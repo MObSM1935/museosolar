@@ -18,6 +18,7 @@
             backdrop-filter: blur(10px);
         }
         .hero-section {
+            /* El fondo inicial se mantiene, se actualizará por JS si APOD es una imagen */
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://placehold.co/1920x1080/000033/FFFFFF?text=Imagen+Impactante+del+Sol') no-repeat center center;
             background-size: cover;
         }
@@ -72,24 +73,15 @@
             <a href="#" class="text-2xl font-bold text-white">
                 <i class="fas fa-solar-system mr-2 text-yellow-400"></i>Observatorio San Miguel
             </a>
-            <div class="hidden md:flex space-x-4 items-center">
+            <div class="hidden md:flex space-x-4 items-center"> {/* Reducido space-x-4 para más items */}
                 <a href="#noticias" class="text-gray-300 hover:text-yellow-400 transition duration-300">Blog</a>
                 <a href="#eventos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Eventos</a>
                 <a href="#cursos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
                 <a href="#ubicacion" class="text-gray-300 hover:text-yellow-400 transition duration-300">Ubicación</a>
-                
-                <div class="relative" id="more-dropdown-container">
-                    <button id="more-dropdown-button" class="text-gray-300 hover:text-yellow-400 transition duration-300 flex items-center focus:outline-none">
-                        Más <i class="fas fa-chevron-down ml-1 text-xs"></i>
-                    </button>
-                    <div id="more-dropdown-menu" class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 navbar-glass ring-1 ring-black ring-opacity-5 z-20">
-                        <a href="#ia" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-yellow-400 transition duration-150">IA Astronómica</a>
-                        <a href="#comunidad" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-yellow-400 transition duration-150">Comunidad</a>
-                        <a href="#contacto" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-yellow-400 transition duration-150">Contacto</a>
-                    </div>
-                </div>
-                
-                <a href="#premium" class="btn-primary px-4 py-2 rounded-md font-semibold ml-2">
+                <a href="#ia" class="text-gray-300 hover:text-yellow-400 transition duration-300">IA Astronómica</a>
+                <a href="#comunidad" class="text-gray-300 hover:text-yellow-400 transition duration-300">Comunidad</a>
+                <a href="#contacto" class="text-gray-300 hover:text-yellow-400 transition duration-300">Contacto</a>
+                <a href="#premium" class="btn-primary px-4 py-2 rounded-md font-semibold">
                     <i class="fas fa-star mr-1"></i>Premium
                 </a>
             </div>
@@ -198,7 +190,7 @@
         </div>
     </section>
     
-    <section id="noticias" class="py-16">
+    <section id="noticias" class="py-16"> {/* Esta es la sección que ahora también es el "Blog" */}
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-center mb-12 section-title">Blog: Noticias Astronómicas y Tecnología Solar</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -282,7 +274,7 @@
             </div>
         </div>
     </section>
-    
+
     <section id="premium" class="py-16">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-center mb-12 section-title"><i class="fas fa-star mr-2"></i>Acceso Premium del Observatorio</h2>
@@ -391,6 +383,10 @@
         const nasaExplanationElement = document.getElementById('nasa-explanation');
         
         async function fetchNasaSolarImage() {
+            // Referencia al hero section
+            const heroSection = document.querySelector('.hero-section');
+
+            // Mensajes de carga para la sección dedicada
             nasaImageElement.src = 'https://placehold.co/800x600/1A202C/E2E8F0?text=Cargando+imagen+solar...';
             nasaTitleElement.textContent = 'Cargando título...';
             nasaExplanationElement.textContent = 'Cargando descripción...';
@@ -415,15 +411,27 @@
                 const data = await response.json();
 
                 if (data.media_type === 'image') {
+                    // Actualizar la sección dedicada de imagen solar
                     nasaImageElement.src = data.url;
                     nasaImageElement.alt = data.title;
                     nasaTitleElement.textContent = data.title;
                     nasaExplanationElement.textContent = data.explanation.substring(0, 200) + '...';
+
+                    // ---- MODIFICACIÓN: Actualizar el fondo del hero section ----
+                    if (heroSection) {
+                        heroSection.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('${data.url}')`;
+                    }
+                    // ---- FIN DE LA MODIFICACIÓN ----
+
                 } else {
+                    // Manejar contenido que no es imagen para la sección dedicada
                     nasaTitleElement.textContent = data.title || 'Contenido no es una imagen hoy';
                     nasaExplanationElement.textContent = `El contenido de APOD para hoy es de tipo: ${data.media_type}. ${data.explanation ? data.explanation.substring(0,100) + '...' : ''} Puedes verlo en: ${data.url}`;
                     nasaImageElement.src = 'https://placehold.co/800x600/1A202C/E2E8F0?text=Contenido+no+visual+(ej.Video)';
                     nasaImageElement.alt = data.title || 'Contenido no visual';
+                    
+                    // Opcional: Si APOD no es una imagen, el hero-section mantendrá su fondo original (placeholder).
+                    // Si quisieras cambiarlo a un placeholder específico aquí para el hero, lo harías similar a la modificación anterior.
                 }
             } catch (error) {
                 console.error('Error al cargar imagen de NASA:', error);
@@ -431,11 +439,13 @@
                 nasaExplanationElement.textContent = error.message || 'No se pudo obtener la imagen del día de la NASA. Verifica la consola para más detalles o intenta más tarde.';
                 nasaImageElement.src = 'https://placehold.co/800x600/FF0000/FFFFFF?text=Error+API';
                 nasaImageElement.alt = 'Error al cargar imagen de NASA';
+
+                // En caso de error, el hero-section mantendrá su fondo original (placeholder).
             }
         }
 
         loadNasaImageButton.addEventListener('click', fetchNasaSolarImage);
-        window.addEventListener('load', fetchNasaSolarImage);
+        window.addEventListener('load', fetchNasaSolarImage); // Carga la imagen al iniciar la página
 
         // Google Maps API
         function initMap() {
@@ -443,10 +453,11 @@
             const mapDiv = document.getElementById('map');
             
             if (typeof google !== 'undefined' && google.maps) {
-                mapDiv.innerHTML = '';
+                mapDiv.innerHTML = ''; // Limpiar mensaje de "Cargando mapa..."
                 const map = new google.maps.Map(mapDiv, {
                     center: observatoryLocation,
                     zoom: 15,
+                    // Estilos para el mapa oscuro (opcional, puedes ajustarlos)
                     styles: [
                         { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
                         { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
@@ -478,25 +489,6 @@
                 console.error("Google Maps API object not available.");
             }
         }
-
-        // Dropdown "Más" para la barra de navegación de escritorio
-        const moreDropdownButton = document.getElementById('more-dropdown-button');
-        const moreDropdownMenu = document.getElementById('more-dropdown-menu');
-        const moreDropdownContainer = document.getElementById('more-dropdown-container'); 
-
-        if (moreDropdownButton && moreDropdownMenu && moreDropdownContainer) {
-            moreDropdownButton.addEventListener('click', function(event) {
-                event.stopPropagation(); 
-                moreDropdownMenu.classList.toggle('hidden');
-            });
-
-            document.addEventListener('click', function(event) {
-                if (!moreDropdownMenu.classList.contains('hidden') && !moreDropdownContainer.contains(event.target)) {
-                    moreDropdownMenu.classList.add('hidden');
-                }
-            });
-        }
-
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLRE28Z6lc3CU8jG2gSZNPetJQeEDtI5A&callback=initMap"></script>
 </body>
