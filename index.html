@@ -361,13 +361,22 @@
             nasaTitleElement.textContent = 'Cargando título...';
             nasaExplanationElement.textContent = 'Cargando descripción...';
 
-            const apiKey = '7d8e2f48-eaa0-4e39-954a-1b22d4fb02be'; // Tu API Key de NASA
+            const apiKey = 'F6yk1zmeHdiBpMh3EvGxdA1c1rvo7HeVNxgE7tnY'; // Nueva API Key de NASA
             const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
 
             try {
                 const response = await fetch(apiUrl);
                 if (!response.ok) {
-                    throw new Error(`Error de NASA API: ${response.status}`);
+                    let errorData = { message: `Error de NASA API: ${response.status}` };
+                    try {
+                        const apiError = await response.json();
+                        if (apiError && apiError.msg) {
+                             errorData.message = apiError.msg;
+                        } else if (apiError && apiError.error && apiError.error.message) {
+                            errorData.message = apiError.error.message;
+                        }
+                    } catch (e) { /* No se pudo parsear el cuerpo del error */ }
+                    throw new Error(errorData.message);
                 }
                 const data = await response.json();
 
@@ -377,24 +386,26 @@
                     nasaTitleElement.textContent = data.title;
                     nasaExplanationElement.textContent = data.explanation.substring(0, 200) + '...';
                 } else {
-                    nasaTitleElement.textContent = 'Contenido no es una imagen hoy';
-                    nasaExplanationElement.textContent = `El contenido de APOD para hoy es de tipo: ${data.media_type}. Puedes verlo en: ${data.url}`;
+                    nasaTitleElement.textContent = data.title || 'Contenido no es una imagen hoy';
+                    nasaExplanationElement.textContent = `El contenido de APOD para hoy es de tipo: ${data.media_type}. ${data.explanation ? data.explanation.substring(0,100) + '...' : ''} Puedes verlo en: ${data.url}`;
                     nasaImageElement.src = 'https://placehold.co/800x600/1A202C/E2E8F0?text=Contenido+no+visual+(ej.Video)';
+                    nasaImageElement.alt = data.title || 'Contenido no visual';
                 }
             } catch (error) {
                 console.error('Error al cargar imagen de NASA:', error);
                 nasaTitleElement.textContent = 'Error al cargar imagen';
-                nasaExplanationElement.textContent = 'No se pudo obtener la imagen del día de la NASA. Intenta más tarde.';
+                nasaExplanationElement.textContent = error.message || 'No se pudo obtener la imagen del día de la NASA. Verifica la consola para más detalles o intenta más tarde.';
                 nasaImageElement.src = 'https://placehold.co/800x600/FF0000/FFFFFF?text=Error+API';
+                nasaImageElement.alt = 'Error al cargar imagen de NASA';
             }
         }
 
         loadNasaImageButton.addEventListener('click', fetchNasaSolarImage);
-        window.addEventListener('load', fetchNasaSolarImage); // Cargar imagen de NASA automáticamente
+        window.addEventListener('load', fetchNasaSolarImage);
 
         // Google Maps API
         function initMap() {
-            const observatoryLocation = { lat: -34.5650, lng: -58.7070 }; // Ajusta estas coordenadas a la ubicación exacta.
+            const observatoryLocation = { lat: -34.5650, lng: -58.7070 }; 
             const mapDiv = document.getElementById('map');
             
             if (typeof google !== 'undefined' && google.maps) {
