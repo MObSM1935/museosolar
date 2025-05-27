@@ -18,7 +18,6 @@
             backdrop-filter: blur(10px);
         }
         .hero-section {
-            /* El fondo inicial se mantiene, se actualizará por JS si APOD es una imagen */
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://placehold.co/1920x1080/000033/FFFFFF?text=Imagen+Impactante+del+Sol') no-repeat center center;
             background-size: cover;
         }
@@ -62,7 +61,7 @@
             height: 384px; 
         }
         section[id] {
-            scroll-margin-top: 80px; /* Ajusta este valor según la altura de tu navbar */
+            scroll-margin-top: 80px; 
         }
     </style>
 </head>
@@ -73,7 +72,7 @@
             <a href="#" class="text-2xl font-bold text-white">
                 <i class="fas fa-solar-system mr-2 text-yellow-400"></i>Observatorio San Miguel
             </a>
-            <div class="hidden md:flex space-x-4 items-center"> {/* Reducido space-x-4 para más items */}
+            <div class="hidden md:flex space-x-4 items-center">
                 <a href="#noticias" class="text-gray-300 hover:text-yellow-400 transition duration-300">Blog</a>
                 <a href="#eventos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Eventos</a>
                 <a href="#cursos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
@@ -190,7 +189,7 @@
         </div>
     </section>
     
-    <section id="noticias" class="py-16"> {/* Esta es la sección que ahora también es el "Blog" */}
+    <section id="noticias" class="py-16">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-center mb-12 section-title">Blog: Noticias Astronómicas y Tecnología Solar</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -244,10 +243,11 @@
             <h2 class="text-3xl font-bold mb-8 section-title">Inteligencia Artificial al Servicio de la Astronomía</h2>
             <div class="max-w-3xl mx-auto">
                 <i class="fas fa-robot text-6xl text-yellow-400 mb-6"></i>
-                <p class="text-lg text-gray-300 mb-6">
+                <p class="text-lg text-gray-300 mb-6"> {/* Párrafo 1, se mantiene estático */}
                     En el Observatorio de Física Cósmica de San Miguel, estamos explorando el potencial de la IA para analizar grandes volúmenes de datos solares, predecir eventos espaciales y asistir en la investigación astronómica.
                 </p>
-                <p class="text-gray-400 mb-8">
+                {/* Este párrafo se actualizará con la respuesta de la API Gemini */}
+                <p class="text-gray-400 mb-8" id="ia-detail-text"> 
                     Nuestros modelos de IA están siendo entrenados con datos históricos y observaciones en tiempo real para ofrecer nuevas perspectivas sobre el comportamiento solar y fenómenos cósmicos.
                 </p>
                 <a href="#" class="btn-primary px-6 py-3 rounded-lg font-semibold">
@@ -376,76 +376,125 @@
         // Año actual en el footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Carga de imagen de NASA
+        // Carga de imagen de NASA (APOD)
         const loadNasaImageButton = document.getElementById('load-nasa-image');
         const nasaImageElement = document.getElementById('nasa-image');
         const nasaTitleElement = document.getElementById('nasa-title');
         const nasaExplanationElement = document.getElementById('nasa-explanation');
         
         async function fetchNasaSolarImage() {
-            // Referencia al hero section
             const heroSection = document.querySelector('.hero-section');
-
-            // Mensajes de carga para la sección dedicada
             nasaImageElement.src = 'https://placehold.co/800x600/1A202C/E2E8F0?text=Cargando+imagen+solar...';
             nasaTitleElement.textContent = 'Cargando título...';
             nasaExplanationElement.textContent = 'Cargando descripción...';
 
-            const apiKey = 'F6yk1zmeHdiBpMh3EvGxdA1c1rvo7HeVNxgE7tnY'; 
+            const apiKey = 'F6yk1zmeHdiBpMh3EvGxdA1c1rvo7HeVNxgE7tnY'; // Tu API key de NASA
             const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
 
             try {
                 const response = await fetch(apiUrl);
                 if (!response.ok) {
                     let errorData = { message: `Error de NASA API: ${response.status}` };
-                    try {
-                        const apiError = await response.json();
-                        if (apiError && apiError.msg) {
-                             errorData.message = apiError.msg;
-                        } else if (apiError && apiError.error && apiError.error.message) {
-                            errorData.message = apiError.error.message;
-                        }
-                    } catch (e) { /* No se pudo parsear el cuerpo del error */ }
+                    try { const apiError = await response.json(); if (apiError && apiError.msg) { errorData.message = apiError.msg;} else if (apiError && apiError.error && apiError.error.message) { errorData.message = apiError.error.message;}} catch (e) {}
                     throw new Error(errorData.message);
                 }
                 const data = await response.json();
 
                 if (data.media_type === 'image') {
-                    // Actualizar la sección dedicada de imagen solar
                     nasaImageElement.src = data.url;
                     nasaImageElement.alt = data.title;
                     nasaTitleElement.textContent = data.title;
                     nasaExplanationElement.textContent = data.explanation.substring(0, 200) + '...';
-
-                    // ---- MODIFICACIÓN: Actualizar el fondo del hero section ----
                     if (heroSection) {
                         heroSection.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('${data.url}')`;
                     }
-                    // ---- FIN DE LA MODIFICACIÓN ----
-
                 } else {
-                    // Manejar contenido que no es imagen para la sección dedicada
                     nasaTitleElement.textContent = data.title || 'Contenido no es una imagen hoy';
                     nasaExplanationElement.textContent = `El contenido de APOD para hoy es de tipo: ${data.media_type}. ${data.explanation ? data.explanation.substring(0,100) + '...' : ''} Puedes verlo en: ${data.url}`;
                     nasaImageElement.src = 'https://placehold.co/800x600/1A202C/E2E8F0?text=Contenido+no+visual+(ej.Video)';
                     nasaImageElement.alt = data.title || 'Contenido no visual';
-                    
-                    // Opcional: Si APOD no es una imagen, el hero-section mantendrá su fondo original (placeholder).
-                    // Si quisieras cambiarlo a un placeholder específico aquí para el hero, lo harías similar a la modificación anterior.
                 }
             } catch (error) {
                 console.error('Error al cargar imagen de NASA:', error);
                 nasaTitleElement.textContent = 'Error al cargar imagen';
-                nasaExplanationElement.textContent = error.message || 'No se pudo obtener la imagen del día de la NASA. Verifica la consola para más detalles o intenta más tarde.';
+                nasaExplanationElement.textContent = error.message || 'No se pudo obtener la imagen. Intenta más tarde.';
                 nasaImageElement.src = 'https://placehold.co/800x600/FF0000/FFFFFF?text=Error+API';
                 nasaImageElement.alt = 'Error al cargar imagen de NASA';
-
-                // En caso de error, el hero-section mantendrá su fondo original (placeholder).
             }
         }
 
         loadNasaImageButton.addEventListener('click', fetchNasaSolarImage);
-        window.addEventListener('load', fetchNasaSolarImage); // Carga la imagen al iniciar la página
+        window.addEventListener('load', fetchNasaSolarImage);
+
+        // --- NUEVA FUNCIÓN PARA LA IA ASTRONÓMICA CON GEMINI API ---
+        async function fetchIAExplanation() {
+            const geminiApiKey = 'AIzaSyBzVb38c6rplB85pK4jkSlNVjYwsBmfonQ'; // LA API KEY QUE PROPORCIONASTE
+            const iaDetailElement = document.getElementById('ia-detail-text');
+
+            if (!iaDetailElement) {
+                console.error("Elemento 'ia-detail-text' no encontrado.");
+                return;
+            }
+
+            iaDetailElement.textContent = 'Consultando a nuestra IA astronómica...'; // Mensaje de carga
+
+            // Un prompt de ejemplo. Puedes cambiarlo según tus necesidades.
+            const prompt = "Explica brevemente, en unas 80 palabras y de forma inspiradora, cómo la Inteligencia Artificial está transformando la astronomía moderna, para la web de un observatorio.";
+
+            try {
+                // Usamos el modelo gemini-1.5-flash-latest que es eficiente para este tipo de tareas.
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${geminiApiKey}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }],
+                        // Opcional: Configuración de generación y seguridad
+                        // generationConfig: { "temperature": 0.7, "maxOutputTokens": 150 },
+                        // safetySettings: [
+                        //   { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_MEDIUM_AND_ABOVE" },
+                        //   { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_MEDIUM_AND_ABOVE" }
+                        // ]
+                    }),
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json(); // Intenta obtener detalles del error de la API
+                    console.error('Error de API Gemini:', errorData);
+                    throw new Error(`Error de API Gemini: ${errorData.error?.message || response.status}`);
+                }
+
+                const data = await response.json();
+                
+                // Extraemos el texto generado. La estructura puede variar un poco, esta es la común.
+                if (data.candidates && data.candidates.length > 0 && 
+                    data.candidates[0].content && data.candidates[0].content.parts && 
+                    data.candidates[0].content.parts.length > 0) {
+                    const generatedText = data.candidates[0].content.parts[0].text;
+                    iaDetailElement.textContent = generatedText;
+                } else {
+                    // Esto puede pasar si el contenido fue bloqueado por filtros de seguridad o la respuesta es inesperada
+                    let fallbackMessage = 'No se pudo obtener una respuesta de la IA en este momento.';
+                    if (data.promptFeedback && data.promptFeedback.blockReason) {
+                        fallbackMessage += ` (Razón: ${data.promptFeedback.blockReason})`;
+                    } else if (data.candidates && data.candidates.length > 0 && data.candidates[0].finishReason !== "STOP") {
+                         fallbackMessage += ` (Razón de finalización: ${data.candidates[0].finishReason})`;
+                    }
+                    iaDetailElement.textContent = fallbackMessage;
+                    console.error('Respuesta inesperada o contenido bloqueado por API Gemini:', data);
+                }
+
+            } catch (error) {
+                console.error('Error al contactar la IA Astronómica (Gemini API):', error);
+                iaDetailElement.textContent = `Error al conectar con la IA: ${error.message}. Revisa la consola y tu clave API.`;
+            }
+        }
+
+        // Llamar a la función de IA al cargar la página
+        window.addEventListener('load', fetchIAExplanation);
+        // --- FIN DE LA NUEVA FUNCIÓN ---
+
 
         // Google Maps API
         function initMap() {
@@ -453,30 +502,12 @@
             const mapDiv = document.getElementById('map');
             
             if (typeof google !== 'undefined' && google.maps) {
-                mapDiv.innerHTML = ''; // Limpiar mensaje de "Cargando mapa..."
+                mapDiv.innerHTML = '';
                 const map = new google.maps.Map(mapDiv, {
                     center: observatoryLocation,
                     zoom: 15,
-                    // Estilos para el mapa oscuro (opcional, puedes ajustarlos)
-                    styles: [
-                        { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
-                        { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
-                        { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
-                        { featureType: "administrative.locality", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] },
-                        { featureType: "poi", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] },
-                        { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#263c3f" }] },
-                        { featureType: "poi.park", elementType: "labels.text.fill", stylers: [{ color: "#6b9a76" }] },
-                        { featureType: "road", elementType: "geometry", stylers: [{ color: "#38414e" }] },
-                        { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#212a37" }] },
-                        { featureType: "road", elementType: "labels.text.fill", stylers: [{ color: "#9ca5b3" }] },
-                        { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#746855" }] },
-                        { featureType: "road.highway", elementType: "geometry.stroke", stylers: [{ color: "#1f2835" }] },
-                        { featureType: "road.highway", elementType: "labels.text.fill", stylers: [{ color: "#f3d19c" }] },
-                        { featureType: "transit", elementType: "geometry", stylers: [{ color: "#2f3948" }] },
-                        { featureType: "transit.station", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] },
-                        { featureType: "water", elementType: "geometry", stylers: [{ color: "#17263c" }] },
-                        { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#515c6d" }] },
-                        { featureType: "water", elementType: "labels.text.stroke", stylers: [{ color: "#17263c" }] },
+                    styles: [ /* Estilos del mapa como antes */
+                        { elementType: "geometry", stylers: [{ color: "#242f3e" }] }, { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] }, { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] }, { featureType: "administrative.locality", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] }, { featureType: "poi", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] }, { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#263c3f" }] }, { featureType: "poi.park", elementType: "labels.text.fill", stylers: [{ color: "#6b9a76" }] }, { featureType: "road", elementType: "geometry", stylers: [{ color: "#38414e" }] }, { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#212a37" }] }, { featureType: "road", elementType: "labels.text.fill", stylers: [{ color: "#9ca5b3" }] }, { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#746855" }] }, { featureType: "road.highway", elementType: "geometry.stroke", stylers: [{ color: "#1f2835" }] }, { featureType: "road.highway", elementType: "labels.text.fill", stylers: [{ color: "#f3d19c" }] }, { featureType: "transit", elementType: "geometry", stylers: [{ color: "#2f3948" }] }, { featureType: "transit.station", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] }, { featureType: "water", elementType: "geometry", stylers: [{ color: "#17263c" }] }, { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#515c6d" }] }, { featureType: "water", elementType: "labels.text.stroke", stylers: [{ color: "#17263c" }] },
                     ]
                 });
                 new google.maps.Marker({
@@ -490,6 +521,6 @@
             }
         }
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLRE28Z6lc3CU8jG2gSZNPetJQeEDtI5A&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLRE28Z6lc3CU8jG2gSZNPetJQeEDtI5A&callback=initMap"></script> {/* Tu API Key de Google Maps */}
 </body>
 </html>
