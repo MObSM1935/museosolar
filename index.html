@@ -6,7 +6,7 @@
     <title>Observatorio de Física Cósmica de San Miguel - Inicio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" xintegrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -55,6 +55,11 @@
         }
         .footer {
             background-color: #00001a; /* Very dark blue for footer */
+        }
+        /* Estilo para el contenedor del mapa (asegura que tenga dimensiones) */
+        #map {
+            width: 100%;
+            height: 384px; /* Equivalente a h-96 de Tailwind */
         }
     </style>
 </head>
@@ -112,55 +117,6 @@
         </div>
     </header>
 
-    <section id="imagen-solar" class="py-16 bg-gray-800">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-4 section-title">Imagen Solar del Día</h2>
-            <p class="text-gray-400 mb-8">Cortesía de NASA API</p>
-            <div id="nasa-solar-image-container" class="max-w-2xl mx-auto card rounded-lg shadow-xl overflow-hidden">
-                <img id="nasa-image" src="https://placehold.co/800x600/1A202C/E2E8F0?text=Cargando+imagen+solar..." alt="Imagen Solar del Día" class="w-full h-auto">
-                <div class="p-6">
-                    <h3 id="nasa-title" class="text-xl font-semibold mb-2 text-white">Título de la Imagen</h3>
-                    <p id="nasa-explanation" class="text-gray-400 text-sm">Descripción o explicación de la imagen...</p>
-                </div>
-            </div>
-             <button id="load-nasa-image" class="mt-8 btn-primary px-6 py-3 rounded-lg font-semibold">
-                <i class="fas fa-sync-alt mr-2"></i>Cargar Nueva Imagen
-            </button>
-        </div>
-    </section>
-
-    <section id="noticias" class="py-16">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12 section-title">Noticias Astronómicas y Tecnología Solar</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="card rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                    <img src="https://placehold.co/600x400/000033/FFFFFF?text=Avance+Solar" alt="Noticia 1" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2 text-white">Nuevo Descubrimiento sobre la Corona Solar</h3>
-                        <p class="text-gray-400 text-sm mb-4">Investigadores revelan datos sorprendentes sobre las altas temperaturas de la corona...</p>
-                        <a href="#" class="text-yellow-400 hover:text-yellow-300 font-semibold">Leer más <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-                <div class="card rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                    <img src="https://placehold.co/600x400/000033/FFFFFF?text=Tecnología+Espacial" alt="Noticia 2" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2 text-white">Lanzamiento Exitoso de Sonda Solar</h3>
-                        <p class="text-gray-400 text-sm mb-4">La sonda "Helios VI" inicia su viaje para estudiar de cerca nuestra estrella...</p>
-                        <a href="#" class="text-yellow-400 hover:text-yellow-300 font-semibold">Leer más <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-                <div class="card rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                    <img src="https://placehold.co/600x400/000033/FFFFFF?text=Evento+Astronómico" alt="Noticia 3" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2 text-white">Próxima Lluvia de Meteoros: Guía de Observación</h3>
-                        <p class="text-gray-400 text-sm mb-4">Prepárate para el espectáculo celestial de las Perseidas este agosto...</p>
-                        <a href="#" class="text-yellow-400 hover:text-yellow-300 font-semibold">Leer más <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section id="eventos" class="py-16 bg-gray-800">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-center mb-12 section-title">Próximos Eventos Solares y Actividades</h2>
@@ -215,8 +171,68 @@
         </div>
     </section>
 
-    <section id="ia" class="py-16 bg-gray-800">
+    <section id="ubicacion" class="py-16 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-8 section-title">Visítanos</h2>
+            <div class="max-w-4xl mx-auto card rounded-lg shadow-xl overflow-hidden p-2">
+                <div id="map" class="rounded-md bg-gray-700 flex items-center justify-center">
+                    <p class="text-gray-400">Cargando mapa del Observatorio...</p>
+                </div>
+            </div>
+            <p class="text-center mt-6 text-gray-400">Av. Ejemplo 123, San Miguel, Buenos Aires, Argentina</p>
+        </div>
+    </section>
+
+    <section id="noticias" class="py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 section-title">Noticias Astronómicas y Tecnología Solar</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/000033/FFFFFF?text=Avance+Solar" alt="Noticia 1" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-white">Nuevo Descubrimiento sobre la Corona Solar</h3>
+                        <p class="text-gray-400 text-sm mb-4">Investigadores revelan datos sorprendentes sobre las altas temperaturas de la corona...</p>
+                        <a href="#" class="text-yellow-400 hover:text-yellow-300 font-semibold">Leer más <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                <div class="card rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/000033/FFFFFF?text=Tecnología+Espacial" alt="Noticia 2" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-white">Lanzamiento Exitoso de Sonda Solar</h3>
+                        <p class="text-gray-400 text-sm mb-4">La sonda "Helios VI" inicia su viaje para estudiar de cerca nuestra estrella...</p>
+                        <a href="#" class="text-yellow-400 hover:text-yellow-300 font-semibold">Leer más <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                <div class="card rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/000033/FFFFFF?text=Evento+Astronómico" alt="Noticia 3" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-white">Próxima Lluvia de Meteoros: Guía de Observación</h3>
+                        <p class="text-gray-400 text-sm mb-4">Prepárate para el espectáculo celestial de las Perseidas este agosto...</p>
+                        <a href="#" class="text-yellow-400 hover:text-yellow-300 font-semibold">Leer más <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="imagen-solar" class="py-16 bg-gray-800">
         <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-4 section-title">Imagen Solar del Día</h2>
+            <p class="text-gray-400 mb-8">Cortesía de NASA API</p>
+            <div id="nasa-solar-image-container" class="max-w-2xl mx-auto card rounded-lg shadow-xl overflow-hidden">
+                <img id="nasa-image" src="https://placehold.co/800x600/1A202C/E2E8F0?text=Cargando+imagen+solar..." alt="Imagen Solar del Día" class="w-full h-auto">
+                <div class="p-6">
+                    <h3 id="nasa-title" class="text-xl font-semibold mb-2 text-white">Título de la Imagen</h3>
+                    <p id="nasa-explanation" class="text-gray-400 text-sm">Descripción o explicación de la imagen...</p>
+                </div>
+            </div>
+             <button id="load-nasa-image" class="mt-8 btn-primary px-6 py-3 rounded-lg font-semibold">
+                <i class="fas fa-sync-alt mr-2"></i>Cargar Nueva Imagen
+            </button>
+        </div>
+    </section>
+
+    <section id="ia" class="py-16"> <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl font-bold mb-8 section-title">Inteligencia Artificial al Servicio de la Astronomía</h2>
             <div class="max-w-3xl mx-auto">
                 <i class="fas fa-robot text-6xl text-yellow-400 mb-6"></i>
@@ -233,7 +249,7 @@
         </div>
     </section>
 
-    <section id="comunidad" class="py-16">
+    <section id="comunidad" class="py-16 bg-gray-800">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl font-bold mb-8 section-title">Únete a Nuestra Comunidad</h2>
              <div class="max-w-2xl mx-auto">
@@ -244,25 +260,12 @@
                 <a href="#" class="btn-primary px-6 py-3 rounded-lg font-semibold mr-4">
                     <i class="fas fa-comments mr-2"></i>Ir al Foro
                 </a>
-                 <a href="#premium" class="btn-secondary px-6 py-3 rounded-lg font-semibold">
-                    <i class="fas fa-user-plus mr-2"></i>Hazte Miembro Premium
+                 <a href="#premium" class="btn-secondary px-6 py-3 rounded-lg font-semibold"> <i class="fas fa-user-plus mr-2"></i>Hazte Miembro Premium
                 </a>
             </div>
         </div>
     </section>
     
-    <section id="ubicacion" class="py-16 bg-gray-800">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-8 section-title">Visítanos</h2>
-            <div class="max-w-4xl mx-auto card rounded-lg shadow-xl overflow-hidden p-2">
-                <div id="map" class="w-full h-96 rounded-md bg-gray-700 flex items-center justify-center">
-                     <p class="text-gray-400">Cargando mapa del Observatorio...</p>
-                </div>
-            </div>
-            <p class="text-center mt-6 text-gray-400">Av. Ejemplo 123, San Miguel, Buenos Aires, Argentina</p>
-        </div>
-    </section>
-
     <footer class="footer text-white py-12">
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-3 gap-8">
@@ -292,7 +295,7 @@
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-500">
-                <p>&copy; <span id="currentYear"></span> Observatorio de Física Cósmica de San Miguel. Todos los derechos reservados.</p>
+                <p>© <span id="currentYear"></span> Observatorio de Física Cósmica de San Miguel. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
@@ -308,7 +311,7 @@
         // Año actual en el footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Placeholder para la carga de imagen de NASA
+        // Carga de imagen de NASA
         const loadNasaImageButton = document.getElementById('load-nasa-image');
         const nasaImageElement = document.getElementById('nasa-image');
         const nasaTitleElement = document.getElementById('nasa-title');
@@ -319,10 +322,7 @@
             nasaTitleElement.textContent = 'Cargando título...';
             nasaExplanationElement.textContent = 'Cargando descripción...';
 
-            // Clave DEMO de la NASA. Deberías obtener tu propia clave en api.nasa.gov
-            const apiKey = 'DEMO_KEY'; 
-            // Usaremos APOD (Astronomy Picture of the Day) como ejemplo. 
-            // Para imágenes específicas del Sol, se pueden usar otras APIs de NASA como SDO o DONKI.
+            const apiKey = 'DEMO_KEY'; // Deberías obtener tu propia clave en api.nasa.gov
             const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
 
             try {
@@ -336,9 +336,8 @@
                     nasaImageElement.src = data.url;
                     nasaImageElement.alt = data.title;
                     nasaTitleElement.textContent = data.title;
-                    nasaExplanationElement.textContent = data.explanation.substring(0, 200) + '...'; // Acortar explicación
+                    nasaExplanationElement.textContent = data.explanation.substring(0, 200) + '...';
                 } else {
-                    // Si no es una imagen (ej. video), mostrar un placeholder o mensaje.
                     nasaTitleElement.textContent = 'Contenido no es una imagen hoy';
                     nasaExplanationElement.textContent = `El contenido de APOD para hoy es de tipo: ${data.media_type}. Puedes verlo en: ${data.url}`;
                     nasaImageElement.src = 'https://placehold.co/800x600/1A202C/E2E8F0?text=Contenido+no+visual+(ej.Video)';
@@ -352,136 +351,52 @@
         }
 
         loadNasaImageButton.addEventListener('click', fetchNasaSolarImage);
-        // Cargar imagen al iniciar la página
-        // Descomentar para cargar automáticamente:
+        // Descomentar para cargar automáticamente la imagen de NASA al cargar la página:
         // window.addEventListener('load', fetchNasaSolarImage);
 
-
-        // Placeholder para Google Maps API
-        // Esta función se llamaría cuando la API de Google Maps esté cargada.
-        // Necesitarás tu propia API Key de Google Maps.
+        // Google Maps API
         function initMap() {
-            const observatoryLocation = { lat: -34.565, lng: -58.707 }; // Coordenadas aproximadas de San Miguel, Bs As. ¡Ajustar!
+            const observatoryLocation = { lat: -34.5650, lng: -58.7070 }; // Ajusta estas coordenadas a la ubicación exacta.
             const mapDiv = document.getElementById('map');
             
             if (typeof google !== 'undefined' && google.maps) {
-                 mapDiv.innerHTML = ''; // Limpiar el mensaje de "cargando"
-                 const map = new google.maps.Map(mapDiv, {
+                mapDiv.innerHTML = ''; // Limpiar el mensaje de "cargando"
+                const map = new google.maps.Map(mapDiv, {
                     center: observatoryLocation,
                     zoom: 15,
                     styles: [ // Estilo oscuro para el mapa
                         { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
                         { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
                         { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
-                        {
-                            featureType: "administrative.locality",
-                            elementType: "labels.text.fill",
-                            stylers: [{ color: "#d59563" }],
-                        },
-                        {
-                            featureType: "poi",
-                            elementType: "labels.text.fill",
-                            stylers: [{ color: "#d59563" }],
-                        },
-                        {
-                            featureType: "poi.park",
-                            elementType: "geometry",
-                            stylers: [{ color: "#263c3f" }],
-                        },
-                        {
-                            featureType: "poi.park",
-                            elementType: "labels.text.fill",
-                            stylers: [{ color: "#6b9a76" }],
-                        },
-                        {
-                            featureType: "road",
-                            elementType: "geometry",
-                            stylers: [{ color: "#38414e" }],
-                        },
-                        {
-                            featureType: "road",
-                            elementType: "geometry.stroke",
-                            stylers: [{ color: "#212a37" }],
-                        },
-                        {
-                            featureType: "road",
-                            elementType: "labels.text.fill",
-                            stylers: [{ color: "#9ca5b3" }],
-                        },
-                        {
-                            featureType: "road.highway",
-                            elementType: "geometry",
-                            stylers: [{ color: "#746855" }],
-                        },
-                        {
-                            featureType: "road.highway",
-                            elementType: "geometry.stroke",
-                            stylers: [{ color: "#1f2835" }],
-                        },
-                        {
-                            featureType: "road.highway",
-                            elementType: "labels.text.fill",
-                            stylers: [{ color: "#f3d19c" }],
-                        },
-                        {
-                            featureType: "transit",
-                            elementType: "geometry",
-                            stylers: [{ color: "#2f3948" }],
-                        },
-                        {
-                            featureType: "transit.station",
-                            elementType: "labels.text.fill",
-                            stylers: [{ color: "#d59563" }],
-                        },
-                        {
-                            featureType: "water",
-                            elementType: "geometry",
-                            stylers: [{ color: "#17263c" }],
-                        },
-                        {
-                            featureType: "water",
-                            elementType: "labels.text.fill",
-                            stylers: [{ color: "#515c6d" }],
-                        },
-                        {
-                            featureType: "water",
-                            elementType: "labels.text.stroke",
-                            stylers: [{ color: "#17263c" }],
-                        },
+                        { featureType: "administrative.locality", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] },
+                        { featureType: "poi", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] },
+                        { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#263c3f" }] },
+                        { featureType: "poi.park", elementType: "labels.text.fill", stylers: [{ color: "#6b9a76" }] },
+                        { featureType: "road", elementType: "geometry", stylers: [{ color: "#38414e" }] },
+                        { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#212a37" }] },
+                        { featureType: "road", elementType: "labels.text.fill", stylers: [{ color: "#9ca5b3" }] },
+                        { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#746855" }] },
+                        { featureType: "road.highway", elementType: "geometry.stroke", stylers: [{ color: "#1f2835" }] },
+                        { featureType: "road.highway", elementType: "labels.text.fill", stylers: [{ color: "#f3d19c" }] },
+                        { featureType: "transit", elementType: "geometry", stylers: [{ color: "#2f3948" }] },
+                        { featureType: "transit.station", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] },
+                        { featureType: "water", elementType: "geometry", stylers: [{ color: "#17263c" }] },
+                        { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#515c6d" }] },
+                        { featureType: "water", elementType: "labels.text.stroke", stylers: [{ color: "#17263c" }] },
                     ]
                 });
                 new google.maps.Marker({
                     position: observatoryLocation,
                     map: map,
-                    title: 'Observatorio de Física Cósmica de San Miguel',
-                    icon: { // Icono personalizado (opcional)
-                        url: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
-                    }
+                    title: 'Observatorio de Física Cósmica de San Miguel'
+                    // Icono personalizado eliminado para usar el predeterminado
                 });
             } else {
-                 mapDiv.innerHTML = '<p class="text-red-400">Error al cargar Google Maps. Asegúrate de que la API Key es correcta y está habilitada.</p>';
-                 console.error("Google Maps API not loaded.");
+                mapDiv.innerHTML = '<p class="text-red-400">Error al cargar Google Maps. Asegúrate de que la API Key es correcta y está habilitada, y que tienes conexión a internet.</p>';
+                console.error("Google Maps API object not available.");
             }
         }
-
-        // Para cargar Google Maps, usualmente se añade un script tag en el HTML:
-        // <script async defer src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&callback=initMap"></script>
-        // Por ahora, lo dejo comentado y llamaremos a initMap() manualmente para demostración si es necesario,
-        // o puedes añadir el script tag con tu clave.
-        // Para simular la carga, puedes llamar initMap() después de un tiempo, pero no es lo ideal para producción.
-        // setTimeout(initMap, 3000); // Simula carga de API y llama a initMap
-        // O, si quieres probarlo sin la API Key (funcionalidad limitada):
-        window.addEventListener('load', () => {
-            // Solo para demostración sin API Key, el mapa no será interactivo ni mostrará mucho.
-            // En un caso real, la API de Google se cargaría y llamaría a initMap como callback.
-            const mapDiv = document.getElementById('map');
-            if (!window.google || !window.google.maps) { // Si Google Maps no se cargó (ej. falta API key)
-                 mapDiv.innerHTML = '<p class="text-yellow-400">Para ver el mapa interactivo, se necesita una API Key de Google Maps.</p>';
-            }
-            // Si tienes una API Key, descomenta el script en el HTML y elimina esta simulación.
-        });
-
     </script>
-</body><script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLRE28Z6lc3CU8jG2gSZNPetJQeEDtI5A&callback=initMap">
-</script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLRE28Z6lc3CU8jG2gSZNPetJQeEDtI5A&callback=initMap"></script>
+</body>
 </html>
