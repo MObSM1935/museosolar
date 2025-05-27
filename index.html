@@ -56,7 +56,6 @@
         .footer {
             background-color: #00001a; /* Very dark blue for footer */
         }
-        /* Estilo para el contenedor del mapa (asegura que tenga dimensiones) */
         #map {
             width: 100%;
             height: 384px; /* Equivalente a h-96 de Tailwind */
@@ -148,7 +147,7 @@
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2 text-white">Introducción a la Astrofísica Solar <span class="premium-tag">PREMIUM</span></h3>
                         <p class="text-gray-400 text-sm mb-4">Un curso completo para entender los fundamentos de la física de nuestra estrella. Acceso exclusivo para miembros premium.</p>
-                        <a href="#" class="btn-secondary px-4 py-2 rounded-md text-sm font-semibold">Ver Detalles</a>
+                        <a href="#premium" class="btn-secondary px-4 py-2 rounded-md text-sm font-semibold">Ver Beneficios Premium</a>
                     </div>
                 </div>
                 <div class="card rounded-lg shadow-xl overflow-hidden">
@@ -164,7 +163,7 @@
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2 text-white">IA Aplicada a la Astronomía <span class="premium-tag">PREMIUM</span></h3>
                         <p class="text-gray-400 text-sm mb-4">Descubre cómo la Inteligencia Artificial está revolucionando la investigación astronómica. Contenido avanzado para suscriptores.</p>
-                        <a href="#" class="btn-secondary px-4 py-2 rounded-md text-sm font-semibold">Ver Detalles</a>
+                        <a href="#premium" class="btn-secondary px-4 py-2 rounded-md text-sm font-semibold">Ver Beneficios Premium</a>
                     </div>
                 </div>
             </div>
@@ -227,12 +226,13 @@
                 </div>
             </div>
              <button id="load-nasa-image" class="mt-8 btn-primary px-6 py-3 rounded-lg font-semibold">
-                <i class="fas fa-sync-alt mr-2"></i>Cargar Nueva Imagen
+                <i class="fas fa-sync-alt mr-2"></i>Cargar Nueva Imagen Manualmente
             </button>
         </div>
     </section>
 
-    <section id="ia" class="py-16"> <div class="container mx-auto px-6 text-center">
+    <section id="ia" class="py-16">
+        <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl font-bold mb-8 section-title">Inteligencia Artificial al Servicio de la Astronomía</h2>
             <div class="max-w-3xl mx-auto">
                 <i class="fas fa-robot text-6xl text-yellow-400 mb-6"></i>
@@ -260,12 +260,50 @@
                 <a href="#" class="btn-primary px-6 py-3 rounded-lg font-semibold mr-4">
                     <i class="fas fa-comments mr-2"></i>Ir al Foro
                 </a>
-                 <a href="#premium" class="btn-secondary px-6 py-3 rounded-lg font-semibold"> <i class="fas fa-user-plus mr-2"></i>Hazte Miembro Premium
+                 <a href="#premium" class="btn-secondary px-6 py-3 rounded-lg font-semibold">
+                    <i class="fas fa-user-plus mr-2"></i>Hazte Miembro Premium
                 </a>
             </div>
         </div>
     </section>
     
+    <section id="premium" class="py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 section-title"><i class="fas fa-star mr-2"></i>Acceso Premium del Observatorio</h2>
+            <div class="max-w-3xl mx-auto text-center mb-10">
+                <p class="text-xl text-gray-300">Lleva tu pasión por la astronomía al siguiente nivel con nuestra membresía premium. Obtén acceso exclusivo a contenido y características diseñadas para verdaderos exploradores del cosmos.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card p-6 rounded-lg shadow-xl text-center">
+                    <i class="fas fa-graduation-cap text-4xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-white">Cursos Avanzados</h3>
+                    <p class="text-gray-400 text-sm">Acceso ilimitado a nuestros cursos especializados en Astrofísica Solar, Cosmología y manejo de datos astronómicos.</p>
+                </div>
+                <div class="card p-6 rounded-lg shadow-xl text-center">
+                    <i class="fas fa-video text-4xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-white">Webinars Exclusivos</h3>
+                    <p class="text-gray-400 text-sm">Participa en webinars mensuales en vivo con nuestros astrónomos y expertos invitados. Sesiones de Q&A incluidas.</p>
+                </div>
+                <div class="card p-6 rounded-lg shadow-xl text-center">
+                    <i class="fas fa-archive text-4xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-white">Archivo Digital</h3>
+                    <p class="text-gray-400 text-sm">Acceso completo a grabaciones de eventos pasados, material de estudio adicional y publicaciones de investigación.</p>
+                </div>
+                <div class="card p-6 rounded-lg shadow-xl text-center md:col-span-2 lg:col-span-1 lg:col-start-2">
+                     <i class="fas fa-chart-line text-4xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-white">Visualizador de Datos (Próximamente)</h3>
+                    <p class="text-gray-400 text-sm">Herramientas avanzadas para visualizar y analizar datos solares en tiempo real, directamente desde nuestras bases de datos.</p>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="#" class="btn-primary text-lg px-10 py-4 rounded-lg font-semibold">
+                    <i class="fas fa-user-plus mr-2"></i>¡Quiero Ser Premium!
+                </a>
+                <p class="text-gray-500 mt-4 text-sm">Se requiere una suscripción para acceder a los beneficios premium.</p>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer text-white py-12">
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-3 gap-8">
@@ -279,6 +317,7 @@
                         <li><a href="#noticias" class="text-gray-400 hover:text-yellow-400">Noticias</a></li>
                         <li><a href="#eventos" class="text-gray-400 hover:text-yellow-400">Eventos</a></li>
                         <li><a href="#cursos" class="text-gray-400 hover:text-yellow-400">Cursos</a></li>
+                        <li><a href="#premium" class="text-gray-400 hover:text-yellow-400">Premium</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-yellow-400">Política de Privacidad</a></li>
                     </ul>
                 </div>
@@ -322,7 +361,7 @@
             nasaTitleElement.textContent = 'Cargando título...';
             nasaExplanationElement.textContent = 'Cargando descripción...';
 
-            const apiKey = 'DEMO_KEY'; // Deberías obtener tu propia clave en api.nasa.gov
+            const apiKey = '7d8e2f48-eaa0-4e39-954a-1b22d4fb02be'; // Tu API Key de NASA
             const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
 
             try {
@@ -351,8 +390,7 @@
         }
 
         loadNasaImageButton.addEventListener('click', fetchNasaSolarImage);
-        // Descomentar para cargar automáticamente la imagen de NASA al cargar la página:
-        // window.addEventListener('load', fetchNasaSolarImage);
+        window.addEventListener('load', fetchNasaSolarImage); // Cargar imagen de NASA automáticamente
 
         // Google Maps API
         function initMap() {
@@ -360,11 +398,11 @@
             const mapDiv = document.getElementById('map');
             
             if (typeof google !== 'undefined' && google.maps) {
-                mapDiv.innerHTML = ''; // Limpiar el mensaje de "cargando"
+                mapDiv.innerHTML = '';
                 const map = new google.maps.Map(mapDiv, {
                     center: observatoryLocation,
                     zoom: 15,
-                    styles: [ // Estilo oscuro para el mapa
+                    styles: [
                         { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
                         { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
                         { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
@@ -389,7 +427,6 @@
                     position: observatoryLocation,
                     map: map,
                     title: 'Observatorio de Física Cósmica de San Miguel'
-                    // Icono personalizado eliminado para usar el predeterminado
                 });
             } else {
                 mapDiv.innerHTML = '<p class="text-red-400">Error al cargar Google Maps. Asegúrate de que la API Key es correcta y está habilitada, y que tienes conexión a internet.</p>';
