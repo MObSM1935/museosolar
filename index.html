@@ -10,11 +10,11 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #1a202c; /* Dark blue-gray background */
-            color: #e2e8f0; /* Light gray text */
+            background-color: #1a202c; 
+            color: #e2e8f0; 
         }
         .navbar-glass {
-            background-color: rgba(26, 32, 44, 0.8); /* Semi-transparent dark background */
+            background-color: rgba(26, 32, 44, 0.8); 
             backdrop-filter: blur(10px);
         }
         .hero-section {
@@ -22,19 +22,19 @@
             background-size: cover;
         }
         .card {
-            background-color: #2d3748; /* Slightly lighter dark card background */
-            border: 1px solid #4a5568; /* Darker border */
+            background-color: #2d3748; 
+            border: 1px solid #4a5568; 
         }
         .btn-primary {
-            background-color: #f6ad55; /* Orange accent */
+            background-color: #f6ad55; 
             color: #1a202c;
             transition: background-color 0.3s ease;
         }
         .btn-primary:hover {
-            background-color: #ed8936; /* Darker orange on hover */
+            background-color: #ed8936; 
         }
         .btn-secondary {
-            background-color: #4a5568; /* Gray button */
+            background-color: #4a5568; 
             color: #e2e8f0;
             transition: background-color 0.3s ease;
         }
@@ -42,7 +42,7 @@
             background-color: #2d3748;
         }
         .section-title {
-            color: #f6ad55; /* Orange accent for titles */
+            color: #f6ad55; 
         }
         .premium-tag {
             background-color: #f6ad55;
@@ -54,11 +54,15 @@
             margin-left: 0.5rem;
         }
         .footer {
-            background-color: #00001a; /* Very dark blue for footer */
+            background-color: #00001a; 
         }
         #map {
             width: 100%;
-            height: 384px; /* Equivalente a h-96 de Tailwind */
+            height: 384px; 
+        }
+        /* Asegurar que las anclas de las secciones tengan un desplazamiento superior para la barra de navegación fija */
+        section[id] {
+            scroll-margin-top: 80px; /* Ajusta este valor según la altura de tu navbar */
         }
     </style>
 </head>
@@ -69,12 +73,14 @@
             <a href="#" class="text-2xl font-bold text-white">
                 <i class="fas fa-solar-system mr-2 text-yellow-400"></i>Observatorio San Miguel
             </a>
-            <div class="hidden md:flex space-x-6 items-center">
-                <a href="#noticias" class="text-gray-300 hover:text-yellow-400 transition duration-300">Noticias</a>
-                <a href="#eventos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Eventos Solares</a>
+            <div class="hidden md:flex space-x-4 items-center"> {/* Reducido space-x-4 para más items */}
+                <a href="#noticias" class="text-gray-300 hover:text-yellow-400 transition duration-300">Blog</a>
+                <a href="#eventos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Eventos</a>
                 <a href="#cursos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
-                <a href="#comunidad" class="text-gray-300 hover:text-yellow-400 transition duration-300">Comunidad</a>
+                <a href="#ubicacion" class="text-gray-300 hover:text-yellow-400 transition duration-300">Ubicación</a>
                 <a href="#ia" class="text-gray-300 hover:text-yellow-400 transition duration-300">IA Astronómica</a>
+                <a href="#comunidad" class="text-gray-300 hover:text-yellow-400 transition duration-300">Comunidad</a>
+                <a href="#contacto" class="text-gray-300 hover:text-yellow-400 transition duration-300">Contacto</a>
                 <a href="#premium" class="btn-primary px-4 py-2 rounded-md font-semibold">
                     <i class="fas fa-star mr-1"></i>Premium
                 </a>
@@ -86,11 +92,13 @@
             </div>
         </div>
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
-            <a href="#noticias" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Noticias</a>
-            <a href="#eventos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Eventos Solares</a>
+            <a href="#noticias" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Blog</a>
+            <a href="#eventos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Eventos</a>
             <a href="#cursos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
-            <a href="#comunidad" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Comunidad</a>
+            <a href="#ubicacion" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Ubicación</a>
             <a href="#ia" class="block text-gray-300 hover:text-yellow-400 transition duration-300">IA Astronómica</a>
+            <a href="#comunidad" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Comunidad</a>
+            <a href="#contacto" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Contacto</a>
             <a href="#premium" class="block btn-primary px-4 py-2 rounded-md font-semibold text-center mt-2">
                 <i class="fas fa-star mr-1"></i>Premium
             </a>
@@ -107,7 +115,7 @@
             </p>
             <div>
                 <a href="#noticias" class="btn-primary text-lg px-8 py-4 rounded-lg font-semibold mr-4">
-                    <i class="fas fa-newspaper mr-2"></i>Últimas Noticias
+                    <i class="fas fa-newspaper mr-2"></i>Ver Blog
                 </a>
                 <a href="#cursos" class="btn-secondary text-lg px-8 py-4 rounded-lg font-semibold">
                     <i class="fas fa-graduation-cap mr-2"></i>Ver Cursos
@@ -181,10 +189,10 @@
             <p class="text-center mt-6 text-gray-400">Av. Ejemplo 123, San Miguel, Buenos Aires, Argentina</p>
         </div>
     </section>
-
-    <section id="noticias" class="py-16">
+    
+    <section id="noticias" class="py-16"> {/* Esta es la sección que ahora también es el "Blog" */}
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12 section-title">Noticias Astronómicas y Tecnología Solar</h2>
+            <h2 class="text-3xl font-bold text-center mb-12 section-title">Blog: Noticias Astronómicas y Tecnología Solar</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="card rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
                     <img src="https://placehold.co/600x400/000033/FFFFFF?text=Avance+Solar" alt="Noticia 1" class="w-full h-48 object-cover">
@@ -266,7 +274,7 @@
             </div>
         </div>
     </section>
-    
+
     <section id="premium" class="py-16">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-center mb-12 section-title"><i class="fas fa-star mr-2"></i>Acceso Premium del Observatorio</h2>
@@ -303,38 +311,50 @@
             </div>
         </div>
     </section>
+    
+    <section id="contacto" class="py-16 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 section-title">Contacto</h2>
+            <div class="max-w-2xl mx-auto card p-8 md:p-10 rounded-lg shadow-xl text-center">
+                <p class="text-gray-300 mb-6 text-lg">¿Preguntas, sugerencias o deseas colaborar? ¡Nos encantaría escucharte!</p>
+                <div class="space-y-4 text-gray-200">
+                    <p><i class="fas fa-map-marker-alt mr-3 text-yellow-400"></i>Av. Ejemplo 123, San Miguel, Buenos Aires, Argentina</p>
+                    <p><i class="fas fa-phone mr-3 text-yellow-400"></i>(011) 1234-5678</p>
+                    <p><i class="fas fa-envelope mr-3 text-yellow-400"></i>info@observatoriosm.org.ar</p>
+                </div>
+                <div class="mt-8 space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-yellow-400 text-3xl transition duration-300"><i class="fab fa-facebook-square"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-yellow-400 text-3xl transition duration-300"><i class="fab fa-twitter-square"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-yellow-400 text-3xl transition duration-300"><i class="fab fa-instagram-square"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-yellow-400 text-3xl transition duration-300"><i class="fab fa-linkedin"></i></a>
+                </div>
+                 <p class="text-gray-500 mt-8 text-sm">También puedes completar nuestro <a href="#" class="text-yellow-500 hover:text-yellow-400">formulario de contacto online</a> (enlace de ejemplo).</p>
+            </div>
+        </div>
+    </section>
 
     <footer class="footer text-white py-12">
         <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-2 gap-8 text-center md:text-left">
                 <div>
                     <h3 class="text-xl font-semibold mb-4"><i class="fas fa-solar-system mr-2 text-yellow-400"></i>Observatorio San Miguel</h3>
-                    <p class="text-gray-400">Dedicados a la investigación y divulgación de la física cósmica y solar.</p>
+                    <p class="text-gray-400 text-sm">Dedicados a la investigación y divulgación de la física cósmica y solar. Explorando los misterios del universo desde San Miguel al cosmos.</p>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold mb-4">Enlaces Rápidos</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#noticias" class="text-gray-400 hover:text-yellow-400">Noticias</a></li>
-                        <li><a href="#eventos" class="text-gray-400 hover:text-yellow-400">Eventos</a></li>
-                        <li><a href="#cursos" class="text-gray-400 hover:text-yellow-400">Cursos</a></li>
-                        <li><a href="#premium" class="text-gray-400 hover:text-yellow-400">Premium</a></li>
+                    <h3 class="text-xl font-semibold mb-4">Enlaces de Interés</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#noticias" class="text-gray-400 hover:text-yellow-400">Blog / Noticias</a></li>
+                        <li><a href="#eventos" class="text-gray-400 hover:text-yellow-400">Eventos y Actividades</a></li>
+                        <li><a href="#cursos" class="text-gray-400 hover:text-yellow-400">Cursos de Astronomía</a></li>
+                        <li><a href="#premium" class="text-gray-400 hover:text-yellow-400">Beneficios Premium</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-yellow-400">Política de Privacidad</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-yellow-400">Términos de Servicio</a></li>
                     </ul>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-4">Contacto</h3>
-                    <p class="text-gray-400"><i class="fas fa-map-marker-alt mr-2"></i>Av. Ejemplo 123, San Miguel</p>
-                    <p class="text-gray-400"><i class="fas fa-phone mr-2"></i>(011) 1234-5678</p>
-                    <p class="text-gray-400"><i class="fas fa-envelope mr-2"></i>info@observatoriosm.org.ar</p>
-                    <div class="mt-4 space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-yellow-400 text-2xl"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-yellow-400 text-2xl"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-yellow-400 text-2xl"><i class="fab fa-instagram"></i></a>
-                    </div>
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-500">
-                <p>© <span id="currentYear"></span> Observatorio de Física Cósmica de San Miguel. Todos los derechos reservados.</p>
+                <p class="text-sm">© <span id="currentYear"></span> Observatorio de Física Cósmica de San Miguel. Todos los derechos reservados.</p>
+                <p class="text-xs mt-2">Diseño inspirado en las nebulosas y la pasión por el descubrimiento.</p>
             </div>
         </div>
     </footer>
@@ -347,6 +367,12 @@
             mobileMenu.classList.toggle('hidden');
         });
 
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
         // Año actual en el footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
@@ -361,7 +387,7 @@
             nasaTitleElement.textContent = 'Cargando título...';
             nasaExplanationElement.textContent = 'Cargando descripción...';
 
-            const apiKey = 'F6yk1zmeHdiBpMh3EvGxdA1c1rvo7HeVNxgE7tnY'; // Nueva API Key de NASA
+            const apiKey = 'F6yk1zmeHdiBpMh3EvGxdA1c1rvo7HeVNxgE7tnY'; 
             const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
 
             try {
