@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos - Observatorio de Física Cósmica de San Miguel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --space-blue: #0b0d17;
+            --cosmic-purple: #1e1a3e;
+            --starlight-yellow: #f6ad55;
+            --nebula-pink: #d53f8c;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--space-blue);
+            color: #e2e8f0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(214, 188, 250, 0.05) 0%, rgba(214, 188, 250, 0) 40%),
+                radial-gradient(circle at 90% 80%, rgba(246, 173, 85, 0.05) 0%, rgba(246, 173, 85, 0) 40%),
+                radial-gradient(circle at 50% 50%, rgba(100, 100, 220, 0.03) 0%, rgba(100, 100, 220, 0) 30%);
+        }
+        
+        .navbar-glass {
+            background-color: rgba(11, 13, 23, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(246, 173, 85, 0.2);
+        }
+        
+        .card {
+            background-color: rgba(30, 26, 62, 0.7);
+            border: 1px solid rgba(109, 40, 217, 0.3);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(214, 188, 250, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--starlight-yellow), var(--nebula-pink));
+            color: #1a202c;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(246, 173, 85, 0.4);
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20px;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(25deg);
+            transition: all 0.5s;
+        }
+        
+        .btn-primary:hover::after {
+            left: 120%;
+        }
+        
+        .section-title {
+            color: var(--starlight-yellow);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--starlight-yellow), var(--nebula-pink));
+            border-radius: 3px;
+        }
+        
+        .star-decoration { /* Para mantener la estética si se necesita */
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+            z-index: 0; 
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0.2; transform: scale(0.8); }
+        }
+
+        .event-card-large {
+            background-color: var(--cosmic-purple);
+            border: 1px solid var(--nebula-pink);
+        }
+        .event-card-large:hover {
+            box-shadow: 0 0 25px var(--nebula-pink_hover, rgba(213, 63, 140, 0.5));
+        }
+        .calendar-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .calendar-table th, .calendar-table td {
+            border: 1px solid rgba(246, 173, 85, 0.3);
+            padding: 12px;
+            text-align: left;
+        }
+        .calendar-table th {
+            background-color: rgba(30, 26, 62, 0.8);
+            color: var(--starlight-yellow);
+        }
+        .calendar-day {
+            min-height: 120px;
+            vertical-align: top;
+        }
+        .calendar-day-number {
+            font-size: 0.8rem;
+            color: var(--starlight-yellow);
+        }
+        .calendar-event-entry {
+            background-color: rgba(213, 63, 140, 0.2);
+            padding: 4px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-top: 4px;
+            display: block;
+        }
+        .archive-year-title {
+            color: var(--nebula-pink);
+            border-bottom: 2px solid var(--nebula-pink);
+            padding-bottom: 5px;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="star-decoration" style="top: 5%; left: 5%; width: 1px; height: 1px; animation-delay: 0.5s;"></div>
+    <div class="star-decoration" style="top: 15%; left: 10%; width: 2px; height: 2px;"></div>
+    <div class="star-decoration" style="top: 95%; left: 50%; width: 1px; height: 1px; animation-delay: 2.2s;"></div>
+    <div class="star-decoration" style="top: 5%; left: 70%; width: 2px; height: 2px; animation-delay: 1.8s;"></div>
+    <div class="star-decoration" style="top: 65%; left: 95%; width: 2px; height: 2px; animation-delay: 3.2s;"></div>
+
+    <nav class="navbar-glass sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-white">
+                <i class="fas fa-satellite mr-2 text-yellow-400"></i>Observatorio San Miguel
+            </a>
+            <div class="hidden md:flex space-x-4 items-center">
+                <a href="index.html#eventos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Próximos Eventos</a>
+                <a href="eventos.html" class="text-yellow-400 font-semibold transition duration-300">Todos los Eventos</a> <a href="index.html#ubicacion" class="text-gray-300 hover:text-yellow-400 transition duration-300">Ubicación</a>
+                <a href="index.html#cursos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
+                <a href="historia.html" class="text-gray-300 hover:text-yellow-400 transition duration-300">Nuestra Historia</a>
+                <a href="index.html#premium" class="btn-primary px-4 py-2 rounded-full font-semibold">
+                    <i class="fas fa-star mr-1"></i>Premium
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-300 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="index.html#eventos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Próximos Eventos</a>
+            <a href="eventos.html" class="block text-yellow-400 font-semibold transition duration-300">Todos los Eventos</a>
+            <a href="index.html#ubicacion" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Ubicación</a>
+            <a href="index.html#cursos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
+            <a href="historia.html" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Nuestra Historia</a>
+            <a href="index.html#premium" class="block btn-primary px-4 py-2 rounded-full font-semibold text-center mt-2">
+                <i class="fas fa-star mr-1"></i>Premium
+            </a>
+        </div>
+    </nav>
+
+    <section id="eventos-pagina" class="py-20 bg-gradient-to-b from-space-blue to-cosmic-purple">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-6 section-title">Eventos Astronómicos en San Miguel</h2>
+            <p class="text-center text-gray-300 text-lg mb-16 max-w-3xl mx-auto">
+                Sumérgete en el cosmos con nuestra variada agenda de eventos. Desde observaciones nocturnas y charlas inspiradoras hasta talleres prácticos y festivales estelares, el Observatorio de Física Cósmica de San Miguel es tu puerta de entrada al universo. ¡Descubre, aprende y maravíllate con nosotros!
+            </p>
+
+            <div id="calendario-extendido" class="my-16">
+                <h3 class="text-3xl font-semibold text-center mb-10 section-title">Calendario Cósmico Extendido</h3>
+                <div class="card p-6 sm:p-8">
+                    <p class="text-gray-300 mb-6 text-center">
+                        Planifica tu aventura cósmica. Aquí te presentamos una vista preliminar de nuestras actividades para los próximos meses. (Nota: Este es un calendario ilustrativo. Consulta los eventos individuales para confirmación y detalles).
+                    </p>
+                    <h4 class="text-2xl font-semibold text-nebula-pink mb-4 text-center">Junio 2025 (Ilustrativo)</h4>
+                    <div class="overflow-x-auto">
+                        <table class="calendar-table mb-8">
+                            <thead>
+                                <tr>
+                                    <th>Lun</th><th>Mar</th><th>Mié</th><th>Jue</th><th>Vie</th><th>Sáb</th><th>Dom</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr> <td class="calendar-day"><span class="calendar-day-number">26</span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number">27</span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number">28</span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number">29</span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number">30</span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number">31</span></td>
+                                    <td class="calendar-day">
+                                        <span class="calendar-day-number">1</span>
+                                        <span class="calendar-event-entry">Charla: Solsticio de Invierno</span>
+                                    </td>
+                                </tr>
+                                <tr> <td class="calendar-day"><span class="calendar-day-number">2</span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number">3</span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number">4</span>
+                                        <span class="calendar-event-entry">Taller: Astrofotografía Básica (Día 1)</span>
+                                    </td>
+                                    <td class="calendar-day"><span class="calendar-day-number">5</span>
+                                        <span class="calendar-event-entry">Taller: Astrofotografía Básica (Día 2)</span>
+                                    </td>
+                                    <td class="calendar-day"><span class="calendar-day-number">6</span>
+                                        <span class="calendar-event-entry">Noche de Observación Pública</span>
+                                    </td>
+                                    <td class="calendar-day"><span class="calendar-day-number">7</span>
+                                         <span class="calendar-event-entry">Especial: Observación Luna Llena</span>
+                                    </td>
+                                    <td class="calendar-day"><span class="calendar-day-number">8</span></td>
+                                </tr>
+                                <tr> <td class="calendar-day"><span class="calendar-day-number">9</span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number">10</span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number">11</span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number">12</span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number">13</span>
+                                        <span class="calendar-event-entry">Noche de Observación Pública</span>
+                                    </td>
+                                    <td class="calendar-day"><span class="calendar-day-number">14</span>
+                                        <span class="calendar-event-entry">Club de Astronomía Infantil</span>
+                                    </td>
+                                    <td class="calendar-day"><span class="calendar-day-number">15</span></td>
+                                </tr>
+                                <tr> <td class="calendar-day"><span class="calendar-day-number">16</span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number">17</span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number">18</span>
+                                        <span class="calendar-event-entry">Charla: Nebulosas y Galaxias</span>
+                                    </td>
+                                    <td class="calendar-day"><span class="calendar-day-number">19</span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number">20</span>
+                                         <span class="calendar-event-entry">Noche de Observación (Miembros Premium)</span>
+                                    </td>
+                                    <td class="calendar-day"><span class="calendar-day-number">21</span>
+                                        <span class="calendar-event-entry">Evento Especial: Solsticio de Invierno</span>
+                                    </td>
+                                    <td class="calendar-day"><span class="calendar-day-number">22</span></td>
+                                </tr>
+                                <tr> <td class="calendar-day"><span class="calendar-day-number">23</span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number">24</span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number">25</span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number">26</span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number">27</span>
+                                        <span class="calendar-event-entry">Noche de Observación Pública</span>
+                                    </td>
+                                    <td class="calendar-day"><span class="calendar-day-number">28</span>
+                                        <span class="calendar-event-entry">Taller: Manejo de Telescopios Nivel 1</span>
+                                    </td>
+                                    <td class="calendar-day"><span class="calendar-day-number">29</span></td>
+                                </tr>
+                                 <tr> 
+                                    <td class="calendar-day"><span class="calendar-day-number">30</span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number"></span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number"></span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number"></span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number"></span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number"></span></td>
+                                    <td class="calendar-day"><span class="calendar-day-number"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-center mt-6"><a href="#contacto-eventos" class="btn-primary px-6 py-3 rounded-full">Consultar o Inscribirse</a></p>
+                </div>
+            </div>
+
+            <div id="eventos-emblematicos" class="my-20">
+                <h3 class="text-3xl font-semibold text-center mb-12 section-title">Nuestros Eventos Emblemáticos</h3>
+                <div class="space-y-12">
+                    <div class="card event-card-large p-6 md:p-8 rounded-xl shadow-2xl">
+                        <div class="grid md:grid-cols-2 gap-8 items-center">
+                            <div class="order-2 md:order-1">
+                                <h4 class="text-2xl lg:text-3xl font-bold text-yellow-400 mb-3">Festival Anual de Estrellas de San Miguel</h4>
+                                <p class="text-sm text-nebula-pink mb-4"><i class="fas fa-calendar-alt mr-2"></i>Generalmente en Noviembre (Consultar fechas exactas)</p>
+                                <p class="text-gray-300 leading-relaxed mb-4">
+                                    Nuestro evento cumbre del año. Tres días dedicados a la celebración de la astronomía con actividades para todas las edades. Incluye observaciones masivas con múltiples telescopios, charlas magistrales de astrónomos reconocidos, talleres interactivos, planetario móvil, feria de ciencias, concurso de astrofotografía, música en vivo y food trucks temáticos. Una experiencia inolvidable para toda la familia y aficionados.
+                                </p>
+                                <h5 class="text-lg font-semibold text-yellow-300 mt-4 mb-2">Actividades Destacadas del Festival:</h5>
+                                <ul class="list-disc list-inside text-gray-400 space-y-1 text-sm">
+                                    <li>Maratón Messier (para observadores avanzados).</li>
+                                    <li>"Bautismo Estelar": Ayudamos a los niños a encontrar su primera constelación.</li>
+                                    <li>Panel de discusión: "El Futuro de la Exploración Espacial".</li>
+                                    <li>Proyección de documentales astronómicos al aire libre.</li>
+                                    <li>Stands de clubes de astronomía de la región.</li>
+                                </ul>
+                                <a href="#contacto-eventos" class="mt-6 inline-block btn-primary px-6 py-3 rounded-full">Más Información e Inscripciones</a>
+                            </div>
+                            <div class="order-1 md:order-2">
+                                <img src="https://via.placeholder.com/500x350.png?text=Festival+Estrellas+San+Miguel" alt="Festival de Estrellas" class="rounded-lg shadow-xl w-full">
+                                <div class="grid grid-cols-3 gap-2 mt-4">
+                                    <img src="https://via.placeholder.com/150x100.png?text=Festival+1" alt="Foto Festival 1" class="rounded">
+                                    <img src="https://via.placeholder.com/150x100.png?text=Festival+2" alt="Foto Festival 2" class="rounded">
+                                    <img src="https://via.placeholder.com/150x100.png?text=Festival+3" alt="Foto Festival 3" class="rounded">
+                                </div>
+                            </div>
+                        </div>
+                         <div class="mt-6 border-t border-gray-700 pt-4">
+                                <h5 class="text-md font-semibold text-nebula-pink mb-2">Testimonios de asistentes (Festival 2024):</h5>
+                                <blockquote class="text-sm text-gray-400 italic border-l-2 border-nebula-pink pl-3 mb-2">"Fue mágico, especialmente ver la Vía Láctea tan clara con los telescopios grandes. Mis hijos quedaron fascinados." - Familia Pérez</blockquote>
+                                <blockquote class="text-sm text-gray-400 italic border-l-2 border-nebula-pink pl-3">"Las charlas fueron de altísimo nivel. Aprendí muchísimo. ¡Ya espero el próximo!" - Carlos G., Estudiante de Física</blockquote>
+                         </div>
+                    </div>
+
+                    <div class="card event-card-large p-6 md:p-8 rounded-xl shadow-2xl">
+                        <div class="grid md:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <img src="https://via.placeholder.com/500x350.png?text=Semana+Ciencia+y+Espacio" alt="Semana de la Ciencia" class="rounded-lg shadow-xl w-full">
+                                <div class="grid grid-cols-3 gap-2 mt-4">
+                                    <img src="https://via.placeholder.com/150x100.png?text=Ciencia+1" alt="Foto Ciencia 1" class="rounded">
+                                    <img src="https://via.placeholder.com/150x100.png?text=Ciencia+2" alt="Foto Ciencia 2" class="rounded">
+                                    <img src="https://via.placeholder.com/150x100.png?text=Ciencia+3" alt="Foto Ciencia 3" class="rounded">
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-2xl lg:text-3xl font-bold text-yellow-400 mb-3">Semana de la Ciencia y el Espacio</h4>
+                                <p class="text-sm text-nebula-pink mb-4"><i class="fas fa-calendar-alt mr-2"></i>Generalmente en Mayo (Vinculado a la Semana Nacional de la Ciencia)</p>
+                                <p class="text-gray-300 leading-relaxed mb-4">
+                                    Una semana intensiva de divulgación científica enfocada en inspirar a jóvenes y adultos. Organizamos jornadas de puertas abiertas, demostraciones científicas interactivas, visitas guiadas especiales a nuestras instalaciones (incluyendo áreas técnicas no siempre accesibles), y un ciclo de conferencias con investigadores locales e invitados sobre los últimos avances en astrofísica, cosmología y ciencias planetarias.
+                                </p>
+                                 <h5 class="text-lg font-semibold text-yellow-300 mt-4 mb-2">Atracciones Principales:</h5>
+                                <ul class="list-disc list-inside text-gray-400 space-y-1 text-sm">
+                                    <li>"Científico por un Día": Los visitantes participan en simulaciones de investigación.</li>
+                                    <li>Demostraciones de espectroscopía y radioastronomía.</li>
+                                    <li>Charlas sobre astrobiología y la búsqueda de vida extraterrestre.</li>
+                                    <li>Competencia de cohetes de agua para escuelas.</li>
+                                </ul>
+                                <a href="#contacto-eventos" class="mt-6 inline-block btn-primary px-6 py-3 rounded-full">Ver Programa Detallado</a>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+
+            <div id="actividades-regulares" class="my-20">
+                <h3 class="text-3xl font-semibold text-center mb-12 section-title">Actividades Regulares Para Ti</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card p-6 hover:shadow-starlight-yellow/30">
+                        <div class="text-4xl text-starlight-yellow mb-4"><i class="fas fa-moon"></i></div>
+                        <h4 class="text-xl font-semibold text-white mb-2">Noches de Observación Pública</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Todos los viernes (si el clima lo permite). Una oportunidad para observar la Luna, planetas y objetos de cielo profundo a través de nuestros telescopios, con la guía de nuestros expertos. Actividad gratuita, requiere inscripción previa.</p>
+                    </div>
+                    <div class="card p-6 hover:shadow-starlight-yellow/30">
+                        <div class="text-4xl text-starlight-yellow mb-4"><i class="fas fa-microphone-alt"></i></div>
+                        <h4 class="text-xl font-semibold text-white mb-2">Ciclo de Charlas "Misterios del Cosmos"</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Un sábado al mes. Astrónomos, físicos y divulgadores comparten sus conocimientos sobre temas fascinantes, desde agujeros negros hasta la materia oscura. Consulta nuestro calendario para temas y ponentes.</p>
+                    </div>
+                    <div class="card p-6 hover:shadow-starlight-yellow/30">
+                        <div class="text-4xl text-starlight-yellow mb-4"><i class="fas fa-tools"></i></div>
+                        <h4 class="text-xl font-semibold text-white mb-2">Talleres Prácticos de Astronomía</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Ofrecemos talleres de astrofotografía, manejo de telescopios, construcción de espectroscopios caseros, y más. Ideales para profundizar tus conocimientos y habilidades. Cupos limitados.</p>
+                    </div>
+                    <div class="card p-6 hover:shadow-starlight-yellow/30">
+                        <div class="text-4xl text-starlight-yellow mb-4"><i class="fas fa-meteor"></i></div>
+                        <h4 class="text-xl font-semibold text-white mb-2">Observación de Fenómenos Especiales</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Organizamos eventos especiales para eclipses, lluvias de meteoros, tránsitos planetarios y conjunciones notables. ¡No te pierdas estos espectáculos celestes únicos!</p>
+                    </div>
+                    <div class="card p-6 hover:shadow-starlight-yellow/30">
+                        <div class="text-4xl text-starlight-yellow mb-4"><i class="fas fa-satellite-dish"></i></div>
+                        <h4 class="text-xl font-semibold text-white mb-2">Transmisiones Online y Webinars</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Periódicamente ofrecemos transmisiones en vivo de observaciones y webinars con expertos, para que puedas disfrutar del cosmos desde cualquier lugar del mundo. Sigue nuestras redes sociales.</p>
+                    </div>
+                    <div class="card p-6 hover:shadow-starlight-yellow/30">
+                        <div class="text-4xl text-starlight-yellow mb-4"><i class="fas fa-child"></i></div>
+                        <h4 class="text-xl font-semibold text-white mb-2">Club de Astronomía Infantil "Pequeños Cosmonautas"</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Actividades lúdicas y educativas para niños de 6 a 12 años, fomentando la curiosidad por la ciencia y el universo. Sábados por la mañana, quincenalmente.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="archivo-eventos" class="my-20">
+                <h3 class="text-3xl font-semibold text-center mb-12 section-title">Revive Nuestros Mejores Momentos: Archivo de Eventos</h3>
+                <div class="card p-6 sm:p-8">
+                    <p class="text-gray-300 mb-6 text-center">
+                        Un vistazo a algunas de las actividades que hemos realizado. ¡El universo es una fuente inagotable de inspiración!
+                    </p>
+                    
+                    <h4 class="text-2xl font-semibold archive-year-title">Eventos Destacados 2024</h4>
+                    <ul class="list-disc list-inside text-gray-400 space-y-2 text-sm pl-4">
+                        <li><strong>Diciembre 2024:</strong> Especial Observación Gemínidas y Charla sobre Meteoritos.</li>
+                        <li><strong>Noviembre 2024:</strong> Gran Festival de Estrellas de San Miguel (Edición XII).</li>
+                        <li><strong>Octubre 2024:</strong> Noche Internacional de Observación Lunar - Edición San Miguel.</li>
+                        <li><strong>Septiembre 2024:</strong> Charla: "Exoplanetas: En Busca de Otros Mundos" por Dra. Invitada.</li>
+                        <li><strong>Agosto 2024:</strong> Taller Intensivo de Astrofotografía de Cielo Profundo (3 días).</li>
+                        <li><strong>Julio 2024:</strong> Observación Especial: Oposición de Saturno.</li>
+                        <li><strong>Junio 2024:</strong> Celebración del Solsticio de Invierno: Charla y Observación Solar (con filtros).</li>
+                        <li><strong>Mayo 2024:</strong> Semana de la Ciencia: "Explorando el Universo con IA".</li>
+                        <li><strong>Abril 2024:</strong> Eclipse Solar Parcial - Jornada de Observación Segura y Educativa.</li>
+                        <li><strong>Marzo 2024:</strong> Charla: "Agujeros Negros Supermasivos" por Dr. Local.</li>
+                        <li><strong>Febrero 2024:</strong> Noche de Observación Temática: "Constelaciones de Verano y Mitología".</li>
+                        <li><strong>Enero 2024:</strong> Taller de Verano para Niños: "Construye tu Propio Sistema Solar".</li>
+                        <li><strong>Diciembre 2023 (continuación):</strong> Visita de Escuela Técnica N°5 - Taller de Robótica Astronómica.</li>
+                        <li><strong>Noviembre 2023 (continuación):</strong> Conferencia Online: "El Telescopio James Webb: Primer Año de Descubrimientos".</li>
+                    </ul>
+
+                    <h4 class="text-2xl font-semibold archive-year-title">Eventos Destacados 2023</h4>
+                    <ul class="list-disc list-inside text-gray-400 space-y-2 text-sm pl-4">
+                        <li><strong>Diciembre 2023:</strong> Cierre Anual Club Pequeños Cosmonautas - Entrega de Diplomas.</li>
+                        <li><strong>Noviembre 2023:</strong> Festival de Estrellas de San Miguel (Edición XI) - Éxito de convocatoria.</li>
+                        <li><strong>Octubre 2023:</strong> Taller: "Introducción a la Radioastronomía Amateur".</li>
+                        <li><strong>Septiembre 2023:</strong> Charla: "La Vida de las Estrellas: Del Nacimiento a la Muerte".</li>
+                        <li><strong>Agosto 2023:</strong> Observación de las Perseidas - Noche de Camping Astronómico (cupos limitados).</li>
+                        <li><strong>Julio 2023:</strong> Curso Breve: "Cosmología Moderna para Principiantes".</li>
+                        <li><strong>Junio 2023:</strong> Presentación Libro: "Cielos de San Miguel" por Fotógrafo Local.</li>
+                        <li><strong>Mayo 2023:</strong> Semana de la Ciencia: "Marte: Pasado, Presente y Futuro".</li>
+                        <li><strong>Abril 2023:</strong> Charla Debate: "¿Estamos Solos en el Universo?".</li>
+                        <li><strong>Marzo 2023:</strong> Taller: "Manejo de Monturas Ecuatoriales y Puesta en Estación".</li>
+                        <li><strong>Febrero 2023:</strong> Noche de San Valentín Bajo las Estrellas (Evento Especial).</li>
+                        <li><strong>Enero 2023:</strong> Observación Cometa C/2022 E3 (ZTF) - Noches especiales.</li>
+                        <li><strong>Diciembre 2022 (continuación):</strong> Participación en Feria de Ciencias Municipal.</li>
+                        <li><strong>Noviembre 2022 (continuación):</strong> Seminario: "Impacto de los Satélites Starlink en la Astronomía".</li>
+                    </ul>
+                    <h4 class="text-2xl font-semibold archive-year-title">Eventos Destacados 2022</h4>
+                     <ul class="list-disc list-inside text-gray-400 space-y-2 text-sm pl-4">
+                        <li><strong>Diciembre 2022:</strong> Observación de la Ocultación de Marte por la Luna.</li>
+                        <li><strong>Noviembre 2022:</strong> Festival de Estrellas de San Miguel (Edición X Aniversario).</li>
+                        <li><strong>Octubre 2022:</strong> Charla "El legado de Carl Sagan" por Dr. Invitado.</li>
+                        <li><strong>Septiembre 2022:</strong> Taller de construcción de relojes solares.</li>
+                        </ul>
+                </div>
+            </div>
+
+            <div id="contacto-eventos" class="my-20 text-center">
+                <h3 class="text-3xl font-semibold mb-8 section-title">Participa y Conéctate</h3>
+                <div class="card max-w-2xl mx-auto p-8">
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        ¿Interesado en asistir a nuestros eventos? La mayoría son gratuitos pero requieren inscripción previa debido a la capacidad limitada. Consulta la descripción de cada evento para detalles específicos sobre cómo registrarte.
+                    </p>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        Si eres investigador, divulgador o un apasionado de la astronomía y te gustaría proponer una charla, un taller o colaborar de alguna forma, ¡nos encantaría escucharte!
+                    </p>
+                    <a href="index.html#contacto" class="btn-primary px-8 py-4 rounded-full font-semibold text-lg">
+                        <i class="fas fa-envelope mr-2"></i>Contáctanos para Inscripciones o Propuestas
+                    </a>
+                    <p class="text-xs text-gray-500 mt-6">Síguenos en nuestras redes sociales para no perderte ninguna novedad sobre nuestros próximos eventos y actividades.</p>
+                    <div class="mt-4 flex justify-center space-x-4">
+                        <a href="#" aria-label="Facebook" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-facebook-f fa-2x"></i></a>
+                        <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="#" aria-label="Twitter" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-twitter fa-2x"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="galeria-comunidad" class="my-20">
+                <h3 class="text-3xl font-semibold text-center mb-12 section-title">Galería de Nuestra Comunidad Cósmica</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <img src="https://via.placeholder.com/300x200.png?text=Evento+Comunidad+1" alt="Comunidad en Evento 1" class="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://via.placeholder.com/300x200.png?text=Evento+Comunidad+2" alt="Comunidad en Evento 2" class="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://via.placeholder.com/300x200.png?text=Evento+Comunidad+3" alt="Comunidad en Evento 3" class="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://via.placeholder.com/300x200.png?text=Evento+Comunidad+4" alt="Comunidad en Evento 4" class="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://via.placeholder.com/300x200.png?text=Evento+Comunidad+5" alt="Comunidad en Evento 5" class="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://via.placeholder.com/300x200.png?text=Evento+Comunidad+6" alt="Comunidad en Evento 6" class="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://via.placeholder.com/300x200.png?text=Evento+Comunidad+7" alt="Comunidad en Evento 7" class="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://via.placeholder.com/300x200.png?text=Evento+Comunidad+8" alt="Comunidad en Evento 8" class="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    </div>
+            </div>
+
+        </div> </section>
+    <footer class="py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <div class="mb-6">
+                 <a href="index.html" class="text-xl font-bold text-white hover:text-yellow-400 transition">
+                    <i class="fas fa-satellite mr-2 text-yellow-400"></i>Observatorio de Física Cósmica de San Miguel
+                </a>
+            </div>
+            <div class="mb-6 space-x-6">
+                <a href="index.html#eventos" class="hover:text-yellow-400">Próximos Eventos</a>
+                <a href="eventos.html" class="hover:text-yellow-400">Todos los Eventos</a>
+                <a href="index.html#cursos" class="hover:text-yellow-400">Cursos</a>
+                <a href="historia.html" class="hover:text-yellow-400">Nuestra Historia</a>
+                <a href="index.html#premium" class="hover:text-yellow-400">Premium</a>
+                <a href="index.html#contacto" class="hover:text-yellow-400">Contacto</a>
+                <a href="#" class="hover:text-yellow-400">Política de Privacidad</a>
+            </div>
+            <div class="mb-6 flex justify-center space-x-6">
+                <a href="#" aria-label="Facebook" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" aria-label="Twitter" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="#" aria-label="YouTube" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-youtube fa-lg"></i></a>
+            </div>
+            <p class="text-sm">© <span id="currentYear"></span> Observatorio de Física Cósmica de San Miguel. Todos los derechos reservados.</p>
+            <p class="text-xs mt-2">Diseñado con <i class="fas fa-heart text-red-500"></i> por la IA y los Amantes del Cosmos.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Menú móvil
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuButton && mobileMenu) {
+          mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+          });
+        }
+
+        // Año actual en footer
+        const currentYearElem = document.getElementById('currentYear');
+        if (currentYearElem) {
+          currentYearElem.textContent = new Date().getFullYear();
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId.length > 1) { // Asegurarse de que el targetId no es solo "#"
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
