@@ -233,6 +233,28 @@
             bottom: 0;
             background: rgba(11, 13, 23, 0.85);
         }
+        
+        .download-section {
+            background: rgba(30, 26, 62, 0.7);
+            border: 1px solid rgba(109, 40, 217, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .file-card {
+            background: rgba(30, 26, 62, 0.5);
+            border: 1px solid rgba(109, 40, 217, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .file-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(214, 188, 250, 0.1);
+            border-color: rgba(246, 173, 85, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -281,7 +303,7 @@
         </div>
     </nav>
 
-    <!-- Encabezado Hero -->
+    <!-- Encabezado Hero con NASA APOD -->
     <header class="hero-section h-screen flex items-center justify-center text-center">
         <div class="container mx-auto px-6 relative z-10">
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
@@ -291,11 +313,11 @@
                 Explora el universo con nuestros cursos especializados, eventos astronómicos y una comunidad apasionada por la física cósmica.
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#cursos" class="btn-primary px-8 py-4 rounded-full font-semibold text-lg">
-                    <i class="fas fa-graduation-cap mr-2"></i>Ver Cursos
+                <a href="#eventos" class="btn-primary px-8 py-4 rounded-full font-semibold text-lg">
+                    <i class="fas fa-calendar-alt mr-2"></i>Ver Eventos
                 </a>
-                <a href="#eventos" class="px-8 py-4 rounded-full font-semibold text-lg border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:bg-opacity-10 transition">
-                    <i class="fas fa-calendar-alt mr-2"></i>Eventos Estelares
+                <a href="#cursos" class="px-8 py-4 rounded-full font-semibold text-lg border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:bg-opacity-10 transition">
+                    <i class="fas fa-graduation-cap mr-2"></i>Explorar Cursos
                 </a>
             </div>
         </div>
@@ -444,7 +466,7 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Curso 1 -->
                 <div class="card overflow-hidden">
-                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-4">
                             <h3 class="text-xl font-semibold text-white">Telescopios: Partes y Usos</h3>
@@ -502,6 +524,72 @@
                                 <p class="text-gray-500 text-sm">o certificación gratis con Premium</p>
                             </div>
                             <button onclick="showCourseDetails('astrofisica')" class="btn-primary px-4 py-2 rounded-full text-sm font-semibold">
+                                Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Curso 4 -->
+                <div class="card overflow-hidden">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1532944924931-24b2baffb9d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-semibold text-white">Astronomía Cultural</h3>
+                            <span class="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-sm font-bold">6 módulos</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4">Explora la astronomía a través de las culturas antiguas y su conexión con el cosmos.</p>
+                        
+                        <div class="flex justify-between items-center mt-6">
+                            <div>
+                                <span class="text-yellow-400 font-bold text-lg">ARS 110.000</span>
+                                <p class="text-gray-500 text-sm">o certificación gratis con Premium</p>
+                            </div>
+                            <button onclick="showCourseDetails('cultural')" class="btn-primary px-4 py-2 rounded-full text-sm font-semibold">
+                                Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Curso 5 -->
+                <div class="card overflow-hidden">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1507697364665-69eec30ea94a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-semibold text-white">Óptica Aplicada</h3>
+                            <span class="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-sm font-bold">6 módulos</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4">Domina los principios ópticos para telescopios y sistemas de observación.</p>
+                        
+                        <div class="flex justify-between items-center mt-6">
+                            <div>
+                                <span class="text-yellow-400 font-bold text-lg">ARS 130.000</span>
+                                <p class="text-gray-500 text-sm">o certificación gratis con Premium</p>
+                            </div>
+                            <button onclick="showCourseDetails('optica')" class="btn-primary px-4 py-2 rounded-full text-sm font-semibold">
+                                Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Curso 6 -->
+                <div class="card overflow-hidden">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-semibold text-white">Arqueoastronomía</h3>
+                            <span class="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-sm font-bold">6 módulos</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4">Estudia la relación entre las antiguas civilizaciones y sus conocimientos astronómicos.</p>
+                        
+                        <div class="flex justify-between items-center mt-6">
+                            <div>
+                                <span class="text-yellow-400 font-bold text-lg">ARS 140.000</span>
+                                <p class="text-gray-500 text-sm">o certificación gratis con Premium</p>
+                            </div>
+                            <button onclick="showCourseDetails('arqueo')" class="btn-primary px-4 py-2 rounded-full text-sm font-semibold">
                                 Ver Detalles
                             </button>
                         </div>
@@ -892,13 +980,13 @@
                             <div class="my-6 p-4 bg-gray-900 bg-opacity-50 rounded-lg">
                                 <p class="text-white">Otorgado a: <span class="font-semibold">[Nombre del Estudiante]</span></p>
                                 <p class="text-white">Por completar exitosamente el curso:</p>
-                                <p class="text-yellow-400 font-bold">Astrofotografía Avanzada</p>
+                                <p class="text-yellow-400 font-bold">Telescopios: Partes y Usos</p>
                             </div>
                             
                             <div class="grid grid-cols-2 gap-4 mb-6">
                                 <div>
                                     <p class="text-gray-400">Instructor</p>
-                                    <p class="text-white">Mayra Schwarzschild</p>
+                                    <p class="text-white">Nicolás Balbi</p>
                                 </div>
                                 <div>
                                     <p class="text-gray-400">Fecha</p>
@@ -909,13 +997,116 @@
                             <div class="flex justify-center space-x-4">
                                 <div class="bg-gray-800 p-4 rounded-lg">
                                     <p class="text-gray-400">Código de Verificación</p>
-                                    <p class="text-yellow-400 font-mono">SM-2025-AF-8426</p>
+                                    <p class="text-yellow-400 font-mono">SM-2025-TP-8426</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
                     <p class="text-gray-400 text-center mt-6">Los miembros Premium reciben certificados digitales verificables al completar cualquier curso sin costo adicional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Descargas -->
+    <section id="downloads" class="py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-16 section-title">Centro de Descargas</h2>
+            
+            <div class="download-section">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-yellow-400 mb-6">Subir Trabajos</h3>
+                        <div class="p-6 bg-gray-800 rounded-lg">
+                            <div class="mb-4">
+                                <label class="block text-gray-300 mb-2">Título del trabajo</label>
+                                <input type="text" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-yellow-400">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-300 mb-2">Descripción</label>
+                                <textarea class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-yellow-400" rows="3"></textarea>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-300 mb-2">Archivo (PDF, PPT, DOC)</label>
+                                <div class="flex items-center justify-center w-full">
+                                    <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer border-gray-600 hover:border-yellow-400">
+                                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                            <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                                            <p class="text-sm text-gray-400">Haz clic para subir o arrastra un archivo</p>
+                                        </div>
+                                        <input type="file" class="hidden" />
+                                    </label>
+                                </div>
+                            </div>
+                            <button class="w-full btn-primary px-4 py-2 rounded-full font-semibold">
+                                <i class="fas fa-upload mr-2"></i>Subir Trabajo
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold text-yellow-400 mb-6">Descargar Investigaciones</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="file-card">
+                                <div class="flex items-center mb-3">
+                                    <i class="fas fa-file-pdf text-2xl text-red-500 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-white">La Evolución de los Telescopios Espaciales</h4>
+                                        <p class="text-gray-400 text-sm">Por Nicolás Balbi · 15 Ago 2025</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-300 mb-4">Análisis histórico y técnico del desarrollo de telescopios espaciales desde el Hubble hasta el James Webb.</p>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400 text-sm">PDF · 4.2 MB</span>
+                                    <button class="text-yellow-400 hover:text-yellow-300">
+                                        <i class="fas fa-download mr-1"></i>Descargar
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="file-card">
+                                <div class="flex items-center mb-3">
+                                    <i class="fas fa-file-powerpoint text-2xl text-orange-500 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-white">Técnicas Modernas de Astrofotografía</h4>
+                                        <p class="text-gray-400 text-sm">Por Mayra Schwarzschild · 10 Ago 2025</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-300 mb-4">Presentación detallada sobre métodos avanzados de astrofotografía y procesamiento de imágenes.</p>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400 text-sm">PPTX · 8.7 MB</span>
+                                    <button class="text-yellow-400 hover:text-yellow-300">
+                                        <i class="fas fa-download mr-1"></i>Descargar
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="file-card">
+                                <div class="flex items-center mb-3">
+                                    <i class="fas fa-file-word text-2xl text-blue-500 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-white">Arqueoastronomía en América Precolombina</h4>
+                                        <p class="text-gray-400 text-sm">Por Bella Vista al Cosmos · 5 Ago 2025</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-300 mb-4">Estudio sobre los conocimientos astronómicos de las civilizaciones precolombinas y sus observatorios.</p>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400 text-sm">DOCX · 3.1 MB</span>
+                                    <button class="text-yellow-400 hover:text-yellow-300">
+                                        <i class="fas fa-download mr-1"></i>Descargar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-6">
+                            <button class="text-yellow-400 hover:text-yellow-300 font-semibold">
+                                <i class="fas fa-arrow-down mr-2"></i>Ver más investigaciones
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1068,11 +1259,11 @@
                     <h3 class="text-lg font-semibold mb-4 text-white">Enlaces Rápidos</h3>
                     <ul class="space-y-2">
                         <li><a href="#eventos" class="text-gray-400 hover:text-yellow-400">Eventos</a></li>
-                        <li><a href="#calendario" class="text-gray-400 hover:text-yellow-400">Calendario Astronómico</a></li>
-                        <li><a href="#comunidad" class="text-gray-400 hover:text-yellow-400">Foro Comunitario</a></li>
-                        <li><a href="#premium" class="text-gray-400 hover:text-yellow-400">Membresía Premium</a></li>
-                        <li><a href="#contacto" class="text-gray-400 hover:text-yellow-400">Contacto</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-yellow-400">Blog Astronómico</a></li>
+                        <li><a href="#ubicacion" class="text-gray-400 hover:text-yellow-400">Ubicación</a></li>
+                        <li><a href="#cursos" class="text-gray-400 hover:text-yellow-400">Cursos</a></li>
+                        <li><a href="#calendario" class="text-gray-400 hover:text-yellow-400">Calendario</a></li>
+                        <li><a href="#comunidad" class="text-gray-400 hover:text-yellow-400">Foro</a></li>
+                        <li><a href="#premium" class="text-gray-400 hover:text-yellow-400">Premium</a></li>
                     </ul>
                 </div>
                 
@@ -1155,6 +1346,8 @@
                 })
                 .catch(error => {
                     console.error('Error al cargar imagen de NASA:', error);
+                    // Imagen de respaldo
+                    heroSection.style.backgroundImage = "linear-gradient(to bottom, rgba(11, 13, 23, 0.7), rgba(30, 26, 62, 0.8)), url('https://images.unsplash.com/photo-1465101162946-4377e57745c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')";
                 });
         });
         
@@ -1307,7 +1500,8 @@
                             correct: 3
                         }
                     ]
-                }
+                },
+                // Datos para los otros cursos (similar a los anteriores)
             };
 
             const course = courseData[courseId];
