@@ -3,45 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Observatorio de Física Cósmica de San Miguel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Observatorio de Física Cósmica de San Miguel - Cursos Astronómicos</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #1a202c; /* Azul oscuro grisáceo Tailwind: bg-gray-800 */
-            color: #e2e8f0; /* Gris claro Tailwind: text-gray-300 */
+            background-color: #1a202c; 
+            color: #e2e8f0; 
         }
         .navbar-glass {
-            background-color: rgba(26, 32, 44, 0.8); /* bg-gray-800 con opacidad */
+            background-color: rgba(26, 32, 44, 0.8); 
             backdrop-filter: blur(10px);
         }
         .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://placehold.co/1920x1080/000033/FFFFFF?text=Imagen+Impactante+del+Sol') center center no-repeat;
             background-size: cover;
+            background-position: center;
+            transition: background-image 1s ease;
         }
         .card {
-            background-color: #2d3748; /* Azul más oscuro Tailwind: bg-gray-700 */
-            border: 1px solid #4a5568; /* Gris medio Tailwind: border-gray-600 */
+            background-color: #2d3748; 
+            border: 1px solid #4a5568; 
         }
         .btn-primary {
-            background-color: #f6ad55; /* Naranja Tailwind: bg-yellow-500 */
-            color: #1a202c; /* Azul oscuro grisáceo para texto */
+            background-color: #f6ad55; 
+            color: #1a202c;
             transition: background-color 0.3s ease;
         }
         .btn-primary:hover {
-            background-color: #ed8936; /* Naranja más oscuro Tailwind: bg-yellow-600 */
+            background-color: #ed8936; 
         }
         .btn-secondary {
-            background-color: #4a5568; /* Gris medio Tailwind: bg-gray-600 */
-            color: #e2e8f0; /* Gris claro para texto */
+            background-color: #4a5568; 
+            color: #e2e8f0;
             transition: background-color 0.3s ease;
         }
         .btn-secondary:hover {
-            background-color: #2d3748; /* Azul más oscuro Tailwind: bg-gray-700 */
+            background-color: #2d3748;
         }
         .section-title {
-            color: #f6ad55; /* Naranja Tailwind: text-yellow-500 */
+            color: #f6ad55; 
         }
         .premium-tag {
             background-color: #f6ad55;
@@ -52,659 +54,860 @@
             font-weight: bold;
             margin-left: 0.5rem;
         }
-        footer {
-            background-color: #00001a; /* Azul muy oscuro, casi negro */
+        .footer {
+            background-color: #00001a; 
         }
         #map {
             width: 100%;
-            height: 384px; /* Igual a h-96 de Tailwind */
+            height: 384px; 
         }
         section[id] {
-            scroll-margin-top: 80px; /* Ajuste para el navbar fijo, aprox la altura del navbar */
+            scroll-margin-top: 80px; 
         }
-        /* Estilos para el Chatbot */
         #chat-display p {
             line-height: 1.6;
         }
-        #chat-display strong.text-yellow-400 { /* Usuario */
+        #chat-display strong.text-yellow-400 {
             color: #f6ad55;
         }
-        #chat-display strong.text-blue-400 { /* AstroBot */
+        #chat-display strong.text-blue-400 {
             color: #63b3ed;
+        }
+        .course-card:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease;
+        }
+        .quiz-option {
+            display: block;
+            margin: 8px 0;
+            padding: 10px;
+            background-color: #2d3748;
+            border: 1px solid #4a5568;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #3c4758;
         }
     </style>
 </head>
-<body class="text-gray-300">
+<body>
 
-    <nav class="navbar-glass sticky top-0 z-50 shadow-lg">
-        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-yellow-500 hover:text-yellow-400 transition-colors">Observatorio San Miguel</a>
-            <div class="hidden md:flex space-x-4 items-center">
-                <a href="#blog" class="hover:text-yellow-400 transition-colors">Blog</a>
-                <a href="#eventos" class="hover:text-yellow-400 transition-colors">Eventos</a>
-                <a href="#cursos" class="hover:text-yellow-400 transition-colors">Cursos</a>
-                <a href="#ubicacion" class="hover:text-yellow-400 transition-colors">Ubicación</a>
-                <a href="#ia" class="hover:text-yellow-400 transition-colors">IA Astronómica</a>
-                <a href="#chatbot" class="hover:text-yellow-400 transition-colors">AstroBot</a>
-                <a href="#comunidad" class="hover:text-yellow-400 transition-colors">Comunidad</a>
-                <a href="#contacto" class="hover:text-yellow-400 transition-colors">Contacto</a>
-                <a href="#premium" class="ml-4 px-4 py-2 btn-primary rounded-md font-semibold">Premium</a>
+<nav class="navbar-glass sticky top-0 z-50 shadow-lg">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl font-bold text-white">
+            <i class="fas fa-solar-system mr-2 text-yellow-400"></i>Observatorio San Miguel
+        </a>
+        <div class="hidden md:flex space-x-4 items-center">
+            <a href="#noticias" class="text-gray-300 hover:text-yellow-400 transition duration-300">Blog</a>
+            <a href="#eventos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Eventos</a>
+            <a href="#cursos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
+            <a href="#ubicacion" class="text-gray-300 hover:text-yellow-400 transition duration-300">Ubicación</a>
+            <a href="#ia" class="text-gray-300 hover:text-yellow-400 transition duration-300">IA Astronómica</a>
+            <a href="#chatbot-ia" class="text-gray-300 hover:text-yellow-400 transition duration-300">AstroBot</a>
+            <a href="#comunidad" class="text-gray-300 hover:text-yellow-400 transition duration-300">Comunidad</a>
+            <a href="#contacto" class="text-gray-300 hover:text-yellow-400 transition duration-300">Contacto</a>
+            <a href="#premium" class="btn-primary px-4 py-2 rounded-md font-semibold">
+                <i class="fas fa-star mr-1"></i>Premium
+            </a>
+        </div>
+        <div class="md:hidden">
+            <button id="mobile-menu-button" class="text-gray-300 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+        <a href="#noticias" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Blog</a>
+        <a href="#eventos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Eventos</a>
+        <a href="#cursos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
+        <a href="#ubicacion" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Ubicación</a>
+        <a href="#ia" class="block text-gray-300 hover:text-yellow-400 transition duration-300">IA Astronómica</a>
+        <a href="#chatbot-ia" class="block text-gray-300 hover:text-yellow-400 transition duration-300">AstroBot</a>
+        <a href="#comunidad" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Comunidad</a>
+        <a href="#contacto" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Contacto</a>
+        <a href="#premium" class="block btn-primary px-4 py-2 rounded-md font-semibold text-center mt-2">
+            <i class="fas fa-star mr-1"></i>Premium
+        </a>
+    </div>
+</nav>
+
+<header class="hero-section h-screen flex items-center justify-center text-center">
+    <div class="container mx-auto px-6">
+        <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+            Explorando los Secretos del Universo
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-200 mb-10 max-w-3xl mx-auto">
+            Descubre los misterios del cosmos, mantente al día con los últimos eventos astronómicos y únete a nuestra comunidad apasionada por la física cósmica.
+        </p>
+        <div>
+            <a href="#cursos" class="btn-primary text-lg px-8 py-4 rounded-lg font-semibold mr-4">
+                <i class="fas fa-graduation-cap mr-2"></i>Explorar Cursos
+            </a>
+            <a href="#eventos" class="btn-secondary text-lg px-8 py-4 rounded-lg font-semibold">
+                <i class="fas fa-calendar-alt mr-2"></i>Ver Eventos
+            </a>
+        </div>
+    </div>
+</header>
+
+<section id="cursos" class="py-16 bg-gray-800">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12 section-title">Nuestros Cursos Certificados</h2>
+        <p class="text-gray-400 text-center mb-10 max-w-3xl mx-auto">
+            Todos nuestros cursos incluyen evaluaciones de opción múltiple para certificar tus conocimientos
+        </p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Telescopios -->
+            <div class="card rounded-lg shadow-xl overflow-hidden course-card">
+                <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Telescopios" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2 text-white">TELESCOPIOS: PARTES Y USOS</h3>
+                    <p class="text-gray-400 text-sm mb-4">Aprende a seleccionar, montar y operar diferentes tipos de telescopios con el experto Nicolás Balbi.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-yellow-400 font-semibold">ARS 150.000</span>
+                        <a href="javascript:void(0)" onclick="showCourseDetails('telescopios')" class="btn-primary px-4 py-2 rounded-md text-sm font-semibold">
+                            <i class="fas fa-info-circle mr-1"></i>Detalles
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-gray-300 hover:text-yellow-400 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            
+            <!-- Astrofotografía -->
+            <div class="card rounded-lg shadow-xl overflow-hidden course-card">
+                <img src="https://images.unsplash.com/photo-1505506874110-6a7a69069a08?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Astrofotografía" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2 text-white">ASTROFOTOGRAFÍA: CAPTURANDO EL COSMOS</h3>
+                    <p class="text-gray-400 text-sm mb-4">Domina técnicas avanzadas para fotografiar estrellas, nebulosas y galaxias con Mayra Schwarzschild.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-yellow-400 font-semibold">ARS 120.000</span>
+                        <a href="javascript:void(0)" onclick="showCourseDetails('astrofotografia')" class="btn-primary px-4 py-2 rounded-md text-sm font-semibold">
+                            <i class="fas fa-info-circle mr-1"></i>Detalles
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Astronomía Cultural -->
+            <div class="card rounded-lg shadow-xl overflow-hidden course-card">
+                <img src="https://images.unsplash.com/photo-1545156521-77bd85671d30?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Astronomía Cultural" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2 text-white">ASTRONOMÍA CULTURAL: MITOS Y REALIDADES</h3>
+                    <p class="text-gray-400 text-sm mb-4">Descubre cómo diferentes culturas interpretaron el cielo con Santiago Maiese.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-yellow-400 font-semibold">ARS 100.000</span>
+                        <a href="javascript:void(0)" onclick="showCourseDetails('astronomia-cultural')" class="btn-primary px-4 py-2 rounded-md text-sm font-semibold">
+                            <i class="fas fa-info-circle mr-1"></i>Detalles
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Óptica -->
+            <div class="card rounded-lg shadow-xl overflow-hidden course-card">
+                <img src="https://images.unsplash.com/photo-1507697364665-69eec30ea1eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Óptica" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2 text-white">ÓPTICA APLICADA A LA ASTRONOMÍA</h3>
+                    <p class="text-gray-400 text-sm mb-4">Fundamentos de óptica para instrumentación astronómica con Nicolás Balbi.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-yellow-400 font-semibold">ARS 180.000</span>
+                        <a href="javascript:void(0)" onclick="showCourseDetails('optica')" class="btn-primary px-4 py-2 rounded-md text-sm font-semibold">
+                            <i class="fas fa-info-circle mr-1"></i>Detalles
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Astrofísica -->
+            <div class="card rounded-lg shadow-xl overflow-hidden course-card">
+                <img src="https://images.unsplash.com/photo-1464802686167-b939a6910659?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Astrofísica" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2 text-white">ASTROFÍSICA: DE LAS ESTRELLAS AL COSMOS</h3>
+                    <p class="text-gray-400 text-sm mb-4">Estudia la física de los objetos celestes con Bella Vista al Cosmos.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-yellow-400 font-semibold">ARS 200.000</span>
+                        <a href="javascript:void(0)" onclick="showCourseDetails('astrofisica')" class="btn-primary px-4 py-2 rounded-md text-sm font-semibold">
+                            <i class="fas fa-info-circle mr-1"></i>Detalles
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Arqueoastronomía -->
+            <div class="card rounded-lg shadow-xl overflow-hidden course-card">
+                <img src="https://images.unsplash.com/photo-1517292987719-0369a794ec0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Arqueoastronomía" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2 text-white">ARQUEOASTRONOMÍA: ANTIGUOS OBSERVADORES DEL CIELO</h3>
+                    <p class="text-gray-400 text-sm mb-4">Explora sitios arqueológicos con orientación astronómica con Mayra Schwarzschild.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-yellow-400 font-semibold">ARS 130.000</span>
+                        <a href="javascript:void(0)" onclick="showCourseDetails('arqueoastronomia')" class="btn-primary px-4 py-2 rounded-md text-sm font-semibold">
+                            <i class="fas fa-info-circle mr-1"></i>Detalles
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-12 text-center">
+            <a href="#premium" class="btn-primary px-8 py-3 rounded-lg font-semibold text-lg">
+                <i class="fas fa-star mr-2"></i>¡Acceso Premium a Todos los Cursos!
+            </a>
+            <p class="text-gray-500 mt-4 text-sm">Certificación oficial con evaluaciones de opción múltiple</p>
+        </div>
+    </div>
+</section>
+
+<!-- Modal para detalles del curso y evaluación -->
+<div id="course-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
+    <div class="bg-gray-800 rounded-lg shadow-xl w-11/12 md:w-3/4 lg:w-2/3 max-h-screen overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="modal-title" class="text-2xl font-bold text-yellow-400"></h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <div id="modal-content" class="text-gray-300"></div>
+            <div id="quiz-section" class="mt-6 hidden">
+                <h4 class="text-xl font-semibold mb-4 text-white">Evaluación de Múltiple Choice</h4>
+                <div id="quiz-questions"></div>
+                <button id="submit-quiz" class="btn-primary mt-4 px-4 py-2 rounded-md font-semibold">
+                    <i class="fas fa-paper-plane mr-2"></i>Enviar Respuestas
+                </button>
+                <div id="quiz-results" class="mt-4 hidden"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="eventos" class="py-16">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12 section-title">Próximos Eventos Astronómicos</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="card p-6 rounded-lg shadow-xl">
+                <h3 class="text-xl font-semibold mb-2 text-white">Noche de Observación: Planetas y Nebulosas</h3>
+                <p class="text-gray-400 text-sm mb-1"><i class="fas fa-calendar-alt mr-2"></i>15 de Agosto, 2025 - 20:00 hs</p>
+                <p class="text-gray-400 text-sm mb-3"><i class="fas fa-map-marker-alt mr-2"></i>Terraza de Observación, Observatorio San Miguel</p>
+                <p class="text-gray-300 mb-4">Observación guiada de Júpiter, Saturno y la Nebulosa de Orión con nuestros telescopios profesionales. Ideal para principiantes.</p>
+                <a href="#" class="btn-primary px-4 py-2 rounded-md text-sm font-semibold">Inscribirse</a>
+            </div>
+            <div class="card p-6 rounded-lg shadow-xl">
+                <h3 class="text-xl font-semibold mb-2 text-white">Charla: "Exoplanetas y Vida en el Universo"</h3>
+                <p class="text-gray-400 text-sm mb-1"><i class="fas fa-calendar-alt mr-2"></i>22 de Agosto, 2025 - 18:30 hs</p>
+                <p class="text-gray-400 text-sm mb-3"><i class="fas fa-map-marker-alt mr-2"></i>Auditorio Principal, Observatorio San Miguel</p>
+                <p class="text-gray-300 mb-4">Conferencia sobre los últimos descubrimientos de exoplanetas y la búsqueda de vida extraterrestre con el Dr. Nicolás Balbi.</p>
+                <a href="#" class="btn-primary px-4 py-2 rounded-md text-sm font-semibold">Reservar Lugar</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="ubicacion" class="py-16 bg-gray-800">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-8 section-title">Visítanos en San Miguel</h2>
+        <div class="max-w-4xl mx-auto card rounded-lg shadow-xl overflow-hidden p-2">
+            <div id="map" class="rounded-md bg-gray-700 flex items-center justify-center">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52563.71918481897!2d-58.73003763242955!3d-34.55556612087543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb0f5d2f7d7c7%3A0x9a3a9b3b3b3b3b3b!2sSan%20Miguel%2C%20Buenos%20Aires%20Province%2C%20Argentina!5e0!3m2!1sen!2sus!4v1716999999999!5m2!1sen!2sus" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+        <p class="text-center mt-6 text-gray-400">
+            <i class="fas fa-map-marker-alt mr-2 text-yellow-400"></i>
+            Av. Balbastro 1234, San Miguel, Buenos Aires, Argentina
+        </p>
+        <p class="text-center text-gray-400">
+            <i class="fas fa-clock mr-2 text-yellow-400"></i>
+            Horarios: Martes a Domingo de 16:00 a 22:00
+        </p>
+    </div>
+</section>
+
+<section id="noticias" class="py-16">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12 section-title">Blog: Noticias Astronómicas</h2>
+        <p class="text-gray-400 text-center mb-10 max-w-3xl mx-auto">
+            Mantente actualizado con las últimas noticias del cosmos
+        </p>
+        
+        <div class="max-w-4xl mx-auto mb-10">
+            <h3 class="text-xl font-semibold mb-4 text-white">Artículos Destacados</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <a href="https://www.space.com/" target="_blank" class="card p-6 rounded-lg shadow-xl hover:bg-gray-700 transition">
+                    <h4 class="text-lg font-semibold mb-2 text-yellow-400">La Misión Artemis: Regreso a la Luna</h4>
+                    <p class="text-gray-400 text-sm mb-4">Space.com - 15 de Julio, 2025</p>
+                    <p class="text-gray-300">Descubre los detalles de la próxima misión tripulada a la Luna y sus objetivos científicos.</p>
+                </a>
+                <a href="https://www.nasa.gov/" target="_blank" class="card p-6 rounded-lg shadow-xl hover:bg-gray-700 transition">
+                    <h4 class="text-lg font-semibold mb-2 text-yellow-400">Nuevos Exoplanetas Descubiertos</h4>
+                    <p class="text-gray-400 text-sm mb-4">NASA - 12 de Julio, 2025</p>
+                    <p class="text-gray-300">El telescopio James Webb identifica 5 nuevos exoplanetas potencialmente habitables.</p>
+                </a>
+            </div>
+        </div>
+        
+        <div id="news-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Las noticias se cargarán aquí dinámicamente -->
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="https://www.sciencenews.org/topic/space" target="_blank" class="btn-primary px-6 py-3 rounded-lg font-semibold">
+                <i class="fas fa-book-open mr-2"></i>Ver Más Noticias en ScienceNews
+            </a>
+        </div>
+    </div>
+</section>
+
+<section id="imagen-solar" class="py-16 bg-gray-800">
+    <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold mb-4 section-title">Imagen Astronómica del Día</h2>
+        <p class="text-gray-400 mb-8">Cortesía de NASA API</p>
+        <div id="nasa-solar-image-container" class="max-w-2xl mx-auto card rounded-lg shadow-xl overflow-hidden">
+            <img id="nasa-image" src="https://placehold.co/800x600/1A202C/E2E8F0?text=Cargando+imagen+astronómica..." alt="Imagen Astronómica del Día" class="w-full h-auto">
+            <div class="p-6">
+                <h3 id="nasa-title" class="text-xl font-semibold mb-2 text-white">Título de la Imagen</h3>
+                <p id="nasa-explanation" class="text-gray-400 text-sm mb-4">Descripción o explicación de la imagen...</p>
+                <div class="flex justify-center space-x-4">
+                    <button id="download-image" class="btn-primary px-4 py-2 rounded-md text-sm font-semibold">
+                        <i class="fas fa-download mr-2"></i>Descargar Imagen
+                    </button>
+                    <button id="download-info" class="btn-secondary px-4 py-2 rounded-md text-sm font-semibold">
+                        <i class="fas fa-file-download mr-2"></i>Descargar Info
+                    </button>
+                </div>
+            </div>
+        </div>
+        <button id="load-nasa-image" class="mt-8 btn-primary px-6 py-3 rounded-lg font-semibold">
+            <i class="fas fa-sync-alt mr-2"></i>Cargar Nueva Imagen
+        </button>
+    </div>
+</section>
+
+<section id="ia" class="py-16">
+    <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold mb-8 section-title">Inteligencia Artificial al Servicio de la Astronomía</h2>
+        <div class="max-w-3xl mx-auto">
+            <i class="fas fa-brain text-6xl text-yellow-400 mb-6"></i>
+            <p class="text-lg text-gray-300 mb-6"> 
+                En el Observatorio de Física Cósmica de San Miguel, estamos explorando el potencial de la IA para analizar grandes volúmenes de datos astronómicos, predecir eventos espaciales y asistir en la investigación cósmica.
+            </p>
+            <p class="text-gray-400 mb-8" id="ia-detail-text"> 
+                Nuestros modelos de IA están siendo entrenados con datos históricos y observaciones en tiempo real para ofrecer nuevas perspectivas sobre el comportamiento estelar y fenómenos cósmicos.
+            </p>
+            <a href="#" class="btn-primary px-6 py-3 rounded-lg font-semibold">
+                <i class="fas fa-cogs mr-2"></i>Conoce Nuestros Proyectos de IA
+            </a>
+        </div>
+    </div>
+</section>
+
+<section id="chatbot-ia" class="py-16 bg-gray-900">
+    <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold mb-8 section-title">Pregúntale a AstroBot <i class="fas fa-robot ml-2"></i></h2>
+        <p class="text-gray-400 mb-6 max-w-xl mx-auto">Interactúa con nuestra IA especializada en astronomía. AstroBot está aquí para responder tus preguntas sobre el cosmos, el Observatorio y más.</p>
+        <div class="max-w-2xl mx-auto card p-6 rounded-lg shadow-xl">
+            <div id="chat-display" class="h-72 overflow-y-auto mb-4 p-4 bg-gray-800 rounded-md text-left text-sm">
+                <p class="text-left mb-2"><strong class="text-blue-400">AstroBot:</strong> ¡Hola! Soy AstroBot, tu asistente astronómico virtual del Observatorio San Miguel. ¿Tienes alguna pregunta sobre el universo, las estrellas, o las actividades del observatorio?</p>
+            </div>
+            <div class="flex mt-4">
+                <input type="text" id="chat-input" class="flex-grow p-3 rounded-l-md border border-gray-600 bg-gray-700 text-white focus:outline-none focus:border-yellow-500 placeholder-gray-500" placeholder="Escribe tu pregunta aquí...">
+                <button id="chat-submit" class="btn-primary px-5 py-3 rounded-r-md font-semibold">
+                    <i class="fas fa-paper-plane"></i> Enviar
                 </button>
             </div>
         </div>
-        <div id="mobile-menu" class="md:hidden hidden bg-gray-800 bg-opacity-95">
-            <a href="#blog" class="block py-2 px-6 hover:bg-gray-700 hover:text-yellow-400 transition-colors">Blog</a>
-            <a href="#eventos" class="block py-2 px-6 hover:bg-gray-700 hover:text-yellow-400 transition-colors">Eventos</a>
-            <a href="#cursos" class="block py-2 px-6 hover:bg-gray-700 hover:text-yellow-400 transition-colors">Cursos</a>
-            <a href="#ubicacion" class="block py-2 px-6 hover:bg-gray-700 hover:text-yellow-400 transition-colors">Ubicación</a>
-            <a href="#ia" class="block py-2 px-6 hover:bg-gray-700 hover:text-yellow-400 transition-colors">IA Astronómica</a>
-            <a href="#chatbot" class="block py-2 px-6 hover:bg-gray-700 hover:text-yellow-400 transition-colors">AstroBot</a>
-            <a href="#comunidad" class="block py-2 px-6 hover:bg-gray-700 hover:text-yellow-400 transition-colors">Comunidad</a>
-            <a href="#contacto" class="block py-2 px-6 hover:bg-gray-700 hover:text-yellow-400 transition-colors">Contacto</a>
-            <a href="#premium" class="block py-2 px-6 text-yellow-500 hover:bg-yellow-600 hover:text-gray-900 transition-colors font-semibold">Premium</a>
-        </div>
-    </nav>
+    </div>
+</section>
 
-    <section class="hero-section h-screen flex items-center justify-center text-center">
-        <div class="container mx-auto px-6">
-            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-lg">Explorando el Corazón del Sistema Solar</h1>
-            <p class="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto drop-shadow-md">Descubre los secretos del Sol, mantente al día con los últimos eventos astronómicos y únete a nuestra comunidad apasionada por la física cósmica.</p>
-            <div class="space-x-4">
-                <a href="#blog" class="px-8 py-3 btn-primary rounded-md text-lg font-semibold">Ver Blog</a>
-                <a href="#cursos" class="px-8 py-3 btn-secondary rounded-md text-lg font-semibold">Ver Cursos</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="eventos" class="py-16">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12 section-title">Próximos Eventos Solares y Actividades</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="card p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow">
-                    <h3 class="text-2xl font-semibold text-yellow-400 mb-3">Charla: "El Sol y su Impacto en la Tierra"</h3>
-                    <p class="text-gray-400 mb-1"><strong class="text-gray-200">Fecha:</strong> 15 de Agosto, 2025 - 18:00 hs</p>
-                    <p class="text-gray-400 mb-4"><strong class="text-gray-200">Lugar:</strong> Auditorio Principal, Observatorio San Miguel</p>
-                    <p class="mb-4">Una charla divulgativa sobre la influencia del Sol en nuestro planeta, desde el clima hasta la tecnología.</p>
-                    <a href="#" class="inline-block btn-secondary px-6 py-2 rounded-md font-semibold">Más Información</a>
-                </div>
-                <div class="card p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow">
-                    <h3 class="text-2xl font-semibold text-yellow-400 mb-3">Noche de Observación Solar (con filtros especiales)</h3>
-                    <p class="text-gray-400 mb-1"><strong class="text-gray-200">Fecha:</strong> 22 de Agosto, 2025 - 10:00 hs</p>
-                    <p class="text-gray-400 mb-4"><strong class="text-gray-200">Lugar:</strong> Terraza de Observación, Observatorio San Miguel</p>
-                    <p class="mb-4">Oportunidad única para observar el Sol de forma segura con nuestros telescopios especializados.</p>
-                    <a href="#" class="inline-block btn-primary px-6 py-2 rounded-md font-semibold">Inscribirse</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="cursos" class="py-16 bg-gray-800">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12 section-title">Cursos y Formación Académica</h2>
-            <p class="text-center text-lg text-gray-400 mb-10">Todos nuestros cursos son certificados por: Bella Vista al Cosmos, Nicolás Balbi, Santiago Maiese y Mayra Schwarzschild.</p>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="card p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow flex flex-col">
-                    <img src="https://placehold.co/600x400/000022/FFFFFF?text=Telescopios" alt="Telescopios" class="rounded-md mb-4">
-                    <h3 class="text-2xl font-semibold text-yellow-400 mb-2">Telescopios: Partes y Usos</h3>
-                    <p class="text-gray-400 mb-3 text-sm flex-grow">Desentraña el funcionamiento de los telescopios, desde sus componentes ópticos hasta su manejo práctico para la observación astronómica. Aprende a elegir tu primer equipo o a sacarle el máximo partido al que ya tienes. <em>Curiosidad: ¿Sabías que el primer telescopio refractor práctico fue presentado por Hans Lippershey en 1608?</em></p>
-                    <a href="#" class="mt-auto inline-block btn-secondary px-6 py-2 rounded-md font-semibold text-center">Inscribirse Ahora</a>
-                </div>
-
-                <div class="card p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow flex flex-col">
-                    <img src="https://placehold.co/600x400/110033/FFFFFF?text=Astrofotografía" alt="Astrofotografía" class="rounded-md mb-4">
-                    <h3 class="text-2xl font-semibold text-yellow-400 mb-2">Astrofotografía <span class="premium-tag">PREMIUM</span></h3>
-                    <p class="text-gray-400 mb-3 text-sm flex-grow">Captura la belleza del cosmos. Este curso te guiará por las técnicas y el equipamiento necesario para fotografiar estrellas, planetas, nebulosas y galaxias. Desde lo básico con tu cámara réflex hasta técnicas avanzadas. <em>Dato estelar: La primera fotografía de la Luna se tomó en 1840 por John William Draper.</em></p>
-                    <a href="#premium" class="mt-auto inline-block btn-primary px-6 py-2 rounded-md font-semibold text-center">Ver Beneficios Premium</a>
-                </div>
-
-                <div class="card p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow flex flex-col">
-                    <img src="https://placehold.co/600x400/220011/FFFFFF?text=Astronomía+Cultural" alt="Astronomía Cultural" class="rounded-md mb-4">
-                    <h3 class="text-2xl font-semibold text-yellow-400 mb-2">Astronomía Cultural</h3>
-                    <p class="text-gray-400 mb-3 text-sm flex-grow">Explora la fascinante relación entre las culturas del mundo y el cielo nocturno. Descubre cómo diferentes civilizaciones interpretaron los astros, crearon mitologías y utilizaron la astronomía en su vida cotidiana. <em>Perspectiva ancestral: Muchas culturas antiguas utilizaban alineaciones astronómicas para marcar solsticios y equinoccios en sus construcciones.</em></p>
-                    <a href="#" class="mt-auto inline-block btn-secondary px-6 py-2 rounded-md font-semibold text-center">Inscribirse Ahora</a>
-                </div>
-
-                <div class="card p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow flex flex-col">
-                    <img src="https://placehold.co/600x400/001122/FFFFFF?text=Óptica+Astronómica" alt="Óptica Astronómica" class="rounded-md mb-4">
-                    <h3 class="text-2xl font-semibold text-yellow-400 mb-2">Óptica Astronómica <span class="premium-tag">PREMIUM</span></h3>
-                    <p class="text-gray-400 mb-3 text-sm flex-grow">Sumérgete en los principios físicos de la luz y su interacción con los instrumentos astronómicos. Comprende el diseño de telescopios, espectrógrafos y detectores para optimizar la captura de información del universo. <em>Detalle luminoso: La aberración cromática, un desafío en los primeros telescopios, ocurre porque diferentes colores de luz se refractan en ángulos ligeramente distintos.</em></p>
-                    <a href="#premium" class="mt-auto inline-block btn-primary px-6 py-2 rounded-md font-semibold text-center">Ver Beneficios Premium</a>
-                </div>
-
-                <div class="card p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow flex flex-col">
-                    <img src="https://placehold.co/600x400/330011/FFFFFF?text=Astrofísica" alt="Astrofísica" class="rounded-md mb-4">
-                    <h3 class="text-2xl font-semibold text-yellow-400 mb-2">Astrofísica Estelar y Galáctica</h3>
-                    <p class="text-gray-400 mb-3 text-sm flex-grow">Un viaje desde el nacimiento hasta la muerte de las estrellas y la estructura de las galaxias. Analiza los procesos físicos que rigen la evolución estelar, los agujeros negros y la dinámica galáctica. <em>Hecho cósmico: Nuestra Vía Láctea contiene cientos de miles de millones de estrellas y ¡se dirige hacia una colisión con la galaxia de Andrómeda en unos 4.500 millones de años!</em></p>
-                    <a href="#" class="mt-auto inline-block btn-secondary px-6 py-2 rounded-md font-semibold text-center">Inscribirse Ahora</a>
-                </div>
-
-                <div class="card p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow flex flex-col">
-                    <img src="https://placehold.co/600x400/111100/FFFFFF?text=Arqueoastronomía" alt="Arqueoastronomía" class="rounded-md mb-4">
-                    <h3 class="text-2xl font-semibold text-yellow-400 mb-2">Arqueoastronomía <span class="premium-tag">PREMIUM</span></h3>
-                    <p class="text-gray-400 mb-3 text-sm flex-grow">Investiga cómo las sociedades antiguas incorporaron conocimientos astronómicos en su arquitectura, calendarios y rituales. Un cruce interdisciplinario entre arqueología y astronomía. <em>Enigma del pasado: Monumentos como Stonehenge revelan un sofisticado entendimiento de los ciclos solares y lunares por parte de sus constructores.</em></p>
-                    <a href="#premium" class="mt-auto inline-block btn-primary px-6 py-2 rounded-md font-semibold text-center">Ver Beneficios Premium</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="ubicacion" class="py-16">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12 section-title">Visítanos</h2>
-            <div class="card rounded-lg shadow-xl overflow-hidden">
-                <div id="map" class="bg-gray-700 text-center flex items-center justify-center">
-                    Cargando mapa del Observatorio...
-                </div>
-            </div>
-            <p class="text-center mt-6 text-lg">
-                Bussolini 1760, San Miguel, Provincia de Buenos Aires, Argentina
-            </p>
-        </div>
-    </section>
-
-    <section id="blog" class="py-16 bg-gray-800">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12 section-title">Blog: Noticias Astronómicas y Tecnología Solar</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="card p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow">
-                    <img src="https://placehold.co/600x400/000044/FFFFFF?text=Corona+Solar" alt="Corona Solar" class="rounded-md mb-4">
-                    <h3 class="text-xl font-semibold text-yellow-400 mb-2">Nuevo Descubrimiento sobre la Corona Solar</h3>
-                    <p class="text-gray-400 text-sm mb-3">Investigadores revelan datos sorprendentes sobre las altas temperaturas de la corona...</p>
-                    <a href="#" class="font-semibold text-yellow-500 hover:text-yellow-400 transition-colors">Leer más &rarr;</a>
-                </div>
-                <div class="card p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow">
-                    <img src="https://placehold.co/600x400/330033/FFFFFF?text=Sonda+Solar" alt="Sonda Solar" class="rounded-md mb-4">
-                    <h3 class="text-xl font-semibold text-yellow-400 mb-2">Lanzamiento Exitoso de Sonda Solar</h3>
-                    <p class="text-gray-400 text-sm mb-3">La sonda "Helios VI" inicia su viaje para estudiar de cerca nuestra estrella...</p>
-                    <a href="#" class="font-semibold text-yellow-500 hover:text-yellow-400 transition-colors">Leer más &rarr;</a>
-                </div>
-                <div class="card p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow">
-                    <img src="https://placehold.co/600x400/002200/FFFFFF?text=Lluvia+Meteoros" alt="Lluvia de Meteoros" class="rounded-md mb-4">
-                    <h3 class="text-xl font-semibold text-yellow-400 mb-2">Próxima Lluvia de Meteoros: Guía de Observación</h3>
-                    <p class="text-gray-400 text-sm mb-3">Prepárate para el espectáculo celestial de las Perseidas este agosto...</p>
-                    <a href="#" class="font-semibold text-yellow-500 hover:text-yellow-400 transition-colors">Leer más &rarr;</a>
-                </div>
-            </div>
-            <div class="text-center mt-12">
-                <a href="#" class="px-8 py-3 btn-primary rounded-md text-lg font-semibold">Visitar Blog Completo</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="nasa-apod" class="py-16">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12 section-title">Imagen Solar del Día <span class="text-sm text-gray-400 font-normal">(Cortesía de NASA API)</span></h2>
-            <div class="card md:flex rounded-lg shadow-xl overflow-hidden">
-                <img id="nasa-image" src="https://placehold.co/800x600/1A202C/E2E8F0?text=Cargando+Imagen+NASA..." alt="Imagen Astronómica del Día de la NASA" class="md:w-1/2 object-cover">
-                <div class="p-6 md:w-1/2 flex flex-col justify-center">
-                    <h3 id="nasa-title" class="text-2xl font-semibold text-yellow-400 mb-3">Cargando título...</h3>
-                    <p id="nasa-explanation" class="text-gray-400 mb-4 text-sm">Cargando descripción...</p>
-                    <button id="load-nasa-image" class="mt-auto btn-secondary px-6 py-2 rounded-md font-semibold self-start">Cargar Nueva Imagen</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="ia" class="py-16 bg-gray-800">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-6 section-title">Inteligencia Artificial al Servicio de la Astronomía</h2>
-            <div class="max-w-3xl mx-auto">
-                <p class="text-lg text-gray-300 mb-4">
-                    En el Observatorio de Física Cósmica de San Miguel, estamos explorando el potencial de la IA para analizar grandes volúmenes de datos solares, predecir eventos espaciales y asistir en la investigación astronómica.
-                </p>
-                <p id="ia-detail-text" class="text-lg text-gray-400 mb-8">
-                    Nuestros modelos de IA (como Gemini) están siendo entrenados con datos históricos y observaciones en tiempo real para ofrecer nuevas perspectivas sobre el comportamiento solar y fenómenos cósmicos.
-                </p>
-                <a href="#" class="px-8 py-3 btn-primary rounded-md text-lg font-semibold">Conoce Nuestros Proyectos de IA</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="chatbot" class="py-16">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12 section-title">Pregúntale a AstroBot</h2>
-            <div class="card max-w-2xl mx-auto p-6 rounded-lg shadow-xl">
-                <div id="chat-display" class="h-80 overflow-y-auto mb-4 p-4 bg-gray-800 rounded-md border border-gray-600 text-sm">
-                    <p><strong class="text-blue-400">AstroBot:</strong> ¡Hola! Soy AstroBot, tu asistente astronómico virtual del Observatorio San Miguel. ¿Tienes alguna pregunta sobre el universo, nuestra estrella el Sol, o las actividades del observatorio?</p>
-                </div>
-                <div class="flex space-x-3">
-                    <input type="text" id="chat-input" class="flex-grow p-3 rounded-md bg-gray-700 border border-gray-600 focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none placeholder-gray-500" placeholder="Escribe tu pregunta aquí...">
-                    <button id="chat-submit" class="btn-primary px-6 py-3 rounded-md font-semibold">Enviar</button>
-                </div>
-                 <p class="text-xs text-gray-500 mt-2 text-center">Chatbot potenciado por OpenAI GPT-3.5-Turbo. Requiere API Key.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="comunidad" class="py-16 bg-gray-800">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-6 section-title">Únete a Nuestra Comunidad</h2>
-            <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+<section id="comunidad" class="py-16 bg-gray-800">
+    <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold mb-8 section-title">Únete a Nuestra Comunidad</h2>
+        <div class="max-w-2xl mx-auto">
+            <i class="fas fa-users text-6xl text-yellow-400 mb-6"></i>
+            <p class="text-lg text-gray-300 mb-6">
                 Conecta con otros entusiastas de la astronomía, participa en foros de discusión, comparte tus observaciones y colabora en proyectos ciudadanos.
             </p>
-            <div class="space-x-0 md:space-x-4 space-y-4 md:space-y-0">
-                <a href="#" class="inline-block px-8 py-3 btn-secondary rounded-md text-lg font-semibold">Ir al Foro</a>
-                <a href="#premium" class="inline-block px-8 py-3 btn-primary rounded-md text-lg font-semibold">Hazte Miembro Premium</a>
+            <a href="#" class="btn-primary px-6 py-3 rounded-lg font-semibold mr-4">
+                <i class="fas fa-comments mr-2"></i>Ir al Foro
+            </a>
+            <a href="#premium" class="btn-secondary px-6 py-3 rounded-lg font-semibold">
+                <i class="fas fa-user-plus mr-2"></i>Hazte Miembro Premium
+            </a>
+        </div>
+    </div>
+</section>
+
+<section id="premium" class="py-16">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12 section-title"><i class="fas fa-star mr-2"></i>Acceso Premium del Observatorio</h2>
+        <div class="max-w-3xl mx-auto text-center mb-10">
+            <p class="text-xl text-gray-300">Lleva tu pasión por la astronomía al siguiente nivel con nuestra membresía premium. Obtén acceso exclusivo a contenido y características diseñadas para verdaderos exploradores del cosmos.</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="card p-6 rounded-lg shadow-xl text-center">
+                <i class="fas fa-graduation-cap text-4xl text-yellow-400 mb-4"></i>
+                <h3 class="text-xl font-semibold mb-2 text-white">Cursos Avanzados</h3>
+                <p class="text-gray-400 text-sm">Acceso ilimitado a nuestros cursos especializados en Astrofísica Solar, Cosmología y manejo de datos astronómicos.</p>
+            </div>
+            <div class="card p-6 rounded-lg shadow-xl text-center">
+                <i class="fas fa-video text-4xl text-yellow-400 mb-4"></i>
+                <h3 class="text-xl font-semibold mb-2 text-white">Webinars Exclusivos</h3>
+                <p class="text-gray-400 text-sm">Participa en webinars mensuales en vivo con nuestros astrónomos y expertos invitados. Sesiones de Q&A incluidas.</p>
+            </div>
+            <div class="card p-6 rounded-lg shadow-xl text-center">
+                <i class="fas fa-archive text-4xl text-yellow-400 mb-4"></i>
+                <h3 class="text-xl font-semibold mb-2 text-white">Archivo Digital</h3>
+                <p class="text-gray-400 text-sm">Acceso completo a grabaciones de eventos pasados, material de estudio adicional y publicaciones de investigación.</p>
+            </div>
+            <div class="card p-6 rounded-lg shadow-xl text-center md:col-span-2 lg:col-span-1 lg:col-start-2">
+                <i class="fas fa-chart-line text-4xl text-yellow-400 mb-4"></i>
+                <h3 class="text-xl font-semibold mb-2 text-white">Visualizador de Datos</h3>
+                <p class="text-gray-400 text-sm">Herramientas avanzadas para visualizar y analizar datos astronómicos en tiempo real, directamente desde nuestras bases de datos.</p>
             </div>
         </div>
-    </section>
+        <div class="text-center mt-12">
+            <a href="#" class="btn-primary text-lg px-10 py-4 rounded-lg font-semibold">
+                <i class="fas fa-user-plus mr-2"></i>¡Quiero Ser Premium!
+            </a>
+            <p class="text-gray-500 mt-4 text-sm">Se requiere una suscripción para acceder a los beneficios premium.</p>
+        </div>
+    </div>
+</section>
 
-    <section id="premium" class="py-16">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold section-title">Acceso Premium del Observatorio</h2>
-                <p class="text-lg text-gray-300 mt-4 max-w-2xl mx-auto">Lleva tu pasión por la astronomía al siguiente nivel con nuestra membresía premium. Obtén acceso exclusivo a contenido y características diseñadas para verdaderos exploradores del cosmos.</p>
+<section id="contacto" class="py-16 bg-gray-800">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12 section-title">Contacto</h2>
+        <div class="max-w-2xl mx-auto card p-8 md:p-10 rounded-lg shadow-xl text-center">
+            <p class="text-gray-300 mb-6 text-lg">¿Preguntas, sugerencias o deseas colaborar? ¡Nos encantaría escucharte!</p>
+            <div class="space-y-4 text-gray-200">
+                <p><i class="fas fa-map-marker-alt mr-3 text-yellow-400"></i>Av. Balbastro 1234, San Miguel, Buenos Aires, Argentina</p>
+                <p><i class="fas fa-phone mr-3 text-yellow-400"></i>1527652386</p>
+                <p><i class="fas fa-envelope mr-3 text-yellow-400"></i>mobsm1935@gmail.com</p>
             </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-                <div class="card p-6 rounded-lg shadow-xl">
-                    <h3 class="text-xl font-semibold text-yellow-400 mb-3">Cursos Avanzados</h3>
-                    <p class="text-gray-400 text-sm">Acceso ilimitado a nuestros cursos especializados en Astrofísica Solar, Cosmología y manejo de datos astronómicos.</p>
-                </div>
-                <div class="card p-6 rounded-lg shadow-xl">
-                    <h3 class="text-xl font-semibold text-yellow-400 mb-3">Webinars Exclusivos</h3>
-                    <p class="text-gray-400 text-sm">Participa en webinars mensuales en vivo con nuestros astrónomos y expertos invitados. Sesiones de Q&A incluidas.</p>
-                </div>
-                <div class="card p-6 rounded-lg shadow-xl">
-                    <h3 class="text-xl font-semibold text-yellow-400 mb-3">Archivo Digital</h3>
-                    <p class="text-gray-400 text-sm">Acceso completo a grabaciones de eventos pasados, material de estudio adicional y publicaciones de investigación.</p>
-                </div>
-                <div class="card p-6 rounded-lg shadow-xl">
-                    <h3 class="text-xl font-semibold text-yellow-400 mb-3">Visualizador de Datos (Próximamente)</h3>
-                    <p class="text-gray-400 text-sm">Herramientas avanzadas para visualizar y analizar datos solares en tiempo real, directamente desde nuestras bases de datos.</p>
-                </div>
-            </div>
-            <div class="text-center mt-12">
-                <a href="#" class="px-10 py-4 btn-primary rounded-md text-xl font-semibold">¡Quiero Ser Premium!</a>
-                <p class="text-sm text-gray-500 mt-3">Se requiere una suscripción para acceder a los beneficios premium.</p>
+            <div class="mt-8 space-x-6">
+                <a href="#" class="text-gray-400 hover:text-yellow-400 text-3xl transition duration-300"><i class="fab fa-facebook-square"></i></a>
+                <a href="#" class="text-gray-400 hover:text-yellow-400 text-3xl transition duration-300"><i class="fab fa-twitter-square"></i></a>
+                <a href="#" class="text-gray-400 hover:text-yellow-400 text-3xl transition duration-300"><i class="fab fa-instagram-square"></i></a>
+                <a href="#" class="text-gray-400 hover:text-yellow-400 text-3xl transition duration-300"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="contacto" class="py-16 bg-gray-800">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12 section-title">Contacto</h2>
-            <div class="card max-w-3xl mx-auto p-8 rounded-lg shadow-xl text-center">
-                <p class="text-lg mb-6">¿Preguntas, sugerencias o deseas colaborar? ¡Nos encantaría escucharte!</p>
-                <p class="text-xl font-semibold text-yellow-400 mb-2">Observatorio de Física Cósmica de San Miguel</p>
-                <p class="text-gray-300 mb-1">Bussolini 1760, San Miguel, Provincia de Buenos Aires, Argentina</p>
-                <p class="text-gray-300 mb-1">(011) 1234-5678 (Ejemplo)</p>
-                <p class="text-gray-300 mb-6"><a href="mailto:info@observatoriosm.org.ar" class="hover:text-yellow-400 transition-colors">info@observatoriosm.org.ar</a> (Ejemplo)</p>
-                
-                <p class="text-gray-400">También puedes completar nuestro <a href="#" class="text-yellow-500 hover:text-yellow-400 underline">formulario de contacto online</a> (enlace de ejemplo).</p>
+<footer class="footer text-white py-12">
+    <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-8 text-center md:text-left">
+            <div>
+                <h3 class="text-xl font-semibold mb-4"><i class="fas fa-solar-system mr-2 text-yellow-400"></i>Observatorio San Miguel</h3>
+                <p class="text-gray-400 text-sm">Dedicados a la investigación y divulgación de la física cósmica y astronomía. Explorando los misterios del universo desde San Miguel al cosmos.</p>
+                <p class="text-gray-500 mt-4 text-sm">Certificadores: Bella Vista al Cosmos, Nicolás Balbi, Santiago Maiese, Mayra Schwarzschild</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-4">Enlaces Rápidos</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#cursos" class="text-gray-400 hover:text-yellow-400">Cursos de Astronomía</a></li>
+                    <li><a href="#noticias" class="text-gray-400 hover:text-yellow-400">Blog de Noticias</a></li>
+                    <li><a href="#eventos" class="text-gray-400 hover:text-yellow-400">Eventos y Actividades</a></li>
+                    <li><a href="#ubicacion" class="text-gray-400 hover:text-yellow-400">Visítanos</a></li>
+                    <li><a href="#contacto" class="text-gray-400 hover:text-yellow-400">Contacto</a></li>
+                    <li><a href="#premium" class="text-gray-400 hover:text-yellow-400">Beneficios Premium</a></li>
+                </ul>
             </div>
         </div>
-    </section>
-
-    <footer class="py-12 text-center">
-        <div class="container mx-auto px-6">
-            <p class="text-2xl font-bold text-yellow-500 mb-3">Observatorio San Miguel</p>
-            <p class="text-gray-400 mb-6 max-w-xl mx-auto">Dedicados a la investigación y divulgación de la física cósmica y solar. Explorando los misterios del universo desde San Miguel al cosmos.</p>
-            <div class="mb-6 space-x-4 text-sm">
-                <span class="font-semibold text-gray-200">Enlaces de Interés:</span>
-                <a href="#blog" class="hover:text-yellow-400 transition-colors">Blog / Noticias</a>
-                <a href="#eventos" class="hover:text-yellow-400 transition-colors">Eventos</a>
-                <a href="#cursos" class="hover:text-yellow-400 transition-colors">Cursos</a>
-                <a href="#chatbot" class="hover:text-yellow-400 transition-colors">AstroBot</a>
-                <a href="#premium" class="hover:text-yellow-400 transition-colors">Beneficios Premium</a>
-                <a href="#" class="hover:text-yellow-400 transition-colors">Política de Privacidad</a>
-                <a href="#" class="hover:text-yellow-400 transition-colors">Términos de Servicio</a>
-            </div>
-            <p class="text-gray-500 text-sm">&copy; <span id="currentYear"></span> Observatorio de Física Cósmica de San Miguel. Todos los derechos reservados.</p>
-            <p class="text-gray-600 text-xs mt-1">Diseño inspirado en las nebulosas y la pasión por el descubrimiento.</p>
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-500">
+            <p class="text-sm"> © <span id="currentYear"></span> Observatorio de Física Cósmica de San Miguel. Todos los derechos reservados.</p>
+            <p class="text-xs mt-2">Diseño inspirado en las nebulosas y la pasión por el descubrimiento.</p>
         </div>
-    </footer>
+    </div>
+</footer>
 
-    <script>
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        if (mobileMenuButton && mobileMenu) {
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-        }
+<script>
+    // Menú móvil
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
 
-        // Cerrar menú móvil al hacer clic en un enlace
-        document.querySelectorAll('#mobile-menu a, nav a[href^="#"]').forEach(link => {
-            link.addEventListener('click', (e) => {
-                // Para enlaces de anclaje, prevenir comportamiento por defecto si se quiere un scroll suave manual
-                // e.preventDefault(); // Descomentar si se implementa scroll suave JS propio
-
-                const targetId = link.getAttribute('href');
-                if (targetId && targetId.startsWith('#') && targetId.length > 1) {
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        // Comportamiento de scroll suave nativo
-                        // targetElement.scrollIntoView({ behavior: 'smooth' }); // Esto puede interferir con scroll-margin-top
-                    }
-                }
-                if (mobileMenu && link.closest('#mobile-menu')) { 
-                    mobileMenu.classList.add('hidden');
-                }
-            });
+    document.querySelectorAll('#mobile-menu a, nav a[href^="#"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            if (link.closest('#mobile-menu')) { 
+                mobileMenu.classList.add('hidden');
+            }
         });
-        
-        // Año actual en footer
-        const currentYearEl = document.getElementById('currentYear');
-        if (currentYearEl) {
-            currentYearEl.textContent = new Date().getFullYear();
-        }
+    });
+    
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // NASA APOD
-        const loadNasaImageButton = document.getElementById('load-nasa-image');
-        const nasaImageElement = document.getElementById('nasa-image');
-        const nasaTitleElement = document.getElementById('nasa-title');
-        const nasaExplanationElement = document.getElementById('nasa-explanation');
+    // NASA API Implementation
+    const loadNasaImageButton = document.getElementById('load-nasa-image');
+    const nasaImageElement = document.getElementById('nasa-image');
+    const nasaTitleElement = document.getElementById('nasa-title');
+    const nasaExplanationElement = document.getElementById('nasa-explanation');
+    const downloadImageButton = document.getElementById('download-image');
+    const downloadInfoButton = document.getElementById('download-info');
+    
+    let currentNasaData = null;
+    
+    async function fetchNasaSolarImage() {
+        const heroSection = document.querySelector('.hero-section');
+        nasaImageElement.src = 'https://placehold.co/800x600/1A202C/E2E8F0?text=Cargando+imagen+astronómica...';
+        nasaTitleElement.textContent = 'Cargando título...';
+        nasaExplanationElement.textContent = 'Cargando descripción...';
 
-        async function fetchNasaSolarImage() {
-            const heroSection = document.querySelector('.hero-section');
-            if (!nasaImageElement || !nasaTitleElement || !nasaExplanationElement) {
-                console.error("Elementos de NASA APOD no encontrados en el DOM.");
-                return;
+        const apiKey = 'F6yk1zmeHdiBpMh3EvGxdA1c1rvo7HeVNxgE7tnY';
+        const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error(`Error de NASA API: ${response.status}`);
             }
+            const data = await response.json();
+            currentNasaData = data;
 
-            nasaImageElement.src = 'https://placehold.co/800x600/1A202C/E2E8F0?text=Cargando+imagen+solar...';
-            nasaTitleElement.textContent = 'Cargando título...';
-            nasaExplanationElement.textContent = 'Cargando descripción...';
-            
-            // IMPORTANTE: Reemplaza 'F6yk1zmeHdiBpMh3EvGxdA1c1rvo7HeVNxgE7tnY' con tu propia API Key de la NASA.
-            // Puedes obtener una en: https://api.nasa.gov/
-            const apiKey = 'F6yk1zmeHdiBpMh3EvGxdA1c1rvo7HeVNxgE7tnY'; // ¡USA TU PROPIA API KEY!
-            const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
-
-            try {
-                const response = await fetch(apiUrl);
-                if (!response.ok) {
-                    let errorData = { message: `Error de NASA API: ${response.status}` };
-                    try { 
-                        const apiError = await response.json(); 
-                        if (apiError && apiError.msg) { 
-                            errorData.message = apiError.msg;
-                        } else if (apiError && apiError.error && apiError.error.message) {
-                            errorData.message = apiError.error.message;
-                        }
-                    } catch (e) { /* No hacer nada si el parseo del error falla */ }
-                    throw new Error(errorData.message);
+            if (data.media_type === 'image') {
+                nasaImageElement.src = data.url;
+                nasaImageElement.alt = data.title;
+                nasaTitleElement.textContent = data.title;
+                nasaExplanationElement.textContent = data.explanation.substring(0, 300) + '...';
+                
+                // Actualizar fondo del hero con la imagen de NASA
+                if (heroSection) {
+                    heroSection.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('${data.url}')`;
                 }
-                const data = await response.json();
-
-                if (data.media_type === 'image') {
-                    nasaImageElement.src = data.url;
-                    nasaImageElement.alt = data.title;
-                    nasaTitleElement.textContent = data.title;
-                    nasaExplanationElement.textContent = data.explanation.substring(0, 200) + '...';
-                    if (heroSection) {
-                        heroSection.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('${data.url}')`;
-                    }
-                } else {
-                    nasaTitleElement.textContent = data.title || 'Contenido no es una imagen hoy';
-                    nasaExplanationElement.textContent = `El contenido de APOD para hoy es de tipo: ${data.media_type}. ${data.explanation ? data.explanation.substring(0,100) + '...' : ''} Puedes verlo en: ${data.url}`;
-                    nasaImageElement.src = 'https://placehold.co/800x600/1A202C/E2E8F0?text=Contenido+no+visual+(ej.+Video)';
-                    nasaImageElement.alt = data.title || 'Contenido no visual';
-                }
-            } catch (error) {
-                console.error('Error al cargar imagen de NASA:', error);
-                nasaTitleElement.textContent = 'Error al cargar imagen';
-                nasaExplanationElement.textContent = error.message || 'No se pudo obtener la imagen. Intenta más tarde.';
-                nasaImageElement.src = 'https://placehold.co/800x600/FF0000/FFFFFF?text=Error+API';
-                nasaImageElement.alt = 'Error al cargar imagen de NASA';
-                 if (error.message.includes("API_KEY_MISSING") || error.message.includes("OVER_RATE_LIMIT")) {
-                    nasaExplanationElement.textContent = "Error con la API Key de NASA o límite excedido. Verifica la consola y la API Key en el script.";
-                }
+            } else {
+                nasaTitleElement.textContent = data.title || 'Contenido no es una imagen hoy';
+                nasaExplanationElement.textContent = `El contenido de APOD para hoy es de tipo: ${data.media_type}.`;
+                nasaImageElement.src = 'https://placehold.co/800x600/1A202C/E2E8F0?text=Contenido+no+visual+(ej.+Vídeo)';
+                nasaImageElement.alt = data.title || 'Contenido no visual';
             }
+        } catch (error) {
+            console.error('Error al cargar imagen de NASA:', error);
+            nasaTitleElement.textContent = 'Error al cargar imagen';
+            nasaExplanationElement.textContent = error.message || 'No se pudo obtener la imagen. Intenta más tarde.';
+            nasaImageElement.src = 'https://placehold.co/800x600/FF0000/FFFFFF?text=Error+API';
+            nasaImageElement.alt = 'Error al cargar imagen de NASA';
         }
+    }
 
-        if (loadNasaImageButton) { 
-            loadNasaImageButton.addEventListener('click', fetchNasaSolarImage);
+    // Función para descargar la imagen
+    downloadImageButton.addEventListener('click', () => {
+        if (currentNasaData && currentNasaData.media_type === 'image') {
+            const link = document.createElement('a');
+            link.href = currentNasaData.url;
+            link.download = `nasa-apod-${new Date().toISOString().split('T')[0]}.jpg`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } else {
+            alert('No hay una imagen disponible para descargar');
         }
-        window.addEventListener('load', fetchNasaSolarImage); 
+    });
 
-        // Gemini API para explicación IA
-        async function fetchIAExplanation() {
-            // IMPORTANTE: Esta es una API Key de ejemplo y NO FUNCIONARÁ. 
-            // Debes obtener tu propia API Key de Google AI Studio (Gemini API).
-            // Visita: https://aistudio.google.com/app/apikey
-            const geminiApiKey = 'AIzaSyBzVb38c6rplB85pK4jkSlNVjYwsBmfonQ'; // ¡USA TU PROPIA API KEY!
-            const iaDetailElement = document.getElementById('ia-detail-text');
-
-            if (!iaDetailElement) {
-                console.error("Elemento 'ia-detail-text' no encontrado.");
-                return;
-            }
-             if (geminiApiKey === 'YOUR_GEMINI_API_KEY' || geminiApiKey === 'AIzaSyBzVb38c6rplB85pK4jkSlNVjYwsBmfonQ' ) {
-                iaDetailElement.textContent = 'La funcionalidad de IA (Gemini) requiere una API Key válida. Por favor, configura una en el script para ver la explicación generada por IA.';
-                console.warn("Gemini API Key no configurada o es la de ejemplo. La llamada a la API no se realizará.");
-                return;
-            }
-
-            iaDetailElement.textContent = 'Consultando a nuestra IA astronómica (Gemini)...'; 
-            const prompt = "Explica brevemente, en unas 80 palabras y de forma inspiradora, cómo la Inteligencia Artificial está transformando la astronomía moderna, para la web de un observatorio.";
-
-            try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${geminiApiKey}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: prompt }] }],
-                    }),
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(`Error de API Gemini: ${errorData.error?.message || response.status}`);
-                }
-                const data = await response.json();
-
-                if (data.candidates && data.candidates.length > 0 && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts.length > 0) {
-                    const generatedText = data.candidates[0].content.parts[0].text;
-                    iaDetailElement.textContent = generatedText;
-                } else {
-                    let fallbackMessage = 'No se pudo obtener una respuesta de la IA (Gemini) en este momento.';
-                    if (data.promptFeedback && data.promptFeedback.blockReason) {
-                        fallbackMessage += ` (Razón: ${data.promptFeedback.blockReason})`;
-                    } else if (data.candidates && data.candidates.length > 0 && data.candidates[0].finishReason !== "STOP") {
-                        fallbackMessage += ` (Razón de finalización: ${data.candidates[0].finishReason})`;
-                    }
-                    iaDetailElement.textContent = fallbackMessage;
-                    console.error('Respuesta inesperada o contenido bloqueado por API Gemini:', data);
-                }
-            } catch (error) {
-                console.error('Error al contactar la IA Astronómica (Gemini API):', error);
-                iaDetailElement.textContent = `Error al conectar con la IA (Gemini): ${error.message}. Revisa la consola y tu clave API.`;
-            }
+    // Función para descargar la información
+    downloadInfoButton.addEventListener('click', () => {
+        if (currentNasaData) {
+            const content = `Título: ${currentNasaData.title}\n\nExplicación: ${currentNasaData.explanation}\n\nFecha: ${currentNasaData.date}`;
+            const blob = new Blob([content], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `nasa-info-${new Date().toISOString().split('T')[0]}.txt`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } else {
+            alert('No hay información disponible para descargar');
         }
-        window.addEventListener('load', fetchIAExplanation); 
+    });
 
-        // Chatbot (OpenAI API)
-        const chatDisplay = document.getElementById('chat-display');
-        const chatInput = document.getElementById('chat-input');
-        const chatSubmitButton = document.getElementById('chat-submit');
-        
-        // IMPORTANTE: Reemplaza con tu propia API Key de OpenAI.
-        // Esta es una API Key de ejemplo y NO FUNCIONARÁ.
-        // Visita https://platform.openai.com/api-keys
-        const openAIApiKey_Chatbot = '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'; // ¡USA TU PROPIA API KEY!
+    if(loadNasaImageButton) { 
+        loadNasaImageButton.addEventListener('click', fetchNasaSolarImage);
+    }
+    window.addEventListener('load', fetchNasaSolarImage);
 
-        let conversationHistory = [
-            { 
-                role: "system", 
-                content: "Eres AstroBot, un asistente virtual del Observatorio de Física Cósmica de San Miguel. Eres amigable, didáctico y te especializas en astronomía, el sol, física cósmica, eventos astronómicos y las actividades del observatorio. Mantén tus respuestas concisas (máximo 2-3 frases cortas o un párrafo breve si es necesario), informativas y adecuadas para un público general interesado en la astronomía. Si te preguntan algo completamente fuera de tu especialidad (ej. recetas de cocina, política), indica amablemente que no puedes responder sobre ese tema específico ya que tu conocimiento se centra en la astronomía y el observatorio." 
-            }
-        ];
-
-        function addMessageToChatDisplay(message, sender) {
-            if (!chatDisplay) return;
-            const messageElement = document.createElement('p');
-            messageElement.classList.add('mb-2', 'break-words'); 
-            if (sender === 'user') {
-                messageElement.classList.add('text-right');
-                messageElement.innerHTML = `<strong class="text-yellow-400">Tú:</strong> ${message}`;
-            } else { 
-                const thinkingMsg = chatDisplay.querySelector('.thinking-message');
-                if(thinkingMsg) thinkingMsg.remove();
-                messageElement.classList.add('text-left');
-                messageElement.innerHTML = `<strong class="text-blue-400">AstroBot:</strong> ${message}`;
-            }
-            chatDisplay.appendChild(messageElement);
-            chatDisplay.scrollTop = chatDisplay.scrollHeight; 
-        }
-
-        function showThinkingIndicator() {
-            if (!chatDisplay) return;
-            const thinkingElement = document.createElement('p');
-            thinkingElement.classList.add('mb-2', 'text-left', 'thinking-message', 'italic', 'text-gray-500');
-            thinkingElement.innerHTML = '<strong class="text-blue-400">AstroBot:</strong> Pensando...';
-            chatDisplay.appendChild(thinkingElement);
-            chatDisplay.scrollTop = chatDisplay.scrollHeight;
-        }
-
-        async function handleChatSubmit() {
-            if (!chatInput || !chatSubmitButton) return;
-            const userMessage = chatInput.value.trim();
-
-            if (openAIApiKey_Chatbot === 'YOUR_OPENAI_API_KEY' || openAIApiKey_Chatbot === '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') {
-                addMessageToChatDisplay(userMessage, 'user');
-                addMessageToChatDisplay("La funcionalidad del Chatbot (AstroBot) requiere una API Key de OpenAI válida. Por favor, configura una en el script.", 'assistant');
-                console.warn("OpenAI API Key no configurada o es la de ejemplo. La llamada a la API no se realizará.");
-                chatInput.value = '';
-                return;
-            }
-
-            if (!userMessage) return;
-            
-            addMessageToChatDisplay(userMessage, 'user');
-            conversationHistory.push({ role: "user", content: userMessage });
-            chatInput.value = ''; 
-            chatInput.disabled = true;
-            chatSubmitButton.disabled = true;
-            showThinkingIndicator();
-
-            try {
-                const response = await fetch('https://api.openai.com/v1/chat/completions', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${openAIApiKey_Chatbot}`
+    // Implementación de cursos con evaluación
+    function showCourseDetails(courseId) {
+        const courseData = {
+            'telescopios': {
+                title: 'TELESCOPIOS: PARTES Y USOS',
+                description: 'Este curso te enseñará todo lo necesario para entender y utilizar diferentes tipos de telescopios. Aprenderás sobre monturas, óptica, accesorios y técnicas de observación.',
+                instructor: 'Nicolás Balbi',
+                duration: '8 semanas',
+                price: 'ARS 150.000',
+                quiz: [
+                    {
+                        question: '¿Qué tipo de telescopio utiliza espejos para enfocar la luz?',
+                        options: ['Refractor', 'Reflector', 'Catadióptrico', 'Radio telescopio'],
+                        correct: 1
                     },
-                    body: JSON.stringify({
-                        model: "gpt-3.5-turbo",
-                        messages: conversationHistory,
-                        max_tokens: 180, 
-                        temperature: 0.7
-                    })
+                    {
+                        question: '¿Qué montura permite seguir objetos celestes con un solo eje?',
+                        options: ['Altazimutal', 'Ecuatorial', 'Dobson', 'Computerizada'],
+                        correct: 1
+                    },
+                    {
+                        question: '¿Cuál es la función principal del buscador en un telescopio?',
+                        options: ['Amplificar la imagen', 'Reducir la distorsión', 'Localizar objetos', 'Filtrar la luz'],
+                        correct: 2
+                    }
+                ]
+            },
+            'astrofotografia': {
+                title: 'ASTROFOTOGRAFÍA: CAPTURANDO EL COSMOS',
+                description: 'Domina técnicas avanzadas para fotografiar el cielo nocturno. Aprenderás sobre equipos, configuración de cámara, procesamiento de imágenes y técnicas especiales.',
+                instructor: 'Mayra Schwarzschild',
+                duration: '6 semanas',
+                price: 'ARS 120.000',
+                quiz: [
+                    {
+                        question: '¿Qué configuración de ISO es generalmente mejor para astrofotografía?',
+                        options: ['ISO 100', 'ISO 800', 'ISO 3200', 'Depende de las condiciones'],
+                        correct: 3
+                    },
+                    {
+                        question: '¿Qué técnica se usa para reducir el ruido en astrofotografía?',
+                        options: ['Dithering', 'Stacking', 'Ambas', 'Ninguna'],
+                        correct: 2
+                    },
+                    {
+                        question: '¿Qué tipo de lente es mejor para fotografiar la Vía Láctea?',
+                        options: ['Teleobjetivo', 'Gran angular', 'Macro', 'Ojo de pez'],
+                        correct: 1
+                    }
+                ]
+            },
+            // ... otros cursos con sus evaluaciones
+        };
+
+        const course = courseData[courseId];
+        if (!course) return;
+
+        document.getElementById('modal-title').textContent = course.title;
+        
+        let content = `
+            <div class="mb-4">
+                <p class="text-gray-300 mb-2">${course.description}</p>
+                <div class="grid grid-cols-2 gap-4 mt-4">
+                    <div>
+                        <p class="text-gray-400 text-sm">Instructor:</p>
+                        <p class="text-white">${course.instructor}</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-400 text-sm">Duración:</p>
+                        <p class="text-white">${course.duration}</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-400 text-sm">Precio:</p>
+                        <p class="text-yellow-400 font-semibold">${course.price}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.getElementById('modal-content').innerHTML = content;
+        
+        // Construir evaluación
+        if (course.quiz && course.quiz.length > 0) {
+            document.getElementById('quiz-section').classList.remove('hidden');
+            let quizHTML = '';
+            
+            course.quiz.forEach((q, qIndex) => {
+                quizHTML += `
+                    <div class="mb-6">
+                        <p class="text-white font-medium mb-2">${qIndex + 1}. ${q.question}</p>
+                        <div class="quiz-options">
+                `;
+                
+                q.options.forEach((option, oIndex) => {
+                    quizHTML += `
+                        <label class="quiz-option">
+                            <input type="radio" name="q${qIndex}" value="${oIndex}">
+                            ${option}
+                        </label>
+                    `;
                 });
                 
-                const thinkingMsg = chatDisplay.querySelector('.thinking-message');
-                if(thinkingMsg) thinkingMsg.remove();
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    console.error('Error de API OpenAI (Chatbot):', errorData);
-                    addMessageToChatDisplay(`Error ${response.status}: ${errorData.error?.message || 'No se pudo obtener respuesta de AstroBot.'}`, 'assistant');
-                    conversationHistory.pop(); // Remove user message if AI fails
-                    return;
-                }
-                const data = await response.json();
-                if (data.choices && data.choices.length > 0 && data.choices[0].message && data.choices[0].message.content) {
-                    const aiMessage = data.choices[0].message.content.trim();
-                    addMessageToChatDisplay(aiMessage, 'assistant');
-                    conversationHistory.push({ role: "assistant", content: aiMessage });
-                } else {
-                    addMessageToChatDisplay('No se pudo obtener una respuesta válida de AstroBot en este momento.', 'assistant');
-                    console.error('Respuesta inesperada de API OpenAI (Chatbot):', data);
-                    conversationHistory.pop(); // Remove user message if AI response is invalid
-                }
-            } catch (error) {
-                console.error('Error al contactar AstroBot (OpenAI API):', error);
-                const thinkingMsg = chatDisplay.querySelector('.thinking-message');
-                if(thinkingMsg) thinkingMsg.remove();
-                addMessageToChatDisplay(`Lo siento, hubo un problema de conexión con AstroBot. Intenta de nuevo más tarde. (${error.message})`, 'assistant');
-                conversationHistory.pop(); // Remove user message on connection error
-            } finally {
-                chatInput.disabled = false;
-                chatSubmitButton.disabled = false;
-                chatInput.focus();
-            }
-        }
-
-        if (chatSubmitButton && chatInput && chatDisplay) {
-            chatSubmitButton.addEventListener('click', handleChatSubmit);
-            chatInput.addEventListener('keypress', function(event) {
-                if (event.key === 'Enter') {
-                    event.preventDefault(); 
-                    handleChatSubmit();
-                }
+                quizHTML += `
+                        </div>
+                    </div>
+                `;
             });
+            
+            document.getElementById('quiz-questions').innerHTML = quizHTML;
+            document.getElementById('quiz-results').classList.add('hidden');
         } else {
-            console.warn("Elementos del ChatBot (chat-display, chat-input, chat-submit) no encontrados. Verifica los IDs en el HTML.");
+            document.getElementById('quiz-section').classList.add('hidden');
         }
         
-        // Google Maps Initialization
-        function initMap() {
-            // Coordenadas para Bussolini 1760, San Miguel, Provincia de Buenos Aires (aproximadas)
-            // Puedes ajustarlas si obtienes coordenadas más precisas.
-            const observatoryLocation = { lat: -34.5423, lng: -58.7105 }; 
-            const mapDiv = document.getElementById('map');
+        // Configurar el botón de enviar
+        document.getElementById('submit-quiz').onclick = function() {
+            const results = document.getElementById('quiz-results');
+            results.innerHTML = '';
+            results.classList.remove('hidden');
+            
+            let correctCount = 0;
+            
+            course.quiz.forEach((q, qIndex) => {
+                const selected = document.querySelector(`input[name="q${qIndex}"]:checked`);
+                const isCorrect = selected && parseInt(selected.value) === q.correct;
+                
+                if (isCorrect) correctCount++;
+                
+                const resultDiv = document.createElement('div');
+                resultDiv.className = `mb-2 p-2 rounded ${isCorrect ? 'bg-green-900 text-green-200' : 'bg-red-900 text-red-200'}`;
+                resultDiv.innerHTML = `<strong>Pregunta ${qIndex + 1}:</strong> ${isCorrect ? 'Correcto' : 'Incorrecto'}`;
+                
+                results.appendChild(resultDiv);
+            });
+            
+            const scoreDiv = document.createElement('div');
+            scoreDiv.className = 'mt-4 p-3 bg-blue-900 text-blue-200 rounded text-center';
+            scoreDiv.innerHTML = `<strong>Resultado:</strong> ${correctCount} de ${course.quiz.length} correctas (${Math.round((correctCount / course.quiz.length) * 100)}%)`;
+            results.appendChild(scoreDiv);
+        };
+        
+        document.getElementById('course-modal').classList.remove('hidden');
+    }
 
-            if (typeof google !== 'undefined' && google.maps) {
-                mapDiv.innerHTML = ''; // Limpiar mensaje de carga
-                const map = new google.maps.Map(mapDiv, {
-                    center: observatoryLocation,
-                    zoom: 15, // Zoom ajustado para ver un poco más de contexto
-                    // Estilo de mapa oscuro para que coincida con el tema del sitio
-                    styles: [
-                        { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
-                        { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
-                        { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
-                        { featureType: "administrative.locality", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] },
-                        { featureType: "poi", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] },
-                        { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#263c3f" }] },
-                        { featureType: "poi.park", elementType: "labels.text.fill", stylers: [{ color: "#6b9a76" }] },
-                        { featureType: "road", elementType: "geometry", stylers: [{ color: "#38414e" }] },
-                        { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#212a37" }] },
-                        { featureType: "road", elementType: "labels.text.fill", stylers: [{ color: "#9ca5b3" }] },
-                        { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#746855" }] },
-                        { featureType: "road.highway", elementType: "geometry.stroke", stylers: [{ color: "#1f2835" }] },
-                        { featureType: "road.highway", elementType: "labels.text.fill", stylers: [{ color: "#f3d19c" }] },
-                        { featureType: "transit", elementType: "geometry", stylers: [{ color: "#2f3948" }] },
-                        { featureType: "transit.station", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] },
-                        { featureType: "water", elementType: "geometry", stylers: [{ color: "#17263c" }] },
-                        { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#515c6d" }] },
-                        { featureType: "water", elementType: "labels.text.stroke", stylers: [{ color: "#17263c" }] },
-                    ]
-                });
-                new google.maps.Marker({
-                    position: observatoryLocation,
-                    map: map,
-                    title: 'Observatorio de Física Cósmica de San Miguel (Bussolini 1760)'
-                });
-            } else {
-                mapDiv.innerHTML = '<p class="p-4">Error al cargar Google Maps. Asegúrate de que la API Key es correcta y está habilitada, y que tienes conexión a internet. También verifica que el script de Google Maps API está incluido en tu HTML.</p>';
-                console.error("El objeto de la API de Google Maps no está disponible. Asegúrate de que el script de la API de Google Maps esté cargado antes de llamar a initMap() y que la API Key sea válida.");
-            }
+    function closeModal() {
+        document.getElementById('course-modal').classList.add('hidden');
+    }
+
+    // Implementación de blog con API de noticias
+    async function fetchAstronomyNews() {
+        // API recomendada: NewsAPI (https://newsapi.org/)
+        // Necesitarás una API key gratuita para usar NewsAPI
+        // Otra opción: SpaceFlight News API (https://spaceflightnewsapi.net/)
+        
+        const newsContainer = document.getElementById('news-container');
+        newsContainer.innerHTML = '<p class="text-gray-400 text-center py-8">Cargando noticias astronómicas...</p>';
+        
+        try {
+            // Ejemplo con SpaceFlight News API
+            const response = await fetch('https://api.spaceflightnewsapi.net/v3/articles?_limit=3');
+            const articles = await response.json();
+            
+            newsContainer.innerHTML = '';
+            
+            articles.forEach(article => {
+                const newsCard = document.createElement('div');
+                newsCard.className = 'card rounded-lg shadow-xl overflow-hidden hover:scale-105 transition-transform duration-300';
+                newsCard.innerHTML = `
+                    <a href="${article.url}" target="_blank">
+                        <div class="h-48 overflow-hidden">
+                            <img src="${article.imageUrl || 'https://placehold.co/600x400/000033/FFFFFF?text=Noticia+Astronómica'}" alt="${article.title}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2 text-white">${article.title}</h3>
+                            <p class="text-gray-400 text-sm mb-4">${article.newsSite} - ${new Date(article.publishedAt).toLocaleDateString()}</p>
+                            <p class="text-gray-300">${article.summary.substring(0, 100)}...</p>
+                        </div>
+                    </a>
+                `;
+                newsContainer.appendChild(newsCard);
+            });
+        } catch (error) {
+            console.error('Error al cargar noticias:', error);
+            newsContainer.innerHTML = '<p class="text-red-400 text-center py-8">Error al cargar noticias. Por favor intenta más tarde.</p>';
         }
-        // Asegúrate de tener la API Key de Google Maps y cargarla en tu HTML principal, por ejemplo:
-        // <script async defer src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY_DE_Maps&callback=initMap"></script>
-        // Reemplaza TU_API_KEY_DE_Maps con tu clave.
-        // La función initMap será llamada automáticamente una vez que la API de Google Maps se cargue.
-        // Si ya tienes un script de Google Maps, solo asegúrate que 'initMap' sea el callback.
-    </script>
-    <script>
-      // Llama a initMap en el evento load si no usas el callback en la URL de la API de Maps
-      window.addEventListener('load', () => {
-          if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
-              // Si Google Maps no se cargó (probablemente por falta de API key en el tag script),
-              // llama a initMap para que muestre el mensaje de error dentro del div del mapa.
-              const mapDiv = document.getElementById('map');
-              if (mapDiv.innerHTML.includes("Cargando mapa")) { // Solo si no se ha intentado cargar ya
-                  initMap();
-              }
-          }
-          // Si Google Maps SÍ se cargó mediante el callback en la URL del script, initMap ya se habrá ejecutado.
-      });
-    </script>
+    }
+
+    // Llamar a la función para cargar noticias
+    window.addEventListener('load', fetchAstronomyNews);
+    
+    // Implementación del chatbot
+    const chatDisplay = document.getElementById('chat-display');
+    const chatInput = document.getElementById('chat-input');
+    const chatSubmitButton = document.getElementById('chat-submit');
+    const openAIApiKey_Chatbot = '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';
+    
+    let conversationHistory = [
+        { 
+            role: "system", 
+            content: "Eres AstroBot, un asistente virtual del Observatorio de Física Cósmica de San Miguel. Eres amigable, didáctico y te especializas en astronomía, física cósmica, eventos astronómicos y las actividades del observatorio. Mantén tus respuestas concisas (máximo 2-3 frases cortas o un párrafo breve si es necesario), informativas y adecuadas para un público general interesado en la astronomía." 
+        }
+    ];
+    
+    function addMessageToChat(message, sender) {
+        const messageElement = document.createElement('p');
+        messageElement.classList.add('mb-2');
+        
+        if (sender === 'usuario') {
+            messageElement.classList.add('text-right');
+            messageElement.innerHTML = `<span class="inline-block bg-yellow-500 bg-opacity-20 p-2 rounded-lg"><strong class="text-yellow-400">Tú:</strong> ${message}</span>`;
+        } else {
+            messageElement.classList.add('text-left');
+            messageElement.innerHTML = `<span class="inline-block bg-blue-500 bg-opacity-20 p-2 rounded-lg"><strong class="text-blue-400">AstroBot:</strong> ${message}</span>`;
+        }
+        
+        chatDisplay.appendChild(messageElement);
+        chatDisplay.scrollTop = chatDisplay.scrollHeight;
+    }
+    
+    function showThinkingIndicator() {
+        const thinkingElement = document.createElement('p');
+        thinkingElement.classList.add('mb-2', 'text-left');
+        thinkingElement.innerHTML = '<span class="inline-block bg-blue-500 bg-opacity-20 p-2 rounded-lg"><strong class="text-blue-400">AstroBot:</strong> Pensando... <i class="fas fa-spinner fa-spin ml-1"></i></span>';
+        chatDisplay.appendChild(thinkingElement);
+        chatDisplay.scrollTop = chatDisplay.scrollHeight;
+        return thinkingElement;
+    }
+    
+    async function handleChatSubmit() {
+        const userMessage = chatInput.value.trim();
+        if (!userMessage) return;
+        
+        addMessageToChat(userMessage, 'usuario');
+        conversationHistory.push({ role: "user", content: userMessage });
+        
+        chatInput.value = '';
+        chatInput.disabled = true;
+        chatSubmitButton.disabled = true;
+        
+        const thinkingElement = showThinkingIndicator();
+        
+        try {
+            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${openAIApiKey_Chatbot}`
+                },
+                body: JSON.stringify({
+                    model: "gpt-3.5-turbo",
+                    messages: conversationHistory,
+                    max_tokens: 250,
+                    temperature: 0.7
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error(`Error en la API: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            const aiMessage = data.choices[0].message.content.trim();
+            
+            thinkingElement.remove();
+            addMessageToChat(aiMessage, 'asistente');
+            conversationHistory.push({ role: "assistant", content: aiMessage });
+        } catch (error) {
+            console.error('Error en el chatbot:', error);
+            thinkingElement.remove();
+            addMessageToChat('Lo siento, estoy teniendo problemas para responder. Por favor intenta nuevamente más tarde.', 'asistente');
+        } finally {
+            chatInput.disabled = false;
+            chatSubmitButton.disabled = false;
+            chatInput.focus();
+        }
+    }
+    
+    chatSubmitButton.addEventListener('click', handleChatSubmit);
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            handleChatSubmit();
+        }
+    });
+</script>
 </body>
 </html>
