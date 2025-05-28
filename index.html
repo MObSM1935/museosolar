@@ -21,7 +21,8 @@
             color: #e2e8f0;
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(214, 188, 250, 0.05) 0%, rgba(214, 188, 250, 0) 40%),
-                radial-gradient(circle at 90% 80%, rgba(246, 173, 85, 0.05) 0%, rgba(246, 173, 85, 0) 40%);
+                radial-gradient(circle at 90% 80%, rgba(246, 173, 85, 0.05) 0%, rgba(246, 173, 85, 0) 40%),
+                radial-gradient(circle at 50% 50%, rgba(100, 100, 220, 0.03) 0%, rgba(100, 100, 220, 0) 30%);
         }
         
         .navbar-glass {
@@ -168,12 +169,13 @@
             background-color: white;
             border-radius: 50%;
             animation: twinkle 5s infinite;
+            z-index: 0; /* Ensure stars are behind content */
         }
         
         @keyframes twinkle {
-            0% { opacity: 0.2; }
-            50% { opacity: 1; }
-            100% { opacity: 0.2; }
+            0% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0.2; transform: scale(0.8); }
         }
         
         #chat-display p {
@@ -216,6 +218,31 @@
             justify-content: center;
             z-index: 1000;
             backdrop-filter: blur(5px);
+            padding: 1rem; /* Added padding for smaller screens */
+        }
+
+        .modal-content {
+            background-color: var(--cosmic-purple);
+            animation: fadeInModal 0.3s ease-out;
+            max-height: 90vh; /* Ensure modal content is scrollable */
+            overflow-y: auto; /* Enable scrolling for modal content */
+        }
+
+        @keyframes fadeInModal {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-tab {
+            color: #a0aec0; /* Tailwind gray-500 */
+            border-bottom: 2px solid transparent;
+        }
+        .modal-tab:hover {
+            color: var(--starlight-yellow);
+        }
+        .modal-tab.active-tab {
+            border-bottom: 2px solid var(--starlight-yellow);
+            color: var(--starlight-yellow);
         }
         
         .certificate {
@@ -255,17 +282,107 @@
             box-shadow: 0 5px 15px rgba(214, 188, 250, 0.1);
             border-color: rgba(246, 173, 85, 0.4);
         }
+
+        /* New styles for the image description section */
+        .apod-description {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background: rgba(30, 26, 62, 0.7);
+            border-radius: 12px;
+            border: 1px solid rgba(246, 173, 85, 0.3);
+        }
+        
+        .apod-description h3 {
+            color: var(--starlight-yellow);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .apod-description p {
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+        
+        .download-apod-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 20;
+            background: rgba(30, 26, 62, 0.85);
+            border: 1px solid rgba(246, 173, 85, 0.5);
+            color: var(--starlight-yellow);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .download-apod-btn:hover {
+            background: var(--starlight-yellow);
+            color: var(--space-blue);
+            transform: translateY(-2px);
+        }
+
+        /* FAQ Accordion */
+        .faq-item summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 1rem;
+            background: rgba(30, 26, 62, 0.8);
+            border-radius: 8px;
+            border: 1px solid rgba(109, 40, 217, 0.3);
+            transition: background-color 0.3s ease;
+        }
+        .faq-item summary:hover {
+            background: rgba(109, 40, 217, 0.2);
+        }
+        .faq-item summary::-webkit-details-marker {
+            display: none; 
+        }
+        .faq-item summary::after {
+            content: '\f078'; /* Font Awesome Angle Down */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            transition: transform 0.3s ease;
+        }
+        .faq-item[open] summary::after {
+            transform: rotate(180deg);
+        }
+        .faq-item div {
+            padding: 1rem;
+            background: rgba(30, 26, 62, 0.5);
+            border-top: 1px solid rgba(109, 40, 217, 0.3);
+            border-radius: 0 0 8px 8px;
+        }
+
     </style>
 </head>
 <body>
-    <!-- Decoración de estrellas -->
+    <div class="star-decoration" style="top: 5%; left: 5%; width: 1px; height: 1px; animation-delay: 0.5s;"></div>
     <div class="star-decoration" style="top: 15%; left: 10%; width: 2px; height: 2px;"></div>
+    <div class="star-decoration" style="top: 10%; left: 30%; width: 1px; height: 1px; animation-delay: 1.5s;"></div>
     <div class="star-decoration" style="top: 25%; left: 85%; width: 3px; height: 3px; animation-delay: 1s;"></div>
+    <div class="star-decoration" style="top: 30%; left: 60%; width: 2px; height: 2px; animation-delay: 2.5s;"></div>
     <div class="star-decoration" style="top: 40%; left: 45%; width: 2px; height: 2px; animation-delay: 2s;"></div>
+    <div class="star-decoration" style="top: 50%; left: 90%; width: 1px; height: 1px; animation-delay: 3.5s;"></div>
+    <div class="star-decoration" style="top: 60%; left: 15%; width: 2px; height: 2px; animation-delay: 0.2s;"></div>
     <div class="star-decoration" style="top: 70%; left: 25%; width: 3px; height: 3px; animation-delay: 3s;"></div>
+    <div class="star-decoration" style="top: 75%; left: 75%; width: 1px; height: 1px; animation-delay: 4.5s;"></div>
     <div class="star-decoration" style="top: 85%; left: 65%; width: 2px; height: 2px; animation-delay: 4s;"></div>
+    <div class="star-decoration" style="top: 90%; left: 5%; width: 3px; height: 3px; animation-delay: 0.8s;"></div>
+    <div class="star-decoration" style="top: 95%; left: 50%; width: 1px; height: 1px; animation-delay: 2.2s;"></div>
+    <div class="star-decoration" style="top: 5%; left: 70%; width: 2px; height: 2px; animation-delay: 1.8s;"></div>
+    <div class="star-decoration" style="top: 65%; left: 95%; width: 2px; height: 2px; animation-delay: 3.2s;"></div>
 
-    <!-- Barra de navegación -->
+
     <nav class="navbar-glass sticky top-0 z-50 shadow-lg">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-white">
@@ -277,7 +394,8 @@
                 <a href="#cursos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
                 <a href="#calendario" class="text-gray-300 hover:text-yellow-400 transition duration-300">Calendario</a>
                 <a href="#comunidad" class="text-gray-300 hover:text-yellow-400 transition duration-300">Foro</a>
-                <a href="#premium" class="text-gray-300 hover:text-yellow-400 transition duration-300">Premium</a>
+                <a href="#ia-stro" class="text-gray-300 hover:text-yellow-400 transition duration-300">IA.STRO</a>
+                <a href="#descargas" class="text-gray-300 hover:text-yellow-400 transition duration-300">Descargas</a>
                 <a href="#contacto" class="text-gray-300 hover:text-yellow-400 transition duration-300">Contacto</a>
                 <a href="#premium" class="btn-primary px-4 py-2 rounded-full font-semibold">
                     <i class="fas fa-star mr-1"></i>Premium
@@ -295,7 +413,8 @@
             <a href="#cursos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
             <a href="#calendario" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Calendario</a>
             <a href="#comunidad" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Foro</a>
-            <a href="#premium" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Premium</a>
+            <a href="#ia-stro" class="block text-gray-300 hover:text-yellow-400 transition duration-300">IA.STRO</a>
+            <a href="#descargas" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Descargas</a>
             <a href="#contacto" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Contacto</a>
             <a href="#premium" class="block btn-primary px-4 py-2 rounded-full font-semibold text-center mt-2">
                 <i class="fas fa-star mr-1"></i>Premium
@@ -303,8 +422,11 @@
         </div>
     </nav>
 
-    <!-- Encabezado Hero con NASA APOD -->
     <header class="hero-section h-screen flex items-center justify-center text-center">
+        <a id="download-apod-btn" class="download-apod-btn hidden">
+            <i class="fas fa-download mr-2"></i>Descargar Imagen
+        </a>
+        
         <div class="container mx-auto px-6 relative z-10">
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
                 Descubre los <span class="text-yellow-400">Secretos</span> del Cosmos
@@ -323,13 +445,23 @@
         </div>
     </header>
 
-    <!-- Sección de Eventos -->
+    <section id="apod-description" class="py-8">
+        <div class="container mx-auto px-6">
+            <div class="apod-description">
+                <h3 class="text-xl font-semibold">
+                    <span>Imagen Astronómica del Día (NASA)</span>
+                    <span id="apod-date" class="text-sm font-normal text-gray-400"></span>
+                </h3>
+                <p id="apod-explanation" class="text-gray-300">Cargando descripción de la imagen del día...</p>
+            </div>
+        </div>
+    </section>
+
     <section id="eventos" class="py-16">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-center mb-16 section-title">Próximos Eventos Astronómicos</h2>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Evento 1 -->
                 <div class="card p-6">
                     <div class="flex items-center mb-4">
                         <div class="bg-yellow-400 text-gray-900 font-bold text-center rounded-lg py-1 px-4 mr-4">
@@ -348,7 +480,6 @@
                     </div>
                 </div>
                 
-                <!-- Evento 2 -->
                 <div class="card p-6">
                     <div class="flex items-center mb-4">
                         <div class="bg-yellow-400 text-gray-900 font-bold text-center rounded-lg py-1 px-4 mr-4">
@@ -367,7 +498,24 @@
                     </div>
                 </div>
                 
-                <!-- Evento 3 -->
+                <div class="card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-yellow-400 text-gray-900 font-bold text-center rounded-lg py-1 px-4 mr-4">
+                            <div class="text-2xl">05</div>
+                            <div class="text-sm">SEP</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Taller de Astrofotografía para Niños</h3>
+                            <p class="text-gray-400 text-sm">16:00 - 18:00 hs</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">Un taller divertido y educativo para que los más pequeños aprendan a capturar la belleza del cielo.</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-yellow-400"><i class="fas fa-map-marker-alt mr-2"></i>Aula Cosmos Kids</span>
+                        <a href="#" class="btn-primary px-4 py-2 rounded-full text-sm font-semibold">Inscribir</a>
+                    </div>
+                </div>
+
                 <div class="card p-6">
                     <div class="flex items-center mb-4">
                         <div class="bg-yellow-400 text-gray-900 font-bold text-center rounded-lg py-1 px-4 mr-4">
@@ -375,14 +523,50 @@
                             <div class="text-sm">SEP</div>
                         </div>
                         <div>
-                            <h3 class="text-xl font-semibold text-white">Lluvia de Perseidas</h3>
+                            <h3 class="text-xl font-semibold text-white">Lluvia de Perseidas (Pico secundario)</h3>
                             <p class="text-gray-400 text-sm">23:00 - 02:00 hs</p>
                         </div>
                     </div>
-                    <p class="text-gray-300 mb-4">Observación guiada de la famosa lluvia de meteoros Perseidas. Trae tu saco de dormir!</p>
+                    <p class="text-gray-300 mb-4">Observación guiada de la famosa lluvia de meteoros Perseidas. Trae tu saco de dormir y curiosidad!</p>
                     <div class="flex justify-between items-center mt-4">
-                        <span class="text-yellow-400"><i class="fas fa-map-marker-alt mr-2"></i>Campo Abierto</span>
+                        <span class="text-yellow-400"><i class="fas fa-map-marker-alt mr-2"></i>Campo Abierto Norte</span>
                         <a href="#" class="btn-primary px-4 py-2 rounded-full text-sm font-semibold">Participar</a>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-yellow-400 text-gray-900 font-bold text-center rounded-lg py-1 px-4 mr-4">
+                            <div class="text-2xl">20</div>
+                            <div class="text-sm">SEP</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Webinar: Exoplanetas y Vida Alienígena</h3>
+                            <p class="text-gray-400 text-sm">19:00 - 20:30 hs (Online)</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">Únete a nuestra experta Dra. Estrella Polar en un viaje virtual explorando exoplanetas y la búsqueda de vida.</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-yellow-400"><i class="fas fa-laptop mr-2"></i>Evento Online</span>
+                        <a href="#" class="btn-primary px-4 py-2 rounded-full text-sm font-semibold">Registrarse</a>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-yellow-400 text-gray-900 font-bold text-center rounded-lg py-1 px-4 mr-4">
+                            <div class="text-2xl">28</div>
+                            <div class="text-sm">SEP</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Observación de Saturno y sus Anillos</h3>
+                            <p class="text-gray-400 text-sm">21:00 - 23:30 hs</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">Saturno estará en una posición ideal para la observación. Admira sus majestuosos anillos a través de nuestros telescopios.</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-yellow-400"><i class="fas fa-map-marker-alt mr-2"></i>Plataforma Principal</span>
+                        <a href="#" class="btn-primary px-4 py-2 rounded-full text-sm font-semibold">Asistir</a>
                     </div>
                 </div>
             </div>
@@ -395,7 +579,6 @@
         </div>
     </section>
 
-    <!-- Sección de Ubicación -->
     <section id="ubicacion" class="py-16 bg-gray-900 bg-opacity-50">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-center mb-8 section-title">Visítanos en San Miguel</h2>
@@ -405,15 +588,19 @@
                     <h3 class="text-xl font-semibold mb-4 text-white">Nuestras Instalaciones</h3>
                     <p class="text-gray-300 mb-4">
                         <i class="fas fa-map-marker-alt text-yellow-400 mr-2"></i> 
-                        Av. Balbastro 1234, San Miguel, Buenos Aires
+                        Av. Balbastro 1234, San Miguel, Provincia de Buenos Aires, Argentina.
                     </p>
                     <p class="text-gray-300 mb-4">
                         <i class="fas fa-clock text-yellow-400 mr-2"></i> 
-                        Martes a Domingo: 16:00 - 22:00
+                        Martes a Domingo: 16:00 - 22:00 (Observaciones nocturnas hasta las 23:30 en eventos programados).
+                    </p>
+                     <p class="text-gray-300 mb-4">
+                        <i class="fas fa-bus text-yellow-400 mr-2"></i> 
+                        Cómo llegar: Colectivos líneas 57, 176, 182. Tren San Martín, Estación San Miguel (a 10 cuadras).
                     </p>
                     <p class="text-gray-300 mb-4">
                         <i class="fas fa-phone text-yellow-400 mr-2"></i> 
-                        (011) 1527652386
+                        (011) 1527652386 (Consultas y reservas)
                     </p>
                     <p class="text-gray-300">
                         <i class="fas fa-envelope text-yellow-400 mr-2"></i> 
@@ -424,16 +611,22 @@
                         <h4 class="text-lg font-semibold mb-3 text-white">Servicios:</h4>
                         <ul class="space-y-2">
                             <li class="flex items-center text-gray-300">
-                                <i class="fas fa-check-circle text-green-400 mr-2"></i> Observación con telescopios profesionales
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i> Observación con telescopios profesionales y amateur.
                             </li>
                             <li class="flex items-center text-gray-300">
-                                <i class="fas fa-check-circle text-green-400 mr-2"></i> Charlas y conferencias semanales
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i> Charlas y conferencias semanales (presenciales y online).
                             </li>
                             <li class="flex items-center text-gray-300">
-                                <i class="fas fa-check-circle text-green-400 mr-2"></i> Talleres prácticos de astronomía
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i> Talleres prácticos de astronomía para todas las edades.
                             </li>
                             <li class="flex items-center text-gray-300">
-                                <i class="fas fa-check-circle text-green-400 mr-2"></i> Biblioteca especializada
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i> Biblioteca especializada con más de 5000 volúmenes.
+                            </li>
+                            <li class="flex items-center text-gray-300">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i> Tienda de souvenirs y material astronómico básico.
+                            </li>
+                             <li class="flex items-center text-gray-300">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i> Acceso para personas con movilidad reducida.
                             </li>
                         </ul>
                     </div>
@@ -449,22 +642,21 @@
                         loading="lazy"
                         class="rounded-lg"
                     ></iframe>
+                     <p class="text-center text-gray-400 p-2 text-sm">Nota: El mapa es una representación. Utiliza la dirección para guiarte.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección de Cursos -->
     <section id="cursos" class="py-16">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-center mb-16 section-title">Nuestros Cursos Certificados</h2>
             <p class="text-gray-400 text-center mb-10 max-w-3xl mx-auto">
-                Todos nuestros cursos incluyen 6 módulos completos con material visual, evaluaciones y certificación final. 
-                Los miembros Premium obtienen certificación gratuita.
+                Todos nuestros cursos incluyen 6 módulos completos con material visual interactivo, evaluaciones continuas y certificación final avalada por el Observatorio. 
+                Los miembros Premium obtienen certificación gratuita y acceso a material exclusivo.
             </p>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Curso 1 -->
                 <div class="card overflow-hidden">
                     <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
                     <div class="p-6">
@@ -486,15 +678,14 @@
                     </div>
                 </div>
                 
-                <!-- Curso 2 -->
                 <div class="card overflow-hidden">
                     <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1505506874110-6a7a69069a08?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-xl font-semibold text-white">Astrofotografía</h3>
+                            <h3 class="text-xl font-semibold text-white">Astrofotografía Inicial</h3>
                             <span class="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-sm font-bold">6 módulos</span>
                         </div>
-                        <p class="text-gray-400 text-sm mb-4">Domina técnicas para fotografiar el cielo nocturno con la experta Mayra Schwarzschild.</p>
+                        <p class="text-gray-400 text-sm mb-4">Domina técnicas para fotografiar el cielo nocturno, desde la Vía Láctea hasta nebulosas, con la experta Mayra Schwarzschild.</p>
                         
                         <div class="flex justify-between items-center mt-6">
                             <div>
@@ -508,15 +699,14 @@
                     </div>
                 </div>
                 
-                <!-- Curso 3 -->
                 <div class="card overflow-hidden">
                     <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1464802686167-b939a6910659?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-xl font-semibold text-white">Astrofísica</h3>
+                            <h3 class="text-xl font-semibold text-white">Introducción a la Astrofísica</h3>
                             <span class="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-sm font-bold">6 módulos</span>
                         </div>
-                        <p class="text-gray-400 text-sm mb-4">Explora la física de los objetos celestes con Bella Vista al Cosmos.</p>
+                        <p class="text-gray-400 text-sm mb-4">Explora la física de los objetos celestes, desde estrellas hasta galaxias, con Bella Vista al Cosmos.</p>
                         
                         <div class="flex justify-between items-center mt-6">
                             <div>
@@ -530,15 +720,14 @@
                     </div>
                 </div>
 
-                <!-- Curso 4 -->
                 <div class="card overflow-hidden">
                     <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1532944924931-24b2baffb9d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-xl font-semibold text-white">Astronomía Cultural</h3>
+                            <h3 class="text-xl font-semibold text-white">Astronomía Cultural Comparada</h3>
                             <span class="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-sm font-bold">6 módulos</span>
                         </div>
-                        <p class="text-gray-400 text-sm mb-4">Explora la astronomía a través de las culturas antiguas y su conexión con el cosmos.</p>
+                        <p class="text-gray-400 text-sm mb-4">Explora la astronomía a través de las culturas antiguas y su conexión con el cosmos. Un viaje por mitologías y saberes ancestrales.</p>
                         
                         <div class="flex justify-between items-center mt-6">
                             <div>
@@ -552,15 +741,14 @@
                     </div>
                 </div>
                 
-                <!-- Curso 5 -->
                 <div class="card overflow-hidden">
                     <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1507697364665-69eec30ea94a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-xl font-semibold text-white">Óptica Aplicada</h3>
+                            <h3 class="text-xl font-semibold text-white">Óptica Aplicada a la Astronomía</h3>
                             <span class="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-sm font-bold">6 módulos</span>
                         </div>
-                        <p class="text-gray-400 text-sm mb-4">Domina los principios ópticos para telescopios y sistemas de observación.</p>
+                        <p class="text-gray-400 text-sm mb-4">Domina los principios ópticos fundamentales para telescopios, espectrógrafos y otros sistemas de observación avanzada.</p>
                         
                         <div class="flex justify-between items-center mt-6">
                             <div>
@@ -574,15 +762,14 @@
                     </div>
                 </div>
                 
-                <!-- Curso 6 -->
                 <div class="card overflow-hidden">
                     <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-xl font-semibold text-white">Arqueoastronomía</h3>
+                            <h3 class="text-xl font-semibold text-white">Arqueoastronomía Global</h3>
                             <span class="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-sm font-bold">6 módulos</span>
                         </div>
-                        <p class="text-gray-400 text-sm mb-4">Estudia la relación entre las antiguas civilizaciones y sus conocimientos astronómicos.</p>
+                        <p class="text-gray-400 text-sm mb-4">Estudia la relación entre las antiguas civilizaciones y sus conocimientos astronómicos. Un análisis de sitios arqueológicos y códices.</p>
                         
                         <div class="flex justify-between items-center mt-6">
                             <div>
@@ -605,7 +792,405 @@
         </div>
     </section>
 
-    <!-- Calendario Astronómico -->
+    <div id="course-modal-telescopios" class="modal-overlay hidden">
+        <div class="modal-content card max-w-3xl w-full mx-auto p-6 sm:p-8 rounded-lg shadow-2xl relative">
+            <button onclick="closeModal('telescopios')" class="absolute top-4 right-4 text-gray-400 hover:text-yellow-400 text-2xl z-20">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="text-2xl sm:text-3xl font-bold text-yellow-400 mb-3">Telescopios: Partes y Usos</h2>
+            <p class="text-gray-300 mb-1 text-sm sm:text-base">Instructor: <span class="font-semibold">Nicolás Balbi</span></p>
+            <span class="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-xs sm:text-sm font-bold mb-5 inline-block">6 módulos</span>
+
+            <div class="mb-5 border-b border-gray-700">
+                <nav class="flex flex-wrap space-x-2 sm:space-x-4 -mb-px" aria-label="Tabs">
+                    <button data-tab="desc-telescopios" class="modal-tab active-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Descripción</button>
+                    <button data-tab="mod-telescopios" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Módulos</button>
+                    <button data-tab="inst-telescopios" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Instructor</button>
+                    <button data-tab="faq-telescopios" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">FAQ</button>
+                </nav>
+            </div>
+
+            <div data-tab-content="desc-telescopios" class="modal-tab-content">
+                <h4 class="text-lg sm:text-xl font-semibold text-white mb-2">Descripción del Curso</h4>
+                <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                    Este curso integral está diseñado para entusiastas de la astronomía de todos los niveles que deseen comprender a fondo los telescopios. Desde los principios básicos de la óptica hasta el manejo avanzado de equipos, el Dr. Nicolás Balbi te guiará a través de seis módulos llenos de información práctica y teórica. Aprenderás a identificar los diferentes tipos de telescopios (refractores, reflectores, catadióptricos), sus componentes clave (objetivos, oculares, monturas), y cómo elegir el equipo adecuado para tus necesidades y presupuesto. Además, se cubrirán técnicas de mantenimiento, colimación y los accesorios más útiles para mejorar tu experiencia de observación. Al finalizar, serás capaz de seleccionar, montar, operar y mantener tu propio telescopio con confianza.
+                </p>
+            </div>
+
+            <div data-tab-content="mod-telescopios" class="modal-tab-content hidden">
+                <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Contenido del Curso (6 Módulos)</h4>
+                <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 1:</strong> Introducción a la Óptica Astronómica y Tipos de Telescopios. Ventajas y desventajas.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 2:</strong> Componentes Clave: Objetivos, Espejos, Oculares (tipos y cálculos), Buscadores.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 3:</strong> Monturas Telescópicas: Ecuatoriales vs. Altazimutales. GoTo. Puesta en estación.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 4:</strong> Selección y Compra: Telescopio ideal para ti. Accesorios Esenciales y Opcionales.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 5:</strong> Operación Práctica: Enfoque, Búsqueda de Objetos (Star Hopping), Observación segura del Sol.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 6:</strong> Mantenimiento Básico, Colimación (Newtonianos y SCTs). Resolución de Problemas Comunes.</li>
+                </ul>
+            </div>
+            
+            <div data-tab-content="inst-telescopios" class="modal-tab-content hidden">
+                 <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Sobre el Instructor: Nicolás Balbi</h4>
+                 <img src="https://via.placeholder.com/100x100.png?text=N.+Balbi" alt="Nicolás Balbi" class="rounded-full float-left mr-4 mb-2 w-20 h-20 sm:w-24 sm:h-24">
+                 <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                    El Dr. Nicolás Balbi es un reconocido astrónomo y divulgador científico con más de 20 años de experiencia en observación astronómica y astrofísica. Graduado de la Universidad Nacional de La Plata, ha participado en numerosos proyectos de investigación y es un apasionado por la enseñanza de la astronomía a públicos de todas las edades. Su especialidad radica en la instrumentación astronómica y las técnicas de observación. Es autor de varios artículos y guías prácticas sobre el uso de telescopios, y actualmente se desempeña como coordinador de actividades en el Observatorio de San Miguel. Su estilo didáctico y accesible hace que los conceptos más complejos sean fáciles de entender.
+                 </p>
+            </div>
+
+            <div data-tab-content="faq-telescopios" class="modal-tab-content hidden">
+                <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Preguntas Frecuentes</h4>
+                <div class="space-y-3 text-sm sm:text-base">
+                    <div>
+                        <p class="font-semibold text-yellow-300">¿Necesito tener un telescopio para tomar el curso?</p>
+                        <p class="text-gray-300">No es estrictamente necesario al inicio, pero será muy útil para aplicar los conocimientos prácticos. El curso cubre cómo seleccionar uno si aún no lo tienes.</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-yellow-300">¿Este curso es para principiantes absolutos?</p>
+                        <p class="text-gray-300">Sí, está diseñado para ser accesible para principiantes, pero también ofrece información valiosa y técnicas avanzadas para aquellos con algo de experiencia previa.</p>
+                    </div>
+                     <div>
+                        <p class="font-semibold text-yellow-300">¿Cuánto tiempo tendré acceso al material del curso?</p>
+                        <p class="text-gray-300">Una vez inscrito, tendrás acceso de por vida al material del curso y a futuras actualizaciones.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 sm:mt-8 text-right">
+                <button class="btn-primary px-4 py-2 sm:px-6 rounded-full font-semibold text-sm sm:text-base">Inscribirme (ARS 150.000)</button>
+                 <p class="text-gray-500 text-xs sm:text-sm mt-2">o certificación gratis con <a href="#premium" class="text-yellow-400 hover:underline">Premium</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="course-modal-astrofotografia" class="modal-overlay hidden">
+        <div class="modal-content card max-w-3xl w-full mx-auto p-6 sm:p-8 rounded-lg shadow-2xl relative">
+            <button onclick="closeModal('astrofotografia')" class="absolute top-4 right-4 text-gray-400 hover:text-yellow-400 text-2xl z-20">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="text-2xl sm:text-3xl font-bold text-yellow-400 mb-3">Astrofotografía Inicial</h2>
+            <p class="text-gray-300 mb-1 text-sm sm:text-base">Instructora: <span class="font-semibold">Mayra Schwarzschild</span></p>
+            <span class="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-xs sm:text-sm font-bold mb-5 inline-block">6 módulos</span>
+
+            <div class="mb-5 border-b border-gray-700">
+                <nav class="flex flex-wrap space-x-2 sm:space-x-4 -mb-px" aria-label="Tabs">
+                    <button data-tab="desc-astrofotografia" class="modal-tab active-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Descripción</button>
+                    <button data-tab="mod-astrofotografia" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Módulos</button>
+                    <button data-tab="inst-astrofotografia" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Instructora</button>
+                    <button data-tab="faq-astrofotografia" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">FAQ</button>
+                </nav>
+            </div>
+
+            <div data-tab-content="desc-astrofotografia" class="modal-tab-content">
+                <h4 class="text-lg sm:text-xl font-semibold text-white mb-2">Descripción del Curso</h4>
+                <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                    Descubre el arte y la técnica de capturar la majestuosidad del cosmos. Este curso te guiará desde los conceptos básicos de la fotografía nocturna hasta técnicas más avanzadas para fotografiar la Vía Láctea, constelaciones, nebulosas y galaxias. Aprenderás sobre el equipo necesario (cámaras DSLR/Mirrorless, objetivos, trípodes, monturas), configuración de la cámara, planificación de sesiones, y el flujo de trabajo de apilado y procesado de imágenes con software especializado como DeepSkyStacker y GIMP/Photoshop.
+                </p>
+            </div>
+
+            <div data-tab-content="mod-astrofotografia" class="modal-tab-content hidden">
+                <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Contenido del Curso (6 Módulos)</h4>
+                <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 1:</strong> Fundamentos de Astrofotografía: Equipo esencial y conceptos clave (ISO, apertura, exposición).</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 2:</strong> Fotografía de Paisaje Nocturno y Vía Láctea: Planificación, composición y captura.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 3:</strong> Introducción a la Fotografía de Cielo Profundo: Nebulosas, galaxias y cúmulos estelares.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 4:</strong> Técnicas de Apilado: Darks, flats, bias. Uso de DeepSkyStacker.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 5:</strong> Procesado Básico de Imágenes Astronómicas: Ajuste de niveles, curvas, color.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 6:</strong> Astrofotografía Planetaria y Lunar: Técnicas de video y apilado con Registax/Autostakkert.</li>
+                </ul>
+            </div>
+            
+            <div data-tab-content="inst-astrofotografia" class="modal-tab-content hidden">
+                 <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Sobre la Instructora: Mayra Schwarzschild</h4>
+                 <img src="https://via.placeholder.com/100x100.png?text=M.+Schwarz" alt="Mayra Schwarzschild" class="rounded-full float-left mr-4 mb-2 w-20 h-20 sm:w-24 sm:h-24">
+                 <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                    Mayra Schwarzschild es una astrofotógrafa galardonada y educadora con una pasión por compartir las maravillas del universo a través de la lente. Con más de 10 años de experiencia, sus imágenes han sido publicadas en revistas internacionales y exhibiciones. Mayra combina su conocimiento técnico con una visión artística única, haciendo de la astrofotografía una disciplina accesible y emocionante para todos. Es experta en técnicas de cielo profundo y procesado avanzado de imágenes.
+                 </p>
+            </div>
+
+            <div data-tab-content="faq-astrofotografia" class="modal-tab-content hidden">
+                <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Preguntas Frecuentes</h4>
+                <div class="space-y-3 text-sm sm:text-base">
+                    <div>
+                        <p class="font-semibold text-yellow-300">¿Qué tipo de cámara necesito?</p>
+                        <p class="text-gray-300">Se recomienda una cámara DSLR o Mirrorless con controles manuales. También se discuten opciones para smartphones.</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-yellow-300">¿Es necesario software de pago para el procesado?</p>
+                        <p class="text-gray-300">El curso enseña técnicas con software gratuito como DeepSkyStacker y GIMP, y también menciona alternativas de pago como Photoshop.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 sm:mt-8 text-right">
+                <button class="btn-primary px-4 py-2 sm:px-6 rounded-full font-semibold text-sm sm:text-base">Inscribirme (ARS 120.000)</button>
+                 <p class="text-gray-500 text-xs sm:text-sm mt-2">o certificación gratis con <a href="#premium" class="text-yellow-400 hover:underline">Premium</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="course-modal-astrofisica" class="modal-overlay hidden">
+        <div class="modal-content card max-w-3xl w-full mx-auto p-6 sm:p-8 rounded-lg shadow-2xl relative">
+            <button onclick="closeModal('astrofisica')" class="absolute top-4 right-4 text-gray-400 hover:text-yellow-400 text-2xl z-20">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="text-2xl sm:text-3xl font-bold text-yellow-400 mb-3">Introducción a la Astrofísica</h2>
+            <p class="text-gray-300 mb-1 text-sm sm:text-base">Instructora: <span class="font-semibold">Bella Vista al Cosmos</span></p>
+            <span class="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-xs sm:text-sm font-bold mb-5 inline-block">6 módulos</span>
+
+            <div class="mb-5 border-b border-gray-700">
+                <nav class="flex flex-wrap space-x-2 sm:space-x-4 -mb-px" aria-label="Tabs">
+                    <button data-tab="desc-astrofisica" class="modal-tab active-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Descripción</button>
+                    <button data-tab="mod-astrofisica" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Módulos</button>
+                    <button data-tab="inst-astrofisica" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Instructora</button>
+                    <button data-tab="faq-astrofisica" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">FAQ</button>
+                </nav>
+            </div>
+
+            <div data-tab-content="desc-astrofisica" class="modal-tab-content">
+                <h4 class="text-lg sm:text-xl font-semibold text-white mb-2">Descripción del Curso</h4>
+                <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                    Sumérgete en los principios fundamentales que gobiernan el universo. Este curso introductorio a la astrofísica te llevará a un viaje desde el nacimiento y evolución de las estrellas, pasando por la estructura y dinámica de las galaxias, hasta los misterios de la materia oscura, la energía oscura y la cosmología. Con un enfoque conceptual y ejemplos claros, Bella Vista al Cosmos desmitificará conceptos complejos y te proporcionará una base sólida para entender las investigaciones más actuales en el campo.
+                </p>
+            </div>
+
+            <div data-tab-content="mod-astrofisica" class="modal-tab-content hidden">
+                <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Contenido del Curso (6 Módulos)</h4>
+                <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 1:</strong> Mecánica Celeste y Leyes de Kepler. Gravedad y órbitas.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 2:</strong> La Luz como Mensajera: Espectroscopía, fotometría y el espectro electromagnético.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 3:</strong> Estrellas: Formación, estructura interna, evolución estelar (Diagrama H-R), supernovas y remanentes.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 4:</strong> Galaxias: Tipos de galaxias, Vía Láctea, colisiones galácticas, agujeros negros supermasivos.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 5:</strong> Cosmología: El Big Bang, expansión del universo, radiación cósmica de fondo.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 6:</strong> Materia Oscura y Energía Oscura: Evidencias, teorías y el futuro del universo.</li>
+                </ul>
+            </div>
+            
+            <div data-tab-content="inst-astrofisica" class="modal-tab-content hidden">
+                 <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Sobre la Instructora: Bella Vista al Cosmos</h4>
+                 <img src="https://via.placeholder.com/100x100.png?text=B.V.C." alt="Bella Vista al Cosmos" class="rounded-full float-left mr-4 mb-2 w-20 h-20 sm:w-24 sm:h-24">
+                 <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                    Bella Vista al Cosmos (seudónimo de una destacada astrofísica y comunicadora científica) es conocida por su habilidad para explicar conceptos astrofísicos complejos de manera clara y apasionante. Con un doctorado en Astrofísica Teórica y una vasta experiencia en investigación y docencia universitaria, Bella busca acercar la ciencia del cosmos a un público amplio. Sus charlas y escritos son célebres por su rigor científico y su capacidad de inspirar curiosidad.
+                 </p>
+            </div>
+
+            <div data-tab-content="faq-astrofisica" class="modal-tab-content hidden">
+                <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Preguntas Frecuentes</h4>
+                <div class="space-y-3 text-sm sm:text-base">
+                    <div>
+                        <p class="font-semibold text-yellow-300">¿Necesito conocimientos previos de física o matemáticas?</p>
+                        <p class="text-gray-300">Se recomienda un nivel básico de física y matemáticas de secundaria, pero el curso se enfoca en los conceptos y la intuición física más que en derivaciones matemáticas complejas.</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-yellow-300">¿Este curso me prepara para una carrera en astrofísica?</p>
+                        <p class="text-gray-300">Proporciona una excelente introducción y una base sólida. Para una carrera formal, se requerirían estudios universitarios más profundos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 sm:mt-8 text-right">
+                <button class="btn-primary px-4 py-2 sm:px-6 rounded-full font-semibold text-sm sm:text-base">Inscribirme (ARS 200.000)</button>
+                 <p class="text-gray-500 text-xs sm:text-sm mt-2">o certificación gratis con <a href="#premium" class="text-yellow-400 hover:underline">Premium</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="course-modal-cultural" class="modal-overlay hidden">
+        <div class="modal-content card max-w-3xl w-full mx-auto p-6 sm:p-8 rounded-lg shadow-2xl relative">
+            <button onclick="closeModal('cultural')" class="absolute top-4 right-4 text-gray-400 hover:text-yellow-400 text-2xl z-20">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="text-2xl sm:text-3xl font-bold text-yellow-400 mb-3">Astronomía Cultural Comparada</h2>
+             <p class="text-gray-300 mb-1 text-sm sm:text-base">Instructor: <span class="font-semibold">Prof. Etno Astro</span></p>
+            <span class="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-xs sm:text-sm font-bold mb-5 inline-block">6 módulos</span>
+
+            <div class="mb-5 border-b border-gray-700">
+                <nav class="flex flex-wrap space-x-2 sm:space-x-4 -mb-px" aria-label="Tabs">
+                    <button data-tab="desc-cultural" class="modal-tab active-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Descripción</button>
+                    <button data-tab="mod-cultural" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Módulos</button>
+                    <button data-tab="inst-cultural" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Instructor</button>
+                    <button data-tab="faq-cultural" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">FAQ</button>
+                </nav>
+            </div>
+
+            <div data-tab-content="desc-cultural" class="modal-tab-content">
+                <h4 class="text-lg sm:text-xl font-semibold text-white mb-2">Descripción del Curso</h4>
+                <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                    Viaja a través del tiempo y las civilizaciones para descubrir cómo diferentes culturas interpretaron el cielo nocturno. Este curso explora las cosmovisiones, mitologías, calendarios y prácticas astronómicas de sociedades antiguas y contemporáneas de todo el mundo, desde Egipto y Mesopotamia hasta los Incas, Mayas, China y las culturas polinesias. Analizaremos cómo la observación del cielo influyó en su agricultura, religión, arquitectura y navegación.
+                </p>
+            </div>
+
+            <div data-tab-content="mod-cultural" class="modal-tab-content hidden">
+                <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Contenido del Curso (6 Módulos)</h4>
+                <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 1:</strong> Introducción a la Astronomía Cultural: Conceptos y Metodologías.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 2:</strong> Astronomía en el Antiguo Egipto y Mesopotamia: Dioses, calendarios y zigurats.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 3:</strong> El Cielo de los Mayas y Aztecas: Códices, observatorios y ciclos cósmicos.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 4:</strong> Astronomía Inca y Andina: Huacas, ceques y la Vía Láctea como río celestial.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 5:</strong> Cosmologías de Asia y Oceanía: China, India y los navegantes polinesios.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 6:</strong> Legado y Relevancia Contemporánea: Etnoastronomía y la preservación del patrimonio celeste.</li>
+                </ul>
+            </div>
+            
+            <div data-tab-content="inst-cultural" class="modal-tab-content hidden">
+                 <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Sobre el Instructor: Prof. Etno Astro</h4>
+                 <img src="https://via.placeholder.com/100x100.png?text=E.Astro" alt="Prof. Etno Astro" class="rounded-full float-left mr-4 mb-2 w-20 h-20 sm:w-24 sm:h-24">
+                 <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                    El Profesor Etno Astro es un antropólogo especializado en etnoastronomía y arqueoastronomía. Ha realizado trabajo de campo en diversas partes del mundo, investigando la relación de las comunidades indígenas y antiguas con el cosmos. Su enfoque interdisciplinario combina la antropología, la arqueología y la astronomía para ofrecer una perspectiva rica y matizada sobre cómo el cielo ha moldeado la cultura humana.
+                 </p>
+            </div>
+
+            <div data-tab-content="faq-cultural" class="modal-tab-content hidden">
+                <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Preguntas Frecuentes</h4>
+                <div class="space-y-3 text-sm sm:text-base">
+                    <div>
+                        <p class="font-semibold text-yellow-300">¿Se requiere algún conocimiento previo de historia o antropología?</p>
+                        <p class="text-gray-300">No, el curso está diseñado para ser introductorio y accesible para todos los interesados.</p>
+                    </div>
+                     <div>
+                        <p class="font-semibold text-yellow-300">¿El curso incluye visitas virtuales a sitios arqueoastronómicos?</p>
+                        <p class="text-gray-300">Sí, se utilizarán recursos multimedia para explorar virtualmente algunos de los sitios más importantes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 sm:mt-8 text-right">
+                <button class="btn-primary px-4 py-2 sm:px-6 rounded-full font-semibold text-sm sm:text-base">Inscribirme (ARS 110.000)</button>
+                 <p class="text-gray-500 text-xs sm:text-sm mt-2">o certificación gratis con <a href="#premium" class="text-yellow-400 hover:underline">Premium</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="course-modal-optica" class="modal-overlay hidden">
+        <div class="modal-content card max-w-3xl w-full mx-auto p-6 sm:p-8 rounded-lg shadow-2xl relative">
+            <button onclick="closeModal('optica')" class="absolute top-4 right-4 text-gray-400 hover:text-yellow-400 text-2xl z-20">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="text-2xl sm:text-3xl font-bold text-yellow-400 mb-3">Óptica Aplicada a la Astronomía</h2>
+            <p class="text-gray-300 mb-1 text-sm sm:text-base">Instructor: <span class="font-semibold">Dr. Lente Fina</span></p>
+            <span class="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-xs sm:text-sm font-bold mb-5 inline-block">6 módulos</span>
+
+            <div class="mb-5 border-b border-gray-700">
+                <nav class="flex flex-wrap space-x-2 sm:space-x-4 -mb-px" aria-label="Tabs">
+                    <button data-tab="desc-optica" class="modal-tab active-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Descripción</button>
+                    <button data-tab="mod-optica" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Módulos</button>
+                    <button data-tab="inst-optica" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Instructor</button>
+                    <button data-tab="faq-optica" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">FAQ</button>
+                </nav>
+            </div>
+
+            <div data-tab-content="desc-optica" class="modal-tab-content">
+                <h4 class="text-lg sm:text-xl font-semibold text-white mb-2">Descripción del Curso</h4>
+                <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                   Este curso profundiza en los principios de la óptica geométrica y física relevantes para la instrumentación astronómica. Se abordarán temas como el diseño de telescopios (refractores, reflectores, catadióptricos), aberraciones ópticas y su corrección, principios de espectrógrafos, interferometría, óptica adaptativa y el funcionamiento de detectores CCD y CMOS. Ideal para quienes buscan entender la ingeniería detrás de los instrumentos que nos permiten explorar el cosmos.
+                </p>
+            </div>
+
+            <div data-tab-content="mod-optica" class="modal-tab-content hidden">
+                <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Contenido del Curso (6 Módulos)</h4>
+                <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 1:</strong> Fundamentos de Óptica Geométrica: Refracción, reflexión, lentes y espejos.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 2:</strong> Diseño Óptico de Telescopios: Trazado de rayos, configuraciones comunes.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 3:</strong> Aberraciones Ópticas: Esférica, cromática, coma, astigmatismo. Métodos de corrección.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 4:</strong> Óptica Física y Difracción: Límite de resolución, interferencia, polarización.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 5:</strong> Instrumentación Auxiliar: Espectrógrafos, filtros, óptica adaptativa.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 6:</strong> Detectores Astronómicos: CCDs, CMOS, fotómetros. Calibración y ruido.</li>
+                </ul>
+            </div>
+            
+            <div data-tab-content="inst-optica" class="modal-tab-content hidden">
+                 <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Sobre el Instructor: Dr. Lente Fina</h4>
+                 <img src="https://via.placeholder.com/100x100.png?text=Dr.Lente" alt="Dr. Lente Fina" class="rounded-full float-left mr-4 mb-2 w-20 h-20 sm:w-24 sm:h-24">
+                 <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                    El Dr. Lente Fina es un ingeniero óptico con especialización en instrumentación astronómica. Ha trabajado en el diseño y construcción de componentes para grandes observatorios internacionales. Su investigación se centra en nuevas tecnologías para mejorar la calidad de imagen y la eficiencia de los telescopios. Es un apasionado por desvelar los secretos de cómo "vemos" el universo.
+                 </p>
+            </div>
+
+            <div data-tab-content="faq-optica" class="modal-tab-content hidden">
+                <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Preguntas Frecuentes</h4>
+                <div class="space-y-3 text-sm sm:text-base">
+                    <div>
+                        <p class="font-semibold text-yellow-300">¿Este curso es muy matemático?</p>
+                        <p class="text-gray-300">Si bien la óptica tiene una base matemática, el curso se enfoca en la comprensión conceptual y la aplicación, utilizando matemáticas de nivel secundario/preuniversitario.</p>
+                    </div>
+                     <div>
+                        <p class="font-semibold text-yellow-300">¿Aprenderé a construir mi propio telescopio?</p>
+                        <p class="text-gray-300">El curso proporciona los conocimientos teóricos para entender el diseño, pero no es un taller de construcción práctica, aunque sí te dará bases para ello.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 sm:mt-8 text-right">
+                <button class="btn-primary px-4 py-2 sm:px-6 rounded-full font-semibold text-sm sm:text-base">Inscribirme (ARS 130.000)</button>
+                 <p class="text-gray-500 text-xs sm:text-sm mt-2">o certificación gratis con <a href="#premium" class="text-yellow-400 hover:underline">Premium</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="course-modal-arqueo" class="modal-overlay hidden">
+        <div class="modal-content card max-w-3xl w-full mx-auto p-6 sm:p-8 rounded-lg shadow-2xl relative">
+            <button onclick="closeModal('arqueo')" class="absolute top-4 right-4 text-gray-400 hover:text-yellow-400 text-2xl z-20">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="text-2xl sm:text-3xl font-bold text-yellow-400 mb-3">Arqueoastronomía Global</h2>
+            <p class="text-gray-300 mb-1 text-sm sm:text-base">Instructor: <span class="font-semibold">Dr. Indiana Cosmos</span></p>
+            <span class="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-xs sm:text-sm font-bold mb-5 inline-block">6 módulos</span>
+
+            <div class="mb-5 border-b border-gray-700">
+                <nav class="flex flex-wrap space-x-2 sm:space-x-4 -mb-px" aria-label="Tabs">
+                    <button data-tab="desc-arqueo" class="modal-tab active-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Descripción</button>
+                    <button data-tab="mod-arqueo" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Módulos</button>
+                    <button data-tab="inst-arqueo" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Instructor</button>
+                    <button data-tab="faq-arqueo" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">FAQ</button>
+                </nav>
+            </div>
+
+            <div data-tab-content="desc-arqueo" class="modal-tab-content">
+                <h4 class="text-lg sm:text-xl font-semibold text-white mb-2">Descripción del Curso</h4>
+                <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                    Embárcate en una aventura arqueológica para descubrir cómo las civilizaciones antiguas de todo el planeta observaron, interpretaron e incorporaron el cosmos en sus vidas. Este curso examina la alineación astronómica de monumentos megalíticos como Stonehenge, las pirámides de Egipto, los templos mayas, y otros sitios menos conocidos pero igualmente fascinantes. Aprenderás sobre los métodos utilizados en arqueoastronomía para decodificar el conocimiento celestial de nuestros ancestros.
+                </p>
+            </div>
+
+            <div data-tab-content="mod-arqueo" class="modal-tab-content hidden">
+                <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Contenido del Curso (6 Módulos)</h4>
+                <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 1:</strong> ¿Qué es la Arqueoastronomía? Historia, métodos y debates.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 2:</strong> Megalitos y Cosmos: Stonehenge, Newgrange y otros monumentos europeos.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 3:</strong> El Cielo de los Faraones: Astronomía, calendarios y arquitectura en el Antiguo Egipto.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 4:</strong> Astronomía en las Américas Precolombinas: Chichén Itzá, Teotihuacán, Machu Picchu.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 5:</strong> Observatorios del Mundo Antiguo: Asia (China, India) y el Pacífico.</li>
+                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 6:</strong> Interpretando el Pasado: Desafíos, nuevas tecnologías y el futuro de la arqueoastronomía.</li>
+                </ul>
+            </div>
+            
+            <div data-tab-content="inst-arqueo" class="modal-tab-content hidden">
+                 <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Sobre el Instructor: Dr. Indiana Cosmos</h4>
+                 <img src="https://via.placeholder.com/100x100.png?text=Dr.Indiana" alt="Dr. Indiana Cosmos" class="rounded-full float-left mr-4 mb-2 w-20 h-20 sm:w-24 sm:h-24">
+                 <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                    El Dr. Indiana Cosmos es un arqueólogo de renombre mundial especializado en la astronomía de las culturas antiguas. Ha dirigido excavaciones en sitios clave y es autor de influyentes publicaciones sobre la materia. Su trabajo combina el rigor de la investigación arqueológica con una profunda comprensión de los principios astronómicos, revelando las sofisticadas maneras en que nuestros antepasados se relacionaron con el universo.
+                 </p>
+            </div>
+
+            <div data-tab-content="faq-arqueo" class="modal-tab-content hidden">
+                <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Preguntas Frecuentes</h4>
+                <div class="space-y-3 text-sm sm:text-base">
+                    <div>
+                        <p class="font-semibold text-yellow-300">¿Necesito ser arqueólogo o astrónomo para este curso?</p>
+                        <p class="text-gray-300">No, el curso es multidisciplinario y está diseñado para cualquier persona con interés en la historia, la arqueología y la astronomía.</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-yellow-300">¿Se discutirán teorías controversiales o pseudocientíficas?</p>
+                        <p class="text-gray-300">El curso se basa en evidencia científica y académica, aunque se pueden mencionar y analizar críticamente algunas teorías alternativas populares.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 sm:mt-8 text-right">
+                <button class="btn-primary px-4 py-2 sm:px-6 rounded-full font-semibold text-sm sm:text-base">Inscribirme (ARS 140.000)</button>
+                 <p class="text-gray-500 text-xs sm:text-sm mt-2">o certificación gratis con <a href="#premium" class="text-yellow-400 hover:underline">Premium</a></p>
+            </div>
+        </div>
+    </div>
     <section id="calendario" class="py-16 bg-gray-900 bg-opacity-50">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-center mb-16 section-title">Calendario Astronómico</h2>
@@ -614,16 +1199,16 @@
                 <div class="flex justify-between items-center mb-8">
                     <h3 class="text-2xl font-bold text-white">Agosto 2025</h3>
                     <div class="flex space-x-2">
-                        <button class="bg-gray-800 text-gray-300 px-4 py-2 rounded-lg">
+                        <button class="bg-gray-800 text-gray-300 px-4 py-2 rounded-lg hover:bg-gray-700 transition">
                             <i class="fas fa-chevron-left"></i>
                         </button>
-                        <button class="bg-gray-800 text-gray-300 px-4 py-2 rounded-lg">
+                        <button class="bg-gray-800 text-gray-300 px-4 py-2 rounded-lg hover:bg-gray-700 transition">
                             <i class="fas fa-chevron-right"></i>
                         </button>
                     </div>
                 </div>
                 
-                <div class="grid grid-cols-7 gap-2 mb-4">
+                <div class="grid grid-cols-7 gap-1 sm:gap-2 mb-4 text-xs sm:text-base">
                     <div class="text-center text-gray-400 p-2">Dom</div>
                     <div class="text-center text-gray-400 p-2">Lun</div>
                     <div class="text-center text-gray-400 p-2">Mar</div>
@@ -633,167 +1218,104 @@
                     <div class="text-center text-gray-400 p-2">Sáb</div>
                 </div>
                 
-                <div class="grid grid-cols-7 gap-2">
-                    <!-- Días del mes -->
-                    <div class="calendar-day p-3 text-center relative">
-                        <div class="text-gray-500">27</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div class="text-gray-500">28</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div class="text-gray-500">29</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div class="text-gray-500">30</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div class="text-gray-500">31</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>1</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>2</div>
-                    </div>
+                <div class="grid grid-cols-7 gap-1 sm:gap-2 text-xs sm:text-base">
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div class="text-gray-500">27</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div class="text-gray-500">28</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div class="text-gray-500">29</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div class="text-gray-500">30</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div class="text-gray-500">31</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>1</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>2</div></div>
                     
-                    <!-- Semana 2 -->
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>3</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>4</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>5</div>
-                        <div class="event-highlight"></div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>6</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>7</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>8</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>9</div>
-                    </div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>3</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>4</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>5</div><div class="event-highlight" title="Taller Astrofotografía Niños"></div><div class="hidden sm:block text-xs text-yellow-500 mt-1 truncate">Taller Niños</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>6</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>7</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>8</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>9</div></div>
                     
-                    <!-- Semana 3 -->
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>10</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>11</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>12</div>
-                        <div class="text-xs text-yellow-400 mt-1">Perseidas</div>
-                        <div class="event-highlight"></div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>13</div>
-                        <div class="text-xs text-yellow-400 mt-1">Perseidas</div>
-                        <div class="event-highlight"></div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>14</div>
-                        <div class="text-xs text-yellow-400 mt-1">Perseidas</div>
-                        <div class="event-highlight"></div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative bg-yellow-400 bg-opacity-10 border-yellow-400">
-                        <div class="text-yellow-400 font-bold">15</div>
-                        <div class="text-xs text-yellow-400 mt-1">Evento: Luna</div>
-                        <div class="event-highlight"></div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>16</div>
-                    </div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>10</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>11</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>12</div><div class="text-xs text-yellow-400 mt-1 truncate">Perseidas</div><div class="event-highlight"></div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>13</div><div class="text-xs text-yellow-400 mt-1 truncate">Perseidas</div><div class="event-highlight"></div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>14</div><div class="text-xs text-yellow-400 mt-1 truncate">Perseidas</div><div class="event-highlight"></div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative bg-yellow-400 bg-opacity-10 border-yellow-400"><div class="text-yellow-400 font-bold">15</div><div class="text-xs text-yellow-400 mt-1 truncate">Evento: Luna</div><div class="event-highlight"></div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>16</div></div>
                     
-                    <!-- Semana 4 -->
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>17</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>18</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>19</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative bg-yellow-400 bg-opacity-10 border-yellow-400">
-                        <div class="text-yellow-400 font-bold">20</div>
-                        <div class="text-xs text-yellow-400 mt-1">Luna Nueva</div>
-                        <div class="event-highlight"></div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative bg-yellow-400 bg-opacity-10 border-yellow-400">
-                        <div class="text-yellow-400 font-bold">21</div>
-                        <div class="text-xs text-yellow-400 mt-1">Evento: Agujeros</div>
-                        <div class="event-highlight"></div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>22</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>23</div>
-                    </div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>17</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>18</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>19</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative bg-yellow-400 bg-opacity-10 border-yellow-400"><div class="text-yellow-400 font-bold">20</div><div class="text-xs text-yellow-400 mt-1 truncate">Luna Nueva</div><div class="event-highlight" title="Webinar Exoplanetas"></div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative bg-yellow-400 bg-opacity-10 border-yellow-400"><div class="text-yellow-400 font-bold">21</div><div class="text-xs text-yellow-400 mt-1 truncate">Charla: Agujeros</div><div class="event-highlight"></div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>22</div><div class="event-highlight" title="Charla Agujeros Negros (evento principal)"></div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>23</div></div>
                     
-                    <!-- Semana 5 -->
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>24</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>25</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>26</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>27</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>28</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>29</div>
-                    </div>
-                    <div class="calendar-day p-3 text-center relative">
-                        <div>30</div>
-                    </div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>24</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>25</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>26</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>27</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>28</div><div class="event-highlight" title="Observación Saturno"></div><div class="hidden sm:block text-xs text-yellow-500 mt-1 truncate">Saturno</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>29</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div>30</div></div>
+                    <div class="calendar-day p-2 sm:p-3 text-center relative"><div class="text-gray-500">1</div></div>
                 </div>
                 
                 <div class="mt-8">
-                    <h3 class="text-xl font-semibold mb-4 text-white">Eventos Destacados</h3>
+                    <h3 class="text-xl font-semibold mb-4 text-white">Eventos Destacados de Agosto</h3>
                     <div class="space-y-4">
                         <div class="flex items-start">
-                            <div class="bg-yellow-400 text-gray-900 font-bold text-center rounded-lg py-1 px-4 mr-4">
-                                <div>12-14</div>
-                                <div>AGO</div>
+                            <div class="bg-yellow-400 text-gray-900 font-bold text-center rounded-lg py-1 px-3 sm:px-4 mr-4">
+                                <div class="text-sm sm:text-base">05</div><div class="text-xs">AGO</div>
                             </div>
                             <div>
-                                <h4 class="text-lg font-semibold text-white">Lluvia de Perseidas</h4>
-                                <p class="text-gray-400">Máximo de 100 meteoros por hora. Mejor visibilidad después de media noche.</p>
+                                <h4 class="text-md sm:text-lg font-semibold text-white">Taller de Astrofotografía para Niños</h4>
+                                <p class="text-gray-400 text-sm">16:00 - 18:00 hs. Aula Cosmos Kids. Una introducción lúdica al mundo de la fotografía celestial.</p>
                             </div>
                         </div>
                         <div class="flex items-start">
-                            <div class="bg-yellow-400 text-gray-900 font-bold text-center rounded-lg py-1 px-4 mr-4">
-                                <div>20</div>
-                                <div>AGO</div>
+                            <div class="bg-yellow-400 text-gray-900 font-bold text-center rounded-lg py-1 px-3 sm:px-4 mr-4">
+                                <div class="text-sm sm:text-base">12-14</div><div class="text-xs">AGO</div>
                             </div>
                             <div>
-                                <h4 class="text-lg font-semibold text-white">Luna Nueva</h4>
-                                <p class="text-gray-400">Excelente oportunidad para observar objetos de cielo profundo.</p>
+                                <h4 class="text-md sm:text-lg font-semibold text-white">Lluvia de Perseidas</h4>
+                                <p class="text-gray-400 text-sm">Máximo de 100 meteoros por hora. Mejor visibilidad después de media noche. Campo Abierto Norte.</p>
                             </div>
                         </div>
                         <div class="flex items-start">
-                            <div class="bg-yellow-400 text-gray-900 font-bold text-center rounded-lg py-1 px-4 mr-4">
-                                <div>21</div>
-                                <div>AGO</div>
+                            <div class="bg-yellow-400 text-gray-900 font-bold text-center rounded-lg py-1 px-3 sm:px-4 mr-4">
+                                <div class="text-sm sm:text-base">15</div><div class="text-xs">AGO</div>
                             </div>
                             <div>
-                                <h4 class="text-lg font-semibold text-white">Charla: Agujeros Negros</h4>
-                                <p class="text-gray-400">Conferencia sobre los últimos descubrimientos en física de agujeros negros.</p>
+                                <h4 class="text-md sm:text-lg font-semibold text-white">Noche de Observación Lunar</h4>
+                                <p class="text-gray-400 text-sm">20:00 - 23:00 hs. Terraza Observatorio. Ideal para familias.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-yellow-400 text-gray-900 font-bold text-center rounded-lg py-1 px-3 sm:px-4 mr-4">
+                                <div class="text-sm sm:text-base">20</div><div class="text-xs">AGO</div>
+                            </div>
+                            <div>
+                                <h4 class="text-md sm:text-lg font-semibold text-white">Luna Nueva y Webinar Exoplanetas</h4>
+                                <p class="text-gray-400 text-sm">Luna Nueva: Excelente para cielo profundo. Webinar: 19:00 hs (Online), con Dra. Estrella Polar.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-yellow-400 text-gray-900 font-bold text-center rounded-lg py-1 px-3 sm:px-4 mr-4">
+                                <div class="text-sm sm:text-base">22</div><div class="text-xs">AGO</div>
+                            </div>
+                            <div>
+                                <h4 class="text-md sm:text-lg font-semibold text-white">Charla: Agujeros Negros</h4>
+                                <p class="text-gray-400 text-sm">18:30 - 20:00 hs. Auditorio Principal. Con Dr. Nicolás Balbi.</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start">
+                            <div class="bg-yellow-400 text-gray-900 font-bold text-center rounded-lg py-1 px-3 sm:px-4 mr-4">
+                                <div class="text-sm sm:text-base">28</div><div class="text-xs">AGO</div>
+                            </div>
+                            <div>
+                                <h4 class="text-md sm:text-lg font-semibold text-white">Observación de Saturno</h4>
+                                <p class="text-gray-400 text-sm">21:00 - 23:30 hs. Plataforma Principal. Admira los anillos del gigante gaseoso.</p>
                             </div>
                         </div>
                     </div>
@@ -802,91 +1324,97 @@
         </div>
     </section>
 
-    <!-- Sección de Comunidad/Foro -->
     <section id="comunidad" class="py-16">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-center mb-16 section-title">Comunidad Astronómica</h2>
             
             <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
                 <div class="card p-8">
-                    <h3 class="text-2xl font-bold mb-4 text-white">Foro de Discusión</h3>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Foro de Discusión Activo</h3>
                     <p class="text-gray-300 mb-6">
-                        Únete a nuestra comunidad de entusiastas de la astronomía. Comparte tus observaciones, haz preguntas y conecta con otros apasionados por el cosmos.
+                        Únete a nuestra vibrante comunidad de entusiastas de la astronomía. Comparte tus observaciones, astrofotos, haz preguntas técnicas y conecta con otros apasionados por el cosmos. ¡Tu aventura estelar comienza aquí!
                     </p>
                     <div class="space-y-4">
-                        <div class="flex items-center p-4 bg-gray-800 rounded-lg">
-                            <div class="bg-yellow-400 text-gray-900 w-10 h-10 rounded-full flex items-center justify-center mr-4">
+                        <div class="flex items-center p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
+                            <div class="bg-yellow-400 text-gray-900 w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
                                 <i class="fas fa-user-astronaut"></i>
                             </div>
                             <div>
                                 <h4 class="font-semibold text-white">Observaciones Recientes</h4>
-                                <p class="text-gray-400 text-sm">320 publicaciones</p>
+                                <p class="text-gray-400 text-sm">320 publicaciones / 15 nuevos hoy</p>
                             </div>
                         </div>
-                        <div class="flex items-center p-4 bg-gray-800 rounded-lg">
-                            <div class="bg-yellow-400 text-gray-900 w-10 h-10 rounded-full flex items-center justify-center mr-4">
+                        <div class="flex items-center p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
+                            <div class="bg-yellow-400 text-gray-900 w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
                                 <i class="fas fa-question-circle"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-white">Preguntas Técnicas</h4>
-                                <p class="text-gray-400 text-sm">184 publicaciones</p>
+                                <h4 class="font-semibold text-white">Consultas Técnicas y Equipos</h4>
+                                <p class="text-gray-400 text-sm">184 publicaciones / 8 nuevos hoy</p>
                             </div>
                         </div>
-                        <div class="flex items-center p-4 bg-gray-800 rounded-lg">
-                            <div class="bg-yellow-400 text-gray-900 w-10 h-10 rounded-full flex items-center justify-center mr-4">
+                        <div class="flex items-center p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
+                            <div class="bg-yellow-400 text-gray-900 w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
                                 <i class="fas fa-camera"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-white">Astrofotografía</h4>
-                                <p class="text-gray-400 text-sm">420 publicaciones</p>
+                                <h4 class="font-semibold text-white">Galería de Astrofotografía</h4>
+                                <p class="text-gray-400 text-sm">420 publicaciones / 25 nuevos hoy</p>
+                            </div>
+                        </div>
+                         <div class="flex items-center p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
+                            <div class="bg-yellow-400 text-gray-900 w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Discusión General y Noticias</h4>
+                                <p class="text-gray-400 text-sm">250 publicaciones / 12 nuevos hoy</p>
                             </div>
                         </div>
                     </div>
                     
-                    <a href="https://www.exampleforum.com/observatoriosanmiguel" target="_blank" class="btn-primary w-full mt-8 py-3 rounded-full font-semibold text-center">
-                        <i class="fas fa-users mr-2"></i>Únete a Nuestro Foro
+                    <a href="https://www.exampleforum.com/observatoriosanmiguel" target="_blank" class="btn-primary w-full mt-8 py-3 rounded-full font-semibold text-center block">
+                        <i class="fas fa-users mr-2"></i>Únete a Nuestro Foro Ahora
                     </a>
                 </div>
                 
                 <div class="card p-8">
-                    <h3 class="text-2xl font-bold mb-4 text-white">Próximos Encuentros</h3>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Próximos Encuentros y Proyectos</h3>
                     <p class="text-gray-300 mb-6">
-                        Participa en nuestros encuentros comunitarios, observaciones grupales y proyectos colaborativos.
+                        Participa en nuestros encuentros comunitarios, observaciones grupales y proyectos colaborativos de ciencia ciudadana. ¡La astronomía es mejor juntos!
                     </p>
                     
                     <div class="space-y-4">
                         <div class="border-l-4 border-yellow-400 pl-4 py-2">
-                            <h4 class="font-semibold text-white">Noche de Observación Grupal</h4>
-                            <p class="text-gray-400">28 de Agosto, 20:00 hs</p>
-                            <p class="text-gray-300 text-sm">Terraza del Observatorio</p>
+                            <h4 class="font-semibold text-white">Noche de Observación Grupal: Nebulosas de Verano</h4>
+                            <p class="text-gray-400 text-sm">28 de Agosto, 20:00 hs - Terraza del Observatorio</p>
+                            <p class="text-gray-300 text-xs mt-1">Guiada por nuestros expertos, exploraremos las joyas del cielo estival.</p>
                         </div>
                         <div class="border-l-4 border-yellow-400 pl-4 py-2">
-                            <h4 class="font-semibold text-white">Taller de Astrofotografía</h4>
-                            <p class="text-gray-400">5 de Septiembre, 18:00 hs</p>
-                            <p class="text-gray-300 text-sm">Sala de Talleres</p>
+                            <h4 class="font-semibold text-white">Taller Avanzado de Astrofotografía (Comunidad)</h4>
+                            <p class="text-gray-400 text-sm">5 de Septiembre, 18:00 hs - Sala de Talleres</p>
+                             <p class="text-gray-300 text-xs mt-1">Exclusivo para miembros del foro, con Mayra Schwarzschild.</p>
                         </div>
                         <div class="border-l-4 border-yellow-400 pl-4 py-2">
-                            <h4 class="font-semibold text-white">Proyecto: Mapeo Estelar</h4>
-                            <p class="text-gray-400">Todos los sábados, 19:00 hs</p>
-                            <p class="text-gray-300 text-sm">Laboratorio de Investigación</p>
+                            <h4 class="font-semibold text-white">Proyecto Ciudadano: Mapeo de Contaminación Lumínica</h4>
+                            <p class="text-gray-400 text-sm">Inicia el 15 de Septiembre - Participación online y local</p>
+                             <p class="text-gray-300 text-xs mt-1">Ayúdanos a medir y concienciar sobre la contaminación lumínica.</p>
+                        </div>
+                         <div class="border-l-4 border-yellow-400 pl-4 py-2">
+                            <h4 class="font-semibold text-white">Star Party Anual del Observatorio</h4>
+                            <p class="text-gray-400 text-sm">18 de Octubre, todo el día - Instalaciones del Observatorio</p>
+                             <p class="text-gray-300 text-xs mt-1">Charlas, talleres, música y observación masiva. ¡No te lo pierdas!</p>
                         </div>
                     </div>
                     
                     <div class="mt-8">
                         <h4 class="text-lg font-semibold mb-3 text-white">Beneficios de la Comunidad:</h4>
-                        <ul class="space-y-2">
-                            <li class="flex items-center text-gray-300">
-                                <i class="fas fa-check-circle text-green-400 mr-2"></i> Acceso a equipos especializados
-                            </li>
-                            <li class="flex items-center text-gray-300">
-                                <i class="fas fa-check-circle text-green-400 mr-2"></i> Descuentos en cursos y eventos
-                            </li>
-                            <li class="flex items-center text-gray-300">
-                                <i class="fas fa-check-circle text-green-400 mr-2"></i> Asesoramiento de expertos
-                            </li>
-                            <li class="flex items-center text-gray-300">
-                                <i class="fas fa-check-circle text-green-400 mr-2"></i> Participación en proyectos de investigación
-                            </li>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex items-center text-gray-300"><i class="fas fa-check-circle text-green-400 mr-2"></i> Acceso prioritario a equipos especializados durante encuentros.</li>
+                            <li class="flex items-center text-gray-300"><i class="fas fa-check-circle text-green-400 mr-2"></i> Descuentos exclusivos en cursos avanzados y eventos especiales.</li>
+                            <li class="flex items-center text-gray-300"><i class="fas fa-check-circle text-green-400 mr-2"></i> Asesoramiento personalizado de expertos en el foro.</li>
+                            <li class="flex items-center text-gray-300"><i class="fas fa-check-circle text-green-400 mr-2"></i> Oportunidad de participar en proyectos de investigación ciudadana.</li>
+                            <li class="flex items-center text-gray-300"><i class="fas fa-check-circle text-green-400 mr-2"></i> Networking con otros aficionados y profesionales de la astronomía.</li>
                         </ul>
                     </div>
                 </div>
@@ -894,216 +1422,226 @@
         </div>
     </section>
 
-    <!-- Sección Premium -->
-    <section id="premium" class="py-16 bg-gradient-to-br from-gray-900 to-indigo-900">
+    <section id="ia-stro" class="py-16 bg-gradient-to-br from-purple-900 to-indigo-900">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-16 section-title">Membresía Premium</h2>
+            <h2 class="text-3xl font-bold text-center mb-16 section-title">IA.STRO - Inteligencia Artificial Astronómica</h2>
             
-            <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
-                <div class="premium-card p-8">
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+                <div class="card p-8">
                     <div class="text-center mb-8">
-                        <h3 class="text-2xl font-bold text-white mb-2">Plan Premium</h3>
-                        <div class="text-4xl font-bold text-yellow-400">$10.000<span class="text-xl text-gray-400">/mes</span></div>
-                        <p class="text-gray-400">Por persona - Cancelación en cualquier momento</p>
+                        <div class="inline-block bg-blue-500 text-white p-4 rounded-full mb-4 shadow-lg">
+                            <i class="fas fa-robot text-4xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Exploración Cósmica con IA</h3>
+                        <p class="text-gray-300">Nuestra plataforma IA.STRO utiliza algoritmos de inteligencia artificial y machine learning para analizar datos astronómicos complejos, ayudando a generar nuevos insights sobre el universo que nos rodea.</p>
                     </div>
                     
                     <div class="space-y-6">
                         <div class="flex items-start">
-                            <div class="bg-yellow-400 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-check"></i>
-                            </div>
+                            <div class="bg-blue-500 text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0"><i class="fas fa-chart-line"></i></div>
                             <div>
-                                <h4 class="font-semibold text-white">Certificación Gratis</h4>
-                                <p class="text-gray-300">Certificados oficiales sin costo adicional en todos los cursos</p>
+                                <h4 class="font-semibold text-white">Análisis Avanzado de Datos</h4>
+                                <p class="text-gray-300 text-sm">Procesamos grandes volúmenes de datos de telescopios (surveys, espectros) para identificar patrones cósmicos, clasificar objetos y detectar anomalías.</p>
                             </div>
                         </div>
                         <div class="flex items-start">
-                            <div class="bg-yellow-400 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-check"></i>
-                            </div>
+                            <div class="bg-blue-500 text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0"><i class="fas fa-star"></i></div>
                             <div>
-                                <h4 class="font-semibold text-white">Acceso Ilimitado</h4>
-                                <p class="text-gray-300">Todos los cursos, materiales y recursos premium</p>
+                                <h4 class="font-semibold text-white">Descubrimiento Acelerado de Objetos</h4>
+                                <p class="text-gray-300 text-sm">Nuestros algoritmos ayudan a identificar candidatos a nuevos cuerpos celestes (exoplanetas, asteroides, supernovas distantes) y fenómenos astronómicos transitorios.</p>
                             </div>
                         </div>
                         <div class="flex items-start">
-                            <div class="bg-yellow-400 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-check"></i>
-                            </div>
+                            <div class="bg-blue-500 text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0"><i class="fas fa-image"></i></div>
                             <div>
-                                <h4 class="font-semibold text-white">Eventos Exclusivos</h4>
-                                <p class="text-gray-300">Acceso a webinars, charlas y encuentros con expertos</p>
+                                <h4 class="font-semibold text-white">Procesamiento Inteligente de Imágenes</h4>
+                                <p class="text-gray-300 text-sm">Mejoramos y analizamos imágenes astronómicas para revelar detalles sutiles, reducir ruido y automatizar la detección de características específicas.</p>
                             </div>
                         </div>
-                        <div class="flex items-start">
-                            <div class="bg-yellow-400 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-check"></i>
-                            </div>
+                         <div class="flex items-start">
+                            <div class="bg-blue-500 text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0"><i class="fas fa-cogs"></i></div>
                             <div>
-                                <h4 class="font-semibold text-white">Descuentos Especiales</h4>
-                                <p class="text-gray-300">20% de descuento en eventos presenciales y merchandising</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-yellow-400 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-white">Asesoramiento Prioritario</h4>
-                                <p class="text-gray-300">Soporte directo con nuestros expertos en astronomía</p>
+                                <h4 class="font-semibold text-white">Optimización de Observaciones</h4>
+                                <p class="text-gray-300 text-sm">IA.STRO puede ayudar a planificar y optimizar los tiempos de observación de nuestros telescopios para maximizar la recolección de datos científicos.</p>
                             </div>
                         </div>
                     </div>
                     
                     <button class="btn-primary w-full mt-8 py-3 rounded-full font-semibold">
-                        <i class="fas fa-rocket mr-2"></i>¡Quiero Ser Premium!
+                        <i class="fas fa-rocket mr-2"></i>Probar IA.STRO (Beta para Premium)
                     </button>
                 </div>
                 
-                <div class="premium-card p-8">
+                <div class="card p-8">
                     <div class="text-center mb-8">
-                        <h3 class="text-2xl font-bold text-white mb-2">Certificación Premium</h3>
-                        <p class="text-gray-300">Obtén tu certificado oficial al completar cualquier curso</p>
+                        <div class="inline-block bg-purple-500 text-white p-4 rounded-full mb-4 shadow-lg">
+                            <i class="fas fa-brain text-4xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Predicciones Cósmicas y Alertas</h3>
+                        <p class="text-gray-300">Nuestros modelos predictivos analizan trayectorias de objetos celestes, la probabilidad de eventos astronómicos y generan alertas tempranas para fenómenos de interés.</p>
                     </div>
                     
-                    <div class="certificate p-8 rounded-lg relative overflow-hidden">
-                        <div class="relative z-10 text-center">
-                            <div class="flex justify-center mb-6">
-                                <div class="bg-gray-900 border-2 border-yellow-400 rounded-full w-24 h-24 flex items-center justify-center">
-                                    <i class="fas fa-certificate text-yellow-400 text-4xl"></i>
-                                </div>
-                            </div>
-                            
-                            <h3 class="text-2xl font-bold text-yellow-400 mb-2">Certificado de Finalización</h3>
-                            <p class="text-white font-semibold">Observatorio de Física Cósmica de San Miguel</p>
-                            
-                            <div class="my-6 p-4 bg-gray-900 bg-opacity-50 rounded-lg">
-                                <p class="text-white">Otorgado a: <span class="font-semibold">[Nombre del Estudiante]</span></p>
-                                <p class="text-white">Por completar exitosamente el curso:</p>
-                                <p class="text-yellow-400 font-bold">Telescopios: Partes y Usos</p>
-                            </div>
-                            
-                            <div class="grid grid-cols-2 gap-4 mb-6">
-                                <div>
-                                    <p class="text-gray-400">Instructor</p>
-                                    <p class="text-white">Nicolás Balbi</p>
-                                </div>
-                                <div>
-                                    <p class="text-gray-400">Fecha</p>
-                                    <p class="text-white">25 de Agosto, 2025</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex justify-center space-x-4">
-                                <div class="bg-gray-800 p-4 rounded-lg">
-                                    <p class="text-gray-400">Código de Verificación</p>
-                                    <p class="text-yellow-400 font-mono">SM-2025-TP-8426</p>
-                                </div>
+                    <div class="bg-gray-800 rounded-xl p-6 mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="font-semibold text-white">Próximos Eventos Detectados por IA</h4>
+                            <span class="text-xs bg-yellow-400 text-gray-900 px-2 py-1 rounded">IA Predicción</span>
+                        </div>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-center"><div class="w-3 h-3 bg-green-400 rounded-full mr-3 animate-pulse"></div><div><p class="text-white">Lluvia de meteoros Oriónidas (Pico)</p><p class="text-gray-400 text-xs">21-22 Octubre 2025 - Alta probabilidad de visibilidad</p></div></li>
+                            <li class="flex items-center"><div class="w-3 h-3 bg-purple-400 rounded-full mr-3 animate-pulse"></div><div><p class="text-white">Máxima aproximación de Marte</p><p class="text-gray-400 text-xs">8 Diciembre 2025 - Magnitud aparente: -1.9</p></div></li>
+                            <li class="flex items-center"><div class="w-3 h-3 bg-blue-400 rounded-full mr-3 animate-pulse"></div><div><p class="text-white">Eclipse lunar parcial (Visible en Sudamérica)</p><p class="text-gray-400 text-xs">28 Agosto 2025 - Inicio: 22:45 UTC</p></div></li>
+                             <li class="flex items-center"><div class="w-3 h-3 bg-red-400 rounded-full mr-3 animate-pulse"></div><div><p class="text-white">Posible outburst Cometa C/2025 X1</p><p class="text-gray-400 text-xs">Predicción: Noviembre 2025 - Incertidumbre media</p></div></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-800 rounded-xl p-6">
+                        <h4 class="font-semibold text-white mb-4">Objeto Celeste del Día (Sugerido por IA)</h4>
+                        <div class="flex items-center">
+                            <div class="bg-gray-700 w-16 h-16 rounded-lg mr-4 flex items-center justify-center shadow-md"><i class="fas fa-atom text-3xl text-yellow-400"></i></div>
+                            <div>
+                                <p class="text-white font-semibold">Nebulosa del Cangrejo (M1)</p>
+                                <p class="text-gray-400 text-sm">Visibilidad óptima esta noche en Tauro. Remanente de supernova SN 1054.</p>
+                                <a href="#" class="text-xs text-blue-400 hover:underline">Más información con IA.STRO</a>
                             </div>
                         </div>
                     </div>
-                    
-                    <p class="text-gray-400 text-center mt-6">Los miembros Premium reciben certificados digitales verificables al completar cualquier curso sin costo adicional.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección de Descargas -->
-    <section id="downloads" class="py-16">
+    <section id="premium" class="py-16 bg-gradient-to-br from-gray-900 to-indigo-900">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-16 section-title">Centro de Descargas</h2>
+            <h2 class="text-3xl font-bold text-center mb-16 section-title">Membresía Premium Cosmos Dorado</h2>
+            
+            <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-stretch"> <div class="premium-card p-8 flex flex-col"> <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-white mb-2">Plan Cosmos Dorado</h3>
+                        <div class="text-4xl font-bold text-yellow-400">$10.000<span class="text-xl text-gray-400">/mes</span></div>
+                        <p class="text-gray-400 text-sm">Por persona - Cancelación en cualquier momento sin compromiso.</p>
+                    </div>
+                    
+                    <div class="space-y-4 flex-grow"> <div class="flex items-start"><div class="bg-yellow-400 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0"><i class="fas fa-check"></i></div><div><h4 class="font-semibold text-white">Certificación Gratis y Oficial</h4><p class="text-gray-300 text-sm">Certificados digitales oficiales sin costo adicional en todos nuestros cursos completados.</p></div></div>
+                        <div class="flex items-start"><div class="bg-yellow-400 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0"><i class="fas fa-check"></i></div><div><h4 class="font-semibold text-white">Acceso Ilimitado a Contenidos</h4><p class="text-gray-300 text-sm">Todos los cursos, materiales de estudio, grabaciones de webinars y recursos premium.</p></div></div>
+                        <div class="flex items-start"><div class="bg-yellow-400 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0"><i class="fas fa-check"></i></div><div><h4 class="font-semibold text-white">Eventos Exclusivos Premium</h4><p class="text-gray-300 text-sm">Acceso prioritario y gratuito a webinars,charlas magistrales y encuentros online con expertos de renombre.</p></div></div>
+                        <div class="flex items-start"><div class="bg-yellow-400 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0"><i class="fas fa-check"></i></div><div><h4 class="font-semibold text-white">Descuentos Especiales</h4><p class="text-gray-300 text-sm">20% de descuento en eventos presenciales especiales, merchandising y talleres avanzados.</p></div></div>
+                        <div class="flex items-start"><div class="bg-yellow-400 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0"><i class="fas fa-check"></i></div><div><h4 class="font-semibold text-white">Soporte y Asesoramiento Prioritario</h4><p class="text-gray-300 text-sm">Consultas directas y soporte prioritario con nuestros expertos en astronomía a través del foro premium.</p></div></div>
+                        <div class="flex items-start"><div class="bg-yellow-400 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0"><i class="fas fa-check"></i></div><div><h4 class="font-semibold text-white">Acceso Beta a IA.STRO</h4><p class="text-gray-300 text-sm">Prueba las nuevas funcionalidades de nuestra plataforma IA.STRO antes que nadie.</p></div></div>
+                    </div>
+                    
+                    <button class="btn-primary w-full mt-8 py-3 rounded-full font-semibold">
+                        <i class="fas fa-rocket mr-2"></i>¡Quiero Ser Cosmos Dorado!
+                    </button>
+                </div>
+                
+                <div class="premium-card p-8 flex flex-col justify-between"> <div>
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">Tu Certificación Premium</h3>
+                            <p class="text-gray-300 text-sm">Obtén tu certificado digital oficial y verificable al completar cualquier curso siendo miembro Cosmos Dorado.</p>
+                        </div>
+                        
+                        <div class="certificate p-6 sm:p-8 rounded-lg relative overflow-hidden shadow-2xl">
+                            <div class="relative z-10 text-center">
+                                <div class="flex justify-center mb-4 sm:mb-6">
+                                    <div class="bg-gray-900 bg-opacity-75 border-2 border-yellow-400 rounded-full w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center shadow-lg"><i class="fas fa-certificate text-yellow-400 text-3xl sm:text-4xl"></i></div>
+                                </div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-yellow-400 mb-1">Certificado de Finalización</h3>
+                                <p class="text-white font-semibold text-sm sm:text-base">Observatorio de Física Cósmica de San Miguel</p>
+                                
+                                <div class="my-4 sm:my-6 p-3 sm:p-4 bg-gray-900 bg-opacity-60 rounded-lg text-xs sm:text-sm">
+                                    <p class="text-white">Otorgado a: <span class="font-semibold">[Nombre del Estudiante Premium]</span></p>
+                                    <p class="text-white mt-1">Por completar exitosamente el curso:</p>
+                                    <p class="text-yellow-400 font-bold mt-1">Telescopios: Partes y Usos Avanzados</p>
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-2 sm:gap-4 mb-4 sm:mb-6 text-xs sm:text-sm">
+                                    <div><p class="text-gray-400">Instructor Principal</p><p class="text-white font-medium">Nicolás Balbi</p></div>
+                                    <div><p class="text-gray-400">Fecha de Emisión</p><p class="text-white font-medium">25 de Agosto, 2025</p></div>
+                                </div>
+                                <div class="flex justify-center">
+                                    <div class="bg-gray-800 bg-opacity-75 p-3 rounded-lg text-xs sm:text-sm"><p class="text-gray-400">Código de Verificación Único</p><p class="text-yellow-400 font-mono tracking-wider">SM-2025-TP-8426-PREMIUM</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-center text-xs sm:text-sm mt-6">Los certificados son verificables online y pueden añadirse a perfiles profesionales como LinkedIn.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="descargas" class="py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-16 section-title">Centro de Descargas y Contribuciones</h2>
             
             <div class="download-section">
-                <div class="grid md:grid-cols-2 gap-8">
+                <div class="grid md:grid-cols-2 gap-8 items-start">
                     <div>
-                        <h3 class="text-2xl font-bold text-yellow-400 mb-6">Subir Trabajos</h3>
-                        <div class="p-6 bg-gray-800 rounded-lg">
+                        <h3 class="text-2xl font-bold text-yellow-400 mb-6"><i class="fas fa-upload mr-2"></i>Sube Tus Trabajos e Investigaciones</h3>
+                        <div class="p-6 bg-gray-800 rounded-lg shadow-lg">
+                            <p class="text-gray-300 mb-4 text-sm">Comparte tus investigaciones, papers, presentaciones o proyectos de astrofotografía con la comunidad. Los trabajos seleccionados podrán ser destacados.</p>
                             <div class="mb-4">
-                                <label class="block text-gray-300 mb-2">Título del trabajo</label>
-                                <input type="text" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-yellow-400">
+                                <label for="work-title" class="block text-gray-300 mb-2 text-sm">Título del trabajo</label>
+                                <input type="text" id="work-title" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-yellow-400 placeholder-gray-500" placeholder="Ej: Análisis espectral de Betelgeuse">
                             </div>
                             <div class="mb-4">
-                                <label class="block text-gray-300 mb-2">Descripción</label>
-                                <textarea class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-yellow-400" rows="3"></textarea>
+                                <label for="work-description" class="block text-gray-300 mb-2 text-sm">Breve Descripción</label>
+                                <textarea id="work-description" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-yellow-400 placeholder-gray-500" rows="3" placeholder="Resumen del contenido y metodología..."></textarea>
                             </div>
                             <div class="mb-4">
-                                <label class="block text-gray-300 mb-2">Archivo (PDF, PPT, DOC)</label>
+                                <label for="work-file" class="block text-gray-300 mb-2 text-sm">Archivo (PDF, PPT, DOC, JPG, PNG - Máx 10MB)</label>
                                 <div class="flex items-center justify-center w-full">
-                                    <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer border-gray-600 hover:border-yellow-400">
+                                    <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer border-gray-600 hover:border-yellow-400 bg-gray-700 hover:bg-gray-600 transition">
                                         <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                             <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
-                                            <p class="text-sm text-gray-400">Haz clic para subir o arrastra un archivo</p>
+                                            <p class="text-sm text-gray-400"><span class="font-semibold">Haz clic para subir</span> o arrastra un archivo</p>
+                                            <p class="text-xs text-gray-500">Formatos soportados: PDF, PPT, DOC, JPG, PNG</p>
                                         </div>
-                                        <input type="file" class="hidden" />
+                                        <input id="work-file" type="file" class="hidden" />
                                     </label>
                                 </div>
                             </div>
-                            <button class="w-full btn-primary px-4 py-2 rounded-full font-semibold">
-                                <i class="fas fa-upload mr-2"></i>Subir Trabajo
+                            <button class="w-full btn-primary px-4 py-3 rounded-full font-semibold">
+                                <i class="fas fa-paper-plane mr-2"></i>Enviar Contribución
                             </button>
                         </div>
                     </div>
                     
                     <div>
-                        <h3 class="text-2xl font-bold text-yellow-400 mb-6">Descargar Investigaciones</h3>
+                        <h3 class="text-2xl font-bold text-yellow-400 mb-6"><i class="fas fa-download mr-2"></i>Descarga Investigaciones y Recursos</h3>
                         
                         <div class="space-y-4">
                             <div class="file-card">
-                                <div class="flex items-center mb-3">
-                                    <i class="fas fa-file-pdf text-2xl text-red-500 mr-3"></i>
-                                    <div>
-                                        <h4 class="font-semibold text-white">La Evolución de los Telescopios Espaciales</h4>
-                                        <p class="text-gray-400 text-sm">Por Nicolás Balbi · 15 Ago 2025</p>
-                                    </div>
-                                </div>
-                                <p class="text-gray-300 mb-4">Análisis histórico y técnico del desarrollo de telescopios espaciales desde el Hubble hasta el James Webb.</p>
-                                <div class="flex justify-between">
-                                    <span class="text-gray-400 text-sm">PDF · 4.2 MB</span>
-                                    <button class="text-yellow-400 hover:text-yellow-300">
-                                        <i class="fas fa-download mr-1"></i>Descargar
-                                    </button>
-                                </div>
+                                <div class="flex items-center mb-3"><i class="fas fa-file-pdf text-2xl text-red-500 mr-3"></i><div><h4 class="font-semibold text-white">La Evolución de los Telescopios Espaciales</h4><p class="text-gray-400 text-xs">Por Nicolás Balbi · 15 Ago 2025</p></div></div>
+                                <p class="text-gray-300 mb-4 text-sm">Análisis histórico y técnico del desarrollo de telescopios espaciales desde el Hubble hasta el James Webb.</p>
+                                <div class="flex justify-between items-center"><span class="text-gray-400 text-xs">PDF · 4.2 MB · 150 descargas</span><button class="text-yellow-400 hover:text-yellow-300 text-sm font-semibold"><i class="fas fa-download mr-1"></i>Descargar</button></div>
                             </div>
                             
                             <div class="file-card">
-                                <div class="flex items-center mb-3">
-                                    <i class="fas fa-file-powerpoint text-2xl text-orange-500 mr-3"></i>
-                                    <div>
-                                        <h4 class="font-semibold text-white">Técnicas Modernas de Astrofotografía</h4>
-                                        <p class="text-gray-400 text-sm">Por Mayra Schwarzschild · 10 Ago 2025</p>
-                                    </div>
-                                </div>
-                                <p class="text-gray-300 mb-4">Presentación detallada sobre métodos avanzados de astrofotografía y procesamiento de imágenes.</p>
-                                <div class="flex justify-between">
-                                    <span class="text-gray-400 text-sm">PPTX · 8.7 MB</span>
-                                    <button class="text-yellow-400 hover:text-yellow-300">
-                                        <i class="fas fa-download mr-1"></i>Descargar
-                                    </button>
-                                </div>
+                                <div class="flex items-center mb-3"><i class="fas fa-file-powerpoint text-2xl text-orange-500 mr-3"></i><div><h4 class="font-semibold text-white">Técnicas Modernas de Astrofotografía de Cielo Profundo</h4><p class="text-gray-400 text-xs">Por Mayra Schwarzschild · 10 Ago 2025</p></div></div>
+                                <p class="text-gray-300 mb-4 text-sm">Presentación detallada sobre métodos avanzados de astrofotografía, apilado y procesamiento de imágenes de nebulosas y galaxias.</p>
+                                <div class="flex justify-between items-center"><span class="text-gray-400 text-xs">PPTX · 8.7 MB · 230 descargas</span><button class="text-yellow-400 hover:text-yellow-300 text-sm font-semibold"><i class="fas fa-download mr-1"></i>Descargar</button></div>
                             </div>
                             
                             <div class="file-card">
-                                <div class="flex items-center mb-3">
-                                    <i class="fas fa-file-word text-2xl text-blue-500 mr-3"></i>
-                                    <div>
-                                        <h4 class="font-semibold text-white">Arqueoastronomía en América Precolombina</h4>
-                                        <p class="text-gray-400 text-sm">Por Bella Vista al Cosmos · 5 Ago 2025</p>
-                                    </div>
-                                </div>
-                                <p class="text-gray-300 mb-4">Estudio sobre los conocimientos astronómicos de las civilizaciones precolombinas y sus observatorios.</p>
-                                <div class="flex justify-between">
-                                    <span class="text-gray-400 text-sm">DOCX · 3.1 MB</span>
-                                    <button class="text-yellow-400 hover:text-yellow-300">
-                                        <i class="fas fa-download mr-1"></i>Descargar
-                                    </button>
-                                </div>
+                                <div class="flex items-center mb-3"><i class="fas fa-file-word text-2xl text-blue-500 mr-3"></i><div><h4 class="font-semibold text-white">Arqueoastronomía en América Precolombina: Un Estudio de Caso</h4><p class="text-gray-400 text-xs">Por Bella Vista al Cosmos · 5 Ago 2025</p></div></div>
+                                <p class="text-gray-300 mb-4 text-sm">Estudio sobre los conocimientos astronómicos de las civilizaciones precolombinas y sus observatorios, con foco en la cultura Moche.</p>
+                                <div class="flex justify-between items-center"><span class="text-gray-400 text-xs">DOCX · 3.1 MB · 95 descargas</span><button class="text-yellow-400 hover:text-yellow-300 text-sm font-semibold"><i class="fas fa-download mr-1"></i>Descargar</button></div>
+                            </div>
+                             <div class="file-card">
+                                <div class="flex items-center mb-3"><i class="fas fa-atlas text-2xl text-green-500 mr-3"></i><div><h4 class="font-semibold text-white">Atlas Estelar del Hemisferio Sur para Principiantes</h4><p class="text-gray-400 text-xs">Observatorio San Miguel · 1 Sep 2025</p></div></div>
+                                <p class="text-gray-300 mb-4 text-sm">Una guía visual con mapas estelares y descripciones de las principales constelaciones y objetos visibles desde el sur.</p>
+                                <div class="flex justify-between items-center"><span class="text-gray-400 text-xs">PDF · 12.5 MB · 500+ descargas</span><button class="text-yellow-400 hover:text-yellow-300 text-sm font-semibold"><i class="fas fa-download mr-1"></i>Descargar</button></div>
+                            </div>
+                             <div class="file-card">
+                                <div class="flex items-center mb-3"><i class="fas fa-journal-whills text-2xl text-purple-400 mr-3"></i><div><h4 class="font-semibold text-white">Guía Práctica para la Observación de Lluvias de Meteoros</h4><p class="text-gray-400 text-xs">Equipo de Divulgación OSM · 20 Jul 2025</p></div></div>
+                                <p class="text-gray-300 mb-4 text-sm">Consejos, trucos y calendarios para aprovechar al máximo las lluvias de meteoros más importantes del año.</p>
+                                <div class="flex justify-between items-center"><span class="text-gray-400 text-xs">PDF · 2.1 MB · 310 descargas</span><button class="text-yellow-400 hover:text-yellow-300 text-sm font-semibold"><i class="fas fa-download mr-1"></i>Descargar</button></div>
                             </div>
                         </div>
                         
                         <div class="text-center mt-6">
-                            <button class="text-yellow-400 hover:text-yellow-300 font-semibold">
-                                <i class="fas fa-arrow-down mr-2"></i>Ver más investigaciones
+                            <button class="text-yellow-400 hover:text-yellow-300 font-semibold text-sm">
+                                <i class="fas fa-archive mr-2"></i>Ver todos los archivos y recursos
                             </button>
                         </div>
                     </div>
@@ -1111,207 +1649,249 @@
             </div>
         </div>
     </section>
+    
+    <section id="testimonios" class="py-16 bg-gray-900 bg-opacity-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-16 section-title">Voces de Nuestra Comunidad</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card p-6 text-center">
+                    <img src="https://via.placeholder.com/80x80.png?text=L.G." alt="Testimonio 1" class="w-20 h-20 rounded-full mx-auto mb-4 border-2 border-yellow-400">
+                    <p class="text-gray-300 italic mb-4">"El curso de Astrofotografía superó mis expectativas. Mayra es una instructora fantástica y ahora puedo capturar la Vía Láctea como siempre soñé."</p>
+                    <h4 class="text-white font-semibold">Laura Gómez</h4>
+                    <p class="text-yellow-400 text-sm">Estudiante, Curso de Astrofotografía</p>
+                </div>
+                <div class="card p-6 text-center">
+                    <img src="https://via.placeholder.com/80x80.png?text=C.M." alt="Testimonio 2" class="w-20 h-20 rounded-full mx-auto mb-4 border-2 border-yellow-400">
+                    <p class="text-gray-300 italic mb-4">"Las noches de observación en el observatorio son mágicas. El equipo es de primera y los voluntarios siempre están dispuestos a explicar y compartir su pasión."</p>
+                    <h4 class="text-white font-semibold">Carlos Méndez</h4>
+                    <p class="text-yellow-400 text-sm">Visitante Frecuente</p>
+                </div>
+                <div class="card p-6 text-center">
+                     <img src="https://via.placeholder.com/80x80.png?text=A.R." alt="Testimonio 3" class="w-20 h-20 rounded-full mx-auto mb-4 border-2 border-yellow-400">
+                    <p class="text-gray-300 italic mb-4">"Gracias al curso de Telescopios, por fin entiendo cómo funciona mi equipo y le estoy sacando mucho más provecho. ¡Totalmente recomendado!"</p>
+                    <h4 class="text-white font-semibold">Ana Rodríguez</h4>
+                    <p class="text-yellow-400 text-sm">Estudiante, Curso de Telescopios</p>
+                </div>
+                 <div class="card p-6 text-center">
+                     <img src="https://via.placeholder.com/80x80.png?text=J.P." alt="Testimonio 4" class="w-20 h-20 rounded-full mx-auto mb-4 border-2 border-yellow-400">
+                    <p class="text-gray-300 italic mb-4">"La membresía Premium vale cada peso. El acceso a los cursos y los eventos exclusivos son geniales. La comunidad del foro es muy activa y solidaria."</p>
+                    <h4 class="text-white font-semibold">Javier Pérez</h4>
+                    <p class="text-yellow-400 text-sm">Miembro Premium Cosmos Dorado</p>
+                </div>
+                 <div class="card p-6 text-center">
+                     <img src="https://via.placeholder.com/80x80.png?text=S.V." alt="Testimonio 5" class="w-20 h-20 rounded-full mx-auto mb-4 border-2 border-yellow-400">
+                    <p class="text-gray-300 italic mb-4">"Mis hijos adoraron el taller de astronomía para niños. Aprendieron muchísimo y se divirtieron. ¡Volveremos!"</p>
+                    <h4 class="text-white font-semibold">Sofía Vargas</h4>
+                    <p class="text-yellow-400 text-sm">Madre de Participantes del Taller Infantil</p>
+                </div>
+                 <div class="card p-6 text-center">
+                     <img src="https://via.placeholder.com/80x80.png?text=M.B." alt="Testimonio 6" class="w-20 h-20 rounded-full mx-auto mb-4 border-2 border-yellow-400">
+                    <p class="text-gray-300 italic mb-4">"La charla sobre Agujeros Negros del Dr. Balbi fue espectacular. Explicaciones claras y fascinantes. Un lujo tener este nivel de divulgación."</p>
+                    <h4 class="text-white font-semibold">Martín Benítez</h4>
+                    <p class="text-yellow-400 text-sm">Asistente a Charla Magistral</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Sección de Contacto -->
+    <section id="faq" class="py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-16 section-title">Preguntas Frecuentes</h2>
+            <div class="max-w-3xl mx-auto space-y-4">
+                <details class="faq-item group">
+                    <summary class="font-semibold text-white text-lg group-hover:text-yellow-400">
+                        ¿Necesito tener mi propio telescopio para visitar el observatorio o tomar cursos?
+                    </summary>
+                    <div class="text-gray-300 mt-2">
+                        No es necesario. Para las visitas y noches de observación, proveemos telescopios. Para los cursos, algunos son teóricos y otros prácticos; en los prácticos, tener tu propio equipo puede ser beneficioso para aplicar lo aprendido, pero no es un requisito indispensable para comenzar. De hecho, nuestro curso "Telescopios: Partes y Usos" está diseñado para ayudarte a elegir uno si estás pensando en comprar.
+                    </div>
+                </details>
+                <details class="faq-item group">
+                    <summary class="font-semibold text-white text-lg group-hover:text-yellow-400">
+                        ¿Los eventos de observación se suspenden por mal tiempo?
+                    </summary>
+                    <div class="text-gray-300 mt-2">
+                        Sí, la observación astronómica depende de cielos despejados. En caso de nubosidad total o lluvia, los eventos de observación al aire libre suelen reprogramarse o reemplazarse por una actividad alternativa bajo techo (charla, taller express, visita guiada especial). Recomendamos revisar nuestras redes sociales o contactarnos unas horas antes del evento si el clima es dudoso.
+                    </div>
+                </details>
+                <details class="faq-item group">
+                    <summary class="font-semibold text-white text-lg group-hover:text-yellow-400">
+                        ¿Cómo me inscribo a un curso o evento?
+                    </summary>
+                    <div class="text-gray-300 mt-2">
+                        Para los eventos, generalmente encontrarás un botón de "Inscribirse" o "Reservar" en la descripción del evento en nuestra web, que te llevará a un formulario o plataforma de inscripción. Para los cursos, el botón "Ver Detalles" te llevará a una página con más información y la opción de inscripción. Algunos eventos gratuitos pueden no requerir inscripción previa, pero siempre es bueno verificar.
+                    </div>
+                </details>
+                 <details class="faq-item group">
+                    <summary class="font-semibold text-white text-lg group-hover:text-yellow-400">
+                        ¿Qué beneficios obtengo con la membresía Premium "Cosmos Dorado"?
+                    </summary>
+                    <div class="text-gray-300 mt-2">
+                        La membresía Cosmos Dorado ofrece múltiples ventajas, como certificación gratuita en todos los cursos, acceso ilimitado a todos los contenidos y materiales, participación en eventos exclusivos online, descuentos en eventos presenciales y merchandising, soporte prioritario y acceso beta a nuestra plataforma IA.STRO. Puedes ver todos los detalles en la sección <a href="#premium" class="text-yellow-400 hover:underline">Premium</a>.
+                    </div>
+                </details>
+                <details class="faq-item group">
+                    <summary class="font-semibold text-white text-lg group-hover:text-yellow-400">
+                        ¿El observatorio es accesible para personas con movilidad reducida?
+                    </summary>
+                    <div class="text-gray-300 mt-2">
+                        Sí, nos esforzamos por ser un espacio inclusivo. Contamos con rampas de acceso a las áreas principales, incluyendo el auditorio y algunas plataformas de observación. Recomendamos contactarnos con anticipación si tienes necesidades específicas para que podamos asegurar la mejor experiencia posible durante tu visita.
+                    </div>
+                </details>
+                 <details class="faq-item group">
+                    <summary class="font-semibold text-white text-lg group-hover:text-yellow-400">
+                        ¿Puedo llevar a mis hijos a las actividades? ¿Hay edad mínima?
+                    </summary>
+                    <div class="text-gray-300 mt-2">
+                        ¡Absolutamente! Fomentamos la participación familiar. Muchas de nuestras noches de observación y charlas son aptas para todas las edades. Además, ofrecemos talleres específicos para niños y adolescentes. Para eventos o cursos más técnicos, puede haber una edad mínima sugerida, la cual se indicará en la descripción del evento/curso. Siempre es bueno consultar si tienes dudas.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+    
+    <section id="equipo" class="py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-16 section-title">Nuestro Equipo Apasionado</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card p-6 text-center">
+                    <img src="https://via.placeholder.com/120x120.png?text=N.Balbi" alt="Dr. Nicolás Balbi" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-yellow-400 shadow-lg">
+                    <h3 class="text-xl font-semibold text-white">Dr. Nicolás Balbi</h3>
+                    <p class="text-yellow-400 mb-2">Director y Astrónomo Principal</p>
+                    <p class="text-gray-300 text-sm">Experto en instrumentación astronómica y divulgador científico. Apasionado por acercar los misterios del cosmos a todos.</p>
+                    <div class="mt-4 space-x-3">
+                        <a href="#" class="text-gray-400 hover:text-yellow-300"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-yellow-300"><i class="fas fa-envelope fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="card p-6 text-center">
+                    <img src="https://via.placeholder.com/120x120.png?text=M.Schwarz" alt="Mayra Schwarzschild" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-yellow-400 shadow-lg">
+                    <h3 class="text-xl font-semibold text-white">Mayra Schwarzschild</h3>
+                    <p class="text-yellow-400 mb-2">Coordinadora de Astrofotografía</p>
+                    <p class="text-gray-300 text-sm">Astrofotógrafa galardonada y educadora. Dedicada a enseñar el arte de capturar la belleza del universo.</p>
+                     <div class="mt-4 space-x-3">
+                        <a href="#" class="text-gray-400 hover:text-yellow-300"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-yellow-300"><i class="fas fa-envelope fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="card p-6 text-center">
+                    <img src="https://via.placeholder.com/120x120.png?text=B.Vista" alt="Bella Vista al Cosmos" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-yellow-400 shadow-lg">
+                    <h3 class="text-xl font-semibold text-white">Bella Vista al Cosmos</h3>
+                    <p class="text-yellow-400 mb-2">Investigadora en Astrofísica</p>
+                    <p class="text-gray-300 text-sm">Especialista en astrofísica teórica y cosmología. Entusiasta de compartir los últimos descubrimientos científicos.</p>
+                     <div class="mt-4 space-x-3">
+                        <a href="#" class="text-gray-400 hover:text-yellow-300"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-yellow-300"><i class="fas fa-envelope fa-lg"></i></a>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </section>
+
+
     <section id="contacto" class="py-16">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-16 section-title">Contacto</h2>
+            <h2 class="text-3xl font-bold text-center mb-16 section-title">Ponte en Contacto</h2>
             
             <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
                 <div class="card p-8">
-                    <h3 class="text-2xl font-bold mb-6 text-white">Información de Contacto</h3>
-                    
-                    <div class="space-y-6">
+                    <h3 class="text-2xl font-bold mb-6 text-white"><i class="fas fa-info-circle mr-2 text-yellow-400"></i>Información de Contacto</h3>
+                    <div class="space-y-5">
                         <div class="flex items-start">
-                            <div class="bg-yellow-400 text-gray-900 w-10 h-10 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-white">Dirección</h4>
-                                <p class="text-gray-300">Av. Balbastro 1234, San Miguel</p>
-                                <p class="text-gray-300">Buenos Aires, Argentina</p>
-                            </div>
+                            <div class="bg-yellow-400 text-gray-900 w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0"><i class="fas fa-map-marker-alt"></i></div>
+                            <div><h4 class="font-semibold text-white">Dirección</h4><p class="text-gray-300 text-sm">Av. Balbastro 1234, San Miguel, Buenos Aires, Argentina.</p></div>
                         </div>
                         <div class="flex items-start">
-                            <div class="bg-yellow-400 text-gray-900 w-10 h-10 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-white">Teléfono</h4>
-                                <p class="text-gray-300">(011) 1527652386</p>
-                            </div>
+                            <div class="bg-yellow-400 text-gray-900 w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0"><i class="fas fa-phone"></i></div>
+                            <div><h4 class="font-semibold text-white">Teléfono</h4><p class="text-gray-300 text-sm">(011) 1527652386 (Consultas y reservas)</p></div>
                         </div>
                         <div class="flex items-start">
-                            <div class="bg-yellow-400 text-gray-900 w-10 h-10 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-white">Email</h4>
-                                <p class="text-gray-300">mobsm1935@gmail.com</p>
-                            </div>
+                            <div class="bg-yellow-400 text-gray-900 w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0"><i class="fas fa-envelope"></i></div>
+                            <div><h4 class="font-semibold text-white">Email Principal</h4><p class="text-gray-300 text-sm">mobsm1935@gmail.com</p></div>
+                        </div>
+                         <div class="flex items-start">
+                            <div class="bg-yellow-400 text-gray-900 w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0"><i class="fas fa-users"></i></div>
+                            <div><h4 class="font-semibold text-white">Consultas de Cursos</h4><p class="text-gray-300 text-sm">cursos.osm@example.com</p></div>
                         </div>
                         <div class="flex items-start">
-                            <div class="bg-yellow-400 text-gray-900 w-10 h-10 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-white">Horario</h4>
-                                <p class="text-gray-300">Martes a Domingo: 16:00 - 22:00</p>
-                                <p class="text-gray-300">Lunes: Cerrado</p>
-                            </div>
+                            <div class="bg-yellow-400 text-gray-900 w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0"><i class="fas fa-clock"></i></div>
+                            <div><h4 class="font-semibold text-white">Horario de Atención Telefónica</h4><p class="text-gray-300 text-sm">Martes a Sábado: 10:00 - 18:00 hs.</p></div>
                         </div>
                     </div>
-                    
-                    <div class="mt-8">
-                        <h4 class="text-lg font-semibold mb-4 text-white">Síguenos</h4>
-                        <div class="flex space-x-4">
-                            <a href="#" class="bg-gray-800 text-yellow-400 w-12 h-12 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-gray-900 transition">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="bg-gray-800 text-yellow-400 w-12 h-12 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-gray-900 transition">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" class="bg-gray-800 text-yellow-400 w-12 h-12 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-gray-900 transition">
-                                <i class="fab fa-youtube"></i>
-                            </a>
-                            <a href="#" class="bg-gray-800 text-yellow-400 w-12 h-12 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-gray-900 transition">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </div>
+                     <div class="mt-8 flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-yellow-300 transition duration-300"><i class="fab fa-facebook-f fa-2x"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-yellow-300 transition duration-300"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-yellow-300 transition duration-300"><i class="fab fa-twitter fa-2x"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-yellow-300 transition duration-300"><i class="fab fa-youtube fa-2x"></i></a>
                     </div>
                 </div>
                 
                 <div class="card p-8">
-                    <h3 class="text-2xl font-bold mb-6 text-white">Envía un Mensaje</h3>
-                    
-                    <form class="space-y-4">
+                    <h3 class="text-2xl font-bold mb-6 text-white"><i class="fas fa-paper-plane mr-2 text-yellow-400"></i>Envíanos un Mensaje</h3>
+                    <form id="contact-form" class="space-y-5">
                         <div>
-                            <label class="block text-gray-300 mb-2">Nombre</label>
-                            <input type="text" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-400">
+                            <label for="name" class="block text-gray-300 mb-1 text-sm">Nombre Completo</label>
+                            <input type="text" id="name" name="name" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-yellow-400 placeholder-gray-500" placeholder="Tu nombre y apellido">
                         </div>
                         <div>
-                            <label class="block text-gray-300 mb-2">Email</label>
-                            <input type="email" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-400">
+                            <label for="email" class="block text-gray-300 mb-1 text-sm">Correo Electrónico</label>
+                            <input type="email" id="email" name="email" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-yellow-400 placeholder-gray-500" placeholder="tuemail@example.com">
                         </div>
                         <div>
-                            <label class="block text-gray-300 mb-2">Asunto</label>
-                            <select class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-400">
-                                <option>Información sobre cursos</option>
-                                <option>Consulta sobre eventos</option>
-                                <option>Membresía Premium</option>
-                                <option>Visitas grupales</option>
+                            <label for="subject" class="block text-gray-300 mb-1 text-sm">Asunto</label>
+                            <select id="subject" name="subject" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-yellow-400">
+                                <option>Consulta General</option>
+                                <option>Información sobre Cursos</option>
+                                <option>Inscripción a Eventos</option>
+                                <option>Sugerencias</option>
+                                <option>Problemas con el Sitio Web</option>
                                 <option>Otro</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-gray-300 mb-2">Mensaje</label>
-                            <textarea rows="4" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-400"></textarea>
+                            <label for="message" class="block text-gray-300 mb-1 text-sm">Mensaje</label>
+                            <textarea id="message" name="message" rows="5" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-yellow-400 placeholder-gray-500" placeholder="Escribe tu consulta aquí..."></textarea>
                         </div>
-                        <button type="submit" class="btn-primary w-full py-3 rounded-full font-semibold mt-4">
-                            <i class="fas fa-paper-plane mr-2"></i>Enviar Mensaje
-                        </button>
+                        <div class="flex items-center">
+                            <input id="accept-terms" name="accept-terms" type="checkbox" required class="h-4 w-4 text-yellow-400 border-gray-600 rounded focus:ring-yellow-500 bg-gray-700">
+                            <label for="accept-terms" class="ml-2 block text-sm text-gray-300">Acepto los <a href="#" class="text-yellow-400 hover:underline">términos y condiciones</a> de contacto.</label>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full btn-primary px-6 py-3 rounded-full font-semibold">
+                                <i class="fas fa-envelope-open-text mr-2"></i>Enviar Mensaje
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pie de página -->
-    <footer class="py-12 bg-gray-900 bg-opacity-80 border-t border-gray-800">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-xl font-semibold mb-4 text-white">
-                        <i class="fas fa-satellite mr-2 text-yellow-400"></i>Observatorio San Miguel
-                    </h3>
-                    <p class="text-gray-400 mb-4">
-                        Dedicados a la investigación y divulgación de la física cósmica y astronomía. Explorando los misterios del universo desde San Miguel al cosmos.
-                    </p>
-                    <div class="flex space-x-3">
-                        <a href="#" class="text-gray-400 hover:text-yellow-400">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-yellow-400">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-yellow-400">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-yellow-400">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 text-white">Cursos</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-yellow-400">Telescopios: Partes y Usos</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-yellow-400">Astrofotografía</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-yellow-400">Astronomía Cultural</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-yellow-400">Óptica Aplicada</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-yellow-400">Astrofísica</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-yellow-400">Arqueoastronomía</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 text-white">Enlaces Rápidos</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#eventos" class="text-gray-400 hover:text-yellow-400">Eventos</a></li>
-                        <li><a href="#ubicacion" class="text-gray-400 hover:text-yellow-400">Ubicación</a></li>
-                        <li><a href="#cursos" class="text-gray-400 hover:text-yellow-400">Cursos</a></li>
-                        <li><a href="#calendario" class="text-gray-400 hover:text-yellow-400">Calendario</a></li>
-                        <li><a href="#comunidad" class="text-gray-400 hover:text-yellow-400">Foro</a></li>
-                        <li><a href="#premium" class="text-gray-400 hover:text-yellow-400">Premium</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 text-white">Certificadores</h3>
-                    <ul class="space-y-2">
-                        <li class="text-gray-400">Bella Vista al Cosmos</li>
-                        <li class="text-gray-400">Nicolás Balbi</li>
-                        <li class="text-gray-400">Santiago Maiese</li>
-                        <li class="text-gray-400">Mayra Schwarzschild</li>
-                    </ul>
-                    
-                    <div class="mt-6">
-                        <h3 class="text-lg font-semibold mb-4 text-white">Boletín Informativo</h3>
-                        <div class="flex">
-                            <input type="email" placeholder="Tu email" class="flex-grow bg-gray-800 border border-gray-700 rounded-l-lg px-4 py-2 text-white focus:outline-none">
-                            <button class="bg-yellow-400 text-gray-900 px-4 rounded-r-lg font-semibold">
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+    <footer class="py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <div class="mb-6">
+                 <a href="#" class="text-xl font-bold text-white hover:text-yellow-400 transition">
+                    <i class="fas fa-satellite mr-2 text-yellow-400"></i>Observatorio de Física Cósmica de San Miguel
+                </a>
             </div>
-            
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
-                <p class="text-sm"> © <span id="currentYear"></span> Observatorio de Física Cósmica de San Miguel. Todos los derechos reservados.</p>
-                <p class="text-xs mt-2">Diseño inspirado en las nebulosas y la pasión por el descubrimiento.</p>
+            <div class="mb-6 space-x-6">
+                <a href="#eventos" class="hover:text-yellow-400">Eventos</a>
+                <a href="#cursos" class="hover:text-yellow-400">Cursos</a>
+                <a href="#comunidad" class="hover:text-yellow-400">Comunidad</a>
+                <a href="#premium" class="hover:text-yellow-400">Premium</a>
+                <a href="#contacto" class="hover:text-yellow-400">Contacto</a>
+                <a href="#" class="hover:text-yellow-400">Política de Privacidad</a>
             </div>
+            <div class="mb-6 flex justify-center space-x-6">
+                <a href="#" aria-label="Facebook" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" aria-label="Twitter" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="#" aria-label="YouTube" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-youtube fa-lg"></i></a>
+            </div>
+            <p class="text-sm">&copy; <span id="currentYear"></span> Observatorio de Física Cósmica de San Miguel. Todos los derechos reservados.</p>
+            <p class="text-xs mt-2">Diseñado con <i class="fas fa-heart text-red-500"></i> por la IA y los Amantes del Cosmos.</p>
         </div>
     </footer>
-
-    <!-- Modal para detalles del curso -->
-    <div id="course-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
-        <div class="bg-gray-800 rounded-xl shadow-xl w-11/12 md:w-3/4 lg:w-2/3 max-h-screen overflow-y-auto" style="max-height: 90vh;">
-            <div class="p-6">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 id="modal-title" class="text-2xl font-bold text-yellow-400">Detalles del Curso</h3>
-                    <button onclick="closeModal()" class="text-gray-400 hover:text-white text-2xl">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                
-                <div id="modal-content" class="text-gray-300">
-                    <!-- El contenido se carga dinámicamente con JavaScript -->
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script>
         // Menú móvil
@@ -1321,332 +1901,119 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        document.querySelectorAll('#mobile-menu a, nav a[href^="#"]').forEach(link => {
-            link.addEventListener('click', (e) => {
-                if (link.closest('#mobile-menu')) { 
-                    mobileMenu.classList.add('hidden');
-                }
-            });
-        });
-        
-        // Actualizar año actual
+        // Año actual en footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
-        
-        // NASA API Implementation
-        window.addEventListener('load', function() {
-            const heroSection = document.querySelector('.hero-section');
-            
-            // Cargar imagen de NASA APOD para el fondo del hero
-            fetch('https://api.nasa.gov/planetary/apod?api_key=F6yk1zmeHdiBpMh3EvGxdA1c1rvo7HeVNxgE7tnY')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.media_type === 'image') {
-                        heroSection.style.backgroundImage = `linear-gradient(to bottom, rgba(11, 13, 23, 0.7), rgba(30, 26, 62, 0.8)), url('${data.url}')`;
+
+        // NASA APOD (Astronomy Picture of the Day)
+        const heroSection = document.querySelector('.hero-section');
+        const apodExplanation = document.getElementById('apod-explanation');
+        const apodDateElem = document.getElementById('apod-date');
+        const downloadApodBtn = document.getElementById('download-apod-btn');
+        const NASA_API_KEY = 'DEMO_KEY'; // Reemplazar con tu propia API key de la NASA si es necesario
+
+        async function fetchAPOD() {
+            try {
+                const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`);
+                if (!response.ok) {
+                    throw new Error(`Error de NASA API: ${response.status}`);
+                }
+                const data = await response.json();
+
+                if (data.media_type === 'image' && data.hdurl) {
+                    heroSection.style.backgroundImage = `url(${data.hdurl})`;
+                    downloadApodBtn.href = data.hdurl;
+                    downloadApodBtn.download = `NASA_APOD_${data.date}.jpg`;
+                    downloadApodBtn.classList.remove('hidden');
+                } else if (data.media_type === 'image' && data.url) {
+                     heroSection.style.backgroundImage = `url(${data.url})`;
+                     downloadApodBtn.href = data.url;
+                     downloadApodBtn.download = `NASA_APOD_${data.date}.jpg`;
+                     downloadApodBtn.classList.remove('hidden');
+                } else {
+                    // Fallback si no es imagen o no hay HD URL, podrías poner una imagen por defecto
+                    heroSection.style.backgroundImage = `url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')`;
+                }
+                apodExplanation.textContent = data.explanation || 'No hay explicación disponible.';
+                apodDateElem.textContent = new Date(data.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
+            } catch (error) {
+                console.error("Error al cargar APOD:", error);
+                apodExplanation.textContent = 'No se pudo cargar la imagen astronómica del día. Intenta de nuevo más tarde.';
+                heroSection.style.backgroundImage = `url('https://images.unsplash.com/photo-1538370965046-79c0d6907d47?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')`; // Imagen de fallback más genérica
+            }
+        }
+        fetchAPOD();
+
+        // Funcionalidad de Modales de Cursos
+        function showCourseDetails(courseId) {
+            const modal = document.getElementById(`course-modal-${courseId}`);
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Evitar scroll del fondo
+                // Activar la primera pestaña por defecto
+                const firstTabButton = modal.querySelector('.modal-tab');
+                const firstTabContent = modal.querySelector('.modal-tab-content');
+                if(firstTabButton && firstTabContent){
+                    modal.querySelectorAll('.modal-tab').forEach(btn => btn.classList.remove('active-tab'));
+                    modal.querySelectorAll('.modal-tab-content').forEach(content => content.classList.add('hidden'));
+                    firstTabButton.classList.add('active-tab');
+                    firstTabContent.classList.remove('hidden');
+                }
+            }
+        }
+
+        function closeModal(courseId) {
+            const modal = document.getElementById(`course-modal-${courseId}`);
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = ''; // Restaurar scroll del fondo
+            }
+        }
+
+        // Event listener para los botones de pestañas dentro de los modales
+        document.querySelectorAll('.modal-overlay').forEach(modal => {
+            modal.querySelectorAll('.modal-tab').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const tabId = button.dataset.tab;
+                    
+                    // Ocultar todos los contenidos de pestañas y desactivar botones
+                    modal.querySelectorAll('.modal-tab-content').forEach(content => {
+                        content.classList.add('hidden');
+                    });
+                    modal.querySelectorAll('.modal-tab').forEach(btn => {
+                        btn.classList.remove('active-tab');
+                    });
+
+                    // Mostrar contenido de pestaña seleccionada y activar botón
+                    const activeContent = modal.querySelector(`[data-tab-content="${tabId}"]`);
+                    if (activeContent) {
+                        activeContent.classList.remove('hidden');
                     }
-                })
-                .catch(error => {
-                    console.error('Error al cargar imagen de NASA:', error);
-                    // Imagen de respaldo
-                    heroSection.style.backgroundImage = "linear-gradient(to bottom, rgba(11, 13, 23, 0.7), rgba(30, 26, 62, 0.8)), url('https://images.unsplash.com/photo-1465101162946-4377e57745c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')";
+                    button.classList.add('active-tab');
                 });
+            });
+        });
+
+        // Cerrar modal al hacer clic fuera del contenido (en el overlay)
+        document.querySelectorAll('.modal-overlay').forEach(modalOverlay => {
+            modalOverlay.addEventListener('click', function(event) {
+                if (event.target === modalOverlay) { // Si el clic fue directamente en el overlay
+                    const modalIdSuffix = modalOverlay.id.replace('course-modal-', '');
+                    closeModal(modalIdSuffix);
+                }
+            });
         });
         
-        // Funciones para el modal de cursos
-        function showCourseDetails(courseId) {
-            const courseData = {
-                'telescopios': {
-                    title: 'TELESCOPIOS: PARTES Y USOS',
-                    instructor: 'Nicolás Balbi',
-                    price: 'ARS 150.000',
-                    description: 'Este curso te enseñará todo lo necesario para entender y utilizar diferentes tipos de telescopios. Aprenderás sobre monturas, óptica, accesorios y técnicas de observación para explorar el cosmos como un profesional.',
-                    modules: [
-                        {
-                            title: 'Módulo 1: Fundamentos Ópticos',
-                            content: 'Introducción a la óptica astronómica, tipos de telescopios (refractores, reflectores, catadióptricos) y cómo funcionan.'
-                        },
-                        {
-                            title: 'Módulo 2: Monturas y Sistemas',
-                            content: 'Monturas altazimutales y ecuatoriales, sistemas de seguimiento, alineación polar y controladores.'
-                        },
-                        {
-                            title: 'Módulo 3: Accesorios Esenciales',
-                            content: 'Oculares, barlows, filtros, buscadores y otros accesorios para mejorar tus observaciones.'
-                        },
-                        {
-                            title: 'Módulo 4: Calibración y Mantenimiento',
-                            content: 'Técnicas para colimar espejos, limpieza óptica y mantenimiento preventivo de tu equipo.'
-                        },
-                        {
-                            title: 'Módulo 5: Técnicas de Observación',
-                            content: 'Cómo localizar objetos celestes, técnicas de observación planetaria y de cielo profundo.'
-                        },
-                        {
-                            title: 'Módulo 6: Resolución de Problemas',
-                            content: 'Solución de problemas comunes, optimización de tu equipo y próximos pasos en tu viaje astronómico.'
-                        }
-                    ],
-                    quiz: [
-                        {
-                            question: '¿Qué tipo de telescopio utiliza espejos para enfocar la luz?',
-                            options: ['Refractor', 'Reflector', 'Catadióptrico', 'Radio telescopio'],
-                            correct: 1
-                        },
-                        {
-                            question: '¿Qué montura permite seguir objetos celestes con un solo eje?',
-                            options: ['Altazimutal', 'Ecuatorial', 'Dobson', 'Computerizada'],
-                            correct: 1
-                        },
-                        {
-                            question: '¿Cuál es la función principal del buscador en un telescopio?',
-                            options: ['Amplificar la imagen', 'Reducir la distorsión', 'Localizar objetos', 'Filtrar la luz'],
-                            correct: 2
-                        }
-                    ]
-                },
-                'astrofotografia': {
-                    title: 'ASTROFOTOGRAFÍA',
-                    instructor: 'Mayra Schwarzschild',
-                    price: 'ARS 120.000',
-                    description: 'Domina técnicas avanzadas para fotografiar el cielo nocturno. Aprenderás sobre equipos, configuración de cámara, procesamiento de imágenes y técnicas especiales para capturar la belleza del cosmos.',
-                    modules: [
-                        {
-                            title: 'Módulo 1: Equipo Básico',
-                            content: 'Cámaras, objetivos, trípodes y accesorios esenciales para comenzar en astrofotografía.'
-                        },
-                        {
-                            title: 'Módulo 2: Técnicas de Exposición',
-                            content: 'Configuración de ISO, apertura, tiempo de exposición y balance de blancos para fotografía nocturna.'
-                        },
-                        {
-                            title: 'Módulo 3: Seguimiento y Monturas',
-                            content: 'Uso de monturas ecuatoriales, sistemas de seguimiento y técnicas para exposiciones largas.'
-                        },
-                        {
-                            title: 'Módulo 4: Fotografía Planetaria',
-                            content: 'Técnicas para capturar la Luna, planetas y otros objetos del sistema solar.'
-                        },
-                        {
-                            title: 'Módulo 5: Cielo Profundo',
-                            content: 'Fotografía de nebulosas, galaxias y cúmulos estelares con exposiciones prolongadas.'
-                        },
-                        {
-                            title: 'Módulo 6: Procesamiento Digital',
-                            content: 'Técnicas de apilado, procesamiento con Photoshop y software especializado.'
-                        }
-                    ],
-                    quiz: [
-                        {
-                            question: '¿Qué configuración de ISO es generalmente mejor para astrofotografía?',
-                            options: ['ISO 100', 'ISO 800', 'ISO 3200', 'Depende de las condiciones'],
-                            correct: 3
-                        },
-                        {
-                            question: '¿Qué técnica se usa para reducir el ruido en astrofotografía?',
-                            options: ['Dithering', 'Stacking', 'Ambas', 'Ninguna'],
-                            correct: 2
-                        },
-                        {
-                            question: '¿Qué tipo de lente es mejor para fotografiar la Vía Láctea?',
-                            options: ['Teleobjetivo', 'Gran angular', 'Macro', 'Ojo de pez'],
-                            correct: 1
-                        }
-                    ]
-                },
-                'astrofisica': {
-                    title: 'ASTROFÍSICA',
-                    instructor: 'Bella Vista al Cosmos',
-                    price: 'ARS 200.000',
-                    description: 'Explora la física de los objetos celestes con este curso avanzado. Desde la formación estelar hasta los agujeros negros y la cosmología, este curso te llevará a un viaje por los fundamentos de la física cósmica.',
-                    modules: [
-                        {
-                            title: 'Módulo 1: Mecánica Celeste',
-                            content: 'Leyes de Kepler, gravitación universal y movimiento orbital.'
-                        },
-                        {
-                            title: 'Módulo 2: Estructura Estelar',
-                            content: 'Formación, evolución y clasificación de estrellas, diagrama HR.'
-                        },
-                        {
-                            title: 'Módulo 3: Sistemas Planetarios',
-                            content: 'Formación de planetas, exoplanetas y búsqueda de vida extraterrestre.'
-                        },
-                        {
-                            title: 'Módulo 4: Galaxias y Cosmología',
-                            content: 'Tipos de galaxias, estructura del universo y expansión cósmica.'
-                        },
-                        {
-                            title: 'Módulo 5: Agujeros Negros',
-                            content: 'Formación, propiedades y efectos de los agujeros negros.'
-                        },
-                        {
-                            title: 'Módulo 6: Instrumentación Avanzada',
-                            content: 'Telescopios espaciales, espectroscopía y técnicas de investigación.'
-                        }
-                    ],
-                    quiz: [
-                        {
-                            question: '¿Qué ley describe el movimiento de los planetas alrededor del Sol?',
-                            options: ['Ley de Newton', 'Ley de Hubble', 'Ley de Kepler', 'Ley de Planck'],
-                            correct: 2
-                        },
-                        {
-                            question: '¿En qué fase pasan la mayoría de las estrellas su vida?',
-                            options: ['Secuencia principal', 'Gigante roja', 'Enana blanca', 'Supernova'],
-                            correct: 0
-                        },
-                        {
-                            question: '¿Qué método se usa comúnmente para detectar exoplanetas?',
-                            options: ['Tránsito', 'Espectroscopía', 'Imagen directa', 'Todos los anteriores'],
-                            correct: 3
-                        }
-                    ]
-                },
-                // Datos para los otros cursos (similar a los anteriores)
-            };
-
-            const course = courseData[courseId];
-            if (!course) return;
-
-            // Construir contenido del modal
-            let content = `
-                <div class="mb-6">
-                    <div class="flex flex-wrap items-center justify-between mb-4">
-                        <div>
-                            <p class="text-gray-400">Instructor: <span class="text-white">${course.instructor}</span></p>
-                            <p class="text-gray-400">Precio: <span class="text-yellow-400 font-bold">${course.price}</span></p>
-                        </div>
-                        <div class="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-sm font-bold mt-2 sm:mt-0">
-                            6 módulos
-                        </div>
-                    </div>
-                    
-                    <p class="text-gray-300 mb-6">${course.description}</p>
-                </div>
-                
-                <h4 class="text-lg font-semibold mb-4 text-white">Módulos del Curso</h4>
-                <div class="grid md:grid-cols-2 gap-4 mb-8">
-            `;
-            
-            course.modules.forEach((module, index) => {
-                content += `
-                    <div class="module-card p-4">
-                        <div class="flex items-start">
-                            <div class="bg-yellow-400 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                                ${index + 1}
-                            </div>
-                            <div>
-                                <h5 class="font-semibold text-white">${module.title}</h5>
-                                <p class="text-gray-400 text-sm">${module.content}</p>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            content += `
-                </div>
-                
-                <h4 class="text-lg font-semibold mb-4 text-white">Evaluación Final</h4>
-                <p class="text-gray-300 mb-4">Para obtener tu certificación, deberás aprobar esta evaluación de múltiple choice con al menos el 70% de respuestas correctas.</p>
-                
-                <div id="quiz-container" class="space-y-6">
-            `;
-            
-            course.quiz.forEach((question, qIndex) => {
-                content += `
-                    <div>
-                        <p class="font-medium text-white mb-2">${qIndex + 1}. ${question.question}</p>
-                        <div class="space-y-3">
-                `;
-                
-                question.options.forEach((option, oIndex) => {
-                    content += `
-                        <label class="quiz-option">
-                            <input type="radio" name="q${qIndex}" value="${oIndex}" class="mr-2">
-                            ${option}
-                        </label>
-                    `;
+        // Cerrar modal con tecla Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                document.querySelectorAll('.modal-overlay:not(.hidden)').forEach(modal => {
+                    const modalIdSuffix = modal.id.replace('course-modal-', '');
+                    closeModal(modalIdSuffix);
                 });
-                
-                content += `
-                        </div>
-                    </div>
-                `;
-            });
-            
-            content += `
-                </div>
-                
-                <div class="flex flex-col sm:flex-row justify-between gap-4 mt-8">
-                    <button id="submit-quiz" class="btn-primary px-6 py-3 rounded-full font-semibold">
-                        <i class="fas fa-paper-plane mr-2"></i>Enviar Respuestas
-                    </button>
-                    <button class="px-6 py-3 rounded-full font-semibold border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:bg-opacity-10 transition">
-                        <i class="fas fa-shopping-cart mr-2"></i>Comprar Curso
-                    </button>
-                </div>
-                
-                <div id="quiz-results" class="mt-6 hidden"></div>
-            `;
-            
-            // Actualizar modal
-            document.getElementById('modal-title').textContent = course.title;
-            document.getElementById('modal-content').innerHTML = content;
-            document.getElementById('course-modal').classList.remove('hidden');
-            
-            // Configurar el botón de enviar
-            document.getElementById('submit-quiz').addEventListener('click', function() {
-                const resultsContainer = document.getElementById('quiz-results');
-                resultsContainer.innerHTML = '';
-                
-                let correctAnswers = 0;
-                
-                course.quiz.forEach((question, qIndex) => {
-                    const selectedOption = document.querySelector(`input[name="q${qIndex}"]:checked`);
-                    const isCorrect = selectedOption && parseInt(selectedOption.value) === question.correct;
-                    
-                    if (isCorrect) correctAnswers++;
-                    
-                    const resultDiv = document.createElement('div');
-                    resultDiv.className = `p-3 rounded-lg mb-3 ${isCorrect ? 'bg-green-900 text-green-200' : 'bg-red-900 text-red-200'}`;
-                    resultDiv.innerHTML = `<strong>Pregunta ${qIndex + 1}:</strong> ${isCorrect ? 'Correcto' : 'Incorrecto'}`;
-                    
-                    resultsContainer.appendChild(resultDiv);
-                });
-                
-                const score = Math.round((correctAnswers / course.quiz.length) * 100);
-                const passed = score >= 70;
-                
-                const resultDiv = document.createElement('div');
-                resultDiv.className = `p-4 rounded-lg text-center mt-4 ${passed ? 'bg-green-900 text-green-200' : 'bg-red-900 text-red-200'}`;
-                resultDiv.innerHTML = `
-                    <p class="text-lg font-bold">Resultado: ${score}% (${correctAnswers} de ${course.quiz.length})</p>
-                    <p class="mt-2">${passed ? '¡Felicidades! Has aprobado la evaluación.' : 'No has alcanzado el puntaje mínimo para aprobar.'}</p>
-                `;
-                
-                if (passed) {
-                    resultDiv.innerHTML += `
-                        <div class="mt-4">
-                            <p class="text-white">Como miembro Premium, puedes obtener tu certificado gratis:</p>
-                            <a href="#premium" class="btn-primary inline-block mt-2 px-6 py-2 rounded-full font-semibold">
-                                <i class="fas fa-star mr-2"></i>Obtener Certificado
-                            </a>
-                        </div>
-                    `;
-                } else {
-                    resultDiv.innerHTML += `
-                        <p class="mt-4">Puedes volver a intentarlo o revisar los módulos del curso.</p>
-                    `;
-                }
-                
-                resultsContainer.appendChild(resultDiv);
-                resultsContainer.classList.remove('hidden');
-            });
-        }
+            }
+        });
 
-        function closeModal() {
-            document.getElementById('course-modal').classList.add('hidden');
-        }
     </script>
 </body>
 </html>
