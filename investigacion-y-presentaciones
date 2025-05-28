@@ -1,1 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observatorio de Física Cósmica de San Miguel - Historia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --space-blue: #0b0d17;
+            --cosmic-purple: #1e1a3e;
+            --starlight-yellow: #f6ad55;
+            --nebula-pink: #d53f8c;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--space-blue);
+            color: #e2e8f0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(214, 188, 250, 0.05) 0%, rgba(214, 188, 250, 0) 40%),
+                radial-gradient(circle at 90% 80%, rgba(246, 173, 85, 0.05) 0%, rgba(246, 173, 85, 0) 40%),
+                radial-gradient(circle at 50% 50%, rgba(100, 100, 220, 0.03) 0%, rgba(100, 100, 220, 0) 30%);
+        }
+        
+        .navbar-glass {
+            background-color: rgba(11, 13, 23, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(246, 173, 85, 0.2);
+        }
+        
+        .hero-section {
+            background-size: cover;
+            background-position: center;
+            transition: background-image 1s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(11, 13, 23, 0.7), rgba(30, 26, 62, 0.8));
+            z-index: 1;
+        }
+        
+        .card {
+            background-color: rgba(30, 26, 62, 0.7);
+            border: 1px solid rgba(109, 40, 217, 0.3);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(214, 188, 250, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--starlight-yellow), var(--nebula-pink));
+            color: #1a202c;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(246, 173, 85, 0.4);
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20px;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(25deg);
+            transition: all 0.5s;
+        }
+        
+        .btn-primary:hover::after {
+            left: 120%;
+        }
+        
+        .section-title {
+            color: var(--starlight-yellow);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--starlight-yellow), var(--nebula-pink));
+            border-radius: 3px;
+        }
+        
+        .star-decoration {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+            z-index: 0; 
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0.2; transform: scale(0.8); }
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem; /* Space for icon and line */
+            padding-bottom: 2rem;
+            border-left: 3px solid var(--starlight-yellow);
+        }
+        .timeline-item:last-child {
+            border-left: 3px solid transparent; /* No line for the last item */
+            padding-bottom: 0;
+        }
+        .timeline-icon {
+            position: absolute;
+            left: -0.875rem; /* (28px icon width / 2) - (3px border-left / 2) approx to center on line */
+            top: 0;
+            background-color: var(--starlight-yellow);
+            color: var(--space-blue);
+            width: 1.75rem; /* 28px */
+            height: 1.75rem; /* 28px */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem; /* 14px */
+        }
+        .history-image-card {
+            background-color: rgba(30, 26, 62, 0.6);
+            border: 1px solid rgba(246, 173, 85, 0.3);
+        }
+        .testimonial-card {
+            background-color: rgba(11, 13, 23, 0.7);
+            border-left: 4px solid var(--nebula-pink);
+        }
+    </style>
+</head>
+<body class="antialiased">
+        <div class="star-decoration" style="top: 5%; left: 5%; width: 1px; height: 1px; animation-delay: 0.5s;"></div>
+    <div class="star-decoration" style="top: 15%; left: 10%; width: 2px; height: 2px;"></div>
+    <div class="star-decoration" style="top: 10%; left: 30%; width: 1px; height: 1px; animation-delay: 1.5s;"></div>
+    <div class="star-decoration" style="top: 25%; left: 85%; width: 3px; height: 3px; animation-delay: 1s;"></div>
+    <div class="star-decoration" style="top: 30%; left: 60%; width: 2px; height: 2px; animation-delay: 2.5s;"></div>
+    <div class="star-decoration" style="top: 40%; left: 45%; width: 2px; height: 2px; animation-delay: 2s;"></div>
+    <div class="star-decoration" style="top: 50%; left: 90%; width: 1px; height: 1px; animation-delay: 3.5s;"></div>
+    <div class="star-decoration" style="top: 60%; left: 15%; width: 2px; height: 2px; animation-delay: 0.2s;"></div>
+    <div class="star-decoration" style="top: 70%; left: 25%; width: 3px; height: 3px; animation-delay: 3s;"></div>
+    <div class="star-decoration" style="top: 75%; left: 75%; width: 1px; height: 1px; animation-delay: 4.5s;"></div>
+    <div class="star-decoration" style="top: 85%; left: 65%; width: 2px; height: 2px; animation-delay: 4s;"></div>
+    <div class="star-decoration" style="top: 90%; left: 5%; width: 3px; height: 3px; animation-delay: 0.8s;"></div>
+    <div class="star-decoration" style="top: 95%; left: 50%; width: 1px; height: 1px; animation-delay: 2.2s;"></div>
+    <div class="star-decoration" style="top: 5%; left: 70%; width: 2px; height: 2px; animation-delay: 1.8s;"></div>
+    <div class="star-decoration" style="top: 65%; left: 95%; width: 2px; height: 2px; animation-delay: 3.2s;"></div>
+
+        <nav class="navbar-glass sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-white">
+                <i class="fas fa-satellite mr-2 text-yellow-400"></i>Observatorio San Miguel
+            </a>
+            <div class="hidden md:flex space-x-4 items-center">
+                <a href="index.html#eventos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Eventos</a>
+                <a href="index.html#ubicacion" class="text-gray-300 hover:text-yellow-400 transition duration-300">Ubicación</a>
+                <a href="index.html#cursos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
+                <a href="#historia" class="text-gray-300 hover:text-yellow-400 transition duration-300">Nuestra Historia</a>                                 <a href="index.html#premium" class="btn-primary px-4 py-2 rounded-full font-semibold">
+                    <i class="fas fa-star mr-1"></i>Premium
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-300 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="index.html#eventos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Eventos</a>
+            <a href="index.html#ubicacion" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Ubicación</a>
+            <a href="index.html#cursos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
+            <a href="#historia" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Nuestra Historia</a>
+                        <a href="index.html#premium" class="block btn-primary px-4 py-2 rounded-full font-semibold text-center mt-2">
+                <i class="fas fa-star mr-1"></i>Premium
+            </a>
+        </div>
+    </nav>
+
+        <section id="historia" class="py-20 bg-gradient-to-b from-space-blue to-cosmic-purple">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-20 section-title">Un Viaje a Través de Nuestra Historia</h2>
+            
+            <div class="max-w-5xl mx-auto">
+                                <div class="card p-8 mb-16 shadow-xl">
+                    <p class="text-lg text-gray-300 leading-relaxed text-center">
+                        El Observatorio de Física Cósmica de San Miguel no es solo un conjunto de telescopios y edificios; es un legado vivo de curiosidad humana, dedicación científica y pasión por desentrañar los misterios del universo. Desde sus humildes comienzos en la década de 1930, impulsado por visionarios locales, hasta convertirse en un referente en la astronomía amateur y profesional en la región, nuestra historia está tejida con los hilos del descubrimiento, la educación y el servicio a la comunidad. Acompáñenos en este recorrido por las estrellas de nuestro pasado, presente y futuro.
+                    </p>
+                </div>
+
+                                <div class="space-y-12">
+
+                                        <div class="timeline-item card p-6 hover:shadow-nebula-pink/30">
+                        <div class="timeline-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-yellow-400 mb-3">La Semilla de una Idea: Fundación y Primeros Años (1935 - 1950)</h3>
+                        <p class="text-gray-400 text-sm mb-4">Coordinador del Período: Documentalista Estelar</p>
+                        <div class="grid md:grid-cols-2 gap-6 items-center">
+                            <div>
+                                <p class="text-gray-300 mb-4 leading-relaxed">
+                                    En la efervescente década de 1930, un grupo de entusiastas locales, liderados por el visionario Don Horacio "Cosmos" Fernández y la Dra. Aurora "Stella" Vega, sintieron la necesidad de crear un espacio dedicado a la contemplación y estudio del cielo austral. Don Horacio, un maestro de escuela con una pasión desbordante por las estrellas, y la Dra. Vega, una de las primeras mujeres en obtener un doctorado en física en el país, unieron fuerzas con comerciantes locales y la incipiente comunidad científica de San Miguel.
+                                </p>
+                                <p class="text-gray-300 mb-4 leading-relaxed">
+                                    La fundación oficial se concretó el 15 de agosto de 1935, con la colocación de la piedra fundamental en el actual terreno, donado por la familia Alvear-Ponce, reconocidos filántropos de la época. El primer instrumento fue un modesto telescopio refractor de 6 pulgadas, apodado "El Vigía Nocturno", adquirido gracias a una colecta popular. Los primeros años estuvieron marcados por enormes desafíos: la escasez de recursos, la falta de personal técnico especializado y el escepticismo de algunos sectores. Sin embargo, la perseverancia y el espíritu colaborativo prevalecieron.
+                                </p>
+                                <h4 class="text-lg font-semibold text-nebula-pink mt-6 mb-2">Hitos Tempranos Destacados:</h4>
+                                <ul class="list-disc list-inside text-gray-300 space-y-1 text-sm">
+                                    <li><strong>1938:</strong> Primera observación pública documentada: Eclipse lunar total, congregando a más de 200 vecinos.</li>
+                                    <li><strong>1942:</strong> Publicación del primer boletín astronómico del observatorio, "Ecos del Cosmos", con observaciones y efemérides.</li>
+                                    <li><strong>1945:</strong> Inicio de colaboraciones con el Observatorio Nacional de Córdoba para el estudio de estrellas variables.</li>
+                                    <li><strong>1949:</strong> Construcción del primer domo pequeño, fabricado artesanalmente por voluntarios.</li>
+                                </ul>
+                            </div>
+                            <div class="history-image-card p-4 rounded-lg">
+                                <img src="https://via.placeholder.com/400x300.png?text=Fundadores+del+Observatorio+(1935)" alt="Fundadores del Observatorio de San Miguel" class="rounded-lg mb-3 shadow-lg w-full">
+                                <p class="text-xs text-center text-gray-400">Recreación artística de los fundadores Don Horacio Fernández y Dra. Aurora Vega junto al primer telescopio.</p>
+                                <img src="https://via.placeholder.com/400x300.png?text=Primer+Domo+Artesanal+(1949)" alt="Primer Domo Artesanal" class="rounded-lg mt-4 shadow-lg w-full">
+                                <p class="text-xs text-center text-gray-400 mt-1">Esquema del primer domo construido por la comunidad.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                                        <div class="timeline-item card p-6 hover:shadow-nebula-pink/30">
+                        <div class="timeline-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-yellow-400 mb-3">Afirmando Raíces: Consolidación y Crecimiento (1951 - 1980)</h3>
+                        <p class="text-gray-400 text-sm mb-4">Historiador a Cargo: Prof. Galileo Scriptum</p>
+                        <div class="grid md:grid-cols-2 gap-6 items-start">
+                            <div>
+                                <p class="text-gray-300 mb-4 leading-relaxed">
+                                    Tras la Segunda Guerra Mundial, el observatorio entró en una fase de consolidación. La dirección fue asumida por el Dr. Bernardo Kepler Jr., un físico de partículas que viró hacia la astrofísica, aportando un rigor científico renovado. Durante su gestión, se formalizaron los programas de investigación y se establecieron vínculos más fuertes con universidades nacionales e internacionales.
+                                </p>
+                                <p class="text-gray-300 mb-4 leading-relaxed">
+                                    En 1957, con motivo del Año Geofísico Internacional, el observatorio adquirió un telescopio reflector de 12 pulgadas, "El Explorador Austral", que permitió iniciar estudios más serios sobre fotometría estelar y la búsqueda de cometas. La década de 1960 vio la construcción de un pequeño auditorio y una biblioteca, que comenzó a albergar una colección creciente de textos astronómicos y actas de congresos. Los programas de divulgación se expandieron, con visitas escolares regulares y charlas públicas que se volvieron una tradición en San Miguel.
+                                </p>
+                                <h4 class="text-lg font-semibold text-nebula-pink mt-6 mb-2">Avances Notables del Período:</h4>
+                                <ul class="list-disc list-inside text-gray-300 space-y-1 text-sm">
+                                    <li><strong>1957:</strong> Adquisición del telescopio "Explorador Austral" (Reflector 12").</li>
+                                    <li><strong>1963:</strong> Descubrimiento del cometa C/1963 R1 (SanMiguel-Vega), el primer cometa descubierto desde el observatorio.</li>
+                                    <li><strong>1969:</strong> El observatorio organizó una masiva observación pública del alunizaje del Apolo 11, con transmisiones de radio en vivo.</li>
+                                    <li><strong>1975:</strong> Publicación del "Catálogo de Estrellas Dobles del Hemisferio Sur - Sección San Miguel".</li>
+                                    <li><strong>1978:</strong> Inicio del programa "Pioneros del Cosmos" para fomentar vocaciones científicas en jóvenes.</li>
+                                </ul>
+                            </div>
+                            <div class="history-image-card p-4 rounded-lg">
+                                <img src="https://via.placeholder.com/400x300.png?text=Telescopio+Explorador+Austral+(1957)" alt="Telescopio Explorador Austral" class="rounded-lg mb-3 shadow-lg w-full">
+                                <p class="text-xs text-center text-gray-400">El reflector de 12 pulgadas "Explorador Austral" poco después de su instalación.</p>
+                                <img src="https://via.placeholder.com/400x300.png?text=Observacion+Apolo+11+(1969)" alt="Observación Apolo 11" class="rounded-lg mt-4 shadow-lg w-full">
+                                <p class="text-xs text-center text-gray-400 mt-1">Multitud congregada en el observatorio para seguir el alunizaje del Apolo 11.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                                        <div class="timeline-item card p-6 hover:shadow-nebula-pink/30">
+                        <div class="timeline-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-yellow-400 mb-3">La Era Digital: Modernización y Nuevos Horizontes (1981 - 2010)</h3>
+                        <p class="text-gray-400 text-sm mb-4">Archivista Principal: Dra. Cronos Pixel</p>
+                        <div class="grid md:grid-cols-2 gap-6 items-start">
+                            <div>
+                                <p class="text-gray-300 mb-4 leading-relaxed">
+                                    La llegada de la computación personal y las tecnologías digitales transformaron radicalmente la astronomía, y el Observatorio de San Miguel no fue ajeno a este cambio. Bajo la dirección de la Dra. Elena "Halley" Gómez, una pionera en la aplicación de CCDs en observatorios sudamericanos, se inició un profundo proceso de modernización.
+                                </p>
+                                <p class="text-gray-300 mb-4 leading-relaxed">
+                                    En 1985 se instaló el primer sistema de guiado computarizado en el "Explorador Austral", y en 1992 se adquirió la primera cámara CCD científica, lo que multiplicó la capacidad de recolección de datos y permitió al observatorio participar en surveys internacionales de búsqueda de supernovas y asteroides NEO. El domo principal fue reemplazado por una estructura moderna y se construyó una sala de control climatizada. La conexión a Internet a mediados de los 90 abrió las puertas a colaboraciones en tiempo real y al acceso a bases de datos globales.
+                                </p>
+                                <h4 class="text-lg font-semibold text-nebula-pink mt-6 mb-2">Transformaciones Clave:</h4>
+                                <ul class="list-disc list-inside text-gray-300 space-y-1 text-sm">
+                                    <li><strong>1985:</strong> Implementación del primer sistema de control computarizado de telescopios.</li>
+                                    <li><strong>1992:</strong> Adquisición de la primera cámara CCD científica, revolucionando la captura de imágenes.</li>
+                                    <li><strong>1998:</strong> Participación en el proyecto de seguimiento del asteroide (4179) Toutatis.</li>
+                                    <li><strong>2003:</strong> Inauguración del nuevo domo principal y la sala de control moderna.</li>
+                                    <li><strong>2007:</strong> Lanzamiento del sitio web del observatorio, ampliando su alcance divulgativo a nivel global.</li>
+                                </ul>
+                            </div>
+                            <div class="history-image-card p-4 rounded-lg">
+                                <img src="https://via.placeholder.com/400x300.png?text=Primera+Imagen+CCD+(1992)" alt="Primera Imagen CCD" class="rounded-lg mb-3 shadow-lg w-full">
+                                <p class="text-xs text-center text-gray-400">Una de las primeras imágenes capturadas con la cámara CCD del observatorio.</p>
+                                <img src="https://via.placeholder.com/400x300.png?text=Nuevo+Domo+Principal+(2003)" alt="Nuevo Domo Principal" class="rounded-lg mt-4 shadow-lg w-full">
+                                <p class="text-xs text-center text-gray-400 mt-1">El moderno domo principal inaugurado en 2003.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                                        <div class="timeline-item card p-6 hover:shadow-nebula-pink/30">
+                        <div class="timeline-icon">
+                            <i class="fas fa-satellite-dish"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-yellow-400 mb-3">Innovación Continua: El Observatorio Hoy y Mirando al Futuro (2011 - Presente)</h3>
+                        <p class="text-gray-400 text-sm mb-4">Custodio Actual del Legado: Equipo de Dirección OSM</p>
+                        <div class="grid md:grid-cols-2 gap-6 items-start">
+                            <div>
+                                <p class="text-gray-300 mb-4 leading-relaxed">
+                                    En la última década, el Observatorio de Física Cósmica de San Miguel ha abrazado plenamente la era de la astronomía de datos masivos y la ciencia ciudadana. Bajo la dirección actual del Dr. Nicolás Balbi, hemos implementado el telescopio robótico "Centinela Austral" de 20 pulgadas, operable remotamente, y hemos desarrollado la plataforma IA.STRO para el análisis inteligente de datos.
+                                </p>
+                                <p class="text-gray-300 mb-4 leading-relaxed">
+                                    Nuestros programas educativos se han diversificado, ofreciendo cursos online y presenciales, talleres de astrofotografía y robótica, y una activa comunidad en línea. Hemos fortalecido nuestro compromiso con la lucha contra la contaminación lumínica y promovemos activamente la inclusión en STEM. El futuro se vislumbra brillante, con planes para un nuevo espectrógrafo de alta resolución y la expansión de nuestros programas de investigación en exoplanetas y cosmología.
+                                </p>
+                                <h4 class="text-lg font-semibold text-nebula-pink mt-6 mb-2">Proyectos y Visión Actual:</h4>
+                                <ul class="list-disc list-inside text-gray-300 space-y-1 text-sm">
+                                    <li><strong>2015:</strong> Instalación del telescopio robótico "Centinela Austral" (20 pulgadas).</li>
+                                    <li><strong>2018:</strong> Lanzamiento del programa de ciencia ciudadana "Cazadores de Asteroides San Miguel".</li>
+                                    <li><strong>2020:</strong> Adaptación exitosa a la divulgación virtual durante la pandemia, alcanzando audiencias récord.</li>
+                                    <li><strong>2023:</strong> Inicio del desarrollo de la plataforma IA.STRO para análisis de datos astronómicos.</li>
+                                    <li><strong>Futuro:</strong> Planes para un nuevo espectrógrafo, expansión de la red de telescopios remotos y fomento de la investigación en inteligencia artificial aplicada a la astronomía.</li>
+                                </ul>
+                            </div>
+                            <div class="history-image-card p-4 rounded-lg">
+                                <img src="https://via.placeholder.com/400x300.png?text=Telescopio+Centinela+Austral+(2015)" alt="Telescopio Centinela Austral" class="rounded-lg mb-3 shadow-lg w-full">
+                                <p class="text-xs text-center text-gray-400">El telescopio robótico "Centinela Austral", orgullo de la instrumentación moderna del observatorio.</p>
+                                <img src="https://via.placeholder.com/400x300.png?text=Equipo+Actual+OSM" alt="Equipo Actual OSM" class="rounded-lg mt-4 shadow-lg w-full">
+                                <p class="text-xs text-center text-gray-400 mt-1">Parte del equipo actual del Observatorio de San Miguel en una jornada de puertas abiertas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>                                 <div class="my-20">
+                    <h3 class="text-3xl font-bold text-center mb-12 section-title">Guardianes del Cosmos: Nuestros Directores</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="card p-6 text-center">
+                            <img src="https://via.placeholder.com/120x120.png?text=H.F." alt="Don Horacio Fernández" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-yellow-400 shadow-lg">
+                            <h4 class="text-xl font-semibold text-white">Don Horacio "Cosmos" Fernández</h4>
+                            <p class="text-yellow-400 text-sm mb-2">Co-Fundador y Primer Promotor (1935-1940)</p>
+                            <p class="text-gray-300 text-xs leading-relaxed">Maestro visionario cuya pasión por las estrellas encendió la chispa inicial del observatorio. Un verdadero pionero de la divulgación científica en San Miguel.</p>
+                        </div>
+                        <div class="card p-6 text-center">
+                            <img src="https://via.placeholder.com/120x120.png?text=A.V." alt="Dra. Aurora Vega" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-yellow-400 shadow-lg">
+                            <h4 class="text-xl font-semibold text-white">Dra. Aurora "Stella" Vega</h4>
+                            <p class="text-yellow-400 text-sm mb-2">Co-Fundadora y Primera Directora Científica (1935-1950)</p>
+                            <p class="text-gray-300 text-xs leading-relaxed">Física pionera, su rigor y conocimiento sentaron las bases científicas del observatorio y su vinculación académica.</p>
+                        </div>
+                        <div class="card p-6 text-center">
+                            <img src="https://via.placeholder.com/120x120.png?text=B.K.Jr." alt="Dr. Bernardo Kepler Jr." class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-yellow-400 shadow-lg">
+                            <h4 class="text-xl font-semibold text-white">Dr. Bernardo Kepler Jr.</h4>
+                            <p class="text-yellow-400 text-sm mb-2">Director (1951-1980)</p>
+                            <p class="text-gray-300 text-xs leading-relaxed">Lideró la consolidación del observatorio, gestionando la adquisición de nuevos instrumentos y expandiendo los programas de investigación y divulgación.</p>
+                        </div>
+                        <div class="card p-6 text-center">
+                            <img src="https://via.placeholder.com/120x120.png?text=E.G." alt="Dra. Elena Gómez" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-yellow-400 shadow-lg">
+                            <h4 class="text-xl font-semibold text-white">Dra. Elena "Halley" Gómez</h4>
+                            <p class="text-yellow-400 text-sm mb-2">Directora (1981-2010)</p>
+                            <p class="text-gray-300 text-xs leading-relaxed">Impulsora de la modernización tecnológica del observatorio, introduciendo la fotografía CCD y las capacidades computacionales.</p>
+                        </div>
+                        <div class="card p-6 text-center">
+                            <img src="https://via.placeholder.com/120x120.png?text=N.B." alt="Dr. Nicolás Balbi" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-yellow-400 shadow-lg">
+                            <h4 class="text-xl font-semibold text-white">Dr. Nicolás Balbi</h4>
+                            <p class="text-yellow-400 text-sm mb-2">Director Actual (2011-Presente)</p>
+                            <p class="text-gray-300 text-xs leading-relaxed">Liderando la nueva era de astronomía robótica, inteligencia artificial y fuerte compromiso con la comunidad y la educación científica.</p>
+                        </div>
+                        <div class="card p-6 text-center opacity-50">                             <img src="https://via.placeholder.com/120x120.png?text=Futuro" alt="Futuro Director" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-gray-500 shadow-lg">
+                            <h4 class="text-xl font-semibold text-gray-400">Próximamente...</h4>
+                            <p class="text-gray-500 text-sm mb-2">El legado continúa</p>
+                            <p class="text-gray-400 text-xs leading-relaxed">Las futuras generaciones seguirán explorando el cosmos desde San Miguel.</p>
+                        </div>
+                    </div>
+                </div>
+
+                                <div class="my-20">
+                    <h3 class="text-3xl font-bold text-center mb-12 section-title">Hitos Científicos y Descubrimientos</h3>
+                    <div class="space-y-8">
+                        <div class="card p-6">
+                            <h4 class="text-xl font-semibold text-yellow-400 mb-2"><i class="fas fa-comet mr-2"></i>Descubrimiento del Cometa C/1963 R1 (SanMiguel-Vega)</h4>
+                            <p class="text-gray-300 text-sm">En septiembre de 1963, utilizando el telescopio "Explorador Austral", el equipo del observatorio, bajo la supervisión de la Dra. Vega (quien regresó como consultora), identificó un nuevo cometa. Este descubrimiento puso al Observatorio San Miguel en el mapa astronómico internacional y demostró la capacidad de observatorios más pequeños para realizar contribuciones significativas.</p>
+                        </div>
+                        <div class="card p-6">
+                            <h4 class="text-xl font-semibold text-yellow-400 mb-2"><i class="fas fa-star-of-david mr-2"></i>Catálogo de Estrellas Dobles Australes</h4>
+                            <p class="text-gray-300 text-sm">Durante la década de 1970, se llevó a cabo un exhaustivo programa de observación de estrellas dobles visibles desde el hemisferio sur. El resultado fue el "Catálogo de Estrellas Dobles del Hemisferio Sur - Sección San Miguel" (1975), que aportó mediciones precisas de separación y ángulo de posición para más de 500 sistemas binarios, algunos de ellos poco estudiados hasta entonces.</p>
+                        </div>
+                        <div class="card p-6">
+                            <h4 class="text-xl font-semibold text-yellow-400 mb-2"><i class="fas fa-meteor mr-2"></i>Participación en el Seguimiento de Asteroides Cercanos (NEOs)</h4>
+                            <p class="text-gray-300 text-sm">Desde la incorporación de la tecnología CCD en los años 90, el observatorio ha colaborado activamente con redes internacionales en el seguimiento astrométrico de Asteroides Cercanos a la Tierra (NEOs). Las observaciones precisas desde San Miguel han contribuido a refinar las órbitas de numerosos objetos, ayudando en la evaluación de riesgos de impacto.</p>
+                        </div>
+                        <div class="card p-6">
+                            <h4 class="text-xl font-semibold text-yellow-400 mb-2"><i class="fas fa-lightbulb mr-2"></i>Estudios sobre Contaminación Lumínica y sus Efectos</h4>
+                            <p class="text-gray-300 text-sm">Más recientemente, el observatorio ha sido pionero en la región en la cuantificación y estudio de la contaminación lumínica. Los datos recolectados han servido para campañas de concienciación y para asesorar a municipios en la implementación de políticas de iluminación más amigables con el cielo nocturno y el medio ambiente.</p>
+                        </div>
+                                                     <div class="card p-6">
+                            <h4 class="text-xl font-semibold text-yellow-400 mb-2"><i class="fas fa-wave-square mr-2"></i>Investigación en Radioastronomía Amateur</h4>
+                            <p class="text-gray-300 text-sm">A principios de la década de 2000, un grupo de radioaficionados y astrónomos del observatorio construyó un pequeño interferómetro para la detección de erupciones solares y la observación de Júpiter en ondas de radio. Aunque modesto, este proyecto sentó un precedente para la exploración de otras longitudes de onda desde San Miguel.</p>
+                        </div>
+                        <div class="card p-6">
+                            <h4 class="text-xl font-semibold text-yellow-400 mb-2"><i class="fas fa-project-diagram mr-2"></i>Desarrollo de Software de Control Telescópico</h4>
+                            <p class="text-gray-300 text-sm">El equipo técnico del observatorio ha desarrollado internamente varias versiones de software para el control de sus telescopios y la automatización de observaciones. Partes de este software han sido compartidas con otros observatorios amateurs de la región, fomentando la colaboración.</p>
+                        </div>
+                    </div>
+                </div>
+
+                                <div class="my-20">
+                    <h3 class="text-3xl font-bold text-center mb-12 section-title">Ecos del Pasado: Testimonios</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="testimonial-card p-6 rounded-lg shadow-lg">
+                            <p class="text-gray-200 italic text-lg mb-4">"Recuerdo las noches frías de 1940, subiendo al pequeño domo con Don Horacio. Su entusiasmo era contagioso. Ver Saturno por primera vez a través de 'El Vigía Nocturno' cambió mi vida."</p>
+                            <p class="text-starlight-yellow font-semibold text-right">- Un Estudiante Pionero (circa 1970, rememorando su juventud)</p>
+                        </div>
+                        <div class="testimonial-card p-6 rounded-lg shadow-lg">
+                            <p class="text-gray-200 italic text-lg mb-4">"La Dra. Vega nos enseñó a ser meticulosos, a registrar cada detalle. El descubrimiento del cometa fue un trabajo de equipo, noches de café y cálculos a mano. ¡Qué época!"</p>
+                            <p class="text-starlight-yellow font-semibold text-right">- Ex-Asistente de Investigación (Entrevista, 1985)</p>
+                        </div>
+                        <div class="testimonial-card p-6 rounded-lg shadow-lg">
+                            <p class="text-gray-200 italic text-lg mb-4">"Cuando llegó la primera CCD, fue como pasar de la pintura al óleo a la fotografía digital instantánea. Podíamos ver objetos que antes eran imposibles. La Dra. Gómez tuvo una visión increíble."</p>
+                            <p class="text-starlight-yellow font-semibold text-right">- Técnico del Observatorio (Jubilado, 2015)</p>
+                        </div>
+                        <div class="testimonial-card p-6 rounded-lg shadow-lg">
+                            <p class="text-gray-200 italic text-lg mb-4">"El Observatorio de San Miguel siempre fue un faro de conocimiento en la comunidad. Mis hijos asistieron a los talleres de los 70 y hoy uno es ingeniero aeroespacial. Su legado es invaluable."</p>
+                            <p class="text-starlight-yellow font-semibold text-right">- Vecina de San Miguel (Carta al director, 1998)</p>
+                        </div>
+                    </div>
+                </div>
+
+                                <div class="my-20">
+                    <h3 class="text-3xl font-bold text-center mb-12 section-title">Ventanas al Cosmos: Nuestra Instrumentación a Través del Tiempo</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="history-image-card p-4 rounded-lg text-center">
+                            <img src="https://via.placeholder.com/300x200.png?text=El+Vigia+Nocturno+(6-inch+Refractor)" alt="El Vigía Nocturno" class="rounded-lg mb-3 shadow-lg w-full h-48 object-cover">
+                            <h4 class="text-lg font-semibold text-white mt-2">"El Vigía Nocturno"</h4>
+                            <p class="text-xs text-gray-400">Refractor de 6 pulgadas (c. 1935). El primer telescopio del observatorio.</p>
+                        </div>
+                        <div class="history-image-card p-4 rounded-lg text-center">
+                            <img src="https://via.placeholder.com/300x200.png?text=Explorador+Austral+(12-inch+Reflector)" alt="Explorador Austral" class="rounded-lg mb-3 shadow-lg w-full h-48 object-cover">
+                            <h4 class="text-lg font-semibold text-white mt-2">"Explorador Austral"</h4>
+                            <p class="text-xs text-gray-400">Reflector de 12 pulgadas (c. 1957). Clave para el descubrimiento de cometas.</p>
+                        </div>
+                        <div class="history-image-card p-4 rounded-lg text-center">
+                            <img src="https://via.placeholder.com/300x200.png?text=Primera+Camara+CCD+(1992)" alt="Primera Cámara CCD" class="rounded-lg mb-3 shadow-lg w-full h-48 object-cover">
+                            <h4 class="text-lg font-semibold text-white mt-2">Cámara CCD Mark I</h4>
+                            <p class="text-xs text-gray-400">Primera cámara CCD científica (c. 1992). Marcó el inicio de la era digital.</p>
+                        </div>
+                        <div class="history-image-card p-4 rounded-lg text-center">
+                            <img src="https://via.placeholder.com/300x200.png?text=Centinela+Austral+(20-inch+Robotic)" alt="Centinela Austral" class="rounded-lg mb-3 shadow-lg w-full h-48 object-cover">
+                            <h4 class="text-lg font-semibold text-white mt-2">"Centinela Austral"</h4>
+                            <p class="text-xs text-gray-400">Telescopio robótico de 20 pulgadas (c. 2015). Operable remotamente.</p>
+                        </div>
+                        <div class="history-image-card p-4 rounded-lg text-center">
+                            <img src="https://via.placeholder.com/300x200.png?text=Espectrografo+Casero+(1970s)" alt="Espectrógrafo Casero" class="rounded-lg mb-3 shadow-lg w-full h-48 object-cover">
+                            <h4 class="text-lg font-semibold text-white mt-2">Espectrógrafo Estelar I</h4>
+                            <p class="text-xs text-gray-400">Primer espectrógrafo construido en el taller del observatorio (c. 1972).</p>
+                        </div>
+                        <div class="history-image-card p-4 rounded-lg text-center">
+                            <img src="https://via.placeholder.com/300x200.png?text=Futuro+Interferometro+Optico" alt="Futuro Interferómetro Óptico" class="rounded-lg mb-3 shadow-lg w-full h-48 object-cover">
+                            <h4 class="text-lg font-semibold text-white mt-2">Proyecto "Visión Austral" (Futuro)</h4>
+                            <p class="text-xs text-gray-400">Concepto para un pequeño interferómetro óptico educativo y de investigación.</p>
+                        </div>
+                    </div>
+                </div>
+
+                                <div class="mt-20 text-center">
+                    <h3 class="text-2xl font-semibold text-yellow-400 mb-6">Nuestro Legado Continúa...</h3>
+                    <p class="text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+                        La historia del Observatorio de Física Cósmica de San Miguel es una narrativa en constante evolución, escrita por cada estrella observada, cada estudiante inspirado y cada descubrimiento compartido. Te invitamos a ser parte de los próximos capítulos de esta gran aventura cósmica.
+                    </p>
+                    <a href="index.html#contacto" class="btn-primary px-8 py-4 rounded-full font-semibold text-lg">
+                        <i class="fas fa-star mr-2"></i>Visítanos y Sé Parte de la Historia
+                    </a>
+                </div>
+
+            </div>         </div>     </section>
+            <footer class="py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <div class="mb-6">
+                 <a href="index.html" class="text-xl font-bold text-white hover:text-yellow-400 transition">
+                    <i class="fas fa-satellite mr-2 text-yellow-400"></i>Observatorio de Física Cósmica de San Miguel
+                </a>
+            </div>
+            <div class="mb-6 space-x-6">
+                <a href="index.html#eventos" class="hover:text-yellow-400">Eventos</a>
+                <a href="index.html#cursos" class="hover:text-yellow-400">Cursos</a>
+                <a href="#historia" class="hover:text-yellow-400">Nuestra Historia</a>
+                <a href="index.html#premium" class="hover:text-yellow-400">Premium</a>
+                <a href="index.html#contacto" class="hover:text-yellow-400">Contacto</a>
+                <a href="#" class="hover:text-yellow-400">Política de Privacidad</a>
+            </div>
+            <div class="mb-6 flex justify-center space-x-6">
+                <a href="#" aria-label="Facebook" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" aria-label="Twitter" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="#" aria-label="YouTube" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-youtube fa-lg"></i></a>
+            </div>
+            <p class="text-sm">© <span id="currentYear"></span> Observatorio de Física Cósmica de San Miguel. Todos los derechos reservados.</p>
+            <p class="text-xs mt-2">Diseñado con <i class="fas fa-heart text-red-500"></i> por la IA y los Amantes del Cosmos.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Menú móvil (asumiendo que ya existe)
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuButton && mobileMenu) {
+          mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+          });
+        }
+
+        // Año actual en footer (asumiendo que ya existe)
+        const currentYearElem = document.getElementById('currentYear');
+        if (currentYearElem) {
+          currentYearElem.textContent = new Date().getFullYear();
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                // Asegurarse de que el targetId no es solo "#"
+                if (targetId.length > 1) {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
 
