@@ -63,6 +63,16 @@
         section[id] {
             scroll-margin-top: 80px; 
         }
+        /* Estilos para el Chatbot */
+        #chat-display p {
+            line-height: 1.6;
+        }
+        #chat-display strong.text-yellow-400 { /* Usuario */
+            color: #f6ad55;
+        }
+        #chat-display strong.text-blue-400 { /* AstroBot */
+            color: #63b3ed;
+        }
     </style>
 </head>
 <body>
@@ -78,7 +88,7 @@
                 <a href="#cursos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
                 <a href="#ubicacion" class="text-gray-300 hover:text-yellow-400 transition duration-300">Ubicación</a>
                 <a href="#ia" class="text-gray-300 hover:text-yellow-400 transition duration-300">IA Astronómica</a>
-                <a href="#comunidad" class="text-gray-300 hover:text-yellow-400 transition duration-300">Comunidad</a>
+                <a href="#chatbot-ia" class="text-gray-300 hover:text-yellow-400 transition duration-300">AstroBot</a> <a href="#comunidad" class="text-gray-300 hover:text-yellow-400 transition duration-300">Comunidad</a>
                 <a href="#contacto" class="text-gray-300 hover:text-yellow-400 transition duration-300">Contacto</a>
                 <a href="#premium" class="btn-primary px-4 py-2 rounded-md font-semibold">
                     <i class="fas fa-star mr-1"></i>Premium
@@ -96,7 +106,7 @@
             <a href="#cursos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
             <a href="#ubicacion" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Ubicación</a>
             <a href="#ia" class="block text-gray-300 hover:text-yellow-400 transition duration-300">IA Astronómica</a>
-            <a href="#comunidad" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Comunidad</a>
+            <a href="#chatbot-ia" class="block text-gray-300 hover:text-yellow-400 transition duration-300">AstroBot</a> <a href="#comunidad" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Comunidad</a>
             <a href="#contacto" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Contacto</a>
             <a href="#premium" class="block btn-primary px-4 py-2 rounded-md font-semibold text-center mt-2">
                 <i class="fas fa-star mr-1"></i>Premium
@@ -188,7 +198,7 @@
             <p class="text-center mt-6 text-gray-400">Av. Ejemplo 123, San Miguel, Buenos Aires, Argentina</p>
         </div>
     </section>
-    
+   
     <section id="noticias" class="py-16">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-center mb-12 section-title">Blog: Noticias Astronómicas y Tecnología Solar</h2>
@@ -242,21 +252,38 @@
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl font-bold mb-8 section-title">Inteligencia Artificial al Servicio de la Astronomía</h2>
             <div class="max-w-3xl mx-auto">
-                <i class="fas fa-robot text-6xl text-yellow-400 mb-6"></i>
+                <i class="fas fa-brain text-6xl text-yellow-400 mb-6"></i>
                 <p class="text-lg text-gray-300 mb-6"> {/* Párrafo 1, se mantiene estático */}
                     En el Observatorio de Física Cósmica de San Miguel, estamos explorando el potencial de la IA para analizar grandes volúmenes de datos solares, predecir eventos espaciales y asistir en la investigación astronómica.
                 </p>
-                {/* Este párrafo se actualizará con la respuesta de la API Gemini */}
+                {/* Este párrafo se actualizará con la respuesta de la API Gemini (según el código original) */}
                 <p class="text-gray-400 mb-8" id="ia-detail-text"> 
-                    Nuestros modelos de IA están siendo entrenados con datos históricos y observaciones en tiempo real para ofrecer nuevas perspectivas sobre el comportamiento solar y fenómenos cósmicos.
+                    Nuestros modelos de IA (como Gemini) están siendo entrenados con datos históricos y observaciones en tiempo real para ofrecer nuevas perspectivas sobre el comportamiento solar y fenómenos cósmicos.
                 </p>
                 <a href="#" class="btn-primary px-6 py-3 rounded-lg font-semibold">
-                    <i class="fas fa-brain mr-2"></i>Conoce Nuestros Proyectos de IA
+                    <i class="fas fa-cogs mr-2"></i>Conoce Nuestros Proyectos de IA
                 </a>
             </div>
         </div>
     </section>
 
+    <section id="chatbot-ia" class="py-16 bg-gray-900">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-8 section-title">Pregúntale a AstroBot <i class="fas fa-robot ml-2"></i></h2>
+            <p class="text-gray-400 mb-6 max-w-xl mx-auto">Interactúa con nuestra IA especializada en astronomía. AstroBot está aquí para responder tus preguntas sobre el cosmos, el Observatorio y más.</p>
+            <div class="max-w-2xl mx-auto card p-6 rounded-lg shadow-xl">
+                <div id="chat-display" class="h-72 overflow-y-auto mb-4 p-4 bg-gray-800 rounded-md text-left text-sm">
+                    <p class="text-left mb-2"><strong class="text-blue-400">AstroBot:</strong> ¡Hola! Soy AstroBot, tu asistente astronómico virtual del Observatorio San Miguel. ¿Tienes alguna pregunta sobre el universo, nuestra estrella el Sol, o las actividades del observatorio?</p>
+                </div>
+                <div class="flex mt-4">
+                    <input type="text" id="chat-input" class="flex-grow p-3 rounded-l-md border border-gray-600 bg-gray-700 text-white focus:outline-none focus:border-yellow-500 placeholder-gray-500" placeholder="Escribe tu pregunta aquí...">
+                    <button id="chat-submit" class="btn-primary px-5 py-3 rounded-r-md font-semibold">
+                        <i class="fas fa-paper-plane"></i> Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
     <section id="comunidad" class="py-16 bg-gray-800">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl font-bold mb-8 section-title">Únete a Nuestra Comunidad</h2>
@@ -311,7 +338,7 @@
             </div>
         </div>
     </section>
-    
+   
     <section id="contacto" class="py-16 bg-gray-800">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-center mb-12 section-title">Contacto</h2>
@@ -346,7 +373,7 @@
                         <li><a href="#noticias" class="text-gray-400 hover:text-yellow-400">Blog / Noticias</a></li>
                         <li><a href="#eventos" class="text-gray-400 hover:text-yellow-400">Eventos y Actividades</a></li>
                         <li><a href="#cursos" class="text-gray-400 hover:text-yellow-400">Cursos de Astronomía</a></li>
-                        <li><a href="#premium" class="text-gray-400 hover:text-yellow-400">Beneficios Premium</a></li>
+                        <li><a href="#chatbot-ia" class="text-gray-400 hover:text-yellow-400">Pregunta a AstroBot</a></li> <li><a href="#premium" class="text-gray-400 hover:text-yellow-400">Beneficios Premium</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-yellow-400">Política de Privacidad</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-yellow-400">Términos de Servicio</a></li>
                     </ul>
@@ -367,28 +394,39 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+        document.querySelectorAll('#mobile-menu a, nav a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (link.closest('#mobile-menu')) { // Solo para enlaces dentro del menú móvil
+                    mobileMenu.classList.add('hidden');
+                }
+                // Para el smooth scroll (si aplica a enlaces del navbar principal también)
+                let targetId = link.getAttribute('href');
+                if (targetId.startsWith('#') && targetId.length > 1) {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // e.preventDefault(); // Descomentar si causa problemas con el cierre del menú
+                        // Desplazamiento suave si es necesario (puede que el navegador ya lo haga)
+                    }
+                }
             });
         });
-        
+       
         // Año actual en el footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Carga de imagen de NASA (APOD)
+        // Carga de imagen de NASA (APOD) - Se mantiene el código original de esta función
         const loadNasaImageButton = document.getElementById('load-nasa-image');
         const nasaImageElement = document.getElementById('nasa-image');
         const nasaTitleElement = document.getElementById('nasa-title');
         const nasaExplanationElement = document.getElementById('nasa-explanation');
-        
+       
         async function fetchNasaSolarImage() {
             const heroSection = document.querySelector('.hero-section');
             nasaImageElement.src = 'https://placehold.co/800x600/1A202C/E2E8F0?text=Cargando+imagen+solar...';
             nasaTitleElement.textContent = 'Cargando título...';
             nasaExplanationElement.textContent = 'Cargando descripción...';
 
-            const apiKey = 'F6yk1zmeHdiBpMh3EvGxdA1c1rvo7HeVNxgE7tnY'; // Tu API key de NASA
+            const apiKey = 'F6yk1zmeHdiBpMh3EvGxdA1c1rvo7HeVNxgE7tnY'; // API key de NASA
             const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
 
             try {
@@ -423,91 +461,186 @@
             }
         }
 
-        loadNasaImageButton.addEventListener('click', fetchNasaSolarImage);
-        window.addEventListener('load', fetchNasaSolarImage);
+        if(loadNasaImageButton) { // Verificar si el botón existe antes de añadir el listener
+            loadNasaImageButton.addEventListener('click', fetchNasaSolarImage);
+        }
+        window.addEventListener('load', fetchNasaSolarImage); // Cargar imagen de NASA al inicio
 
-        // --- NUEVA FUNCIÓN PARA LA IA ASTRONÓMICA CON GEMINI API ---
+        // --- FUNCIÓN PARA LA IA ASTRONÓMICA CON GEMINI API (se mantiene la original de Gemini) ---
         async function fetchIAExplanation() {
-            const geminiApiKey = 'AIzaSyBzVb38c6rplB85pK4jkSlNVjYwsBmfonQ'; // LA API KEY QUE PROPORCIONASTE
+            const geminiApiKey = 'AIzaSyBzVb38c6rplB85pK4jkSlNVjYwsBmfonQ'; // API KEY de Gemini
             const iaDetailElement = document.getElementById('ia-detail-text');
 
             if (!iaDetailElement) {
                 console.error("Elemento 'ia-detail-text' no encontrado.");
                 return;
             }
-
-            iaDetailElement.textContent = 'Consultando a nuestra IA astronómica...'; // Mensaje de carga
-
-            // Un prompt de ejemplo. Puedes cambiarlo según tus necesidades.
+            iaDetailElement.textContent = 'Consultando a nuestra IA astronómica (Gemini)...'; 
             const prompt = "Explica brevemente, en unas 80 palabras y de forma inspiradora, cómo la Inteligencia Artificial está transformando la astronomía moderna, para la web de un observatorio.";
 
             try {
-                // Usamos el modelo gemini-1.5-flash-latest que es eficiente para este tipo de tareas.
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${geminiApiKey}`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         contents: [{ parts: [{ text: prompt }] }],
-                        // Opcional: Configuración de generación y seguridad
-                        // generationConfig: { "temperature": 0.7, "maxOutputTokens": 150 },
-                        // safetySettings: [
-                        //   { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_MEDIUM_AND_ABOVE" },
-                        //   { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_MEDIUM_AND_ABOVE" }
-                        // ]
                     }),
                 });
-
                 if (!response.ok) {
-                    const errorData = await response.json(); // Intenta obtener detalles del error de la API
-                    console.error('Error de API Gemini:', errorData);
+                    const errorData = await response.json();
                     throw new Error(`Error de API Gemini: ${errorData.error?.message || response.status}`);
                 }
-
                 const data = await response.json();
-                
-                // Extraemos el texto generado. La estructura puede variar un poco, esta es la común.
-                if (data.candidates && data.candidates.length > 0 && 
-                    data.candidates[0].content && data.candidates[0].content.parts && 
-                    data.candidates[0].content.parts.length > 0) {
+                if (data.candidates && data.candidates.length > 0 && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts.length > 0) {
                     const generatedText = data.candidates[0].content.parts[0].text;
                     iaDetailElement.textContent = generatedText;
                 } else {
-                    // Esto puede pasar si el contenido fue bloqueado por filtros de seguridad o la respuesta es inesperada
-                    let fallbackMessage = 'No se pudo obtener una respuesta de la IA en este momento.';
+                    let fallbackMessage = 'No se pudo obtener una respuesta de la IA (Gemini) en este momento.';
                     if (data.promptFeedback && data.promptFeedback.blockReason) {
                         fallbackMessage += ` (Razón: ${data.promptFeedback.blockReason})`;
                     } else if (data.candidates && data.candidates.length > 0 && data.candidates[0].finishReason !== "STOP") {
-                         fallbackMessage += ` (Razón de finalización: ${data.candidates[0].finishReason})`;
+                        fallbackMessage += ` (Razón de finalización: ${data.candidates[0].finishReason})`;
                     }
                     iaDetailElement.textContent = fallbackMessage;
                     console.error('Respuesta inesperada o contenido bloqueado por API Gemini:', data);
                 }
-
             } catch (error) {
                 console.error('Error al contactar la IA Astronómica (Gemini API):', error);
-                iaDetailElement.textContent = `Error al conectar con la IA: ${error.message}. Revisa la consola y tu clave API.`;
+                iaDetailElement.textContent = `Error al conectar con la IA (Gemini): ${error.message}. Revisa la consola y tu clave API.`;
+            }
+        }
+        window.addEventListener('load', fetchIAExplanation); // Cargar explicación de IA (Gemini) al inicio
+        // --- FIN DE LA FUNCIÓN IA (Gemini) ---
+
+        // --- CÓDIGO PARA EL NUEVO CHATBOT IA CON GPT (OpenAI) ---
+        const chatDisplay = document.getElementById('chat-display');
+        const chatInput = document.getElementById('chat-input');
+        const chatSubmitButton = document.getElementById('chat-submit');
+        // ¡IMPORTANTE! USA TU CLAVE API DE PROYECTO DE OPENAI AQUÍ
+        const openAIApiKey_Chatbot = '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'; 
+
+        let conversationHistory = [
+            { 
+                role: "system", 
+                content: "Eres AstroBot, un asistente virtual del Observatorio de Física Cósmica de San Miguel. Eres amigable, didáctico y te especializas en astronomía, el sol, física cósmica, eventos astronómicos y las actividades del observatorio. Mantén tus respuestas concisas (máximo 2-3 frases cortas o un párrafo breve si es necesario), informativas y adecuadas para un público general interesado en la astronomía. Si te preguntan algo completamente fuera de tu especialidad (ej. recetas de cocina, política), indica amablemente que no puedes responder sobre ese tema específico ya que tu conocimiento se centra en la astronomía y el observatorio." 
+            }
+        ];
+
+        function addMessageToChatDisplay(message, sender) {
+            const messageElement = document.createElement('p');
+            messageElement.classList.add('mb-2', 'break-words'); // break-words para evitar desbordamiento
+            if (sender === 'user') {
+                messageElement.classList.add('text-right');
+                messageElement.innerHTML = `<span class="inline-block bg-yellow-500 bg-opacity-20 p-2 rounded-lg text-gray-200"><strong class="text-yellow-400">Tú:</strong> ${message}</span>`;
+            } else { // 'assistant'
+                messageElement.classList.add('text-left');
+                // Eliminar el mensaje "Pensando..." si existe
+                const thinkingMsg = chatDisplay.querySelector('.thinking-message');
+                if(thinkingMsg) thinkingMsg.remove();
+                messageElement.innerHTML = `<span class="inline-block bg-blue-500 bg-opacity-20 p-2 rounded-lg text-gray-200"><strong class="text-blue-400">AstroBot:</strong> ${message}</span>`;
+            }
+            chatDisplay.appendChild(messageElement);
+            chatDisplay.scrollTop = chatDisplay.scrollHeight; // Auto-scroll to bottom
+        }
+        
+        function showThinkingIndicator() {
+            const thinkingElement = document.createElement('p');
+            thinkingElement.classList.add('mb-2', 'text-left', 'thinking-message');
+            thinkingElement.innerHTML = `<span class="inline-block bg-blue-500 bg-opacity-20 p-2 rounded-lg text-gray-200"><strong class="text-blue-400">AstroBot:</strong> Pensando... <i class="fas fa-spinner fa-spin ml-1"></i></span>`;
+            chatDisplay.appendChild(thinkingElement);
+            chatDisplay.scrollTop = chatDisplay.scrollHeight;
+        }
+
+
+        async function handleChatSubmit() {
+            const userMessage = chatInput.value.trim();
+            if (!userMessage || !openAIApiKey_Chatbot) {
+                 if(!openAIApiKey_Chatbot) console.error("API Key de OpenAI para el Chatbot no está configurada.");
+                return;
+            }
+
+            addMessageToChatDisplay(userMessage, 'user');
+            conversationHistory.push({ role: "user", content: userMessage });
+            chatInput.value = ''; 
+            chatInput.disabled = true;
+            chatSubmitButton.disabled = true;
+            showThinkingIndicator();
+
+            try {
+                const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${openAIApiKey_Chatbot}`
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-3.5-turbo",
+                        messages: conversationHistory,
+                        max_tokens: 180, 
+                        temperature: 0.7
+                    })
+                });
+                
+                const thinkingMsg = chatDisplay.querySelector('.thinking-message');
+                if(thinkingMsg) thinkingMsg.remove();
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error('Error de API OpenAI (Chatbot):', errorData);
+                    addMessageToChatDisplay(`Error ${response.status}: ${errorData.error?.message || 'No se pudo obtener respuesta de AstroBot.'}`, 'assistant');
+                    conversationHistory.pop(); // Quita el último mensaje del usuario si la IA falla para reintentar
+                    return;
+                }
+
+                const data = await response.json();
+                if (data.choices && data.choices.length > 0 && data.choices[0].message && data.choices[0].message.content) {
+                    const aiMessage = data.choices[0].message.content.trim();
+                    addMessageToChatDisplay(aiMessage, 'assistant');
+                    conversationHistory.push({ role: "assistant", content: aiMessage });
+                } else {
+                    addMessageToChatDisplay('No se pudo obtener una respuesta válida de AstroBot en este momento.', 'assistant');
+                    console.error('Respuesta inesperada de API OpenAI (Chatbot):', data);
+                    conversationHistory.pop(); 
+                }
+
+            } catch (error) {
+                console.error('Error al contactar AstroBot (OpenAI API):', error);
+                const thinkingMsg = chatDisplay.querySelector('.thinking-message');
+                if(thinkingMsg) thinkingMsg.remove();
+                addMessageToChatDisplay(`Lo siento, hubo un problema de conexión con AstroBot. Intenta de nuevo más tarde. (${error.message})`, 'assistant');
+                conversationHistory.pop(); 
+            } finally {
+                chatInput.disabled = false;
+                chatSubmitButton.disabled = false;
+                chatInput.focus();
             }
         }
 
-        // Llamar a la función de IA al cargar la página
-        window.addEventListener('load', fetchIAExplanation);
-        // --- FIN DE LA NUEVA FUNCIÓN ---
+        if (chatSubmitButton && chatInput && chatDisplay) {
+            chatSubmitButton.addEventListener('click', handleChatSubmit);
+            chatInput.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // Evita que el Enter haga un submit de formulario si estuviera en uno
+                    handleChatSubmit();
+                }
+            });
+        } else {
+            console.warn("Elementos del ChatBot (chat-display, chat-input, chat-submit) no encontrados. Verifica los IDs en el HTML.");
+        }
+        // --- FIN CÓDIGO CHATBOT IA ---
 
 
-        // Google Maps API
+        // Google Maps API - Se mantiene el código original
         function initMap() {
             const observatoryLocation = { lat: -34.5650, lng: -58.7070 }; 
             const mapDiv = document.getElementById('map');
-            
+           
             if (typeof google !== 'undefined' && google.maps) {
-                mapDiv.innerHTML = '';
+                mapDiv.innerHTML = ''; 
                 const map = new google.maps.Map(mapDiv, {
                     center: observatoryLocation,
                     zoom: 15,
-                    styles: [ /* Estilos del mapa como antes */
-                        { elementType: "geometry", stylers: [{ color: "#242f3e" }] }, { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] }, { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] }, { featureType: "administrative.locality", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] }, { featureType: "poi", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] }, { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#263c3f" }] }, { featureType: "poi.park", elementType: "labels.text.fill", stylers: [{ color: "#6b9a76" }] }, { featureType: "road", elementType: "geometry", stylers: [{ color: "#38414e" }] }, { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#212a37" }] }, { featureType: "road", elementType: "labels.text.fill", stylers: [{ color: "#9ca5b3" }] }, { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#746855" }] }, { featureType: "road.highway", elementType: "geometry.stroke", stylers: [{ color: "#1f2835" }] }, { featureType: "road.highway", elementType: "labels.text.fill", stylers: [{ color: "#f3d19c" }] }, { featureType: "transit", elementType: "geometry", stylers: [{ color: "#2f3948" }] }, { featureType: "transit.station", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] }, { featureType: "water", elementType: "geometry", stylers: [{ color: "#17263c" }] }, { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#515c6d" }] }, { featureType: "water", elementType: "labels.text.stroke", stylers: [{ color: "#17263c" }] },
+                    styles: [ { elementType: "geometry", stylers: [{ color: "#242f3e" }] }, { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] }, { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] }, { featureType: "administrative.locality", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] }, { featureType: "poi", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] }, { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#263c3f" }] }, { featureType: "poi.park", elementType: "labels.text.fill", stylers: [{ color: "#6b9a76" }] }, { featureType: "road", elementType: "geometry", stylers: [{ color: "#38414e" }] }, { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#212a37" }] }, { featureType: "road", elementType: "labels.text.fill", stylers: [{ color: "#9ca5b3" }] }, { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#746855" }] }, { featureType: "road.highway", elementType: "geometry.stroke", stylers: [{ color: "#1f2835" }] }, { featureType: "road.highway", elementType: "labels.text.fill", stylers: [{ color: "#f3d19c" }] }, { featureType: "transit", elementType: "geometry", stylers: [{ color: "#2f3948" }] }, { featureType: "transit.station", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] }, { featureType: "water", elementType: "geometry", stylers: [{ color: "#17263c" }] }, { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#515c6d" }] }, { featureType: "water", elementType: "labels.text.stroke", stylers: [{ color: "#17263c" }] },
                     ]
                 });
                 new google.maps.Marker({
@@ -521,6 +654,6 @@
             }
         }
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLRE28Z6lc3CU8jG2gSZNPetJQeEDtI5A&callback=initMap"></script> {/* Tu API Key de Google Maps */}
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLRE28Z6lc3CU8jG2gSZNPetJQeEDtI5A&callback=initMap"></script> {/* API Key de Google Maps */}
 </body>
 </html>
