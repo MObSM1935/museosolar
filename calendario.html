@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observatorio de Física Cósmica de San Miguel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --space-blue: #0b0d17;
+            --cosmic-purple: #1e1a3e;
+            --starlight-yellow: #f6ad55;
+            --nebula-pink: #d53f8c;
+            --lunar-silver: #c0c0c0;
+            --meteor-red: #e57373;
+            --planet-blue: #64b5f6;
+            --special-event-green: #81c784;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--space-blue);
+            color: #e2e8f0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(214, 188, 250, 0.05) 0%, rgba(214, 188, 250, 0) 40%),
+                radial-gradient(circle at 90% 80%, rgba(246, 173, 85, 0.05) 0%, rgba(246, 173, 85, 0) 40%),
+                radial-gradient(circle at 50% 50%, rgba(100, 100, 220, 0.03) 0%, rgba(100, 100, 220, 0) 30%);
+        }
+        
+        .navbar-glass {
+            background-color: rgba(11, 13, 23, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(246, 173, 85, 0.2);
+        }
+        
+        .card {
+            background-color: rgba(30, 26, 62, 0.7);
+            border: 1px solid rgba(109, 40, 217, 0.3);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(214, 188, 250, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--starlight-yellow), var(--nebula-pink));
+            color: #1a202c;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(246, 173, 85, 0.4);
+        }
+        .btn-primary::after {
+            content: ''; position: absolute; top: -50%; left: -60%; width: 20px; height: 200%;
+            background: rgba(255, 255, 255, 0.3); transform: rotate(25deg); transition: all 0.5s;
+        }
+        .btn-primary:hover::after { left: 120%; }
+
+        .section-title {
+            color: var(--starlight-yellow);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        .section-title::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 80px; height: 3px; background: linear-gradient(90deg, var(--starlight-yellow), var(--nebula-pink));
+            border-radius: 3px;
+        }
+
+        /* Estilos específicos del Calendario Detallado */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-bottom: 2rem;
+        }
+        .calendar-header-cell {
+            background-color: var(--cosmic-purple);
+            color: var(--starlight-yellow);
+            padding: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            border-radius: 4px;
+        }
+        .calendar-day-cell {
+            background-color: rgba(30, 26, 62, 0.5);
+            border: 1px solid rgba(109, 40, 217, 0.2);
+            border-radius: 4px;
+            padding: 0.5rem;
+            min-height: 150px;
+            position: relative;
+            font-size: 0.8rem;
+        }
+        .calendar-day-cell.other-month {
+            background-color: rgba(11, 13, 23, 0.4);
+            color: #6b7280;
+        }
+        .day-number {
+            font-weight: 600;
+            color: var(--starlight-yellow);
+            margin-bottom: 0.25rem;
+            display: block;
+            text-align: right;
+            font-size: 0.9rem;
+        }
+        .event-entry {
+            background-color: rgba(213, 63, 140, 0.2);
+            color: #e2e8f0;
+            padding: 0.25rem 0.4rem;
+            border-radius: 3px;
+            margin-bottom: 0.25rem;
+            display: block;
+            font-size: 0.7rem;
+            line-height: 1.2;
+            border-left: 3px solid var(--nebula-pink);
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .event-entry:hover {
+            background-color: rgba(213, 63, 140, 0.4);
+        }
+        .event-entry i { margin-right: 0.25rem; }
+
+        /* Colores específicos para tipos de eventos */
+        .event-lunar { border-left-color: var(--lunar-silver); background-color: rgba(192,192,192,0.1); }
+        .event-meteor { border-left-color: var(--meteor-red); background-color: rgba(229,115,115,0.1); }
+        .event-planet { border-left-color: var(--planet-blue); background-color: rgba(100,181,246,0.1); }
+        .event-special { border-left-color: var(--special-event-green); background-color: rgba(129,199,132,0.1); }
+        .event-observatorio { border-left-color: var(--starlight-yellow); background-color: rgba(246,173,85,0.1); }
+        .event-premium { border-left-color: #60a5fa; background-color: rgba(96,165,250,0.1); }
+        
+        .legend-item { display: flex; align-items: center; margin-bottom: 0.5rem; font-size: 0.8rem; }
+        .legend-color-box { width: 1rem; height: 1rem; margin-right: 0.5rem; border-radius: 3px; }
+
+        .star-decoration {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+            z-index: 0; 
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0.2; transform: scale(0.8); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Decoración de estrellas -->
+    <div class="star-decoration" style="top: 5%; left: 5%; width: 1px; height: 1px; animation-delay: 0.5s;"></div>
+    <div class="star-decoration" style="top: 15%; left: 10%; width: 2px; height: 2px;"></div>
+    <div class="star-decoration" style="top: 10%; left: 30%; width: 1px; height: 1px; animation-delay: 1.5s;"></div>
+    <div class="star-decoration" style="top: 25%; left: 85%; width: 3px; height: 3px; animation-delay: 1s;"></div>
+    <div class="star-decoration" style="top: 30%; left: 60%; width: 2px; height: 2px; animation-delay: 2.5s;"></div>
+    <div class="star-decoration" style="top: 40%; left: 45%; width: 2px; height: 2px; animation-delay: 2s;"></div>
+    <div class="star-decoration" style="top: 50%; left: 90%; width: 1px; height: 1px; animation-delay: 3.5s;"></div>
+    <div class="star-decoration" style="top: 60%; left: 15%; width: 2px; height: 2px; animation-delay: 0.2s;"></div>
+    <div class="star-decoration" style="top: 70%; left: 25%; width: 3px; height: 3px; animation-delay: 3s;"></div>
+    <div class="star-decoration" style="top: 75%; left: 75%; width: 1px; height: 1px; animation-delay: 4.5s;"></div>
+    <div class="star-decoration" style="top: 85%; left: 65%; width: 2px; height: 2px; animation-delay: 4s;"></div>
+    <div class="star-decoration" style="top: 90%; left: 5%; width: 3px; height: 3px; animation-delay: 0.8s;"></div>
+    <div class="star-decoration" style="top: 95%; left: 50%; width: 1px; height: 1px; animation-delay: 2.2s;"></div>
+    <div class="star-decoration" style="top: 5%; left: 70%; width: 2px; height: 2px; animation-delay: 1.8s;"></div>
+    <div class="star-decoration" style="top: 65%; left: 95%; width: 2px; height: 2px; animation-delay: 3.2s;"></div>
+
+    <!-- Barra de navegación -->
+    <nav class="navbar-glass sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-white">
+                <i class="fas fa-satellite mr-2 text-yellow-400"></i>Observatorio San Miguel
+            </a>
+            <div class="hidden md:flex space-x-4 items-center">
+                <a href="#eventos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Eventos</a>
+                <a href="#calendario" class="text-yellow-400 font-semibold transition duration-300">Calendario Detallado</a>
+                <a href="#cursos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
+                <a href="#historia" class="text-gray-300 hover:text-yellow-400 transition duration-300">Nuestra Historia</a>
+                <a href="#premium" class="btn-primary px-4 py-2 rounded-full font-semibold">
+                    <i class="fas fa-star mr-1"></i>Premium
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-300 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="#eventos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Eventos</a>
+            <a href="#calendario" class="block text-yellow-400 font-semibold transition duration-300">Calendario Detallado</a>
+            <a href="#cursos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
+            <a href="#historia" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Nuestra Historia</a>
+            <a href="#premium" class="block btn-primary px-4 py-2 rounded-full font-semibold text-center mt-2">
+                <i class="fas fa-star mr-1"></i>Premium
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="py-20 bg-gradient-to-br from-cosmic-purple to-space-blue">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">Explora el Universo con Nosotros</h1>
+                <p class="text-xl text-gray-300 mb-8">Descubre los misterios del cosmos en el Observatorio de Física Cósmica de San Miguel</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#eventos" class="btn-primary px-8 py-4 rounded-full font-semibold text-lg">
+                        <i class="fas fa-calendar-alt mr-2"></i>Próximos Eventos
+                    </a>
+                    <a href="#cursos" class="bg-gray-800 hover:bg-gray-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition duration-300">
+                        <i class="fas fa-graduation-cap mr-2"></i>Nuestros Cursos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Eventos Destacados -->
+    <section id="eventos" class="py-20 bg-space-blue">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 section-title">Eventos Destacados</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Evento 1 -->
+                <div class="card p-6">
+                    <div class="bg-gray-800 rounded-lg p-4 mb-4">
+                        <span class="text-yellow-400 font-semibold">12 Ago 2025 | 23:00</span>
+                        <h3 class="text-xl font-bold text-white mt-2">Lluvia de Perseidas</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Observación especial de la famosa lluvia de meteoros en su pico máximo. Trae tu manta y disfruta del espectáculo celeste.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="bg-purple-600 text-white px-3 py-1 rounded-full text-sm">Astronomía</span>
+                        <a href="#" class="text-yellow-400 hover:text-yellow-300 font-semibold">Ver detalles <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Evento 2 -->
+                <div class="card p-6">
+                    <div class="bg-gray-800 rounded-lg p-4 mb-4">
+                        <span class="text-yellow-400 font-semibold">15 Ago 2025 | 20:00</span>
+                        <h3 class="text-xl font-bold text-white mt-2">Noche de Observación Lunar</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Explora los cráteres, mares y montañas de la Luna con nuestros telescopios profesionales y guías expertos.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm">Taller</span>
+                        <a href="#" class="text-yellow-400 hover:text-yellow-300 font-semibold">Ver detalles <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Evento 3 -->
+                <div class="card p-6">
+                    <div class="bg-gray-800 rounded-lg p-4 mb-4">
+                        <span class="text-yellow-400 font-semibold">20 Ago 2025 | 19:00</span>
+                        <h3 class="text-xl font-bold text-white mt-2">Charla: Agujeros Negros</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Conoce los secretos de los objetos más enigmáticos del universo con nuestro experto en relatividad general.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="bg-pink-600 text-white px-3 py-1 rounded-full text-sm">Conferencia</span>
+                        <a href="#" class="text-yellow-400 hover:text-yellow-300 font-semibold">Ver detalles <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#calendario" class="btn-primary px-8 py-4 rounded-full font-semibold text-lg">
+                    <i class="fas fa-calendar-check mr-2"></i>Ver Calendario Completo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calendario Astronómico Detallado -->
+    <section id="calendario" class="py-20 bg-gradient-to-br from-cosmic-purple to-space-blue">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-4xl font-bold text-center mb-6 section-title">Calendario Astronómico Detallado 2025</h2>
+            <p class="text-center text-gray-300 text-lg mb-12 max-w-3xl mx-auto">
+                Explora nuestra agenda cósmica mes a mes. Aquí encontrarás todos los eventos del observatorio, fenómenos astronómicos importantes y actividades especiales. ¡No te pierdas nada de lo que el universo y el Observatorio San Miguel tienen para ofrecerte!
+            </p>
+
+            <div class="card p-6 mb-12 max-w-2xl mx-auto">
+                <h3 class="text-xl font-semibold text-white mb-4 text-center">Leyenda de Eventos</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="legend-item"><div class="legend-color-box" style="background-color: var(--starlight-yellow);"></div><span>Evento General del Observatorio</span></div>
+                    <div class="legend-item"><div class="legend-color-box" style="background-color: var(--nebula-pink);"></div><span>Charla / Conferencia</span></div>
+                    <div class="legend-item"><div class="legend-color-box" style="background-color: var(--cosmic-purple); border: 1px solid var(--starlight-yellow);"></div><span>Taller / Curso</span></div>
+                    <div class="legend-item"><div class="legend-color-box" style="background-color: var(--lunar-silver);"></div><span>Evento Lunar (Fase, Eclipse)</span></div>
+                    <div class="legend-item"><div class="legend-color-box" style="background-color: var(--meteor-red);"></div><span>Lluvia de Meteoros</span></div>
+                    <div class="legend-item"><div class="legend-color-box" style="background-color: var(--planet-blue);"></div><span>Evento Planetario (Oposición, Conjunción)</span></div>
+                    <div class="legend-item"><div class="legend-color-box" style="background-color: var(--special-event-green);"></div><span>Evento Especial / Festival</span></div>
+                    <div class="legend-item"><div class="legend-color-box" style="background-color: #60a5fa;"></div><span>Evento Premium</span></div>
+                </div>
+                <p class="text-xs text-gray-400 mt-4 text-center">Haz clic en un evento para ver más detalles.</p>
+            </div>
+            
+            <!-- Calendario de Mayo 2025 -->
+            <div class="mb-16">
+                <h3 class="text-3xl font-bold text-yellow-400 mb-8 text-center">Mayo 2025</h3>
+                <div class="calendar-grid">
+                    <div class="calendar-header-cell">Lun</div>
+                    <div class="calendar-header-cell">Mar</div>
+                    <div class="calendar-header-cell">Mié</div>
+                    <div class="calendar-header-cell">Jue</div>
+                    <div class="calendar-header-cell">Vie</div>
+                    <div class="calendar-header-cell">Sáb</div>
+                    <div class="calendar-header-cell">Dom</div>
+
+                    <div class="calendar-day-cell other-month"><span class="day-number">28</span></div>
+                    <div class="calendar-day-cell other-month"><span class="day-number">29</span></div>
+                    <div class="calendar-day-cell other-month"><span class="day-number">30</span></div>
+
+                    <div class="calendar-day-cell">
+                        <span class="day-number">1</span>
+                        <span class="event-entry event-observatorio"><i class="fas fa-star"></i>20:00 - Noche Observación Pública</span>
+                    </div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">2</span>
+                        <span class="event-entry event-lunar"><i class="fas fa-moon"></i>Luna en Cuarto Creciente</span>
+                        <span class="event-entry"><i class="fas fa-chalkboard-teacher"></i>18:00 - Taller: Constelaciones de Otoño</span>
+                    </div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">3</span>
+                        <span class="event-entry"><i class="fas fa-users"></i>10:00 - Club Pequeños Cosmonautas</span>
+                    </div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">4</span>
+                        <span class="event-entry event-meteor"><i class="fas fa-meteor"></i>Pico Eta Acuáridas (AM)</span>
+                    </div>
+                    <div class="calendar-day-cell"><span class="day-number">5</span></div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">6</span>
+                        <span class="event-entry event-lunar"><i class="fas fa-circle"></i>21:05 - Luna Llena</span>
+                    </div>
+                    <div class="calendar-day-cell"><span class="day-number">7</span></div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">8</span>
+                        <span class="event-entry event-observatorio"><i class="fas fa-star"></i>20:00 - Noche Observación Pública</span>
+                    </div>
+                    <div class="calendar-day-cell"><span class="day-number">9</span></div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">10</span>
+                        <span class="event-entry"><i class="fas fa-microphone-alt"></i>19:00 - Charla: "La Búsqueda de Agua en Marte"</span>
+                    </div>
+                    <div class="calendar-day-cell"><span class="day-number">11</span></div>
+                    <div class="calendar-day-cell"><span class="day-number">12</span></div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">13</span>
+                        <span class="event-entry event-lunar"><i class="fas fa-adjust"></i>Luna en Cuarto Menguante</span>
+                    </div>
+                    <div class="calendar-day-cell"><span class="day-number">14</span></div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">15</span>
+                        <span class="event-entry event-observatorio"><i class="fas fa-star"></i>20:00 - Noche Observación Pública</span>
+                        <span class="event-entry event-special"><i class="fas fa-school"></i>Visita Escolar Programada</span>
+                    </div>
+                    <div class="calendar-day-cell"><span class="day-number">16</span></div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">17</span>
+                         <span class="event-entry"><i class="fas fa-users"></i>10:00 - Club Pequeños Cosmonautas</span>
+                         <span class="event-entry"><i class="fas fa-tools"></i>15:00 - Taller: "Calibración de Telescopios"</span>
+                    </div>
+                    <div class="calendar-day-cell"><span class="day-number">18</span></div>
+                    <div class="calendar-day-cell"><span class="day-number">19</span></div>
+                    <div class="calendar-day-cell"><span class="day-number">20</span></div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">21</span>
+                         <span class="event-entry event-lunar"><i class="far fa-circle"></i>03:33 - Luna Nueva</span>
+                    </div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">22</span>
+                        <span class="event-entry event-observatorio"><i class="fas fa-star"></i>20:00 - Noche Observación (Cielo Profundo)</span>
+                    </div>
+                    <div class="calendar-day-cell"><span class="day-number">23</span></div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">24</span>
+                        <span class="event-entry"><i class="fas fa-microphone-alt"></i>19:00 - Charla: "El Big Bang y el Origen del Universo"</span>
+                         <span class="event-entry event-premium"><i class="fas fa-crown"></i>21:00 - Sesión Q&A Premium con Director</span>
+                    </div>
+                    <div class="calendar-day-cell"><span class="day-number">25</span></div>
+                    <div class="calendar-day-cell"><span class="day-number">26</span></div>
+                    <div class="calendar-day-cell"><span class="day-number">27</span></div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">28</span> <span class="event-entry event-lunar"><i class="fas fa-moon"></i>Luna en Cuarto Creciente</span>
+                        <span class="event-entry event-observatorio"><i class="fas fa-star"></i>20:00 - Noche de Observación Pública Especial: Mercurio visible</span>
+                    </div>
+                    <div class="calendar-day-cell"><span class="day-number">29</span>
+                        <span class="event-entry"><i class="fas fa-tools"></i>17:00 - Taller: "Astrofotografía Planetaria" (Parte 1)</span>
+                    </div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">30</span>
+                        <span class="event-entry"><i class="fas fa-tools"></i>17:00 - Taller: "Astrofotografía Planetaria" (Parte 2)</span>
+                    </div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">31</span>
+                        <span class="event-entry"><i class="fas fa-users"></i>10:00 - Club Pequeños Cosmonautas: Cierre de Mes</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Calendario de Junio 2025 -->
+            <div class="mb-16">
+                <h3 class="text-3xl font-bold text-yellow-400 mb-8 text-center">Junio 2025</h3>
+                <div class="calendar-grid">
+                    <div class="calendar-header-cell">Lun</div>
+                    <div class="calendar-header-cell">Mar</div>
+                    <div class="calendar-header-cell">Mié</div>
+                    <div class="calendar-header-cell">Jue</div>
+                    <div class="calendar-header-cell">Vie</div>
+                    <div class="calendar-header-cell">Sáb</div>
+                    <div class="calendar-header-cell">Dom</div>
+
+                    <div class="calendar-day-cell other-month"><span class="day-number"></span></div>
+                    <div class="calendar-day-cell other-month"><span class="day-number"></span></div>
+                    <div class="calendar-day-cell other-month"><span class="day-number"></span></div>
+                    <div class="calendar-day-cell other-month"><span class="day-number"></span></div>
+                    <div class="calendar-day-cell other-month"><span class="day-number"></span></div>
+                    <div class="calendar-day-cell other-month"><span class="day-number"></span></div>
+                    
+                    <div class="calendar-day-cell">
+                        <span class="day-number">1</span>
+                        <span class="event-entry event-planet"><i class="fas fa-globe-americas"></i>Mercurio en máxima elongación Este</span>
+                    </div>
+                    <div class="calendar-day-cell"><span class="day-number">2</span></div>
+                    <div class="calendar-day-cell"><span class="day-number">3</span></div>
+                    <div class="calendar-day-cell"><span class="day-number">4</span></div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">5</span>
+                        <span class="event-entry event-observatorio"><i class="fas fa-star"></i>20:30 - Noche Observación Pública</span>
+                         <span class="event-entry event-lunar"><i class="fas fa-circle"></i>05:12 - Luna Llena</span>
+                    </div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">6</span>
+                        <span class="event-entry"><i class="fas fa-microphone-alt"></i>19:00 - Charla: "Cosmología Oscura: Materia y Energía"</span>
+                    </div>
+                    <div class="calendar-day-cell"><span class="day-number">7</span></div>
+                    <div class="calendar-day-cell"><span class="day-number">8</span></div>
+                    <div class="calendar-day-cell"><span class="day-number">9</span></div>
+                    <div class="calendar-day-cell"><span class="day-number">10</span></div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">11</span>
+                        <span class="event-entry event-lunar"><i class="fas fa-adjust"></i>Luna en Cuarto Menguante</span>
+                    </div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">12</span>
+                        <span class="event-entry event-observatorio"><i class="fas fa-star"></i>20:30 - Noche Observación Pública</span>
+                    </div>
+                    <div class="calendar-day-cell"><span class="day-number">13</span></div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">14</span>
+                        <span class="event-entry"><i class="fas fa-users"></i>10:00 - Club Pequeños Cosmonautas</span>
+                        <span class="event-entry"><i class="fas fa-tools"></i>15:00 - Taller: "Software de Simulación Astronómica"</span>
+                    </div>
+                    <div class="calendar-day-cell"><span class="day-number">15</span></div>
+                    <div class="calendar-day-cell"><span class="day-number">16</span></div>
+                    <div class="calendar-day-cell"><span class="day-number">17</span></div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">18</span>
+                        <span class="event-entry event-premium"><i class="fas fa-crown"></i>19:00 - Webinar Premium: "Astrofísica de Altas Energías"</span>
+                    </div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">19</span>
+                        <span class="event-entry event-observatorio"><i class="fas fa-star"></i>20:30 - Noche Observación Pública</span>
+                         <span class="event-entry event-lunar"><i class="far fa-circle"></i>15:03 - Luna Nueva</span>
+                    </div>
+                    <div class="calendar-day-cell"><span class="day-number">20</span></div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">21</span>
+                        <span class="event-entry event-special"><i class="fas fa-sun"></i>00:04 - Solsticio de Invierno</span>
+                        <span class="event-entry event-special"><i class="fas fa-campground"></i>18:00 - Festejo Solsticio: Fogón y Cuentos del Cosmos</span>
+                    </div>
+                    <div class="calendar-day-cell"><span class="day-number">22</span></div>
+                    <div class="calendar-day-cell"><span class="day-number">23</span></div>
+                    <div class="calendar-day-cell"><span class="day-number">24</span></div>
+                    <div class="calendar-day-cell"><span class="day-number">25</span></div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">26</span>
+                        <span class="event-entry event-observatorio"><i class="fas fa-star"></i>20:30 - Noche Observación Pública (Constelaciones Invernales)</span>
+                        <span class="event-entry event-lunar"><i class="fas fa-moon"></i>Luna en Cuarto Creciente</span>
+                    </div>
+                    <div class="calendar-day-cell"><span class="day-number">27</span></div>
+                    <div class="calendar-day-cell">
+                        <span class="day-number">28</span>
+                        <span class="event-entry"><i class="fas fa-users"></i>10:00 - Club Pequeños Cosmonautas</span>
+                        <span class="event-entry"><i class="fas fa-camera-retro"></i>16:00 - Concurso Fotografía: "Cielos de Invierno" (Cierre)</span>
+                    </div>
+                    <div class="calendar-day-cell"><span class="day-number">29</span></div>
+                    <div class="calendar-day-cell"><span class="day-number">30</span></div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#contacto" class="btn-primary px-8 py-4 rounded-full font-semibold text-lg">
+                    <i class="fas fa-question-circle mr-2"></i>¿Consultas sobre el Calendario? Contáctanos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Cursos -->
+    <section id="cursos" class="py-20 bg-space-blue">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 section-title">Nuestros Cursos</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Curso 1 -->
+                <div class="card p-6">
+                    <div class="bg-gray-800 rounded-lg p-4 mb-4">
+                        <span class="text-yellow-400 font-semibold">Inicia: 10 Sep 2025</span>
+                        <h3 class="text-xl font-bold text-white mt-2">Astronomía para Principiantes</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Descubre el cielo nocturno, aprende a identificar constelaciones y a usar telescopios básicos. Perfecto para entusiastas sin experiencia previa.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="bg-purple-600 text-white px-3 py-1 rounded-full text-sm">8 semanas</span>
+                        <a href="#" class="text-yellow-400 hover:text-yellow-300 font-semibold">Inscríbete <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Curso 2 -->
+                <div class="card p-6">
+                    <div class="bg-gray-800 rounded-lg p-4 mb-4">
+                        <span class="text-yellow-400 font-semibold">Inicia: 15 Sep 2025</span>
+                        <h3 class="text-xl font-bold text-white mt-2">Astrofotografía Digital</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Domina las técnicas para capturar el cosmos con tu cámara. Desde paisajes estelares hasta imágenes planetarias.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm">6 semanas</span>
+                        <a href="#" class="text-yellow-400 hover:text-yellow-300 font-semibold">Inscríbete <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Curso 3 -->
+                <div class="card p-6">
+                    <div class="bg-gray-800 rounded-lg p-4 mb-4">
+                        <span class="text-yellow-400 font-semibold">Inicia: 20 Sep 2025</span>
+                        <h3 class="text-xl font-bold text-white mt-2">Cosmología Moderna</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Explora los misterios del universo: Big Bang, materia oscura, energía oscura y la expansión cósmica.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="bg-pink-600 text-white px-3 py-1 rounded-full text-sm">10 semanas</span>
+                        <a href="#" class="text-yellow-400 hover:text-yellow-300 font-semibold">Inscríbete <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Premium -->
+    <section id="premium" class="py-20 bg-gradient-to-br from-purple-900 to-blue-900">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl font-bold text-white mb-6 section-title">Membresía Premium</h2>
+                <p class="text-xl text-gray-300 mb-8">Accede a beneficios exclusivos y apoya nuestra misión de divulgación científica</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="card p-6">
+                        <div class="text-yellow-400 text-3xl mb-4">
+                            <i class="fas fa-telescope"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Acceso a Telescopios Remotos</h3>
+                        <p class="text-gray-300">Controla nuestros telescopios profesionales desde cualquier lugar</p>
+                    </div>
+                    
+                    <div class="card p-6">
+                        <div class="text-yellow-400 text-3xl mb-4">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Sesiones Exclusivas</h3>
+                        <p class="text-gray-300">Charlas y Q&A con astrónomos e investigadores destacados</p>
+                    </div>
+                    
+                    <div class="card p-6">
+                        <div class="text-yellow-400 text-3xl mb-4">
+                            <i class="fas fa-calendar-star"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Eventos Prioritarios</h3>
+                        <p class="text-gray-300">Reserva anticipada para eventos especiales y observaciones</p>
+                    </div>
+                </div>
+                
+                <a href="#" class="btn-primary px-8 py-4 rounded-full font-semibold text-lg inline-block">
+                    <i class="fas fa-crown mr-2"></i>Hazte Miembro Premium
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer class="py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Observatorio San Miguel</h3>
+                    <p class="text-gray-400">Explorando el cosmos desde 1985. Comprometidos con la divulgación científica y la investigación astronómica.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Enlaces Rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#eventos" class="text-gray-400 hover:text-yellow-400">Eventos</a></li>
+                        <li><a href="#calendario" class="text-gray-400 hover:text-yellow-400">Calendario</a></li>
+                        <li><a href="#cursos" class="text-gray-400 hover:text-yellow-400">Cursos</a></li>
+                        <li><a href="#premium" class="text-gray-400 hover:text-yellow-400">Premium</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Contacto</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-map-marker-alt mr-2"></i> Ruta 8, Km 45, San Miguel</li>
+                        <li><i class="fas fa-phone mr-2"></i> (011) 4785-2233</li>
+                        <li><i class="fas fa-envelope mr-2"></i> info@observatoriosanmiguel.ar</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Síguenos</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-facebook-f text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-purple-600"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-red-600"><i class="fab fa-youtube text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>© <span id="currentYear"></span> Observatorio de Física Cósmica de San Miguel. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menú móvil
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuButton && mobileMenu) {
+          mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+          });
+        }
+
+        // Año actual en footer
+        const currentYearElem = document.getElementById('currentYear');
+        if (currentYearElem) {
+          currentYearElem.textContent = new Date().getFullYear();
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId.length > 1) {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+        
+        // Detalles de eventos del calendario
+        document.querySelectorAll('.event-entry').forEach(entry => {
+            entry.addEventListener('click', () => {
+                // Crear modal con detalles
+                const modal = document.createElement('div');
+                modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4';
+                modal.innerHTML = `
+                    <div class="bg-gray-800 rounded-lg p-6 max-w-md w-full">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-white">Detalles del Evento</h3>
+                            <button class="text-gray-400 hover:text-white">&times;</button>
+                        </div>
+                        <div class="text-gray-300 mb-4">${entry.innerHTML}</div>
+                        <p class="text-sm text-gray-500 mb-4">Haz clic en cualquier lugar para cerrar</p>
+                        <button class="btn-primary px-4 py-2 rounded font-semibold w-full">Reservar Lugar</button>
+                    </div>
+                `;
+                
+                // Cerrar modal al hacer clic
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal || e.target.tagName === 'BUTTON') {
+                        document.body.removeChild(modal);
+                    }
+                });
+                
+                document.body.appendChild(modal);
+            });
+        });
+    </script>
+</body>
+</html>
