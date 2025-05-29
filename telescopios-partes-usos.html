@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso: Telescopios: Partes y Usos - Observatorio San Miguel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --space-blue: #0b0d17;
+            --cosmic-purple: #1e1a3e;
+            --starlight-yellow: #f6ad55;
+            --nebula-pink: #d53f8c;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--space-blue);
+            color: #e2e8f0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(214, 188, 250, 0.05) 0%, rgba(214, 188, 250, 0) 40%),
+                radial-gradient(circle at 90% 80%, rgba(246, 173, 85, 0.05) 0%, rgba(246, 173, 85, 0) 40%),
+                radial-gradient(circle at 50% 50%, rgba(100, 100, 220, 0.03) 0%, rgba(100, 100, 220, 0) 30%);
+        }
+        
+        .navbar-glass {
+            background-color: rgba(11, 13, 23, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(246, 173, 85, 0.2);
+        }
+
+        .course-hero-section {
+            background-image: linear-gradient(to bottom, rgba(11, 13, 23, 0.7), rgba(30, 26, 62, 0.85)), url('https://images.unsplash.com/photo-1518065704062-02aa0a26cedc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            min-height: 60vh;
+        }
+        
+        .card { /* Reutilizando el estilo de card del index */
+            background-color: rgba(30, 26, 62, 0.7);
+            border: 1px solid rgba(109, 40, 217, 0.3);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--starlight-yellow), var(--nebula-pink));
+            color: #1a202c;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(246, 173, 85, 0.4);
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20px;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(25deg);
+            transition: all 0.5s;
+        }
+        
+        .btn-primary:hover::after {
+            left: 120%;
+        }
+        
+        .section-title {
+            color: var(--starlight-yellow);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--starlight-yellow), var(--nebula-pink));
+            border-radius: 3px;
+        }
+        
+        .star-decoration {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+            z-index: 0;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0.2; transform: scale(0.8); }
+        }
+
+        .course-detail-card { /* Estilo específico para la tarjeta principal del curso */
+             box-shadow: 0 10px 30px rgba(11, 13, 23, 0.5);
+        }
+
+        .modal-tab { /* Reutilizando estilos de tabs de los modales del index */
+            color: #a0aec0; /* Tailwind gray-500 */
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .modal-tab:hover {
+            color: var(--starlight-yellow);
+        }
+        .modal-tab.active-tab {
+            border-bottom: 2px solid var(--starlight-yellow);
+            color: var(--starlight-yellow);
+        }
+        .course-content img {
+            border-radius: 8px;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="star-decoration" style="top: 5%; left: 5%; width: 1px; height: 1px; animation-delay: 0.5s;"></div>
+    <div class="star-decoration" style="top: 15%; left: 10%; width: 2px; height: 2px;"></div>
+    <div class="star-decoration" style="top: 10%; left: 30%; width: 1px; height: 1px; animation-delay: 1.5s;"></div>
+    <div class="star-decoration" style="top: 25%; left: 85%; width: 3px; height: 3px; animation-delay: 1s;"></div>
+    <div class="star-decoration" style="top: 30%; left: 60%; width: 2px; height: 2px; animation-delay: 2.5s;"></div>
+    <div class="star-decoration" style="top: 40%; left: 45%; width: 2px; height: 2px; animation-delay: 2s;"></div>
+    <div class="star-decoration" style="top: 50%; left: 90%; width: 1px; height: 1px; animation-delay: 3.5s;"></div>
+
+    <nav class="navbar-glass sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-white">
+                <i class="fas fa-satellite mr-2 text-yellow-400"></i>Observatorio San Miguel
+            </a>
+            <div class="hidden md:flex space-x-4 items-center">
+                <a href="index.html#eventos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Eventos</a>
+                <a href="index.html#ubicacion" class="text-gray-300 hover:text-yellow-400 transition duration-300">Ubicación</a>
+                <a href="index.html#cursos" class="text-yellow-400 font-semibold transition duration-300">Cursos</a> <a href="calendarios.html" class="text-gray-300 hover:text-yellow-400 transition duration-300">Calendario</a>
+                <a href="index.html#comunidad" class="text-gray-300 hover:text-yellow-400 transition duration-300">Foro</a>
+                <a href="index.html#ia-stro" class="text-gray-300 hover:text-yellow-400 transition duration-300">IA.STRO</a>
+                <a href="index.html#descargas" class="text-gray-300 hover:text-yellow-400 transition duration-300">Descargas</a>
+                <a href="index.html#contacto" class="text-gray-300 hover:text-yellow-400 transition duration-300">Contacto</a>
+                <a href="index.html#premium" class="btn-primary px-4 py-2 rounded-full font-semibold">
+                    <i class="fas fa-star mr-1"></i>Premium
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-300 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="index.html#eventos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Eventos</a>
+            <a href="index.html#ubicacion" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Ubicación</a>
+            <a href="index.html#cursos" class_active="block text-yellow-400 font-semibold transition duration-300">Cursos</a>
+            <a href="calendarios.html" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Calendario</a>
+            <a href="index.html#comunidad" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Foro</a>
+            <a href="index.html#ia-stro" class="block text-gray-300 hover:text-yellow-400 transition duration-300">IA.STRO</a>
+            <a href="index.html#descargas" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Descargas</a>
+            <a href="index.html#contacto" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Contacto</a>
+            <a href="index.html#premium" class="block btn-primary px-4 py-2 rounded-full font-semibold text-center mt-2">
+                <i class="fas fa-star mr-1"></i>Premium
+            </a>
+        </div>
+    </nav>
+
+    <header class="course-hero-section flex items-center justify-center text-center">
+        <div class="container mx-auto px-6 relative z-10">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+                Curso: <span class="text-yellow-400">Telescopios: Partes y Usos</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
+                Domina el arte de la observación astronómica aprendiendo todo sobre los telescopios, desde su selección hasta su manejo experto.
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 py-12">
+        <article class="course-detail-card max-w-4xl w-full mx-auto p-6 sm:p-8 md:p-10 rounded-lg shadow-2xl relative">
+            <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-yellow-400 mb-2">Telescopios: Partes y Usos</h2>
+                    <p class="text-gray-300 mb-1 text-lg">Instructor: <span class="font-semibold text-white">Dr. Nicolás Balbi</span></p>
+                    <span class="bg-yellow-500 text-gray-900 px-4 py-1 rounded-full text-sm sm:text-base font-bold inline-block">6 Módulos Completos</span>
+                </div>
+                <div class="mt-4 md:mt-0 text-left md:text-right">
+                    <div class="text-3xl font-bold text-yellow-400">ARS 150.000</div>
+                    <p class="text-gray-400 text-sm">o certificación gratis con <a href="index.html#premium" class="text-yellow-300 hover:underline">Premium</a></p>
+                    <button class="btn-primary px-6 py-3 rounded-full font-semibold text-lg mt-3 w-full md:w-auto">
+                        <i class="fas fa-shopping-cart mr-2"></i>Inscribirme Ahora
+                    </button>
+                </div>
+            </div>
+
+            <div class="mb-6 border-b border-gray-700">
+                <nav class="flex flex-wrap space-x-2 sm:space-x-4 -mb-px" aria-label="Tabs">
+                    <button data-tab="desc-telescopios" class="modal-tab active-tab px-3 py-3 sm:px-4 font-medium text-sm sm:text-base rounded-t-lg"><i class="fas fa-info-circle mr-2"></i>Descripción</button>
+                    <button data-tab="mod-telescopios" class="modal-tab px-3 py-3 sm:px-4 font-medium text-sm sm:text-base rounded-t-lg"><i class="fas fa-list-ol mr-2"></i>Módulos</button>
+                    <button data-tab="inst-telescopios" class="modal-tab px-3 py-3 sm:px-4 font-medium text-sm sm:text-base rounded-t-lg"><i class="fas fa-chalkboard-teacher mr-2"></i>Instructor</button>
+                    <button data-tab="faq-telescopios" class="modal-tab px-3 py-3 sm:px-4 font-medium text-sm sm:text-base rounded-t-lg"><i class="fas fa-question-circle mr-2"></i>FAQ</button>
+                </nav>
+            </div>
+
+            <div class="course-content">
+                <div data-tab-content="desc-telescopios" class="modal-tab-content">
+                    <h3 class="text-2xl font-semibold text-white mb-4">Acerca de Este Curso</h3>
+                    <p class="text-gray-300 leading-relaxed text-base mb-4">
+                        Este curso integral está diseñado para entusiastas de la astronomía de todos los niveles que deseen comprender a fondo los telescopios. Desde los principios básicos de la óptica hasta el manejo avanzado de equipos, el Dr. Nicolás Balbi te guiará a través de seis módulos llenos de información práctica y teórica.
+                    </p>
+                    <img src="https://images.unsplash.com/photo-161029049640e7c0db8a94d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Detalle de un telescopio profesional" class="w-full md:w-3/4 mx-auto my-6 rounded-lg shadow-xl">
+                    <p class="text-gray-300 leading-relaxed text-base mb-4">
+                        Aprenderás a identificar los diferentes tipos de telescopios (refractores, reflectores, catadióptricos), sus componentes clave (objetivos, oculares, monturas), y cómo elegir el equipo adecuado para tus necesidades y presupuesto. Además, se cubrirán técnicas de mantenimiento, colimación y los accesorios más útiles para mejorar tu experiencia de observación.
+                    </p>
+                    <p class="text-gray-300 leading-relaxed text-base">
+                        Al finalizar, serás capaz de seleccionar, montar, operar y mantener tu propio telescopio con confianza, abriendo una ventana personal al vasto universo que nos rodea. ¡Prepárate para explorar el cosmos como nunca antes!
+                    </p>
+                     <img src="https://images.unsplash.com/photo-1447433589629-149beeC05015?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Persona observando a través de un telescopio" class="w-full md:w-3/4 mx-auto my-6 rounded-lg shadow-xl">
+                </div>
+
+                <div data-tab-content="mod-telescopios" class="modal-tab-content hidden">
+                    <h3 class="text-2xl font-semibold text-white mb-4">Contenido del Curso (6 Módulos)</h3>
+                    <ul class="space-y-3 text-gray-300 text-base">
+                        <li class="p-4 bg-gray-800 bg-opacity-50 rounded-md border-l-4 border-yellow-400"><strong>Módulo 1:</strong> Introducción a la Óptica Astronómica y Tipos de Telescopios. Ventajas y desventajas.</li>
+                        <li class="p-4 bg-gray-800 bg-opacity-50 rounded-md border-l-4 border-yellow-400"><strong>Módulo 2:</strong> Componentes Clave: Objetivos, Espejos, Oculares (tipos y cálculos), Buscadores.</li>
+                        <li class="p-4 bg-gray-800 bg-opacity-50 rounded-md border-l-4 border-yellow-400"><strong>Módulo 3:</strong> Monturas Telescópicas: Ecuatoriales vs. Altazimutales. GoTo. Puesta en estación.</li>
+                        <li class="p-4 bg-gray-800 bg-opacity-50 rounded-md border-l-4 border-yellow-400"><strong>Módulo 4:</strong> Selección y Compra: Telescopio ideal para ti. Accesorios Esenciales y Opcionales.</li>
+                        <li class="p-4 bg-gray-800 bg-opacity-50 rounded-md border-l-4 border-yellow-400"><strong>Módulo 5:</strong> Operación Práctica: Enfoque, Búsqueda de Objetos (Star Hopping), Observación segura del Sol.</li>
+                        <li class="p-4 bg-gray-800 bg-opacity-50 rounded-md border-l-4 border-yellow-400"><strong>Módulo 6:</strong> Mantenimiento Básico, Colimación (Newtonianos y SCTs). Resolución de Problemas Comunes.</li>
+                    </ul>
+                </div>
+                
+                <div data-tab-content="inst-telescopios" class="modal-tab-content hidden">
+                    <h3 class="text-2xl font-semibold text-white mb-4">Sobre el Instructor: Dr. Nicolás Balbi</h3>
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start">
+                        <img src="https://via.placeholder.com/150x150.png?text=Dr.+N.+Balbi" alt="Dr. Nicolás Balbi" class="rounded-full float-left mr-0 sm:mr-6 mb-4 sm:mb-0 w-32 h-32 sm:w-36 sm:h-36 border-4 border-yellow-400">
+                        <div class="text-gray-300 leading-relaxed text-base">
+                            <p class="mb-3">
+                                El Dr. Nicolás Balbi es un reconocido astrónomo y divulgador científico con más de 20 años de experiencia en observación astronómica y astrofísica. Graduado de la Universidad Nacional de La Plata, ha participado en numerosos proyectos de investigación y es un apasionado por la enseñanza de la astronomía a públicos de todas las edades.
+                            </p>
+                            <p class="mb-3">
+                                Su especialidad radica en la instrumentación astronómica y las técnicas de observación. Es autor de varios artículos y guías prácticas sobre el uso de telescopios, y actualmente se desempeña como director y coordinador de actividades en el Observatorio de Física Cósmica de San Miguel.
+                            </p>
+                            <p>
+                                Su estilo didáctico y accesible hace que los conceptos más complejos sean fáciles de entender, inspirando a futuras generaciones de exploradores del cosmos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div data-tab-content="faq-telescopios" class="modal-tab-content hidden">
+                    <h3 class="text-2xl font-semibold text-white mb-4">Preguntas Frecuentes</h3>
+                    <div class="space-y-4 text-base">
+                        <div class="p-4 bg-gray-800 bg-opacity-50 rounded-md">
+                            <p class="font-semibold text-yellow-300 mb-1">¿Necesito tener un telescopio para tomar el curso?</p>
+                            <p class="text-gray-300">No es estrictamente necesario al inicio, pero será muy útil para aplicar los conocimientos prácticos. El curso cubre cómo seleccionar uno si aún no lo tienes.</p>
+                        </div>
+                        <div class="p-4 bg-gray-800 bg-opacity-50 rounded-md">
+                            <p class="font-semibold text-yellow-300 mb-1">¿Este curso es para principiantes absolutos?</p>
+                            <p class="text-gray-300">Sí, está diseñado para ser accesible para principiantes, pero también ofrece información valiosa y técnicas avanzadas para aquellos con algo de experiencia previa.</p>
+                        </div>
+                        <div class="p-4 bg-gray-800 bg-opacity-50 rounded-md">
+                            <p class="font-semibold text-yellow-300 mb-1">¿Cuánto tiempo tendré acceso al material del curso?</p>
+                            <p class="text-gray-300">Una vez inscrito, tendrás acceso de por vida al material del curso y a futuras actualizaciones que se realicen.</p>
+                        </div>
+                        <div class="p-4 bg-gray-800 bg-opacity-50 rounded-md">
+                            <p class="font-semibold text-yellow-300 mb-1">¿Hay certificación al finalizar?</p>
+                            <p class="text-gray-300">Sí, al completar satisfactoriamente todos los módulos y evaluaciones, recibirás un certificado digital emitido por el Observatorio. Los miembros Premium obtienen esta certificación sin costo adicional.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-gray-700 text-center">
+                <h3 class="text-xl font-semibold text-white mb-3">¿Listo para explorar el universo?</h3>
+                <button class="btn-primary px-8 py-4 rounded-full font-semibold text-xl">
+                    <i class="fas fa-user-graduate mr-2"></i>¡Inscríbete y Comienza tu Aventura Cósmica!
+                </button>
+                 <p class="text-gray-400 text-sm mt-3">Plazas limitadas. Asegura tu lugar en la próxima edición.</p>
+            </div>
+        </article>
+    </main>
+
+    <footer class="py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <div class="mb-6">
+                <a href="index.html" class="text-xl font-bold text-white hover:text-yellow-400 transition">
+                    <i class="fas fa-satellite mr-2 text-yellow-400"></i>Observatorio de Física Cósmica de San Miguel
+                </a>
+            </div>
+            <div class="mb-6 space-x-6">
+                <a href="index.html#eventos" class="hover:text-yellow-400">Eventos</a>
+                <a href="index.html#cursos" class="hover:text-yellow-400">Cursos</a>
+                <a href="index.html#comunidad" class="hover:text-yellow-400">Comunidad</a>
+                <a href="calendarios.html" class="hover:text-yellow-400">Calendario</a>
+                <a href="index.html#premium" class="hover:text-yellow-400">Premium</a>
+                <a href="index.html#contacto" class="hover:text-yellow-400">Contacto</a>
+                <a href="#" class="hover:text-yellow-400">Política de Privacidad</a>
+            </div>
+            <div class="mb-6 flex justify-center space-x-6">
+                <a href="#" aria-label="Facebook" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" aria-label="Twitter" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="#" aria-label="YouTube" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-youtube fa-lg"></i></a>
+            </div>
+            <p class="text-sm">© <span id="currentYear"></span> Observatorio de Física Cósmica de San Miguel. Todos los derechos reservados.</p>
+            <p class="text-xs mt-2">Diseñado con <i class="fas fa-heart text-red-500"></i> por la IA y los Amantes del Cosmos.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Menú móvil
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Año actual en footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Funcionalidad de Pestañas del Curso
+        const coursePageContainer = document.querySelector('.course-detail-card'); // Contenedor principal de la página del curso
+
+        coursePageContainer.querySelectorAll('.modal-tab').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tabId = button.dataset.tab;
+                
+                coursePageContainer.querySelectorAll('.modal-tab-content').forEach(content => {
+                    content.classList.add('hidden');
+                });
+                coursePageContainer.querySelectorAll('.modal-tab').forEach(btn => {
+                    btn.classList.remove('active-tab');
+                });
+
+                const activeContent = coursePageContainer.querySelector(`[data-tab-content="${tabId}"]`);
+                if (activeContent) {
+                    activeContent.classList.remove('hidden');
+                }
+                button.classList.add('active-tab');
+            });
+        });
+
+        // Activar la primera pestaña por defecto al cargar la página
+        const firstTabButton = coursePageContainer.querySelector('.modal-tab');
+        const firstTabContent = coursePageContainer.querySelector('.modal-tab-content');
+        if(firstTabButton && firstTabContent){
+            coursePageContainer.querySelectorAll('.modal-tab').forEach(btn => btn.classList.remove('active-tab'));
+            coursePageContainer.querySelectorAll('.modal-tab-content').forEach(content => content.classList.add('hidden'));
+            firstTabButton.classList.add('active-tab');
+            firstTabContent.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
