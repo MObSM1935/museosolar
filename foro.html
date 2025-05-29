@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foro Comunidad - Observatorio de Física Cósmica de San Miguel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --space-blue: #0b0d17;
+            --cosmic-purple: #1e1a3e;
+            --starlight-yellow: #f6ad55;
+            --nebula-pink: #d53f8c;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--space-blue);
+            color: #e2e8f0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(214, 188, 250, 0.05) 0%, rgba(214, 188, 250, 0) 40%),
+                radial-gradient(circle at 90% 80%, rgba(246, 173, 85, 0.05) 0%, rgba(246, 173, 85, 0) 40%),
+                radial-gradient(circle at 50% 50%, rgba(100, 100, 220, 0.03) 0%, rgba(100, 100, 220, 0) 30%);
+        }
+        
+        .navbar-glass { /* Estilos de Navbar (reutilizados) */
+            background-color: rgba(11, 13, 23, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(246, 173, 85, 0.2);
+        }
+        
+        .card { /* Estilos de Card (reutilizados) */
+            background-color: rgba(30, 26, 62, 0.7);
+            border: 1px solid rgba(109, 40, 217, 0.3);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(214, 188, 250, 0.1);
+        }
+        
+        .btn-primary { /* Estilos de Botón (reutilizados) */
+            background: linear-gradient(135deg, var(--starlight-yellow), var(--nebula-pink));
+            color: #1a202c;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(246, 173, 85, 0.4);
+        }
+        .btn-primary::after {
+            content: ''; position: absolute; top: -50%; left: -60%; width: 20px; height: 200%;
+            background: rgba(255, 255, 255, 0.3); transform: rotate(25deg); transition: all 0.5s;
+        }
+        .btn-primary:hover::after { left: 120%; }
+
+        .section-title { /* Estilos de Título de Sección (reutilizados) */
+            color: var(--starlight-yellow);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        .section-title::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 80px; height: 3px; background: linear-gradient(90deg, var(--starlight-yellow), var(--nebula-pink));
+            border-radius: 3px;
+        }
+        .star-decoration { /* Para mantener la estética si se necesita */
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+            z-index: 0; 
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0.2; transform: scale(0.8); }
+        }
+
+        /* Estilos específicos del Foro */
+        .forum-category-card {
+            background-color: var(--cosmic-purple);
+            border: 1px solid var(--nebula-pink);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .forum-category-card:hover {
+            box-shadow: 0 0 20px rgba(213, 63, 140, 0.4); /* --nebula-pink con alpha */
+            transform: translateY(-3px);
+        }
+        .forum-table tbody tr:hover {
+            background-color: rgba(246, 173, 85, 0.05); /* --starlight-yellow con alpha bajo */
+        }
+        .forum-topic-title a:hover {
+            color: var(--nebula-pink);
+            text-decoration: underline;
+        }
+        .forum-avatar {
+            min-width: 48px; /* Para asegurar que el avatar no se encoja demasiado */
+        }
+        .topic-status-icon {
+            font-size: 1.2rem;
+        }
+        .icon-pinned { color: var(--starlight-yellow); }
+        .icon-locked { color: #9ca3af; } /* Gris */
+        .icon-new-posts { color: var(--nebula-pink); }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="star-decoration" style="top: 5%; left: 5%; width: 1px; height: 1px; animation-delay: 0.5s;"></div>
+    <div class="star-decoration" style="top: 15%; left: 10%; width: 2px; height: 2px;"></div>
+    <div class="star-decoration" style="top: 10%; left: 30%; width: 1px; height: 1px; animation-delay: 1.5s;"></div>
+    <div class="star-decoration" style="top: 25%; left: 85%; width: 3px; height: 3px; animation-delay: 1s;"></div>
+    <div class="star-decoration" style="top: 30%; left: 60%; width: 2px; height: 2px; animation-delay: 2.5s;"></div>
+    <div class="star-decoration" style="top: 95%; left: 50%; width: 1px; height: 1px; animation-delay: 2.2s;"></div>
+    <div class="star-decoration" style="top: 5%; left: 70%; width: 2px; height: 2px; animation-delay: 1.8s;"></div>
+    <div class="star-decoration" style="top: 65%; left: 95%; width: 2px; height: 2px; animation-delay: 3.2s;"></div>
+
+    <nav class="navbar-glass sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-white">
+                <i class="fas fa-satellite mr-2 text-yellow-400"></i>Observatorio San Miguel
+            </a>
+            <div class="hidden md:flex space-x-4 items-center">
+                <a href="index.html#eventos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Eventos</a>
+                <a href="calendario.html" class="text-gray-300 hover:text-yellow-400 transition duration-300">Calendario</a>
+                <a href="index.html#cursos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
+                <a href="historia.html" class="text-gray-300 hover:text-yellow-400 transition duration-300">Historia</a>
+                <a href="foro.html" class="text-yellow-400 font-semibold transition duration-300">Foro Comunidad</a> <a href="index.html#premium" class="btn-primary px-4 py-2 rounded-full font-semibold">
+                    <i class="fas fa-star mr-1"></i>Premium
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-300 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="index.html#eventos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Eventos</a>
+            <a href="calendario.html" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Calendario</a>
+            <a href="index.html#cursos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
+            <a href="historia.html" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Historia</a>
+            <a href="foro.html" class="block text-yellow-400 font-semibold transition duration-300">Foro Comunidad</a>
+            <a href="index.html#premium" class="block btn-primary px-4 py-2 rounded-full font-semibold text-center mt-2">
+                <i class="fas fa-star mr-1"></i>Premium
+            </a>
+        </div>
+    </nav>
+
+    <section id="foro-observatorio" class="py-20 bg-gradient-to-bl from-space-blue via-cosmic-purple to-indigo-900">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-4xl font-bold text-center mb-6 section-title">Comunidad Estelar: Nuestro Foro</h2>
+            <p class="text-center text-gray-300 text-lg mb-12 max-w-3xl mx-auto">
+                ¡Bienvenido al corazón de nuestra comunidad astronómica! Este es tu espacio dedicado para conectar, compartir tus descubrimientos, resolver dudas, aprender de otros aficionados y profesionales, y debatir sobre todo lo relacionado con la astronomía, la astrofísica, la exploración espacial y las actividades de nuestro querido Observatorio San Miguel. ¡Sumérgete en las conversaciones cósmicas!
+            </p>
+
+            <div class="mb-10 flex flex-col sm:flex-row justify-between items-center gap-4 p-4 card">
+                <button class="btn-primary px-6 py-3 rounded-full w-full sm:w-auto text-base">
+                    <i class="fas fa-plus-circle mr-2"></i>Iniciar Nuevo Tema de Discusión
+                </button>
+                <div class="relative w-full sm:w-2/5">
+                    <input type="text" placeholder="Buscar en el foro (ej: 'nebulosa orion', 'configurar goto')..." class="w-full bg-gray-800 border border-gray-700 rounded-full px-6 py-3 text-white focus:outline-none focus:border-yellow-400 placeholder-gray-500 text-sm">
+                    <button class="absolute right-0 top-0 mt-3 mr-4 text-gray-400 hover:text-yellow-400">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="foro-categorias" class="mb-16">
+                <h3 class="text-3xl font-semibold text-yellow-400 mb-8 text-center">Explora Nuestras Categorías Principales</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="forum-category-card p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-binoculars text-3xl text-starlight-yellow mr-4"></i>
+                            <div>
+                                <h4 class="text-xl font-bold text-white hover:text-yellow-300 transition"><a href="#sim-cat-observacion">Observación Astronómica General</a></h4>
+                                <p class="text-xs text-gray-400">Comparte tus experiencias, preguntas sobre qué observar, cielos oscuros.</p>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-3 flex justify-between">
+                            <span><i class="fas fa-comments mr-1"></i> 125 Temas</span>
+                            <span><i class="fas fa-file-alt mr-1"></i> 1530 Mensajes</span>
+                        </div>
+                        <hr class="border-gray-700 my-3">
+                        <p class="text-xs text-gray-400">Último tema: <a href="#sim-tema-luna" class="hover:underline text-nebula-pink">"Impresionante vista de los cráteres lunares anoche"</a> por AstroValen (Hace 2 horas)</p>
+                    </div>
+
+                    <div class="forum-category-card p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-camera-retro text-3xl text-starlight-yellow mr-4"></i>
+                            <div>
+                                <h4 class="text-xl font-bold text-white hover:text-yellow-300 transition"><a href="#sim-cat-astrofoto">Astrofotografía y Procesado</a></h4>
+                                <p class="text-xs text-gray-400">Muestra tus astrofotos, técnicas de captura, software de procesado, tutoriales.</p>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-3 flex justify-between">
+                            <span><i class="fas fa-comments mr-1"></i> 210 Temas</span>
+                            <span><i class="fas fa-file-alt mr-1"></i> 2890 Mensajes</span>
+                        </div>
+                        <hr class="border-gray-700 my-3">
+                        <p class="text-xs text-gray-400">Último tema: <a href="#sim-tema-orion" class="hover:underline text-nebula-pink">"Mi primer intento con la Nebulosa de Orión - Consejos?"</a> por CielitoLindo (Hace 45 minutos)</p>
+                    </div>
+
+                    <div class="forum-category-card p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-telescope text-3xl text-starlight-yellow mr-4"></i>
+                            <div>
+                                <h4 class="text-xl font-bold text-white hover:text-yellow-300 transition"><a href="#sim-cat-equipos">Equipos y Accesorios</a></h4>
+                                <p class="text-xs text-gray-400">Discusiones sobre telescopios, oculares, monturas, cámaras, filtros, bricolaje.</p>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-3 flex justify-between">
+                            <span><i class="fas fa-comments mr-1"></i> 180 Temas</span>
+                            <span><i class="fas fa-file-alt mr-1"></i> 2050 Mensajes</span>
+                        </div>
+                        <hr class="border-gray-700 my-3">
+                        <p class="text-xs text-gray-400">Último tema: <a href="#sim-tema-dobson" class="hover:underline text-nebula-pink">"Review: Dobson SkyWatcher 8 vs GSO 8"</a> por CompradorInteligente (Hace 5 horas)</p>
+                    </div>
+
+                    <div class="forum-category-card p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-atom text-3xl text-starlight-yellow mr-4"></i>
+                            <div>
+                                <h4 class="text-xl font-bold text-white hover:text-yellow-300 transition"><a href="#sim-cat-astrofisica">Astrofísica y Cosmología</a></h4>
+                                <p class="text-xs text-gray-400">Debates teóricos, últimas noticias científicas, agujeros negros, Big Bang.</p>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-3 flex justify-between">
+                            <span><i class="fas fa-comments mr-1"></i> 95 Temas</span>
+                            <span><i class="fas fa-file-alt mr-1"></i> 1100 Mensajes</span>
+                        </div>
+                        <hr class="border-gray-700 my-3">
+                        <p class="text-xs text-gray-400">Último tema: <a href="#sim-tema-webb" class="hover:underline text-nebula-pink">"Nuevas imágenes del Webb revelan..."</a> por DivulgadorPro (Hace 1 día)</p>
+                    </div>
+
+                    <div class="forum-category-card p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-calendar-star text-3xl text-starlight-yellow mr-4"></i>
+                            <div>
+                                <h4 class="text-xl font-bold text-white hover:text-yellow-300 transition"><a href="#sim-cat-eventososm">Eventos del Observatorio OSM</a></h4>
+                                <p class="text-xs text-gray-400">Información, discusiones y feedback sobre nuestras charlas, talleres y noches de observación.</p>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-3 flex justify-between">
+                            <span><i class="fas fa-comments mr-1"></i> 75 Temas</span>
+                            <span><i class="fas fa-file-alt mr-1"></i> 850 Mensajes</span>
+                        </div>
+                        <hr class="border-gray-700 my-3">
+                        <p class="text-xs text-gray-400">Último tema: <a href="#sim-tema-charla" class="hover:underline text-nebula-pink">"¡Excelente la charla de anoche sobre exoplanetas!"</a> por AsistenteFeliz (Hace 8 horas)</p>
+                    </div>
+                    
+                    <div class="forum-category-card p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-users text-3xl text-starlight-yellow mr-4"></i>
+                            <div>
+                                <h4 class="text-xl font-bold text-white hover:text-yellow-300 transition"><a href="#sim-cat-comunidad">Comunidad y Off-Topic</a></h4>
+                                <p class="text-xs text-gray-400">Presentaciones, encuentros informales, otros hobbies y temas de interés general.</p>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-3 flex justify-between">
+                            <span><i class="fas fa-comments mr-1"></i> 150 Temas</span>
+                            <span><i class="fas fa-file-alt mr-1"></i> 1700 Mensajes</span>
+                        </div>
+                        <hr class="border-gray-700 my-3">
+                        <p class="text-xs text-gray-400">Último tema: <a href="#sim-tema-presentacion" class="hover:underline text-nebula-pink">"¡Hola a todos! Soy nuevo desde Córdoba."</a> por ExploradorCordobes (Hace 15 minutos)</p>
+                    </div>
+                     <div class="forum-category-card p-6 rounded-lg shadow-lg border-2 border-yellow-500">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-crown text-3xl text-yellow-500 mr-4"></i>
+                            <div>
+                                <h4 class="text-xl font-bold text-yellow-500 hover:text-yellow-300 transition"><a href="#sim-cat-premium">Rincón Exclusivo Premium</a></h4>
+                                <p class="text-xs text-gray-400">Acceso solo para miembros Cosmos Dorado. Consultas directas, material extra, Q&A con expertos.</p>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-3 flex justify-between">
+                            <span><i class="fas fa-comments mr-1"></i> 30 Temas</span>
+                            <span><i class="fas fa-file-alt mr-1"></i> 450 Mensajes</span>
+                        </div>
+                        <hr class="border-yellow-500 my-3">
+                        <p class="text-xs text-gray-400">Último tema: <a href="#sim-tema-premiumqya" class="hover:underline text-yellow-300">"Grabación del último Q&A con Dr. Balbi ya disponible"</a> por AdminOSM (Hace 30 minutos)</p>
+                    </div>
+                     <div class="forum-category-card p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-graduation-cap text-3xl text-starlight-yellow mr-4"></i>
+                            <div>
+                                <h4 class="text-xl font-bold text-white hover:text-yellow-300 transition"><a href="#sim-cat-cursos">Cursos y Aprendizaje</a></h4>
+                                <p class="text-xs text-gray-400">Dudas sobre los cursos del observatorio, material complementario, grupos de estudio.</p>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-3 flex justify-between">
+                            <span><i class="fas fa-comments mr-1"></i> 65 Temas</span>
+                            <span><i class="fas fa-file-alt mr-1"></i> 720 Mensajes</span>
+                        </div>
+                        <hr class="border-gray-700 my-3">
+                        <p class="text-xs text-gray-400">Último tema: <a href="#sim-tema-cursoduda" class="hover:underline text-nebula-pink">"Consulta sobre el módulo 3 de Astrofísica"</a> por EstudianteDedicado (Hace 2 días)</p>
+                    </div>
+                      <div class="forum-category-card p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-newspaper text-3xl text-starlight-yellow mr-4"></i>
+                            <div>
+                                <h4 class="text-xl font-bold text-white hover:text-yellow-300 transition"><a href="#sim-cat-noticias">Noticias y Descubrimientos</a></h4>
+                                <p class="text-xs text-gray-400">Comparte y comenta las últimas noticias del mundo de la astronomía y la exploración espacial.</p>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-3 flex justify-between">
+                            <span><i class="fas fa-comments mr-1"></i> 110 Temas</span>
+                            <span><i class="fas fa-file-alt mr-1"></i> 1300 Mensajes</span>
+                        </div>
+                        <hr class="border-gray-700 my-3">
+                        <p class="text-xs text-gray-400">Último tema: <a href="#sim-tema-descubrimientoX" class="hover:underline text-nebula-pink">"Nuevo exoplaneta potencialmente habitable descubierto"</a> por AstroNews (Hace 6 horas)</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="foro-temas-recientes" class="mb-16">
+                <h3 class="text-3xl font-semibold text-yellow-400 mb-8 text-center">Últimas Discusiones en la Comunidad</h3>
+                <div class="bg-gray-800 bg-opacity-70 rounded-lg shadow-xl overflow-hidden">
+                    <table class="min-w-full forum-table">
+                        <thead class="bg-cosmic-purple bg-opacity-80">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-yellow-300 uppercase tracking-wider sm:px-6">Tema</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-yellow-300 uppercase tracking-wider hidden sm:table-cell sm:px-6">Autor</th>
+                                <th class="px-2 py-3 text-center text-xs font-medium text-yellow-300 uppercase tracking-wider hidden md:table-cell sm:px-3">Rsp.</th>
+                                <th class="px-2 py-3 text-center text-xs font-medium text-yellow-300 uppercase tracking-wider hidden md:table-cell sm:px-3">Vistas</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-yellow-300 uppercase tracking-wider sm:px-6">Último Mensaje</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr class="bg-cosmic-purple bg-opacity-30">
+                                <td class="px-4 py-4 sm:px-6 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-thumbtack topic-status-icon icon-pinned mr-2" title="Tema Fijado"></i>
+                                        <div class="ml-1">
+                                            <div class="text-sm font-semibold text-white forum-topic-title"><a href="#sim-tema-normas">Normas del Foro y Guía de Bienvenida</a></div>
+                                            <div class="text-xs text-gray-400">En: Comunidad y Off-Topic</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-300 hidden sm:table-cell sm:px-6">AdminOSM</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">5</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">10520</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-400 sm:px-6">
+                                    por <a href="#" class="font-medium text-yellow-400 hover:text-yellow-200">AdminOSM</a><br>
+                                    <span class="text-xs">01 Ene, 2025 - 12:00 PM</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 sm:px-6 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-comments topic-status-icon icon-new-posts mr-2" title="Nuevos mensajes"></i>
+                                        <div class="ml-1">
+                                            <div class="text-sm font-medium text-white forum-topic-title"><a href="#ejemplo-tema-1">¿Mejor telescopio para principiante con presupuesto de $X?</a></div>
+                                            <div class="text-xs text-gray-400">En: Equipos y Accesorios</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-300 hidden sm:table-cell sm:px-6">AficionadoEstelar</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">3</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">78</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-400 sm:px-6">
+                                    por <a href="#" class="font-medium text-white hover:text-yellow-200">MayraSchwarz_Astrofoto</a><br>
+                                    <span class="text-xs">26 May, 2025 - 09:00 AM</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 sm:px-6 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <i class="far fa-comments topic-status-icon mr-2" title="Sin nuevos mensajes"></i>
+                                        <div class="ml-1">
+                                            <div class="text-sm font-medium text-white forum-topic-title"><a href="#sim-tema-orion">Mi primer intento con la Nebulosa de Orión - Consejos?</a></div>
+                                            <div class="text-xs text-gray-400">En: Astrofotografía y Procesado</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-300 hidden sm:table-cell sm:px-6">CielitoLindo</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">15</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">250</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-400 sm:px-6">
+                                    por <a href="#" class="font-medium text-white hover:text-yellow-200">ProcesadorExperto</a><br>
+                                    <span class="text-xs">Hace 15 minutos</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 sm:px-6 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-lock topic-status-icon icon-locked mr-2" title="Tema Cerrado"></i>
+                                        <div class="ml-1">
+                                            <div class="text-sm font-medium text-gray-400 forum-topic-title"><a href="#sim-tema-evento-pasado" class="text-gray-400">Discusión: Charla sobre Exoplanetas (Abril 2025)</a></div>
+                                            <div class="text-xs text-gray-500">En: Eventos del Observatorio OSM</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-300 hidden sm:table-cell sm:px-6">ParticipanteCurioso</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">42</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">890</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-400 sm:px-6">
+                                    por <a href="#" class="font-medium text-yellow-400 hover:text-yellow-200">AdminOSM</a><br>
+                                    <span class="text-xs">30 Abr, 2025 - 11:00 PM</span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="px-4 py-4 sm:px-6 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <i class="far fa-comments topic-status-icon mr-2"></i>
+                                        <div class="ml-1">
+                                            <div class="text-sm font-medium text-white forum-topic-title"><a href="#sim-tema-contaminacion">Iniciativa para reducir contaminación lumínica en San Miguel</a></div>
+                                            <div class="text-xs text-gray-400">En: Observación Astronómica General</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-300 hidden sm:table-cell sm:px-6">VecinoPreocupado</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">28</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">512</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-400 sm:px-6">
+                                    por <a href="#" class="font-medium text-white hover:text-yellow-200">ActivistaEstelar</a><br>
+                                    <span class="text-xs">Hace 1 hora</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 sm:px-6 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-comments topic-status-icon icon-new-posts mr-2"></i>
+                                        <div class="ml-1">
+                                            <div class="text-sm font-medium text-white forum-topic-title"><a href="#sim-tema-agujero-negro">¿Es posible fotografiar Sagitario A* con equipo amateur?</a></div>
+                                            <div class="text-xs text-gray-400">En: Astrofísica y Cosmología</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-300 hidden sm:table-cell sm:px-6">SoñadorCósmico</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">9</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">150</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-400 sm:px-6">
+                                    por <a href="#" class="font-medium text-yellow-400 hover:text-yellow-200">NicolasBalbi_OSM</a><br>
+                                    <span class="text-xs">Hace 3 horas</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 sm:px-6 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <i class="far fa-comments topic-status-icon mr-2"></i>
+                                        <div class="ml-1">
+                                            <div class="text-sm font-medium text-white forum-topic-title"><a href="#sim-tema-ocular">Recomendación ocular para ver detalles en Júpiter</a></div>
+                                            <div class="text-xs text-gray-400">En: Equipos y Accesorios</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-300 hidden sm:table-cell sm:px-6">PlanetFan</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">12</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">220</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-400 sm:px-6">
+                                    por <a href="#" class="font-medium text-white hover:text-yellow-200">OpticoExperto</a><br>
+                                    <span class="text-xs">Hace 6 horas</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 sm:px-6 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-comments topic-status-icon icon-new-posts mr-2"></i>
+                                        <div class="ml-1">
+                                            <div class="text-sm font-medium text-white forum-topic-title"><a href="#sim-tema-perseidas-fotos">Mis fotos de las Perseidas 2025 - ¡Espectaculares!</a></div>
+                                            <div class="text-xs text-gray-400">En: Astrofotografía y Procesado</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-300 hidden sm:table-cell sm:px-6">CazadorDeMeteoros</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">22</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">410</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-400 sm:px-6">
+                                    por <a href="#" class="font-medium text-white hover:text-yellow-200">AstroValen</a><br>
+                                    <span class="text-xs">Hace 8 horas</span>
+                                </td>
+                            </tr>
+                             <tr class="bg-yellow-500 bg-opacity-10">
+                                <td class="px-4 py-4 sm:px-6 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-crown topic-status-icon text-yellow-500 mr-2" title="Tema Premium"></i>
+                                        <div class="ml-1">
+                                            <div class="text-sm font-semibold text-yellow-500 forum-topic-title"><a href="#sim-tema-premiumqya" class="text-yellow-500">Grabación del último Q&A con Dr. Balbi ya disponible</a></div>
+                                            <div class="text-xs text-yellow-600">En: Rincón Exclusivo Premium</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-yellow-200 hidden sm:table-cell sm:px-6">AdminOSM</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-yellow-200 text-center hidden md:table-cell sm:px-3">2</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-yellow-200 text-center hidden md:table-cell sm:px-3">55</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-yellow-200 sm:px-6">
+                                    por <a href="#" class="font-medium text-yellow-100 hover:text-yellow-300">AdminOSM</a><br>
+                                    <span class="text-xs">Hace 30 minutos</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 sm:px-6 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <i class="far fa-comments topic-status-icon mr-2"></i>
+                                        <div class="ml-1">
+                                            <div class="text-sm font-medium text-white forum-topic-title"><a href="#sim-tema-dark-frames">Importancia de los Dark Frames en Astrofotografía</a></div>
+                                            <div class="text-xs text-gray-400">En: Astrofotografía y Procesado</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-300 hidden sm:table-cell sm:px-6">PixelPerfecto</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">8</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">180</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-400 sm:px-6">
+                                    por <a href="#" class="font-medium text-white hover:text-yellow-200">MaestroDelStack</a><br>
+                                    <span class="text-xs">Ayer, 05:20 PM</span>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td class="px-4 py-4 sm:px-6 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                         <i class="fas fa-comments topic-status-icon icon-new-posts mr-2"></i>
+                                        <div class="ml-1">
+                                            <div class="text-sm font-medium text-white forum-topic-title"><a href="#sim-tema-libro-recomendado">Libro recomendado sobre Historia de la Astronomía</a></div>
+                                            <div class="text-xs text-gray-400">En: Comunidad y Off-Topic</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-300 hidden sm:table-cell sm:px-6">LectorAvido</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">6</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">95</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-400 sm:px-6">
+                                    por <a href="#" class="font-medium text-white hover:text-yellow-200">BiblioCosmos</a><br>
+                                    <span class="text-xs">Hoy, 08:15 AM</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 sm:px-6 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <i class="far fa-comments topic-status-icon mr-2"></i>
+                                        <div class="ml-1">
+                                            <div class="text-sm font-medium text-white forum-topic-title"><a href="#sim-tema-evento-proximo">¿Alguien va al Festival de Estrellas en Noviembre?</a></div>
+                                            <div class="text-xs text-gray-400">En: Eventos del Observatorio OSM</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-300 hidden sm:table-cell sm:px-6">PlanificadorEstelar</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">35</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">670</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-400 sm:px-6">
+                                    por <a href="#" class="font-medium text-white hover:text-yellow-200">FestivalFanático</a><br>
+                                    <span class="text-xs">Hace 2 días</span>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td class="px-4 py-4 sm:px-6 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                         <i class="fas fa-comments topic-status-icon icon-new-posts mr-2"></i>
+                                        <div class="ml-1">
+                                            <div class="text-sm font-medium text-white forum-topic-title"><a href="#sim-tema-software-gratuito">Mejor software GRATUITO para procesar astrofotos</a></div>
+                                            <div class="text-xs text-gray-400">En: Astrofotografía y Procesado</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-300 hidden sm:table-cell sm:px-6">AhorradorEstelar</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">19</td>
+                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-400 text-center hidden md:table-cell sm:px-3">330</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-400 sm:px-6">
+                                    por <a href="#" class="font-medium text-white hover:text-yellow-200">OpenSourceFan</a><br>
+                                    <span class="text-xs">Hace 4 horas</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="px-6 py-4 border-t border-gray-700 flex flex-col xs:flex-row items-center xs:justify-between">
+                        <span class="text-xs xs:text-sm text-gray-400">
+                            Mostrando 1 a 12 de 257 temas
+                        </span>
+                        <div class="inline-flex mt-2 xs:mt-0">
+                            <button class="text-sm bg-gray-700 hover:bg-gray-600 text-gray-300 font-semibold py-2 px-4 rounded-l">
+                                Anterior
+                            </button>
+                            <button class="text-sm bg-gray-700 hover:bg-gray-600 text-gray-300 font-semibold py-2 px-4 rounded-r">
+                                Siguiente
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ejemplo-tema-1" class="my-16">
+                <h3 class="text-2xl font-bold text-yellow-400 mb-4"><i class="fas fa-comments mr-2"></i>Viendo Tema: ¿Mejor telescopio para principiante con presupuesto de $X?</h3>
+                
+                <article class="card p-6 mb-6">
+                    <div class="flex items-start space-x-3 sm:space-x-4">
+                        <img src="https://via.placeholder.com/48/0B0D17/F6AD55?text=AF" alt="Avatar AficionadoEstelar" class="forum-avatar w-10 h-10 sm:w-12 sm:h-12 rounded-full">
+                        <div>
+                            <p class="font-semibold text-white">AficionadoEstelar</p>
+                            <p class="text-xs text-gray-400">Publicado: 25 de Mayo, 2025 - 10:30 AM</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-gray-300 space-y-4 leading-relaxed text-sm sm:text-base">
+                        <p>¡Hola comunidad! Soy nuevo en esto de la astronomía y estoy super entusiasmado. Estuve ahorrando y tengo un presupuesto de aproximadamente $X (pesos argentinos) para mi primer telescopio. Me gustaría algo que me permita ver bien la Luna, planetas como Júpiter y Saturno, y si es posible, algunas nebulosas o galaxias brillantes.</p>
+                        <p>Estuve viendo algunos modelos online pero me siento un poco perdido con tantas opciones: refractores, reflectores, Dobson, GoTo, etc. ¿Qué me recomendarían para empezar que sea bueno, bonito y barato (dentro de mi presupuesto)?</p>
+                        <p>Algunas consideraciones:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Vivo en una ciudad con contaminación lumínica moderada, pero tengo acceso a escaparme a zonas más oscuras los fines de semana.</li>
+                            <li>Me interesa tanto la observación visual como, en un futuro, probar algo de astrofotografía básica (quizás con el celular al principio).</li>
+                            <li>Busco algo que no sea extremadamente complicado de montar y usar para un novato.</li>
+                            <li>¿Marcas recomendadas? ¿Tiendas confiables en Argentina?</li>
+                        </ul>
+                        <p>Agradecería mucho sus consejos y experiencias. ¡Cielos despejados!</p>
+                    </div>
+                    <div class="mt-6 flex justify-end items-center space-x-2">
+                        <span class="text-xs text-gray-500">Visto 78 veces</span>
+                        <button class="text-xs bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-3 py-1 rounded-full"><i class="fas fa-thumbs-up mr-1"></i> Útil (12)</button>
+                        <button class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 px-3 py-1 rounded-full"><i class="fas fa-flag mr-1"></i> Reportar</button>
+                    </div>
+                </article>
+
+                <h4 class="text-xl font-semibold text-white mb-4 mt-8">Respuestas (3)</h4>
+
+                <article class="card p-6 mb-6 ml-0 sm:ml-6 lg:ml-12">
+                     <div class="flex items-start space-x-3 sm:space-x-4">
+                        <img src="https://via.placeholder.com/48/1E1A3E/F6AD55?text=NB" alt="Avatar NicolasBalbi_OSM" class="forum-avatar w-10 h-10 sm:w-12 sm:h-12 rounded-full">
+                        <div>
+                            <p class="font-semibold text-yellow-400">NicolasBalbi_OSM <span class="text-xs bg-nebula-pink text-white px-2 py-0.5 rounded-full ml-1">Staff OSM</span></p>
+                            <p class="text-xs text-gray-400">Publicado: 25 de Mayo, 2025 - 02:15 PM</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-gray-300 space-y-4 leading-relaxed text-sm sm:text-base">
+                        <p>¡Hola AficionadoEstelar! Bienvenido al fascinante mundo de la astronomía. Es una excelente pregunta y muy común para quienes empiezan.</p>
+                        <p>Con tu presupuesto y considerando tus intereses, te daría algunas opciones:</p>
+                        <ol class="list-decimal list-inside ml-4 space-y-2">
+                            <li><strong>Telescopio Reflector Newtoniano tipo Dobson:</strong> Son los reyes del "bang for the buck" (mejor rendimiento por tu dinero) en términos de apertura. Un Dobson de 6 u 8 pulgadas te dará vistas impresionantes de planetas y muchos objetos de cielo profundo. Son muy simples de usar (montura altazimutal). La desventaja es que no son ideales para astrofotografía de larga exposición por la montura, pero para visual son imbatibles y puedes hacer fotos planetarias o lunares básicas.</li>
+                            <li><strong>Telescopio Refractor en Montura Ecuatorial:</strong> Un refractor de unos 80-90mm de buena calidad óptica en una montura ecuatorial (como una EQ3 o similar) puede ser una buena opción si la astrofotografía es un objetivo más serio a futuro. La montura ecuatorial permite seguir los objetos más fácilmente. Serán menos luminosos que un Dobson de igual precio, pero pueden ofrecer imágenes muy nítidas.</li>
+                            <li><strong>Telescopio Maksutov-Cassegrain:</strong> Son compactos y buenos para planetaria y lunar, con buena nitidez. Un modelo de 90mm o 102mm podría estar en tu rango. Algunos vienen con monturas GoTo básicas, lo cual ayuda a encontrar objetos pero consume parte del presupuesto.</li>
+                        </ol>
+                        <p>Respecto a marcas, Sky-Watcher, Celestron, Orion son reconocidas. En Argentina, busca tiendas especializadas en astronomía (hay varias con buena reputación, busca en Google "tiendas telescopios Argentina").</p>
+                        <p>Para la contaminación lumínica, un filtro UHC o CLS puede ayudar un poco para nebulosas, pero nada reemplaza un cielo oscuro. ¡Aprovecha esas escapadas!</p>
+                        <p>En el observatorio tenemos talleres de iniciación y manejo de telescopios que te podrían ser muy útiles. ¡Saludos!</p>
+                    </div>
+                     <div class="mt-6 flex justify-end items-center space-x-2">
+                        <button class="text-xs bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-3 py-1 rounded-full"><i class="fas fa-thumbs-up mr-1"></i> Útil (25)</button>
+                         <button class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 px-3 py-1 rounded-full"><i class="fas fa-reply mr-1"></i> Citar</button>
+                        <button class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 px-3 py-1 rounded-full"><i class="fas fa-flag mr-1"></i> Reportar</button>
+                    </div>
+                </article>
+
+                <article class="card p-6 mb-6 ml-0 sm:ml-6 lg:ml-12">
+                     <div class="flex items-start space-x-3 sm:space-x-4">
+                        <img src="https://via.placeholder.com/48/F6AD55/0B0D17?text=MS" alt="Avatar MayraSchwarz_Astrofoto" class="forum-avatar w-10 h-10 sm:w-12 sm:h-12 rounded-full">
+                        <div>
+                            <p class="font-semibold text-white">MayraSchwarz_Astrofoto <span class="text-xs bg-green-500 text-white px-2 py-0.5 rounded-full ml-1">Experta</span></p>
+                            <p class="text-xs text-gray-400">Publicado: 26 de Mayo, 2025 - 09:00 AM</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-gray-300 space-y-4 leading-relaxed text-sm sm:text-base">
+                        <p>Coincido con Nicolás. Si la astrofotografía es un interés secundario por ahora, un Dobson de 6" es una maravilla para visual. Vas a ver mucho más detalle en cielo profundo que con un refractor pequeño por el mismo precio.</p>
+                        <p>Para astrofotografía planetaria/lunar con un Dobson, se puede usar la técnica de "lucky imaging" (grabar un video corto y apilar los mejores frames). Incluso con el celular y un adaptador, puedes sacar fotos decentes de la Luna.</p>
+                        <p>Si más adelante te pica fuerte el bichito de la astrofoto de cielo profundo, ahí sí pensarías en una buena montura ecuatorial motorizada, que es la base. Pero para empezar y disfrutar visualmente, el Dobson es fantástico y te enseña mucho a "navegar" el cielo manualmente.</p>
+                        <p>¡Mucha suerte con tu elección y no dudes en participar de nuestros talleres de astrofotografía!</p>
+                    </div>
+                     <div class="mt-6 flex justify-end items-center space-x-2">
+                        <button class="text-xs bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-3 py-1 rounded-full"><i class="fas fa-thumbs-up mr-1"></i> Útil (18)</button>
+                         <button class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 px-3 py-1 rounded-full"><i class="fas fa-reply mr-1"></i> Citar</button>
+                        <button class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 px-3 py-1 rounded-full"><i class="fas fa-flag mr-1"></i> Reportar</button>
+                    </div>
+                </article>
+
+                 <article class="card p-6 mb-6 ml-0 sm:ml-6 lg:ml-12">
+                     <div class="flex items-start space-x-3 sm:space-x-4">
+                        <img src="https://via.placeholder.com/48/D53F8C/FFFFFF?text=CE" alt="Avatar CompradorExperto" class="forum-avatar w-10 h-10 sm:w-12 sm:h-12 rounded-full">
+                        <div>
+                            <p class="font-semibold text-white">CompradorExperto</p>
+                            <p class="text-xs text-gray-400">Publicado: 27 de Mayo, 2025 - 11:20 AM</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-gray-300 space-y-4 leading-relaxed text-sm sm:text-base">
+                        <p>Solo para agregar a lo que dijeron los expertos: no te olvides de contemplar en tu presupuesto algunos accesorios básicos que mejorarán mucho tu experiencia:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Un par de oculares adicionales de diferentes distancias focales (ej. uno de baja potencia para objetos extensos y uno de alta potencia para planetas).</li>
+                            <li>Un filtro lunar (la Luna llena es MUY brillante en el telescopio).</li>
+                            <li>Un buscador Telrad o de punto rojo, además del buscador óptico que traiga el telescopio.</li>
+                            <li>Una linterna de luz roja para no encandilarte y perder la adaptación a la oscuridad.</li>
+                            <li>Algún planisferio o app de astronomía para tu celular (Stellarium es genial y gratuito).</li>
+                        </ul>
+                        <p>A veces las tiendas ofrecen "kits de inicio" que pueden ser convenientes. ¡Investiga bien antes de comprar! Y sí, el taller del observatorio sobre manejo de telescopios es muy recomendable.</p>
+                    </div>
+                     <div class="mt-6 flex justify-end items-center space-x-2">
+                        <button class="text-xs bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-3 py-1 rounded-full"><i class="fas fa-thumbs-up mr-1"></i> Útil (15)</button>
+                         <button class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 px-3 py-1 rounded-full"><i class="fas fa-reply mr-1"></i> Citar</button>
+                        <button class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 px-3 py-1 rounded-full"><i class="fas fa-flag mr-1"></i> Reportar</button>
+                    </div>
+                </article>
+
+
+                <div class="card p-6 mt-10">
+                    <h4 class="text-xl font-semibold text-white mb-4">Escribe tu Respuesta al Tema</h4>
+                    <form action="#" method="POST"> <textarea name="respuesta" rows="8" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-yellow-400 placeholder-gray-500 mb-4 text-sm" placeholder="Comparte tu experiencia, consejo o pregunta relacionada con este tema..."></textarea>
+                        <div class="flex flex-col sm:flex-row justify-between items-center gap-3">
+                            <div class="flex space-x-1">
+                                <button type="button" title="Negrita" class="text-gray-400 hover:text-white p-2 rounded hover:bg-gray-700"><i class="fas fa-bold"></i></button>
+                                <button type="button" title="Cursiva" class="text-gray-400 hover:text-white p-2 rounded hover:bg-gray-700"><i class="fas fa-italic"></i></button>
+                                <button type="button" title="Subrayado" class="text-gray-400 hover:text-white p-2 rounded hover:bg-gray-700"><i class="fas fa-underline"></i></button>
+                                <button type="button" title="Enlace" class="text-gray-400 hover:text-white p-2 rounded hover:bg-gray-700"><i class="fas fa-link"></i></button>
+                                <button type="button" title="Citar" class="text-gray-400 hover:text-white p-2 rounded hover:bg-gray-700"><i class="fas fa-quote-left"></i></button>
+                                <button type="button" title="Lista" class="text-gray-400 hover:text-white p-2 rounded hover:bg-gray-700"><i class="fas fa-list-ul"></i></button>
+                            </div>
+                            <button type="submit" class="btn-primary px-8 py-3 rounded-full w-full sm:w-auto text-base">
+                                <i class="fas fa-paper-plane mr-2"></i>Publicar Respuesta
+                            </button>
+                        </div>
+                         <p class="text-xs text-gray-500 mt-4">Por favor, recuerda mantener un tono respetuoso y constructivo. Consulta las <a href="#sim-tema-normas" class="text-nebula-pink hover:underline">normas del foro</a>.</p>
+                    </form>
+                </div>
+            </div> <div class="text-center mt-16">
+                <button class="btn-primary px-8 py-4 rounded-full text-lg">
+                    <i class="fas fa-list-ul mr-2"></i>Ver Todos los Temas
+                </button>
+            </div>
+
+        </div> </section>
+    <footer class="py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <p class="text-sm">© <span id="currentYearForum"></span> Observatorio de Física Cósmica de San Miguel. Todos los derechos reservados.</p>
+             <p class="text-xs mt-2">Diseñado con <i class="fas fa-heart text-red-500"></i> por la IA y los Amantes del Cosmos.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Menú móvil
+        const mobileMenuButtonForum = document.getElementById('mobile-menu-button'); // Asume que el ID es el mismo
+        const mobileMenuForum = document.getElementById('mobile-menu'); // Asume que el ID es el mismo
+        if (mobileMenuButtonForum && mobileMenuForum) {
+          mobileMenuButtonForum.addEventListener('click', () => {
+            mobileMenuForum.classList.toggle('hidden');
+          });
+        }
+
+        // Año actual en footer
+        const currentYearElemForum = document.getElementById('currentYearForum');
+        if (currentYearElemForum) {
+          currentYearElemForum.textContent = new Date().getFullYear();
+        }
+
+        // Smooth scroll (si se usa en esta página)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Prevenir comportamiento por defecto solo si el href es más que solo "#"
+                if (this.getAttribute('href').length > 1) {
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault(); // Solo prevenir si el elemento existe y se va a scrollear
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
