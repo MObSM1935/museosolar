@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eventos - Observatorio de Física Cósmica de San Miguel</title>
+    <title>Observatorio San Miguel - Explorando el Cosmos</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,6 +13,8 @@
             --cosmic-purple: #1e1a3e;
             --starlight-yellow: #f6ad55;
             --nebula-pink: #d53f8c;
+            --ia-blue: #3b82f6; /* Un azul distintivo para IA.STRO */
+            --ia-highlight: #60a5fa; 
         }
         
         body {
@@ -20,31 +22,39 @@
             background-color: var(--space-blue);
             color: #e2e8f0;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(214, 188, 250, 0.05) 0%, rgba(214, 188, 250, 0) 40%),
+                radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.05) 0%, rgba(59, 130, 246, 0) 40%), /* IA Blue subtle gradient */
                 radial-gradient(circle at 90% 80%, rgba(246, 173, 85, 0.05) 0%, rgba(246, 173, 85, 0) 40%),
                 radial-gradient(circle at 50% 50%, rgba(100, 100, 220, 0.03) 0%, rgba(100, 100, 220, 0) 30%);
         }
         
-        .navbar-glass {
+        .navbar-glass { /* Estilos de Navbar */
             background-color: rgba(11, 13, 23, 0.9);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(246, 173, 85, 0.2);
         }
         
-        .card {
+        .card { /* Estilos de Card */
             background-color: rgba(30, 26, 62, 0.7);
             border: 1px solid rgba(109, 40, 217, 0.3);
             border-radius: 12px;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
-        
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(214, 188, 250, 0.1);
         }
+        /* Card específica para IA.STRO */
+        .ia-card {
+            background-color: rgba(30, 26, 62, 0.85); /* Un poco más opaco */
+            border: 1px solid var(--ia-blue);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+        }
+        .ia-card:hover {
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.4);
+        }
         
-        .btn-primary {
+        .btn-primary { /* Estilos de Botón */
             background: linear-gradient(135deg, var(--starlight-yellow), var(--nebula-pink));
             color: #1a202c;
             font-weight: 600;
@@ -53,124 +63,136 @@
             position: relative;
             overflow: hidden;
         }
-        
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(246, 173, 85, 0.4);
         }
-        
         .btn-primary::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -60%;
-            width: 20px;
-            height: 200%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: rotate(25deg);
-            transition: all 0.5s;
+            content: ''; position: absolute; top: -50%; left: -60%; width: 20px; height: 200%;
+            background: rgba(255, 255, 255, 0.3); transform: rotate(25deg); transition: all 0.5s;
         }
-        
-        .btn-primary:hover::after {
-            left: 120%;
+        .btn-primary:hover::after { left: 120%; }
+
+        .btn-ia { /* Botón específico para IA.STRO */
+            background: linear-gradient(135deg, var(--ia-blue), var(--ia-highlight));
+            color: white;
         }
-        
-        .section-title {
+        .btn-ia:hover {
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.5);
+        }
+
+        .section-title { /* Estilos de Título de Sección */
             color: var(--starlight-yellow);
             position: relative;
             display: inline-block;
             padding-bottom: 10px;
         }
-        
+        .section-title.ia-title { color: var(--ia-blue); } /* Título con color IA */
+        .section-title.ia-title::after {
+             background: linear-gradient(90deg, var(--ia-blue), var(--ia-highlight));
+        }
         .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--starlight-yellow), var(--nebula-pink));
+            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 80px; height: 3px; background: linear-gradient(90deg, var(--starlight-yellow), var(--nebula-pink));
             border-radius: 3px;
         }
         
-        .star-decoration { /* Para mantener la estética si se necesita */
-            position: absolute;
-            background-color: white;
-            border-radius: 50%;
-            animation: twinkle 5s infinite;
-            z-index: 0; 
+        .star-decoration {
+            position: absolute; background-color: white; border-radius: 50%;
+            animation: twinkle 5s infinite; z-index: 0; 
         }
-        
         @keyframes twinkle {
             0% { opacity: 0.2; transform: scale(0.8); }
             50% { opacity: 1; transform: scale(1.2); }
             100% { opacity: 0.2; transform: scale(0.8); }
         }
 
-        .event-card-large {
+        /* Estilos para Dashboard y Chat simulados */
+        .ia-dashboard-widget {
             background-color: var(--cosmic-purple);
-            border: 1px solid var(--nebula-pink);
+            border: 1px solid var(--ia-highlight);
+            padding: 1.5rem;
+            border-radius: 8px;
         }
-        .event-card-large:hover {
-            box-shadow: 0 0 25px var(--nebula-pink_hover, rgba(213, 63, 140, 0.5));
+        .ia-chat-bubble {
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
+            max-width: 80%;
+            line-height: 1.5;
         }
-        .calendar-table {
-            width: 100%;
-            border-collapse: collapse;
+        .ia-chat-bubble.user {
+            background-color: var(--starlight-yellow);
+            color: var(--space-blue);
+            margin-left: auto;
+            border-bottom-right-radius: 0;
         }
-        .calendar-table th, .calendar-table td {
-            border: 1px solid rgba(246, 173, 85, 0.3);
-            padding: 12px;
-            text-align: left;
+        .ia-chat-bubble.ia {
+            background-color: var(--ia-blue);
+            color: white;
+            margin-right: auto;
+            border-bottom-left-radius: 0;
         }
-        .calendar-table th {
-            background-color: rgba(30, 26, 62, 0.8);
-            color: var(--starlight-yellow);
+        .code-block-ia {
+            background-color: #080a10; /* Un negro azulado más oscuro */
+            color: #9CDCFE; /* Color de texto típico para código */
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            border: 1px solid var(--ia-highlight);
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
         }
-        .calendar-day {
-            min-height: 120px;
-            vertical-align: top;
+        .code-block-ia .comment { color: #6A9955; } /* Comentarios en verde */
+        .code-block-ia .keyword { color: #569CD6; } /* Palabras clave en azul */
+        .code-block-ia .string { color: #CE9178; } /* Strings en naranja */
+        .code-block-ia .function { color: #DCDCAA; } /* Funciones en amarillo */
+        .code-block-ia .number { color: #B5CEA8; } /* Números en verde claro */
+
+        /* Nuevos estilos para hero section */
+        .hero-bg {
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(214, 188, 250, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(246, 173, 85, 0.1) 0%, transparent 40%),
+                linear-gradient(to bottom, rgba(11, 13, 23, 0.9), rgba(30, 26, 62, 0.7));
+            background-size: cover;
+            background-position: center;
         }
-        .calendar-day-number {
-            font-size: 0.8rem;
-            color: var(--starlight-yellow);
+        
+        .telescope-icon {
+            animation: pulse 3s infinite;
         }
-        .calendar-event-entry {
-            background-color: rgba(213, 63, 140, 0.2);
-            padding: 4px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            margin-top: 4px;
-            display: block;
-        }
-        .archive-year-title {
-            color: var(--nebula-pink);
-            border-bottom: 2px solid var(--nebula-pink);
-            padding-bottom: 5px;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
         }
     </style>
 </head>
 <body class="antialiased">
+    <!-- Decoración de estrellas -->
     <div class="star-decoration" style="top: 5%; left: 5%; width: 1px; height: 1px; animation-delay: 0.5s;"></div>
     <div class="star-decoration" style="top: 15%; left: 10%; width: 2px; height: 2px;"></div>
-    <div class="star-decoration" style="top: 95%; left: 50%; width: 1px; height: 1px; animation-delay: 2.2s;"></div>
-    <div class="star-decoration" style="top: 5%; left: 70%; width: 2px; height: 2px; animation-delay: 1.8s;"></div>
-    <div class="star-decoration" style="top: 65%; left: 95%; width: 2px; height: 2px; animation-delay: 3.2s;"></div>
-
+    <div class="star-decoration" style="top: 25%; left: 90%; width: 1px; height: 1px; animation-delay: 1.2s;"></div>
+    <div class="star-decoration" style="top: 60%; left: 15%; width: 1.5px; height: 1.5px; animation-delay: 0.8s;"></div>
+    <div class="star-decoration" style="top: 80%; left: 80%; width: 2px; height: 2px; animation-delay: 1.5s;"></div>
+    
+    <!-- Barra de navegación -->
     <nav class="navbar-glass sticky top-0 z-50 shadow-lg">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold text-white">
+            <a href="#" class="text-2xl font-bold text-white">
                 <i class="fas fa-satellite mr-2 text-yellow-400"></i>Observatorio San Miguel
             </a>
             <div class="hidden md:flex space-x-4 items-center">
-                <a href="index.html#eventos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Próximos Eventos</a>
-                <a href="eventos.html" class="text-yellow-400 font-semibold transition duration-300">Todos los Eventos</a> <a href="index.html#ubicacion" class="text-gray-300 hover:text-yellow-400 transition duration-300">Ubicación</a>
-                <a href="index.html#cursos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
-                <a href="historia.html" class="text-gray-300 hover:text-yellow-400 transition duration-300">Nuestra Historia</a>
-                <a href="index.html#premium" class="btn-primary px-4 py-2 rounded-full font-semibold">
+                <a href="#eventos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Eventos</a>
+                <a href="#calendario" class="text-gray-300 hover:text-yellow-400 transition duration-300">Calendario</a>
+                <a href="#cursos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
+                <a href="#historia" class="text-gray-300 hover:text-yellow-400 transition duration-300">Historia</a>
+                <a href="#astroia" class="text-yellow-400 font-semibold transition duration-300">IA.STRO</a>
+                <a href="#premium" class="btn-primary px-4 py-2 rounded-full font-semibold">
                     <i class="fas fa-star mr-1"></i>Premium
                 </a>
             </div>
@@ -181,335 +203,699 @@
             </div>
         </div>
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
-            <a href="index.html#eventos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Próximos Eventos</a>
-            <a href="eventos.html" class="block text-yellow-400 font-semibold transition duration-300">Todos los Eventos</a>
-            <a href="index.html#ubicacion" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Ubicación</a>
-            <a href="index.html#cursos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
-            <a href="historia.html" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Nuestra Historia</a>
-            <a href="index.html#premium" class="block btn-primary px-4 py-2 rounded-full font-semibold text-center mt-2">
+            <a href="#eventos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Eventos</a>
+            <a href="#calendario" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Calendario</a>
+            <a href="#cursos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
+            <a href="#historia" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Historia</a>
+            <a href="#astroia" class="block text-yellow-400 font-semibold transition duration-300">IA.STRO</a>
+            <a href="#premium" class="block btn-primary px-4 py-2 rounded-full font-semibold text-center mt-2">
                 <i class="fas fa-star mr-1"></i>Premium
             </a>
         </div>
     </nav>
 
-    <section id="eventos-pagina" class="py-20 bg-gradient-to-b from-space-blue to-cosmic-purple">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-6 section-title">Eventos Astronómicos en San Miguel</h2>
-            <p class="text-center text-gray-300 text-lg mb-16 max-w-3xl mx-auto">
-                Sumérgete en el cosmos con nuestra variada agenda de eventos. Desde observaciones nocturnas y charlas inspiradoras hasta talleres prácticos y festivales estelares, el Observatorio de Física Cósmica de San Miguel es tu puerta de entrada al universo. ¡Descubre, aprende y maravíllate con nosotros!
-            </p>
+    <!-- Hero Section -->
+    <section class="hero-bg py-24 md:py-32 relative overflow-hidden">
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <div class="telescope-icon inline-block mb-6">
+                    <i class="fas fa-telescope text-6xl text-yellow-400"></i>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    Explorando el Universo desde San Miguel
+                </h1>
+                <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                    Descubre los misterios del cosmos con nuestro observatorio. Eventos, cursos y tecnología de vanguardia para todos los amantes de la astronomía.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#eventos" class="btn-primary px-8 py-3 rounded-full font-bold text-lg">
+                        <i class="fas fa-calendar-alt mr-2"></i>Próximos Eventos
+                    </a>
+                    <a href="#premium" class="btn-ia px-8 py-3 rounded-full font-bold text-lg">
+                        <i class="fas fa-rocket mr-2"></i>Hazte Premium
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <div id="calendario-extendido" class="my-16">
-                <h3 class="text-3xl font-semibold text-center mb-10 section-title">Calendario Cósmico Extendido</h3>
-                <div class="card p-6 sm:p-8">
-                    <p class="text-gray-300 mb-6 text-center">
-                        Planifica tu aventura cósmica. Aquí te presentamos una vista preliminar de nuestras actividades para los próximos meses. (Nota: Este es un calendario ilustrativo. Consulta los eventos individuales para confirmación y detalles).
-                    </p>
-                    <h4 class="text-2xl font-semibold text-nebula-pink mb-4 text-center">Junio 2025 (Ilustrativo)</h4>
-                    <div class="overflow-x-auto">
-                        <table class="calendar-table mb-8">
-                            <thead>
-                                <tr>
-                                    <th>Lun</th><th>Mar</th><th>Mié</th><th>Jue</th><th>Vie</th><th>Sáb</th><th>Dom</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr> <td class="calendar-day"><span class="calendar-day-number">26</span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number">27</span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number">28</span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number">29</span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number">30</span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number">31</span></td>
-                                    <td class="calendar-day">
-                                        <span class="calendar-day-number">1</span>
-                                        <span class="calendar-event-entry">Charla: Solsticio de Invierno</span>
-                                    </td>
-                                </tr>
-                                <tr> <td class="calendar-day"><span class="calendar-day-number">2</span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number">3</span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number">4</span>
-                                        <span class="calendar-event-entry">Taller: Astrofotografía Básica (Día 1)</span>
-                                    </td>
-                                    <td class="calendar-day"><span class="calendar-day-number">5</span>
-                                        <span class="calendar-event-entry">Taller: Astrofotografía Básica (Día 2)</span>
-                                    </td>
-                                    <td class="calendar-day"><span class="calendar-day-number">6</span>
-                                        <span class="calendar-event-entry">Noche de Observación Pública</span>
-                                    </td>
-                                    <td class="calendar-day"><span class="calendar-day-number">7</span>
-                                         <span class="calendar-event-entry">Especial: Observación Luna Llena</span>
-                                    </td>
-                                    <td class="calendar-day"><span class="calendar-day-number">8</span></td>
-                                </tr>
-                                <tr> <td class="calendar-day"><span class="calendar-day-number">9</span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number">10</span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number">11</span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number">12</span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number">13</span>
-                                        <span class="calendar-event-entry">Noche de Observación Pública</span>
-                                    </td>
-                                    <td class="calendar-day"><span class="calendar-day-number">14</span>
-                                        <span class="calendar-event-entry">Club de Astronomía Infantil</span>
-                                    </td>
-                                    <td class="calendar-day"><span class="calendar-day-number">15</span></td>
-                                </tr>
-                                <tr> <td class="calendar-day"><span class="calendar-day-number">16</span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number">17</span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number">18</span>
-                                        <span class="calendar-event-entry">Charla: Nebulosas y Galaxias</span>
-                                    </td>
-                                    <td class="calendar-day"><span class="calendar-day-number">19</span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number">20</span>
-                                         <span class="calendar-event-entry">Noche de Observación (Miembros Premium)</span>
-                                    </td>
-                                    <td class="calendar-day"><span class="calendar-day-number">21</span>
-                                        <span class="calendar-event-entry">Evento Especial: Solsticio de Invierno</span>
-                                    </td>
-                                    <td class="calendar-day"><span class="calendar-day-number">22</span></td>
-                                </tr>
-                                <tr> <td class="calendar-day"><span class="calendar-day-number">23</span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number">24</span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number">25</span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number">26</span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number">27</span>
-                                        <span class="calendar-event-entry">Noche de Observación Pública</span>
-                                    </td>
-                                    <td class="calendar-day"><span class="calendar-day-number">28</span>
-                                        <span class="calendar-event-entry">Taller: Manejo de Telescopios Nivel 1</span>
-                                    </td>
-                                    <td class="calendar-day"><span class="calendar-day-number">29</span></td>
-                                </tr>
-                                 <tr> 
-                                    <td class="calendar-day"><span class="calendar-day-number">30</span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number"></span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number"></span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number"></span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number"></span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number"></span></td>
-                                    <td class="calendar-day"><span class="calendar-day-number"></span></td>
-                                </tr>
-                            </tbody>
-                        </table>
+    <!-- Sección de Eventos -->
+    <section id="eventos" class="py-20">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center section-title mb-16">Próximos Eventos Astronómicos</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Evento 1 -->
+                <div class="card p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <span class="text-xs font-semibold bg-yellow-500 text-gray-900 px-2 py-1 rounded-full">Noche de Observación</span>
+                            <h3 class="text-xl font-bold text-white mt-2">Lluvia de Perseidas</h3>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-lg font-bold text-yellow-400">12 Ago</p>
+                            <p class="text-xs text-gray-400">21:00 - 02:00</p>
+                        </div>
                     </div>
-                    <p class="text-center mt-6"><a href="#contacto-eventos" class="btn-primary px-6 py-3 rounded-full">Consultar o Inscribirse</a></p>
+                    <p class="text-gray-300 text-sm mb-4">Acompaña a nuestros astrónomos para observar la lluvia de meteoros más espectacular del año. Trae tu manta y disfruta del espectáculo celeste.</p>
+                    <div class="flex items-center text-gray-400 text-sm mb-4">
+                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        <span>Terrazas del Observatorio</span>
+                    </div>
+                    <button class="btn-primary w-full py-2 rounded-full text-sm font-semibold">Reservar Lugar</button>
+                </div>
+                
+                <!-- Evento 2 -->
+                <div class="card p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <span class="text-xs font-semibold bg-purple-500 text-gray-900 px-2 py-1 rounded-full">Conferencia</span>
+                            <h3 class="text-xl font-bold text-white mt-2">Agujeros Negros Supermasivos</h3>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-lg font-bold text-yellow-400">25 Ago</p>
+                            <p class="text-xs text-gray-400">19:30 - 21:00</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">El Dr. Alejandro Galaxia nos revelará los últimos descubrimientos sobre estos monstruos cósmicos que habitan el centro de las galaxias.</p>
+                    <div class="flex items-center text-gray-400 text-sm mb-4">
+                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        <span>Auditorio Principal</span>
+                    </div>
+                    <button class="btn-primary w-full py-2 rounded-full text-sm font-semibold">Reservar Entrada</button>
+                </div>
+                
+                <!-- Evento 3 -->
+                <div class="card p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <span class="text-xs font-semibold bg-blue-500 text-gray-900 px-2 py-1 rounded-full">Taller</span>
+                            <h3 class="text-xl font-bold text-white mt-2">Fotografía Astronómica</h3>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-lg font-bold text-yellow-400">5 Sep</p>
+                            <p class="text-xs text-gray-400">18:00 - 22:00</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Aprende a capturar la belleza del cosmos con tu cámara. Trae tu equipo y nuestros expertos te guiarán en este apasionante arte.</p>
+                    <div class="flex items-center text-gray-400 text-sm mb-4">
+                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        <span>Sala de Talleres</span>
+                    </div>
+                    <button class="btn-primary w-full py-2 rounded-full text-sm font-semibold">Inscribirse</button>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#calendario" class="inline-flex items-center text-yellow-400 hover:text-yellow-300 transition duration-300">
+                    <span>Ver todos los eventos</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Calendario -->
+    <section id="calendario" class="py-20 bg-gradient-to-br from-space-blue via-cosmic-purple to-space-blue">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center section-title mb-16">Calendario Astronómico</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="card p-6">
+                    <div class="flex flex-wrap justify-between mb-6">
+                        <h3 class="text-xl font-bold text-white">Septiembre 2024</h3>
+                        <div class="flex space-x-2">
+                            <button class="p-2 rounded-full bg-gray-800 hover:bg-gray-700">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="p-2 rounded-full bg-gray-800 hover:bg-gray-700">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-7 gap-2 mb-4">
+                        <div class="text-center text-gray-500 text-sm py-2">Lun</div>
+                        <div class="text-center text-gray-500 text-sm py-2">Mar</div>
+                        <div class="text-center text-gray-500 text-sm py-2">Mié</div>
+                        <div class="text-center text-gray-500 text-sm py-2">Jue</div>
+                        <div class="text-center text-gray-500 text-sm py-2">Vie</div>
+                        <div class="text-center text-gray-500 text-sm py-2">Sáb</div>
+                        <div class="text-center text-gray-500 text-sm py-2">Dom</div>
+                        
+                        <!-- Días del calendario -->
+                        <div class="text-center py-2"></div>
+                        <div class="text-center py-2"></div>
+                        <div class="text-center py-2"></div>
+                        <div class="text-center py-2"></div>
+                        <div class="text-center py-2"></div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">1</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">2</span>
+                        </div>
+                        
+                        <!-- Semana 1 -->
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">3</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">4</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full bg-yellow-500 text-gray-900 mx-auto">5</span>
+                            <span class="text-xs text-yellow-400 block mt-1">Taller</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">6</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">7</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">8</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">9</span>
+                        </div>
+                        
+                        <!-- Semana 2 -->
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">10</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">11</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">12</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">13</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">14</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">15</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">16</span>
+                        </div>
+                        
+                        <!-- Semana 3 -->
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">17</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">18</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">19</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">20</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">21</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">22</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full bg-purple-500 text-gray-900 mx-auto">23</span>
+                            <span class="text-xs text-purple-400 block mt-1">Eclipse</span>
+                        </div>
+                        
+                        <!-- Semana 4 -->
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">24</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full bg-blue-500 text-gray-900 mx-auto">25</span>
+                            <span class="text-xs text-blue-400 block mt-1">Conferencia</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">26</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">27</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">28</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">29</span>
+                        </div>
+                        <div class="text-center py-2">
+                            <span class="block w-8 h-8 leading-8 rounded-full mx-auto">30</span>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-gray-700 pt-4">
+                        <h4 class="text-lg font-semibold text-white mb-3">Eventos Destacados</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-start">
+                                <div class="w-3 h-3 rounded-full bg-yellow-500 mt-1.5 mr-3"></div>
+                                <div>
+                                    <h5 class="font-semibold text-white">5 Sep - Taller de Fotografía Astronómica</h5>
+                                    <p class="text-sm text-gray-400">18:00 - Sala de Talleres</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-3 h-3 rounded-full bg-purple-500 mt-1.5 mr-3"></div>
+                                <div>
+                                    <h5 class="font-semibold text-white">23 Sep - Eclipse Lunar Parcial</h5>
+                                    <p class="text-sm text-gray-400">Mejor visibilidad: 22:30</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-3 h-3 rounded-full bg-blue-500 mt-1.5 mr-3"></div>
+                                <div>
+                                    <h5 class="font-semibold text-white">25 Sep - Conferencia: Agujeros Negros</h5>
+                                    <p class="text-sm text-gray-400">19:30 - Auditorio Principal</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección IA.STRO -->
+    <section id="astroia" class="py-20 bg-gradient-to-br from-space-blue via-ia-blue to-cosmic-purple">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="text-center mb-16">
+                <i class="fas fa-robot text-6xl text-ia-highlight mb-4"></i>
+                <h2 class="text-4xl md:text-5xl font-bold section-title ia-title">IA.STRO: Inteligencia Artificial al Servicio del Cosmos</h2>
+                <p class="text-gray-300 text-lg mt-6 max-w-3xl mx-auto">
+                    Bienvenido a IA.STRO, la plataforma de vanguardia del Observatorio San Miguel donde la inteligencia artificial y el machine learning se unen a la pasión por la astronomía. Descubre cómo estamos revolucionando la forma en que exploramos, analizamos y comprendemos el universo.
+                </p>
+            </div>
+
+            <div class="mb-20">
+                <h3 class="text-3xl font-semibold text-center text-ia-highlight mb-12">El Poder de IA.STRO a tu Alcance</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="ia-card p-6 rounded-xl">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-chart-line text-3xl text-ia-blue mr-4"></i>
+                            <h4 class="text-xl font-bold text-white">Análisis Avanzado de Grandes Volúmenes de Datos</h4>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-3 leading-relaxed">
+                            IA.STRO está diseñado para procesar y analizar terabytes de datos astronómicos provenientes de nuestros telescopios y de surveys públicos. Utilizamos algoritmos de deep learning para identificar patrones sutiles, clasificar objetos celestes con alta precisión y detectar anomalías que podrían pasar desapercibidas al ojo humano o a métodos tradicionales.
+                        </p>
+                        <p class="text-xs text-ia-highlight mb-1 font-semibold">Aplicaciones Clave:</p>
+                        <ul class="list-disc list-inside text-gray-400 text-xs space-y-1 pl-4">
+                            <li>Clasificación morfológica de galaxias en imágenes de campo amplio.</li>
+                            <li>Análisis espectral automatizado para determinar composición estelar.</li>
+                            <li>Identificación de outliers en curvas de luz de estrellas variables.</li>
+                            <li>Correlación de datos multi-longitud de onda para estudios integrales.</li>
+                        </ul>
+                         <button class="btn-ia mt-4 px-4 py-2 rounded-full text-sm font-semibold w-full"><i class="fas fa-cogs mr-2"></i>Explorar Módulo de Análisis (Simulado)</button>
+                    </div>
+
+                    <div class="ia-card p-6 rounded-xl">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-search-plus text-3xl text-ia-blue mr-4"></i>
+                            <h4 class="text-xl font-bold text-white">Descubrimiento Acelerado de Objetos y Fenómenos</h4>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-3 leading-relaxed">
+                            Nuestros modelos de IA son entrenados continuamente para buscar lo desconocido. IA.STRO tamiza enormes conjuntos de datos para identificar candidatos prometedores a nuevos exoplanetas mediante el método de tránsito, detectar supernovas en sus etapas tempranas, rastrear asteroides potencialmente peligrosos (NEOs) y alertar sobre fenómenos transitorios como GRBs o fulguraciones estelares.
+                        </p>
+                        <p class="text-xs text-ia-highlight mb-1 font-semibold">Logros Simulados Recientes:</p>
+                        <ul class="list-disc list-inside text-gray-400 text-xs space-y-1 pl-4">
+                            <li>Identificación de 5 nuevos candidatos a exoplanetas tipo "Júpiter Caliente".</li>
+                            <li>Alerta temprana de la supernova SN2025osm-ia en una galaxia distante.</li>
+                            <li>Seguimiento y refinamiento orbital de 3 NEOs con paso cercano.</li>
+                        </ul>
+                        <button class="btn-ia mt-4 px-4 py-2 rounded-full text-sm font-semibold w-full"><i class="fas fa-meteor mr-2"></i>Ver Alertas de Descubrimiento (Simulado)</button>
+                    </div>
+
+                    <div class="ia-card p-6 rounded-xl">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-image text-3xl text-ia-blue mr-4"></i>
+                            <h4 class="text-xl font-bold text-white">Procesamiento Inteligente y Realce de Imágenes</h4>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-3 leading-relaxed">
+                           IA.STRO va más allá del apilado tradicional. Empleamos técnicas de IA para la deconvolución avanzada, reducción de ruido inteligente, eliminación de artefactos cósmicos y realce de detalles finos en imágenes astronómicas. Esto permite a nuestros astrónomos y a la comunidad obtener imágenes de calidad científica y estética superior.
+                        </p>
+                        <p class="text-xs text-ia-highlight mb-1 font-semibold">Herramientas Destacadas:</p>
+                        <ul class="list-disc list-inside text-gray-400 text-xs space-y-1 pl-4">
+                            <li>Reducción de ruido basada en redes neuronales convolucionales (CNNs).</li>
+                            <li>Segmentación semántica para aislar objetos de interés (nebulosas, galaxias).</li>
+                            <li>"Super-resolución" simulada para mejorar el detalle en imágenes limitadas por seeing.</li>
+                        </ul>
+                         <button class="btn-ia mt-4 px-4 py-2 rounded-full text-sm font-semibold w-full"><i class="fas fa-magic mr-2"></i>Probar Herramientas de Imagen (Simulado)</button>
+                    </div>
+
+                    <div class="ia-card p-6 rounded-xl">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-calendar-check text-3xl text-ia-blue mr-4"></i>
+                            <h4 class="text-xl font-bold text-white">Optimización Inteligente del Tiempo de Telescopio</h4>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-3 leading-relaxed">
+                            El tiempo en los telescopios es valioso. IA.STRO utiliza algoritmos de planificación y optimización para programar las observaciones de manera eficiente, teniendo en cuenta las condiciones meteorológicas previstas (simuladas), la visibilidad de los objetos, la prioridad científica y las solicitudes de los usuarios (especialmente miembros Premium).
+                        </p>
+                        <p class="text-xs text-ia-highlight mb-1 font-semibold">Beneficios Clave:</p>
+                        <ul class="list-disc list-inside text-gray-400 text-xs space-y-1 pl-4">
+                            <li>Maximización del tiempo útil de observación.</li>
+                            <li>Programación dinámica adaptada a cambios climáticos.</li>
+                            <li>Sugerencias de objetivos óptimos según la configuración del equipo y la época del año.</li>
+                            <li>Interfaz para que miembros Premium soliciten observaciones (simulado).</li>
+                        </ul>
+                        <button class="btn-ia mt-4 px-4 py-2 rounded-full text-sm font-semibold w-full"><i class="fas fa-tasks mr-2"></i>Solicitar Tiempo Optimizado (Simulado)</button>
+                    </div>
                 </div>
             </div>
 
-            <div id="eventos-emblematicos" class="my-20">
-                <h3 class="text-3xl font-semibold text-center mb-12 section-title">Nuestros Eventos Emblemáticos</h3>
-                <div class="space-y-12">
-                    <div class="card event-card-large p-6 md:p-8 rounded-xl shadow-2xl">
-                        <div class="grid md:grid-cols-2 gap-8 items-center">
-                            <div class="order-2 md:order-1">
-                                <h4 class="text-2xl lg:text-3xl font-bold text-yellow-400 mb-3">Festival Anual de Estrellas de San Miguel</h4>
-                                <p class="text-sm text-nebula-pink mb-4"><i class="fas fa-calendar-alt mr-2"></i>Generalmente en Noviembre (Consultar fechas exactas)</p>
-                                <p class="text-gray-300 leading-relaxed mb-4">
-                                    Nuestro evento cumbre del año. Tres días dedicados a la celebración de la astronomía con actividades para todas las edades. Incluye observaciones masivas con múltiples telescopios, charlas magistrales de astrónomos reconocidos, talleres interactivos, planetario móvil, feria de ciencias, concurso de astrofotografía, música en vivo y food trucks temáticos. Una experiencia inolvidable para toda la familia y aficionados.
-                                </p>
-                                <h5 class="text-lg font-semibold text-yellow-300 mt-4 mb-2">Actividades Destacadas del Festival:</h5>
-                                <ul class="list-disc list-inside text-gray-400 space-y-1 text-sm">
-                                    <li>Maratón Messier (para observadores avanzados).</li>
-                                    <li>"Bautismo Estelar": Ayudamos a los niños a encontrar su primera constelación.</li>
-                                    <li>Panel de discusión: "El Futuro de la Exploración Espacial".</li>
-                                    <li>Proyección de documentales astronómicos al aire libre.</li>
-                                    <li>Stands de clubes de astronomía de la región.</li>
-                                </ul>
-                                <a href="#contacto-eventos" class="mt-6 inline-block btn-primary px-6 py-3 rounded-full">Más Información e Inscripciones</a>
+            <div class="my-20">
+                <h3 class="text-3xl font-semibold text-center text-ia-highlight mb-12">Dashboard IA.STRO (Simulación de Interfaz)</h3>
+                <div class="ia-card p-6 md:p-8 rounded-xl shadow-2xl">
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="ia-dashboard-widget text-center">
+                            <i class="fas fa-server text-4xl text-ia-blue mb-3"></i>
+                            <h5 class="text-lg font-semibold text-white">Estado de los Clusters IA</h5>
+                            <p class="text-2xl font-bold text-green-400">Online</p>
+                            <p class="text-xs text-gray-400">Última comprobación: Hace 2 min</p>
+                            <div class="w-full bg-gray-700 rounded-full h-2.5 mt-2">
+                                <div class="bg-green-500 h-2.5 rounded-full" style="width: 95%"></div>
                             </div>
-                            <div class="order-1 md:order-2">
-                                <img src="https://via.placeholder.com/500x350.png?text=Festival+Estrellas+San+Miguel" alt="Festival de Estrellas" class="rounded-lg shadow-xl w-full">
-                                <div class="grid grid-cols-3 gap-2 mt-4">
-                                    <img src="https://via.placeholder.com/150x100.png?text=Festival+1" alt="Foto Festival 1" class="rounded">
-                                    <img src="https://via.placeholder.com/150x100.png?text=Festival+2" alt="Foto Festival 2" class="rounded">
-                                    <img src="https://via.placeholder.com/150x100.png?text=Festival+3" alt="Foto Festival 3" class="rounded">
-                                </div>
-                            </div>
+                            <p class="text-xs text-gray-400 mt-1">Carga CPU: 65% | Memoria: 78%</p>
                         </div>
-                         <div class="mt-6 border-t border-gray-700 pt-4">
-                                <h5 class="text-md font-semibold text-nebula-pink mb-2">Testimonios de asistentes (Festival 2024):</h5>
-                                <blockquote class="text-sm text-gray-400 italic border-l-2 border-nebula-pink pl-3 mb-2">"Fue mágico, especialmente ver la Vía Láctea tan clara con los telescopios grandes. Mis hijos quedaron fascinados." - Familia Pérez</blockquote>
-                                <blockquote class="text-sm text-gray-400 italic border-l-2 border-nebula-pink pl-3">"Las charlas fueron de altísimo nivel. Aprendí muchísimo. ¡Ya espero el próximo!" - Carlos G., Estudiante de Física</blockquote>
-                         </div>
-                    </div>
-
-                    <div class="card event-card-large p-6 md:p-8 rounded-xl shadow-2xl">
-                        <div class="grid md:grid-cols-2 gap-8 items-center">
-                            <div>
-                                <img src="https://via.placeholder.com/500x350.png?text=Semana+Ciencia+y+Espacio" alt="Semana de la Ciencia" class="rounded-lg shadow-xl w-full">
-                                <div class="grid grid-cols-3 gap-2 mt-4">
-                                    <img src="https://via.placeholder.com/150x100.png?text=Ciencia+1" alt="Foto Ciencia 1" class="rounded">
-                                    <img src="https://via.placeholder.com/150x100.png?text=Ciencia+2" alt="Foto Ciencia 2" class="rounded">
-                                    <img src="https://via.placeholder.com/150x100.png?text=Ciencia+3" alt="Foto Ciencia 3" class="rounded">
-                                </div>
-                            </div>
-                            <div>
-                                <h4 class="text-2xl lg:text-3xl font-bold text-yellow-400 mb-3">Semana de la Ciencia y el Espacio</h4>
-                                <p class="text-sm text-nebula-pink mb-4"><i class="fas fa-calendar-alt mr-2"></i>Generalmente en Mayo (Vinculado a la Semana Nacional de la Ciencia)</p>
-                                <p class="text-gray-300 leading-relaxed mb-4">
-                                    Una semana intensiva de divulgación científica enfocada en inspirar a jóvenes y adultos. Organizamos jornadas de puertas abiertas, demostraciones científicas interactivas, visitas guiadas especiales a nuestras instalaciones (incluyendo áreas técnicas no siempre accesibles), y un ciclo de conferencias con investigadores locales e invitados sobre los últimos avances en astrofísica, cosmología y ciencias planetarias.
-                                </p>
-                                 <h5 class="text-lg font-semibold text-yellow-300 mt-4 mb-2">Atracciones Principales:</h5>
-                                <ul class="list-disc list-inside text-gray-400 space-y-1 text-sm">
-                                    <li>"Científico por un Día": Los visitantes participan en simulaciones de investigación.</li>
-                                    <li>Demostraciones de espectroscopía y radioastronomía.</li>
-                                    <li>Charlas sobre astrobiología y la búsqueda de vida extraterrestre.</li>
-                                    <li>Competencia de cohetes de agua para escuelas.</li>
-                                </ul>
-                                <a href="#contacto-eventos" class="mt-6 inline-block btn-primary px-6 py-3 rounded-full">Ver Programa Detallado</a>
-                            </div>
+                        <div class="ia-dashboard-widget">
+                            <i class="fas fa-history text-3xl text-ia-blue mb-3"></i>
+                            <h5 class="text-lg font-semibold text-white mb-2">Últimos Análisis Completados</h5>
+                            <ul class="text-xs text-gray-300 space-y-1.5">
+                                <li class="truncate"><i class="fas fa-check-circle text-green-400 mr-1"></i>Clasificación galaxias Survey XYZ (Lote 3)</li>
+                                <li class="truncate"><i class="fas fa-check-circle text-green-400 mr-1"></i>Detección tránsitos estrella KIC 8462852</li>
+                                <li class="truncate"><i class="fas fa-spinner fa-spin text-yellow-400 mr-1"></i>Procesando imágenes Nebulosa del Cangrejo...</li>
+                                <li class="truncate"><i class="fas fa-check-circle text-green-400 mr-1"></i>Búsqueda Supernovas Campo Profundo Sur</li>
+                            </ul>
+                        </div>
+                        <div class="ia-dashboard-widget">
+                             <i class="fas fa-bell text-3xl text-ia-blue mb-3"></i>
+                            <h5 class="text-lg font-semibold text-white mb-2">Alertas Astronómicas IA</h5>
+                             <ul class="text-xs text-gray-300 space-y-1.5">
+                                <li class="truncate"><span class="text-red-500 font-bold">[ALTA]</span> Candidato NEO con órbita cercana.</li>
+                                <li class="truncate"><span class="text-yellow-500 font-bold">[MEDIA]</span> Posible fulguración en Proxima Centauri.</li>
+                                <li class="truncate"><span class="text-blue-400 font-bold">[INFO]</span> Óptima visibilidad de Júpiter esta noche.</li>
+                             </ul>
                         </div>
                     </div>
-                    </div>
-            </div>
-
-            <div id="actividades-regulares" class="my-20">
-                <h3 class="text-3xl font-semibold text-center mb-12 section-title">Actividades Regulares Para Ti</h3>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="card p-6 hover:shadow-starlight-yellow/30">
-                        <div class="text-4xl text-starlight-yellow mb-4"><i class="fas fa-moon"></i></div>
-                        <h4 class="text-xl font-semibold text-white mb-2">Noches de Observación Pública</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed">Todos los viernes (si el clima lo permite). Una oportunidad para observar la Luna, planetas y objetos de cielo profundo a través de nuestros telescopios, con la guía de nuestros expertos. Actividad gratuita, requiere inscripción previa.</p>
-                    </div>
-                    <div class="card p-6 hover:shadow-starlight-yellow/30">
-                        <div class="text-4xl text-starlight-yellow mb-4"><i class="fas fa-microphone-alt"></i></div>
-                        <h4 class="text-xl font-semibold text-white mb-2">Ciclo de Charlas "Misterios del Cosmos"</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed">Un sábado al mes. Astrónomos, físicos y divulgadores comparten sus conocimientos sobre temas fascinantes, desde agujeros negros hasta la materia oscura. Consulta nuestro calendario para temas y ponentes.</p>
-                    </div>
-                    <div class="card p-6 hover:shadow-starlight-yellow/30">
-                        <div class="text-4xl text-starlight-yellow mb-4"><i class="fas fa-tools"></i></div>
-                        <h4 class="text-xl font-semibold text-white mb-2">Talleres Prácticos de Astronomía</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed">Ofrecemos talleres de astrofotografía, manejo de telescopios, construcción de espectroscopios caseros, y más. Ideales para profundizar tus conocimientos y habilidades. Cupos limitados.</p>
-                    </div>
-                    <div class="card p-6 hover:shadow-starlight-yellow/30">
-                        <div class="text-4xl text-starlight-yellow mb-4"><i class="fas fa-meteor"></i></div>
-                        <h4 class="text-xl font-semibold text-white mb-2">Observación de Fenómenos Especiales</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed">Organizamos eventos especiales para eclipses, lluvias de meteoros, tránsitos planetarios y conjunciones notables. ¡No te pierdas estos espectáculos celestes únicos!</p>
-                    </div>
-                    <div class="card p-6 hover:shadow-starlight-yellow/30">
-                        <div class="text-4xl text-starlight-yellow mb-4"><i class="fas fa-satellite-dish"></i></div>
-                        <h4 class="text-xl font-semibold text-white mb-2">Transmisiones Online y Webinars</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed">Periódicamente ofrecemos transmisiones en vivo de observaciones y webinars con expertos, para que puedas disfrutar del cosmos desde cualquier lugar del mundo. Sigue nuestras redes sociales.</p>
-                    </div>
-                    <div class="card p-6 hover:shadow-starlight-yellow/30">
-                        <div class="text-4xl text-starlight-yellow mb-4"><i class="fas fa-child"></i></div>
-                        <h4 class="text-xl font-semibold text-white mb-2">Club de Astronomía Infantil "Pequeños Cosmonautas"</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed">Actividades lúdicas y educativas para niños de 6 a 12 años, fomentando la curiosidad por la ciencia y el universo. Sábados por la mañana, quincenalmente.</p>
+                    <div class="ia-dashboard-widget">
+                        <h5 class="text-lg font-semibold text-white mb-3">Actividad de Detección de Exoplanetas (Últimos 30 días)</h5>
+                        <img src="https://via.placeholder.com/800x300.png?text=Gráfico+Simulado+de+Detección+de+Exoplanetas+IA.STRO" alt="Gráfico de Detección" class="w-full rounded-md">
+                        <p class="text-xs text-gray-400 mt-2 text-center">Este gráfico simula la tasa de identificación de candidatos a exoplanetas por los algoritmos de IA.STRO.</p>
                     </div>
                 </div>
             </div>
             
-            <div id="archivo-eventos" class="my-20">
-                <h3 class="text-3xl font-semibold text-center mb-12 section-title">Revive Nuestros Mejores Momentos: Archivo de Eventos</h3>
-                <div class="card p-6 sm:p-8">
-                    <p class="text-gray-300 mb-6 text-center">
-                        Un vistazo a algunas de las actividades que hemos realizado. ¡El universo es una fuente inagotable de inspiración!
-                    </p>
-                    
-                    <h4 class="text-2xl font-semibold archive-year-title">Eventos Destacados 2024</h4>
-                    <ul class="list-disc list-inside text-gray-400 space-y-2 text-sm pl-4">
-                        <li><strong>Diciembre 2024:</strong> Especial Observación Gemínidas y Charla sobre Meteoritos.</li>
-                        <li><strong>Noviembre 2024:</strong> Gran Festival de Estrellas de San Miguel (Edición XII).</li>
-                        <li><strong>Octubre 2024:</strong> Noche Internacional de Observación Lunar - Edición San Miguel.</li>
-                        <li><strong>Septiembre 2024:</strong> Charla: "Exoplanetas: En Busca de Otros Mundos" por Dra. Invitada.</li>
-                        <li><strong>Agosto 2024:</strong> Taller Intensivo de Astrofotografía de Cielo Profundo (3 días).</li>
-                        <li><strong>Julio 2024:</strong> Observación Especial: Oposición de Saturno.</li>
-                        <li><strong>Junio 2024:</strong> Celebración del Solsticio de Invierno: Charla y Observación Solar (con filtros).</li>
-                        <li><strong>Mayo 2024:</strong> Semana de la Ciencia: "Explorando el Universo con IA".</li>
-                        <li><strong>Abril 2024:</strong> Eclipse Solar Parcial - Jornada de Observación Segura y Educativa.</li>
-                        <li><strong>Marzo 2024:</strong> Charla: "Agujeros Negros Supermasivos" por Dr. Local.</li>
-                        <li><strong>Febrero 2024:</strong> Noche de Observación Temática: "Constelaciones de Verano y Mitología".</li>
-                        <li><strong>Enero 2024:</strong> Taller de Verano para Niños: "Construye tu Propio Sistema Solar".</li>
-                        <li><strong>Diciembre 2023 (continuación):</strong> Visita de Escuela Técnica N°5 - Taller de Robótica Astronómica.</li>
-                        <li><strong>Noviembre 2023 (continuación):</strong> Conferencia Online: "El Telescopio James Webb: Primer Año de Descubrimientos".</li>
-                    </ul>
+            <div class="my-20">
+                <h3 class="text-3xl font-semibold text-center text-ia-highlight mb-12">Consulta a tu Asistente Virtual IA.STRO</h3>
+                <div class="ia-card max-w-2xl mx-auto p-6 rounded-xl shadow-2xl">
+                    <div class="h-96 overflow-y-auto p-4 space-y-3 bg-space-blue rounded mb-4 border border-ia-highlight">
+                        <div class="ia-chat-bubble ia">
+                            <i class="fas fa-robot mr-2"></i>¡Hola! Soy IA.STRO Asistente. ¿En qué puedo ayudarte hoy con tus datos astronómicos o consultas?
+                        </div>
+                        <div class="ia-chat-bubble user">
+                            Necesito información sobre la Nebulosa del Anillo (M57).
+                        </div>
+                        <div class="ia-chat-bubble ia">
+                            <i class="fas fa-robot mr-2"></i>Claro. M57, la Nebulosa del Anillo, es una nebulosa planetaria en la constelación de Lyra. Se encuentra a unos 2,300 años luz de distancia. Su magnitud aparente es de 8.8. ¿Deseas datos específicos como coordenadas, espectro típico o imágenes procesadas por IA.STRO?
+                        </div>
+                        <div class="ia-chat-bubble user">
+                            Sí, coordenadas J2000 y una imagen procesada recientemente.
+                        </div>
+                        <div class="ia-chat-bubble ia">
+                            <i class="fas fa-robot mr-2"></i>Perfecto. Coordenadas J2000 para M57: Ascensión Recta 18h 53m 35.079s, Declinación +33° 01' 45.03".<br>Aquí tienes una imagen reciente procesada por nuestro módulo de realce:
+                            <img src="https://via.placeholder.com/300x200.png?text=M57+Procesada+por+IA.STRO" alt="M57 Procesada" class="rounded-md my-2 shadow-lg">
+                            ¿Algo más en lo que pueda asistirte?
+                        </div>
+                        <div class="ia-chat-bubble user">
+                             ¿Puedes generar un script Python para descargar datos de Gaia sobre estrellas en un radio de 5 arcmin alrededor de M57?
+                        </div>
+                        <div class="ia-chat-bubble ia">
+                            <i class="fas fa-robot mr-2"></i>¡Absolutamente! Aquí tienes un script básico usando Astroquery para esa tarea. Recuerda tener `astroquery` instalado (`pip install astroquery`):
+                            <div class="code-block-ia">
+                                <span class="comment"># Script Python para consultar Gaia alrededor de M57</span><br>
+                                <span class="keyword">from</span> astroquery.gaia <span class="keyword">import</span> Gaia<br>
+                                <span class="keyword">from</span> astropy.coordinates <span class="keyword">import</span> SkyCoord<br>
+                                <span class="keyword">import</span> astropy.units <span class="keyword">as</span> u<br>
+                                <br>
+                                m57_coords = SkyCoord(<span class="string">'18h53m35.079s'</span>, <span class="string">'+33d01m45.03s'</span>, frame=<span class="string">'icrs'</span>)<br>
+                                radius = <span class="number">5</span> * u.arcmin<br>
+                                <br>
+                                job = Gaia.launch_job_async(<span class="string">"SELECT TOP 100 source_id, ra, dec, phot_g_mean_mag "</span> \<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;                         <span class="string">"FROM gaiaedr3.gaia_source "</span> \<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;                         <span class="string">"WHERE 1=CONTAINS(POINT('ICRS', ra, dec), CIRCLE('ICRS', "</span> \<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;                         f<span class="string">"{m57_coords.ra.deg}, {m57_coords.dec.deg}, {radius.to(u.deg).value}"</span><span class="string">"))"</span>)<br>
+                                results = job.get_results()<br>
+                                <span class="function">print</span>(results)
+                            </div>
+                            Este script recuperará las primeras 100 fuentes de Gaia EDR3 en el radio especificado. Puedes ajustar la consulta ADQL según tus necesidades.
+                        </div>
 
-                    <h4 class="text-2xl font-semibold archive-year-title">Eventos Destacados 2023</h4>
-                    <ul class="list-disc list-inside text-gray-400 space-y-2 text-sm pl-4">
-                        <li><strong>Diciembre 2023:</strong> Cierre Anual Club Pequeños Cosmonautas - Entrega de Diplomas.</li>
-                        <li><strong>Noviembre 2023:</strong> Festival de Estrellas de San Miguel (Edición XI) - Éxito de convocatoria.</li>
-                        <li><strong>Octubre 2023:</strong> Taller: "Introducción a la Radioastronomía Amateur".</li>
-                        <li><strong>Septiembre 2023:</strong> Charla: "La Vida de las Estrellas: Del Nacimiento a la Muerte".</li>
-                        <li><strong>Agosto 2023:</strong> Observación de las Perseidas - Noche de Camping Astronómico (cupos limitados).</li>
-                        <li><strong>Julio 2023:</strong> Curso Breve: "Cosmología Moderna para Principiantes".</li>
-                        <li><strong>Junio 2023:</strong> Presentación Libro: "Cielos de San Miguel" por Fotógrafo Local.</li>
-                        <li><strong>Mayo 2023:</strong> Semana de la Ciencia: "Marte: Pasado, Presente y Futuro".</li>
-                        <li><strong>Abril 2023:</strong> Charla Debate: "¿Estamos Solos en el Universo?".</li>
-                        <li><strong>Marzo 2023:</strong> Taller: "Manejo de Monturas Ecuatoriales y Puesta en Estación".</li>
-                        <li><strong>Febrero 2023:</strong> Noche de San Valentín Bajo las Estrellas (Evento Especial).</li>
-                        <li><strong>Enero 2023:</strong> Observación Cometa C/2022 E3 (ZTF) - Noches especiales.</li>
-                        <li><strong>Diciembre 2022 (continuación):</strong> Participación en Feria de Ciencias Municipal.</li>
-                        <li><strong>Noviembre 2022 (continuación):</strong> Seminario: "Impacto de los Satélites Starlink en la Astronomía".</li>
-                    </ul>
-                    <h4 class="text-2xl font-semibold archive-year-title">Eventos Destacados 2022</h4>
-                     <ul class="list-disc list-inside text-gray-400 space-y-2 text-sm pl-4">
-                        <li><strong>Diciembre 2022:</strong> Observación de la Ocultación de Marte por la Luna.</li>
-                        <li><strong>Noviembre 2022:</strong> Festival de Estrellas de San Miguel (Edición X Aniversario).</li>
-                        <li><strong>Octubre 2022:</strong> Charla "El legado de Carl Sagan" por Dr. Invitado.</li>
-                        <li><strong>Septiembre 2022:</strong> Taller de construcción de relojes solares.</li>
-                        </ul>
-                </div>
-            </div>
-
-            <div id="contacto-eventos" class="my-20 text-center">
-                <h3 class="text-3xl font-semibold mb-8 section-title">Participa y Conéctate</h3>
-                <div class="card max-w-2xl mx-auto p-8">
-                    <p class="text-gray-300 mb-6 leading-relaxed">
-                        ¿Interesado en asistir a nuestros eventos? La mayoría son gratuitos pero requieren inscripción previa debido a la capacidad limitada. Consulta la descripción de cada evento para detalles específicos sobre cómo registrarte.
-                    </p>
-                    <p class="text-gray-300 mb-6 leading-relaxed">
-                        Si eres investigador, divulgador o un apasionado de la astronomía y te gustaría proponer una charla, un taller o colaborar de alguna forma, ¡nos encantaría escucharte!
-                    </p>
-                    <a href="index.html#contacto" class="btn-primary px-8 py-4 rounded-full font-semibold text-lg">
-                        <i class="fas fa-envelope mr-2"></i>Contáctanos para Inscripciones o Propuestas
-                    </a>
-                    <p class="text-xs text-gray-500 mt-6">Síguenos en nuestras redes sociales para no perderte ninguna novedad sobre nuestros próximos eventos y actividades.</p>
-                    <div class="mt-4 flex justify-center space-x-4">
-                        <a href="#" aria-label="Facebook" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-facebook-f fa-2x"></i></a>
-                        <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-instagram fa-2x"></i></a>
-                        <a href="#" aria-label="Twitter" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-twitter fa-2x"></i></a>
+                    </div>
+                    <div class="flex gap-3">
+                        <input type="text" placeholder="Escribe tu consulta a IA.STRO..." class="flex-grow bg-gray-800 border border-gray-700 rounded-full px-6 py-3 text-white focus:outline-none focus:border-ia-blue placeholder-gray-500 text-sm">
+                        <button class="btn-ia px-6 py-3 rounded-full"><i class="fas fa-paper-plane"></i></button>
                     </div>
                 </div>
             </div>
-
-            <div id="galeria-comunidad" class="my-20">
-                <h3 class="text-3xl font-semibold text-center mb-12 section-title">Galería de Nuestra Comunidad Cósmica</h3>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <img src="https://via.placeholder.com/300x200.png?text=Evento+Comunidad+1" alt="Comunidad en Evento 1" class="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
-                    <img src="https://via.placeholder.com/300x200.png?text=Evento+Comunidad+2" alt="Comunidad en Evento 2" class="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
-                    <img src="https://via.placeholder.com/300x200.png?text=Evento+Comunidad+3" alt="Comunidad en Evento 3" class="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
-                    <img src="https://via.placeholder.com/300x200.png?text=Evento+Comunidad+4" alt="Comunidad en Evento 4" class="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
-                    <img src="https://via.placeholder.com/300x200.png?text=Evento+Comunidad+5" alt="Comunidad en Evento 5" class="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
-                    <img src="https://via.placeholder.com/300x200.png?text=Evento+Comunidad+6" alt="Comunidad en Evento 6" class="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
-                    <img src="https://via.placeholder.com/300x200.png?text=Evento+Comunidad+7" alt="Comunidad en Evento 7" class="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
-                    <img src="https://via.placeholder.com/300x200.png?text=Evento+Comunidad+8" alt="Comunidad en Evento 8" class="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
-                    </div>
-            </div>
-
-        </div> </section>
-    <footer class="py-12 border-t border-gray-800">
-        <div class="container mx-auto px-6 text-center text-gray-400">
-            <div class="mb-6">
-                 <a href="index.html" class="text-xl font-bold text-white hover:text-yellow-400 transition">
-                    <i class="fas fa-satellite mr-2 text-yellow-400"></i>Observatorio de Física Cósmica de San Miguel
+            
+            <div class="mt-20 text-center">
+                 <h3 class="text-2xl font-semibold text-ia-highlight mb-6">Únete a la Revolución de la Astronomía con IA</h3>
+                 <p class="text-gray-300 mb-8 max-w-2xl mx-auto">
+                    Los miembros Premium del Observatorio San Miguel tienen acceso exclusivo a funcionalidades beta de IA.STRO, tutoriales avanzados y la oportunidad de colaborar en proyectos de investigación impulsados por inteligencia artificial.
+                </p>
+                <a href="#premium" class="btn-primary px-10 py-4 rounded-full font-bold text-lg mr-0 sm:mr-4 mb-4 sm:mb-0">
+                    <i class="fas fa-star mr-2"></i>Hazte Miembro Premium
+                </a>
+                <a href="#contacto" class="btn-ia px-10 py-4 rounded-full font-bold text-lg">
+                    <i class="fas fa-info-circle mr-2"></i>Más Información sobre IA.STRO
                 </a>
             </div>
-            <div class="mb-6 space-x-6">
-                <a href="index.html#eventos" class="hover:text-yellow-400">Próximos Eventos</a>
-                <a href="eventos.html" class="hover:text-yellow-400">Todos los Eventos</a>
-                <a href="index.html#cursos" class="hover:text-yellow-400">Cursos</a>
-                <a href="historia.html" class="hover:text-yellow-400">Nuestra Historia</a>
-                <a href="index.html#premium" class="hover:text-yellow-400">Premium</a>
-                <a href="index.html#contacto" class="hover:text-yellow-400">Contacto</a>
-                <a href="#" class="hover:text-yellow-400">Política de Privacidad</a>
+        </div>
+    </section>
+
+    <!-- Sección Premium -->
+    <section id="premium" class="py-20">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center section-title mb-16">Membresía Premium</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Membresía Básica -->
+                <div class="card p-8 text-center">
+                    <h3 class="text-xl font-bold text-white mb-2">Explorador Estelar</h3>
+                    <div class="text-4xl font-bold text-yellow-400 mb-6">$19<span class="text-xl text-gray-400">/mes</span></div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-300">Acceso prioritario a eventos</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-300">Descuentos en cursos y talleres</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-300">Acceso a telescopios remotos 5h/mes</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-times text-red-500 mr-2"></i>
+                            <span class="text-gray-400">Acceso a IA.STRO</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-times text-red-500 mr-2"></i>
+                            <span class="text-gray-400">Solicitud de observaciones IA</span>
+                        </li>
+                    </ul>
+                    <button class="btn-primary w-full py-3 rounded-full font-semibold">Empezar Ahora</button>
+                </div>
+                
+                <!-- Membresía Recomendada -->
+                <div class="card p-8 text-center border-2 border-yellow-400 transform scale-105 relative">
+                    <div class="absolute top-0 right-0 bg-yellow-400 text-gray-900 px-4 py-1 font-bold rounded-bl-lg">MÁS POPULAR</div>
+                    <h3 class="text-xl font-bold text-white mb-2">Astrónomo Avanzado</h3>
+                    <div class="text-4xl font-bold text-yellow-400 mb-6">$39<span class="text-xl text-gray-400">/mes</span></div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-300">Todo en Explorador Estelar</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-300">Acceso completo a IA.STRO</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-300">Solicitud de observaciones IA</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-300">Acceso a telescopios remotos 15h/mes</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-300">Asesoría personalizada mensual</span>
+                        </li>
+                    </ul>
+                    <button class="btn-primary w-full py-3 rounded-full font-semibold">Empezar Ahora</button>
+                </div>
+                
+                <!-- Membresía Institucional -->
+                <div class="card p-8 text-center">
+                    <h3 class="text-xl font-bold text-white mb-2">Institucional</h3>
+                    <div class="text-4xl font-bold text-yellow-400 mb-6">$99<span class="text-xl text-gray-400">/mes</span></div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-300">Todo en Astrónomo Avanzado</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-300">Hasta 5 usuarios</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-300">Acceso a telescopios remotos 50h/mes</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-300">Talleres personalizados</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-300">Prioridad en proyectos colaborativos</span>
+                        </li>
+                    </ul>
+                    <button class="btn-primary w-full py-3 rounded-full font-semibold">Contactar Ventas</button>
+                </div>
             </div>
-            <div class="mb-6 flex justify-center space-x-6">
-                <a href="#" aria-label="Facebook" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-facebook-f fa-lg"></i></a>
-                <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-instagram fa-lg"></i></a>
-                <a href="#" aria-label="Twitter" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-twitter fa-lg"></i></a>
-                <a href="#" aria-label="YouTube" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-youtube fa-lg"></i></a>
+            
+            <div class="mt-16 max-w-3xl mx-auto">
+                <div class="card p-6">
+                    <h3 class="text-xl font-bold text-white mb-4 text-center">Beneficios Premium Exclusivos</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="flex">
+                            <div class="text-yellow-400 text-2xl mr-4">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Acceso Completo a IA.STRO</h4>
+                                <p class="text-gray-300 text-sm">Utiliza nuestras herramientas de IA para análisis astronómico avanzado, detección de objetos y procesamiento de imágenes.</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="text-yellow-400 text-2xl mr-4">
+                                <i class="fas fa-satellite"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Tiempo de Telescopio Remoto</h4>
+                                <p class="text-gray-300 text-sm">Controla nuestros telescopios de forma remota para tus propias observaciones y proyectos de investigación.</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="text-yellow-400 text-2xl mr-4">
+                                <i class="fas fa-user-astronaut"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Asesoría Personalizada</h4>
+                                <p class="text-gray-300 text-sm">Recibe orientación de nuestros astrónomos profesionales para tus proyectos y observaciones.</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="text-yellow-400 text-2xl mr-4">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Contenido Exclusivo</h4>
+                                <p class="text-gray-300 text-sm">Accede a webinars, tutoriales avanzados y recursos educativos disponibles solo para miembros Premium.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p class="text-sm">© <span id="currentYear"></span> Observatorio de Física Cósmica de San Miguel. Todos los derechos reservados.</p>
-            <p class="text-xs mt-2">Diseñado con <i class="fas fa-heart text-red-500"></i> por la IA y los Amantes del Cosmos.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">
+                        <i class="fas fa-satellite mr-2 text-yellow-400"></i>Observatorio San Miguel
+                    </h3>
+                    <p class="text-gray-400 mb-4">
+                        Explorando el universo y compartiendo el conocimiento astronómico con la comunidad desde 1985.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-yellow-400">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-yellow-400">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-yellow-400">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-yellow-400">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Enlaces Rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#eventos" class="text-gray-400 hover:text-yellow-400">Eventos</a></li>
+                        <li><a href="#calendario" class="text-gray-400 hover:text-yellow-400">Calendario Astronómico</a></li>
+                        <li><a href="#cursos" class="text-gray-400 hover:text-yellow-400">Cursos y Talleres</a></li>
+                        <li><a href="#astroia" class="text-gray-400 hover:text-yellow-400">IA.STRO</a></li>
+                        <li><a href="#premium" class="text-gray-400 hover:text-yellow-400">Membresía Premium</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Recursos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-yellow-400">Blog Astronómico</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-yellow-400">Galería de Imágenes</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-yellow-400">Guías de Observación</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-yellow-400">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-yellow-400">Documentación IA.STRO</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Contacto</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">Cerro del Observatorio, San Miguel, Argentina</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">+54 11 2345-6789</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">info@observatoriosanmiguel.ar</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">Viernes a Domingo: 19:00 - 00:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="text-sm text-gray-400">© <span id="currentYear"></span> Observatorio de Física Cósmica de San Miguel. Todos los derechos reservados.</p>
+                <p class="text-xs mt-2 text-gray-500">Diseñado con <i class="fas fa-heart text-red-500"></i> por la IA y los Amantes del Cosmos.</p>
+            </div>
         </div>
     </footer>
 
@@ -529,17 +915,20 @@
           currentYearElem.textContent = new Date().getFullYear();
         }
 
-        // Smooth scroll for anchor links
+        // Smooth scroll para enlaces internos
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId.length > 1) { // Asegurarse de que el targetId no es solo "#"
+                if (this.getAttribute('href').length > 1) {
+                    const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth'
-                        });
+                        e.preventDefault(); 
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                        
+                        // Cerrar menú móvil si está abierto
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                        }
                     }
                 }
             });
