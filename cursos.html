@@ -362,6 +362,135 @@
             border-top: 1px solid rgba(109, 40, 217, 0.3);
             border-radius: 0 0 8px 8px;
         }
+        
+        /* Nuevos estilos para inscripción */
+        .registration-form input,
+        .registration-form textarea,
+        .registration-form select {
+            background: rgba(30, 26, 62, 0.7);
+            border: 1px solid rgba(109, 40, 217, 0.3);
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        
+        .registration-form input:focus,
+        .registration-form textarea:focus,
+        .registration-form select:focus {
+            outline: none;
+            border-color: var(--starlight-yellow);
+            box-shadow: 0 0 0 3px rgba(246, 173, 85, 0.2);
+        }
+        
+        .payment-option {
+            background: rgba(30, 26, 62, 0.6);
+            border: 1px solid rgba(109, 40, 217, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-option:hover {
+            border-color: var(--starlight-yellow);
+            background: rgba(30, 26, 62, 0.8);
+        }
+        
+        .payment-option.active {
+            border-color: var(--starlight-yellow);
+            background: rgba(30, 26, 62, 0.9);
+            box-shadow: 0 0 15px rgba(246, 173, 85, 0.3);
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: rgba(30, 26, 62, 0.6);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--starlight-yellow), var(--nebula-pink));
+            border-radius: 3px;
+            transition: width 0.4s ease;
+        }
+        
+        .enrollment-success {
+            background: rgba(30, 26, 62, 0.8);
+            border: 2px solid var(--starlight-yellow);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .enrollment-success h3 {
+            color: var(--starlight-yellow);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .enrollment-success p {
+            color: #e2e8f0;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .enrollment-success .icon {
+            font-size: 4rem;
+            color: var(--starlight-yellow);
+            margin-bottom: 1.5rem;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Nuevo estilo para enlaces importantes */
+        .important-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .link-card {
+            background: rgba(30, 26, 62, 0.7);
+            border: 1px solid rgba(109, 40, 217, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--starlight-yellow);
+            box-shadow: 0 10px 20px rgba(214, 188, 250, 0.1);
+        }
+        
+        .link-card i {
+            font-size: 2rem;
+            color: var(--starlight-yellow);
+            margin-right: 1rem;
+        }
+        
+        .link-content h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .link-content p {
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
 
     </style>
 </head>
@@ -381,7 +510,6 @@
     <div class="star-decoration" style="top: 95%; left: 50%; width: 1px; height: 1px; animation-delay: 2.2s;"></div>
     <div class="star-decoration" style="top: 5%; left: 70%; width: 2px; height: 2px; animation-delay: 1.8s;"></div>
     <div class="star-decoration" style="top: 65%; left: 95%; width: 2px; height: 2px; animation-delay: 3.2s;"></div>
-
 
     <nav class="navbar-glass sticky top-0 z-50 shadow-lg">
        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -434,6 +562,7 @@
             </p>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1: Telescopios -->
                 <div class="card overflow-hidden flex flex-col">
                     <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1518045950085-3107094440e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
                         <span class="absolute top-2 left-2 bg-starlight-yellow text-space-blue px-3 py-1 rounded-full text-xs font-bold shadow-md">Nivel: Principiante</span>
@@ -468,6 +597,7 @@
                     </div>
                 </div>
                 
+                <!-- Card 2: Astrofotografía -->
                 <div class="card overflow-hidden flex flex-col">
                     <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
                          <span class="absolute top-2 left-2 bg-starlight-yellow text-space-blue px-3 py-1 rounded-full text-xs font-bold shadow-md">Nivel: Principiante a Intermedio</span>
@@ -503,6 +633,7 @@
                     </div>
                 </div>
 
+                <!-- Card 3: Astrofísica -->
                 <div class="card overflow-hidden flex flex-col">
                     <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1614726365902-795258957643?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
                         <span class="absolute top-2 left-2 bg-starlight-yellow text-space-blue px-3 py-1 rounded-full text-xs font-bold shadow-md">Nivel: Intermedio</span>
@@ -538,6 +669,7 @@
                     </div>
                 </div>
 
+                <!-- Card 4: Astronomía Cultural -->
                 <div class="card overflow-hidden flex flex-col">
                     <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1564053489985-915404004711?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
                         <span class="absolute top-2 left-2 bg-starlight-yellow text-space-blue px-3 py-1 rounded-full text-xs font-bold shadow-md">Nivel: Todos los Niveles</span>
@@ -572,6 +704,7 @@
                     </div>
                 </div>
                 
+                <!-- Card 5: Radioastronomía -->
                 <div class="card overflow-hidden flex flex-col">
                     <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1580264820443-904499a91310?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
                         <span class="absolute top-2 left-2 bg-starlight-yellow text-space-blue px-3 py-1 rounded-full text-xs font-bold shadow-md">Nivel: Intermedio a Avanzado</span>
@@ -606,6 +739,7 @@
                     </div>
                 </div>
 
+                <!-- Card 6: Astrobiología -->
                 <div class="card overflow-hidden flex flex-col">
                     <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1633695546384-637afcb170c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
                         <span class="absolute top-2 left-2 bg-starlight-yellow text-space-blue px-3 py-1 rounded-full text-xs font-bold shadow-md">Nivel: Todos los Niveles</span>
@@ -650,6 +784,7 @@
         </div>
     </section>
 
+    <!-- Modal de detalles para curso de Telescopios -->
     <div id="course-modal-telescopios" class="modal-overlay hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-[1000]">
         <div class="modal-content card max-w-3xl w-full mx-auto p-6 sm:p-8 rounded-lg shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <button onclick="closeModal('telescopios')" class="absolute top-4 right-4 text-gray-400 hover:text-yellow-400 text-2xl z-20">
@@ -717,25 +852,198 @@
             </div>
 
             <div class="mt-6 sm:mt-8 text-right">
-                <button class="btn-primary px-5 py-2.5 sm:px-6 rounded-full font-semibold text-sm sm:text-base">Inscribirme (ARS 150.000)</button>
+                <button onclick="openRegistrationModal('Telescopios: Partes, Usos y Secretos Revelados', 150000)" class="btn-primary px-5 py-2.5 sm:px-6 rounded-full font-semibold text-sm sm:text-base">Inscribirme (ARS 150.000)</button>
                 <p class="text-gray-500 text-xs sm:text-sm mt-2">o certificación y acceso gratis con <a href="index.html#premium" class="text-yellow-400 hover:underline">Membresía Premium</a></p>
             </div>
         </div>
     </div>
     
-    <div id="course-modal-astrofotografia" class="modal-overlay hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-[1000]">
-        <div class="modal-content card max-w-3xl w-full mx-auto p-6 sm:p-8 rounded-lg shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <button onclick="closeModal('astrofotografia')" class="absolute top-4 right-4 text-gray-400 hover:text-yellow-400 text-2xl z-20"><i class="fas fa-times"></i></button>
-            <h2 class="text-2xl sm:text-3xl font-bold text-yellow-400 mb-3">Astrofotografía: Captura la Belleza del Cosmos</h2>
-             <p class="text-gray-300 mb-1 text-sm sm:text-base">Instructora: <span class="font-semibold">Mayra Schwarzschild</span></p>
-            <span class="bg-nebula-pink text-white px-3 py-1 rounded-full text-xs sm:text-sm font-bold mb-5 inline-block">8 Módulos</span>
-            <div class="text-gray-300">Contenido del modal de Astrofotografía aquí... (similar al de telescopios, con descripción, módulos, instructor, FAQ específicos)</div>
-             <div class="mt-6 sm:mt-8 text-right">
-                <button class="btn-primary px-5 py-2.5 sm:px-6 rounded-full font-semibold text-sm sm:text-base">Inscribirme (ARS 180.000)</button>
-                <p class="text-gray-500 text-xs sm:text-sm mt-2">o certificación y acceso gratis con <a href="index.html#premium" class="text-yellow-400 hover:underline">Membresía Premium</a></p>
+    <!-- Modal de inscripción -->
+    <div id="registration-modal" class="modal-overlay hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-[1100]">
+        <div class="modal-content card max-w-xl w-full mx-auto p-6 sm:p-8 rounded-lg shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeRegistrationModal()" class="absolute top-4 right-4 text-gray-400 hover:text-yellow-400 text-2xl z-20">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div id="registration-form-container">
+                <h2 class="text-2xl sm:text-3xl font-bold text-yellow-400 mb-3">Inscripción al Curso</h2>
+                <p id="course-title" class="text-gray-300 text-xl mb-6">Telescopios: Partes, Usos y Secretos Revelados</p>
+                
+                <div class="progress-bar mb-6">
+                    <div id="registration-progress" class="progress-fill" style="width: 33%"></div>
+                </div>
+                
+                <form id="registration-form" class="registration-form">
+                    <div class="step" id="step1">
+                        <h3 class="text-xl font-semibold text-white mb-4">Información Personal</h3>
+                        <input type="text" id="name" placeholder="Nombre completo" required>
+                        <input type="email" id="email" placeholder="Correo electrónico" required>
+                        <input type="tel" id="phone" placeholder="Teléfono">
+                        <textarea id="experience" placeholder="Experiencia previa en astronomía (opcional)" rows="3"></textarea>
+                        <div class="text-right">
+                            <button type="button" onclick="nextStep(2)" class="btn-primary px-5 py-2.5 rounded-full font-semibold">Siguiente</button>
+                        </div>
+                    </div>
+                    
+                    <div class="step hidden" id="step2">
+                        <h3 class="text-xl font-semibold text-white mb-4">Forma de Pago</h3>
+                        <div class="payment-option" onclick="selectPayment(this, 'premium')">
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400 text-2xl mr-3"></i>
+                                <div>
+                                    <h4 class="text-white font-semibold">Membresía Premium</h4>
+                                    <p class="text-gray-400 text-sm">Acceso a todos los cursos sin costo adicional</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-option" onclick="selectPayment(this, 'transferencia')">
+                            <div class="flex items-center">
+                                <i class="fas fa-university text-blue-400 text-2xl mr-3"></i>
+                                <div>
+                                    <h4 class="text-white font-semibold">Transferencia Bancaria</h4>
+                                    <p class="text-gray-400 text-sm">Descuento del 5% por pago anticipado</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-option" onclick="selectPayment(this, 'tarjeta')">
+                            <div class="flex items-center">
+                                <i class="fas fa-credit-card text-purple-400 text-2xl mr-3"></i>
+                                <div>
+                                    <h4 class="text-white font-semibold">Tarjeta de Crédito</h4>
+                                    <p class="text-gray-400 text-sm">Pagos en 3, 6 o 12 cuotas sin interés</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-option" onclick="selectPayment(this, 'mercadoPago')">
+                            <div class="flex items-center">
+                                <i class="fas fa-wallet text-green-400 text-2xl mr-3"></i>
+                                <div>
+                                    <h4 class="text-white font-semibold">Mercado Pago</h4>
+                                    <p class="text-gray-400 text-sm">Pago rápido y seguro</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <input type="hidden" id="payment-method" value="">
+                        
+                        <div class="flex justify-between mt-6">
+                            <button type="button" onclick="prevStep(1)" class="bg-gray-700 text-white px-5 py-2.5 rounded-full font-semibold hover:bg-gray-600">Atrás</button>
+                            <button type="button" onclick="nextStep(3)" class="btn-primary px-5 py-2.5 rounded-full font-semibold">Siguiente</button>
+                        </div>
+                    </div>
+                    
+                    <div class="step hidden" id="step3">
+                        <h3 class="text-xl font-semibold text-white mb-4">Confirmación</h3>
+                        <div class="bg-gray-800 rounded-lg p-4 mb-4">
+                            <p class="text-gray-300"><strong>Curso:</strong> <span id="confirm-course">Telescopios: Partes, Usos y Secretos Revelados</span></p>
+                            <p class="text-gray-300"><strong>Método de pago:</strong> <span id="confirm-payment">Membresía Premium</span></p>
+                            <p class="text-gray-300"><strong>Nombre:</strong> <span id="confirm-name">Juan Pérez</span></p>
+                            <p class="text-gray-300"><strong>Email:</strong> <span id="confirm-email">juan@example.com</span></p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <input type="checkbox" id="terms" required>
+                            <label for="terms" class="text-gray-300 ml-2">Acepto los <a href="#" class="text-yellow-400 hover:underline">términos y condiciones</a> y la <a href="#" class="text-yellow-400 hover:underline">política de privacidad</a></label>
+                        </div>
+                        
+                        <div class="flex justify-between">
+                            <button type="button" onclick="prevStep(2)" class="bg-gray-700 text-white px-5 py-2.5 rounded-full font-semibold hover:bg-gray-600">Atrás</button>
+                            <button type="submit" class="btn-primary px-5 py-2.5 rounded-full font-semibold">Confirmar Inscripción</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div id="registration-success" class="enrollment-success hidden">
+                <div class="icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>¡Inscripción Exitosa!</h3>
+                <p>Te has inscrito correctamente al curso <strong id="success-course">Telescopios: Partes, Usos y Secretos Revelados</strong>.</p>
+                <p>Hemos enviado un correo de confirmación a <strong id="success-email">juan@example.com</strong> con los detalles de acceso al curso.</p>
+                <button onclick="closeRegistrationModal()" class="btn-primary px-8 py-3 rounded-full font-semibold mt-4">Continuar Explorando</button>
             </div>
         </div>
     </div>
+    
+    <!-- Sección de enlaces importantes -->
+    <section id="important-links" class="py-16 bg-gradient-to-b from-space-blue to-cosmic-purple">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title">Recursos Astronómicos Importantes</h2>
+            <p class="text-gray-300 text-center text-lg mb-12 max-w-3xl mx-auto">
+                Explora estos recursos esenciales para continuar tu viaje astronómico. Desde observatorios internacionales hasta datos en tiempo real y oportunidades educativas.
+            </p>
+            
+            <div class="important-links">
+                <a href="https://www.nasa.gov" target="_blank" class="link-card">
+                    <i class="fas fa-rocket"></i>
+                    <div class="link-content">
+                        <h4>NASA</h4>
+                        <p>Administración Nacional de Aeronáutica y el Espacio de EE.UU.</p>
+                    </div>
+                </a>
+                
+                <a href="https://www.esa.int" target="_blank" class="link-card">
+                    <i class="fas fa-satellite"></i>
+                    <div class="link-content">
+                        <h4>Agencia Espacial Europea (ESA)</h4>
+                        <p>Organización dedicada a la exploración del espacio en Europa</p>
+                    </div>
+                </a>
+                
+                <a href="https://www.eso.org" target="_blank" class="link-card">
+                    <i class="fas fa-telescope"></i>
+                    <div class="link-content">
+                        <h4>Observatorio Europeo Austral (ESO)</h4>
+                        <p>Organización líder en astronomía en el hemisferio sur</p>
+                    </div>
+                </a>
+                
+                <a href="https://www.skyandtelescope.org" target="_blank" class="link-card">
+                    <i class="fas fa-book"></i>
+                    <div class="link-content">
+                        <h4>Sky & Telescope</h4>
+                        <p>Revista líder en astronomía para aficionados</p>
+                    </div>
+                </a>
+                
+                <a href="https://www.iau.org" target="_blank" class="link-card">
+                    <i class="fas fa-globe-americas"></i>
+                    <div class="link-content">
+                        <h4>Unión Astronómica Internacional (IAU)</h4>
+                        <p>Organización que agrupa a las sociedades astronómicas</p>
+                    </div>
+                </a>
+                
+                <a href="https://www.mincyt.gob.ar" target="_blank" class="link-card">
+                    <i class="fas fa-landmark"></i>
+                    <div class="link-content">
+                        <h4>Ministerio de Ciencia (Argentina)</h4>
+                        <p>Organismo oficial de ciencia y tecnología de Argentina</p>
+                    </div>
+                </a>
+                
+                <a href="https://www.conae.gov.ar" target="_blank" class="link-card">
+                    <i class="fas fa-satellite-dish"></i>
+                    <div class="link-content">
+                        <h4>CONAE (Argentina)</h4>
+                        <p>Comisión Nacional de Actividades Espaciales</p>
+                    </div>
+                </a>
+                
+                <a href="https://heasarc.gsfc.nasa.gov" target="_blank" class="link-card">
+                    <i class="fas fa-database"></i>
+                    <div class="link-content">
+                        <h4>Archivo de Datos Astronómicos de NASA</h4>
+                        <p>Acceso a datos de misiones astronómicas</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
      </main>
     <footer class="py-12 border-t border-gray-800">
         <div class="container mx-auto px-6 text-center text-gray-400">
@@ -773,45 +1081,6 @@
 
         // Año actual en footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-        // NASA APOD (Astronomy Picture of the Day)
-        const heroSection = document.querySelector('.hero-section');
-        const apodExplanation = document.getElementById('apod-explanation');
-        const apodDateElem = document.getElementById('apod-date');
-        const downloadApodBtn = document.getElementById('download-apod-btn');
-        const NASA_API_KEY = 'DEMO_KEY'; // Reemplazar con tu propia API key de la NASA si es necesario
-
-        async function fetchAPOD() {
-            try {
-                const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`);
-                if (!response.ok) {
-                    throw new Error(`Error de NASA API: ${response.status}`);
-                }
-                const data = await response.json();
-
-                if (data.media_type === 'image' && data.hdurl) {
-                    heroSection.style.backgroundImage = `url(${data.hdurl})`;
-                    downloadApodBtn.href = data.hdurl;
-                    downloadApodBtn.download = `NASA_APOD_${data.date}.jpg`;
-                    downloadApodBtn.classList.remove('hidden');
-                } else if (data.media_type === 'image' && data.url) {
-                     heroSection.style.backgroundImage = `url(${data.url})`;
-                     downloadApodBtn.href = data.url;
-                     downloadApodBtn.download = `NASA_APOD_${data.date}.jpg`;
-                     downloadApodBtn.classList.remove('hidden');
-                } else {
-                    // Fallback si no es imagen o no hay HD URL, podrías poner una imagen por defecto
-                    heroSection.style.backgroundImage = `url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')`;
-                }
-                apodExplanation.textContent = data.explanation || 'No hay explicación disponible.';
-                apodDateElem.textContent = new Date(data.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
-            } catch (error) {
-                console.error("Error al cargar APOD:", error);
-                apodExplanation.textContent = 'No se pudo cargar la imagen astronómica del día. Intenta de nuevo más tarde.';
-                heroSection.style.backgroundImage = `url('https://images.unsplash.com/photo-1538370965046-79c0d6907d47?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')`; // Imagen de fallback más genérica
-            }
-        }
-        fetchAPOD();
 
         // Funcionalidad de Modales de Cursos
         function showCourseDetails(courseId) {
@@ -882,6 +1151,103 @@
                     closeModal(modalIdSuffix);
                 });
             }
+        });
+        
+        // Funcionalidad para inscripción
+        function openRegistrationModal(courseName, coursePrice) {
+            const modal = document.getElementById('registration-modal');
+            document.getElementById('course-title').textContent = courseName;
+            document.getElementById('confirm-course').textContent = courseName;
+            document.getElementById('success-course').textContent = courseName;
+            
+            // Resetear el formulario
+            document.getElementById('registration-form').reset();
+            document.getElementById('payment-method').value = '';
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('active');
+            });
+            
+            // Mostrar el formulario y ocultar el mensaje de éxito
+            document.getElementById('registration-form-container').classList.remove('hidden');
+            document.getElementById('registration-success').classList.add('hidden');
+            
+            // Resetear el progreso
+            document.getElementById('registration-progress').style.width = '33%';
+            
+            // Ocultar todos los pasos y mostrar el primero
+            document.querySelectorAll('.step').forEach(step => step.classList.add('hidden'));
+            document.getElementById('step1').classList.remove('hidden');
+            
+            // Mostrar el modal
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeRegistrationModal() {
+            const modal = document.getElementById('registration-modal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+        
+        function nextStep(stepNumber) {
+            // Ocultar todos los pasos
+            document.querySelectorAll('.step').forEach(step => step.classList.add('hidden'));
+            
+            // Mostrar el paso actual
+            document.getElementById(`step${stepNumber}`).classList.remove('hidden');
+            
+            // Actualizar la barra de progreso
+            const progress = stepNumber === 1 ? 33 : stepNumber === 2 ? 66 : 100;
+            document.getElementById('registration-progress').style.width = `${progress}%`;
+            
+            // Si es el paso de confirmación, llenar los campos de confirmación
+            if (stepNumber === 3) {
+                document.getElementById('confirm-name').textContent = document.getElementById('name').value;
+                document.getElementById('confirm-email').textContent = document.getElementById('email').value;
+                document.getElementById('confirm-payment').textContent = document.querySelector('.payment-option.active h4').textContent;
+            }
+        }
+        
+        function prevStep(stepNumber) {
+            nextStep(stepNumber);
+        }
+        
+        function selectPayment(element, method) {
+            // Remover la clase activa de todas las opciones
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('active');
+            });
+            
+            // Agregar la clase activa a la opción seleccionada
+            element.classList.add('active');
+            
+            // Guardar el método de pago
+            document.getElementById('payment-method').value = method;
+        }
+        
+        // Manejar el envío del formulario de inscripción
+        document.getElementById('registration-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Obtener los valores del formulario
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const paymentMethod = document.getElementById('payment-method').value;
+            
+            // Actualizar el mensaje de éxito
+            document.getElementById('success-email').textContent = email;
+            
+            // Ocultar el formulario y mostrar el mensaje de éxito
+            document.getElementById('registration-form-container').classList.add('hidden');
+            document.getElementById('registration-success').classList.remove('hidden');
+            
+            // Simular guardado en base de datos
+            console.log('Inscripción registrada:', {
+                name: name,
+                email: email,
+                paymentMethod: paymentMethod,
+                course: document.getElementById('course-title').textContent
+            });
         });
 
     </script>
