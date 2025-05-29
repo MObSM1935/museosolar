@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubicación Detallada - Observatorio de Física Cósmica de San Miguel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --space-blue: #0b0d17;
+            --cosmic-purple: #1e1a3e;
+            --starlight-yellow: #f6ad55;
+            --nebula-pink: #d53f8c;
+            --location-green: #34d399; /* Un verde para destacar elementos de ubicación/naturaleza */
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--space-blue);
+            color: #e2e8f0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(52, 211, 153, 0.05) 0%, rgba(52, 211, 153, 0) 40%), /* Location Green subtle */
+                radial-gradient(circle at 90% 80%, rgba(246, 173, 85, 0.05) 0%, rgba(246, 173, 85, 0) 40%),
+                radial-gradient(circle at 50% 50%, rgba(100, 100, 220, 0.03) 0%, rgba(100, 100, 220, 0) 30%);
+        }
+        
+        .navbar-glass { /* Estilos de Navbar (reutilizados) */
+            background-color: rgba(11, 13, 23, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(246, 173, 85, 0.2);
+        }
+        
+        .card { /* Estilos de Card (reutilizados) */
+            background-color: rgba(30, 26, 62, 0.7);
+            border: 1px solid rgba(109, 40, 217, 0.3);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(214, 188, 250, 0.1);
+        }
+        .location-card { /* Card específica para ubicación */
+            background-color: rgba(16, 22, 46, 0.85); /* Un azul más oscuro y terrenal */
+            border: 1px solid var(--location-green);
+            box-shadow: 0 0 15px rgba(52, 211, 153, 0.2);
+        }
+         .location-card:hover {
+            box-shadow: 0 0 25px rgba(52, 211, 153, 0.4);
+        }
+        
+        .btn-primary { /* Estilos de Botón (reutilizados) */
+            background: linear-gradient(135deg, var(--starlight-yellow), var(--nebula-pink));
+            color: #1a202c;
+            font-weight: 600; /* Normalizado */
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(246, 173, 85, 0.4);
+        }
+        .btn-primary::after {
+            content: ''; position: absolute; top: -50%; left: -60%; width: 20px; height: 200%;
+            background: rgba(255, 255, 255, 0.3); transform: rotate(25deg); transition: all 0.5s;
+        }
+        .btn-primary:hover::after { left: 120%; }
+
+        .btn-location { /* Botón específico para ubicación */
+            background: linear-gradient(135deg, var(--location-green), #2aa779); /* Tonos de verde */
+            color: white;
+        }
+        .btn-location:hover {
+            box-shadow: 0 5px 15px rgba(52, 211, 153, 0.5);
+        }
+
+        .section-title { /* Estilos de Título de Sección (reutilizados) */
+            color: var(--starlight-yellow);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        .section-title.location-title { color: var(--location-green); }
+        .section-title.location-title::after {
+             background: linear-gradient(90deg, var(--location-green), #2aa779);
+        }
+        .section-title::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 80px; height: 3px; background: linear-gradient(90deg, var(--starlight-yellow), var(--nebula-pink));
+            border-radius: 3px;
+        }
+        
+        .star-decoration { /* Para mantener la estética si se necesita */
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+            z-index: 0; 
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0.2; transform: scale(0.8); }
+        }
+        .testimonial-card {
+            background-color: rgba(11, 13, 23, 0.7);
+            border-left: 4px solid var(--location-green);
+        }
+        .gallery-image-container {
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        .gallery-image-container img {
+            transition: transform 0.3s ease-out;
+        }
+        .gallery-image-container:hover img {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <nav class="navbar-glass sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-white">
+                <i class="fas fa-satellite mr-2 text-yellow-400"></i>Observatorio San Miguel
+            </a>
+            <div class="hidden md:flex space-x-4 items-center">
+                <a href="index.html#eventos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Eventos</a>
+                <a href="calendario.html" class="text-gray-300 hover:text-yellow-400 transition duration-300">Calendario</a>
+                <a href="ubicacion.html" class="text-yellow-400 font-semibold transition duration-300">Ubicación</a> <a href="index.html#cursos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
+                <a href="historia.html" class="text-gray-300 hover:text-yellow-400 transition duration-300">Historia</a>
+                <a href="foro.html" class="text-gray-300 hover:text-yellow-400 transition duration-300">Foro</a>
+                <a href="iastro.html" class="text-gray-300 hover:text-yellow-400 transition duration-300">IA.STRO</a>
+                <a href="index.html#premium" class="btn-primary px-4 py-2 rounded-full font-semibold">
+                    <i class="fas fa-star mr-1"></i>Premium
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-300 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="ubicacion.html" class="block text-yellow-400 font-semibold transition duration-300">Ubicación</a>
+            <a href="index.html#premium" class="block btn-primary px-4 py-2 rounded-full font-semibold text-center mt-2">
+                 <i class="fas fa-star mr-1"></i>Premium
+             </a>
+        </div>
+    </nav>
+
+    <section id="ubicacion-detallada" class="py-20 bg-gradient-to-br from-space-blue via-cosmic-purple to-indigo-900">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="text-center mb-16">
+                <i class="fas fa-map-marked-alt text-6xl text-location-green mb-4"></i>
+                <h2 class="text-4xl md:text-5xl font-bold section-title location-title">Encuéntranos Bajo los Cielos de San Miguel</h2>
+                <p class="text-gray-300 text-lg mt-6 max-w-3xl mx-auto">
+                    El Observatorio de Física Cósmica de San Miguel te espera en un entorno privilegiado, donde la ciencia se encuentra con la tranquilidad. Descubre todo lo que necesitas saber para planificar tu visita a nuestro portal al universo.
+                </p>
+            </div>
+
+            <div class="mb-20 grid md:grid-cols-2 gap-12 items-center">
+                <div class="location-card p-8 rounded-xl">
+                    <h3 class="text-2xl font-semibold text-white mb-4"><i class="fas fa-mountain mr-2 text-location-green"></i>Un Emplazamiento Estratégico</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-3">
+                        Situado en las afueras de la ciudad de San Miguel, provincia de Buenos Aires, nuestro observatorio goza de una ubicación que busca equilibrar la accesibilidad para nuestros visitantes con la necesidad de cielos lo más oscuros posible para la investigación astronómica. Aunque la expansión urbana presenta desafíos constantes, hemos sido un bastión de la observación astronómica en la región por décadas, gracias a la elevación moderada del terreno y a iniciativas locales de protección del cielo nocturno.
+                    </p>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-3">
+                        El predio del observatorio abarca aproximadamente 5 hectáreas, rodeado por una zona de amortiguación verde que ayuda a mitigar la contaminación lumínica directa. La elección original del sitio en la década de 1930 (ver <a href="historia.html#fundacion" class="text-nebula-pink hover:underline">Nuestra Historia</a>) fue visionaria, anticipando el crecimiento de la ciudad pero buscando un horizonte despejado.
+                    </p>
+                     <p class="text-gray-300 text-sm leading-relaxed">
+                        La calidad del cielo en nuestro sitio se clasifica generalmente como Bortle 5-6, lo que permite la observación de la Vía Láctea en noches claras y sin luna, así como numerosos objetos de cielo profundo. Estamos continuamente trabajando con la municipalidad y la comunidad para implementar ordenanzas de iluminación responsable.
+                    </p>
+                </div>
+                <div class="gallery-image-container shadow-2xl">
+                    <img src="https://via.placeholder.com/600x400.png?text=Vista+Aérea+del+Observatorio+OSM" alt="Vista aérea del Observatorio de San Miguel" class="rounded-xl w-full">
+                    <p class="text-xs text-gray-500 mt-2 text-center">Simulación de vista aérea del complejo del Observatorio.</p>
+                </div>
+            </div>
+
+            <div class="mb-20 location-card p-6 md:p-8 rounded-xl">
+                <h3 class="text-2xl font-semibold text-white mb-6 text-center"><i class="fas fa-compass mr-2 text-location-green"></i>Nuestra Ubicación Exacta y Mapa Interactivo</h3>
+                <div class="grid md:grid-cols-2 gap-8 items-start">
+                    <div>
+                        <h4 class="text-xl font-semibold text-location-green mb-3">Dirección Postal:</h4>
+                        <p class="text-gray-200 text-lg mb-1"><i class="fas fa-map-pin mr-2"></i>Avenida Estelar 1935, (B1663) San Miguel,</p>
+                        <p class="text-gray-200 text-lg mb-4">Provincia de Buenos Aires, Argentina.</p>
+                        
+                        <h4 class="text-xl font-semibold text-location-green mb-3 mt-6">Coordenadas Geográficas:</h4>
+                        <p class="text-gray-200 text-sm mb-1"><i class="fas fa-globe-americas mr-2"></i>Latitud: 34° 32' 15.7" S (aprox.)</p>
+                        <p class="text-gray-200 text-sm mb-4"><i class="fas fa-globe-americas mr-2"></i>Longitud: 58° 42' 55.3" O (aprox.)</p>
+
+                        <h4 class="text-xl font-semibold text-location-green mb-3 mt-6">Horarios de Visita (Público General):</h4>
+                        <ul class="text-gray-300 text-sm space-y-1 list-inside list-disc">
+                            <li><strong>Viernes (Noches de Observación):</strong> 20:00 - 23:00 hs (con reserva previa, sujeto a condiciones climáticas).</li>
+                            <li><strong>Sábados (Visitas Diurnas Guiadas):</strong> 10:00 - 12:00 hs y 15:00 - 17:00 hs (con reserva previa).</li>
+                            <li><strong>Eventos Especiales:</strong> Consultar <a href="calendario.html" class="text-nebula-pink hover:underline">nuestro calendario</a>.</li>
+                            <li><strong>Grupos Educativos:</strong> Horarios a coordinar durante la semana.</li>
+                        </ul>
+                        <p class="text-xs text-gray-400 mt-3">El observatorio permanece cerrado al público general los domingos y feriados, excepto para eventos especiales anunciados.</p>
+                    </div>
+                    <div class="h-96 md:h-full w-full rounded-xl overflow-hidden shadow-2xl border-2 border-location-green">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3286.900000000000!2d-58.71530000000000!3d-34.54000000000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDMyJzE1LjciUyA1OMKwNDInNTUuMyJX!5e0!3m2!1ses!2sar!4v1620000000000!5m2!1ses!2sar" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy"
+                            title="Mapa de Ubicación del Observatorio San Miguel">
+                        </iframe>
+                        <p class="text-xs text-gray-500 mt-2 text-center">Ubicación aproximada. Consulta las instrucciones detalladas para llegar.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-20">
+                <h3 class="text-3xl font-semibold text-center text-location-green mb-12">Planifica tu Viaje: Cómo Llegar al Observatorio</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="location-card p-6 rounded-xl">
+                        <h4 class="text-xl font-bold text-white mb-3"><i class="fas fa-car mr-2 text-location-green"></i>En Automóvil</h4>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3">
+                            El observatorio es accesible en automóvil particular y contamos con estacionamiento gratuito para visitantes (capacidad limitada, se recomienda llegar con antelación en días de eventos concurridos).
+                        </p>
+                        <p class="text-xs text-location-green font-semibold mb-1">Desde CABA (Centro):</p>
+                        <ul class="list-decimal list-inside text-gray-400 text-xs space-y-1 pl-4 mb-3">
+                            <li>Tomar Autopista 25 de Mayo hacia el Oeste.</li>
+                            <li>Continuar por Acceso Oeste (RN7).</li>
+                            <li>Tomar la salida correspondiente a Camino del Buen Ayre.</li>
+                            <li>Seguir por Camino del Buen Ayre hasta la salida indicada para San Miguel (Ruta Provincial 8 o similar).</li>
+                            <li>Una vez en San Miguel, seguir la señalización hacia "Observatorio Astronómico" o utilizar GPS con nuestra dirección. Tiempo estimado: 45-70 minutos según tráfico.</li>
+                        </ul>
+                        <p class="text-xs text-location-green font-semibold mb-1">Desde Zona Norte GBA:</p>
+                         <ul class="list-decimal list-inside text-gray-400 text-xs space-y-1 pl-4">
+                            <li>Utilizar Panamericana (RN9) y luego empalmar con Camino del Buen Ayre dirección Oeste/Sur.</li>
+                            <li>Alternativamente, rutas internas como Av. Márquez (RP4) hasta San Miguel.</li>
+                        </ul>
+                        <p class="text-xs text-gray-500 mt-3"><strong>Importante:</strong> Algunas aplicaciones de GPS pueden ofrecer rutas por caminos no asfaltados en el tramo final. Se recomienda seguir las avenidas principales y la señalización local.</p>
+                    </div>
+
+                    <div class="location-card p-6 rounded-xl">
+                        <h4 class="text-xl font-bold text-white mb-3"><i class="fas fa-bus-alt mr-2 text-location-green"></i>En Transporte Público</h4>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3">
+                            Llegar en transporte público es posible, aunque requiere una combinación de tren y/o colectivo, más una caminata o un corto viaje en taxi/remis desde la parada más cercana.
+                        </p>
+                        <p class="text-xs text-location-green font-semibold mb-1">Opción Tren + Colectivo:</p>
+                        <ul class="list-decimal list-inside text-gray-400 text-xs space-y-1 pl-4 mb-3">
+                            <li><strong>Tren Línea San Martín:</strong> Desde Retiro (CABA) o estaciones intermedias hasta la estación San Miguel.</li>
+                            <li><strong>Tren Línea Urquiza:</strong> Desde Federico Lacroze (CABA) hasta la estación Gral. Lemos, luego combinar con colectivo hacia San Miguel centro.</li>
+                            <li>Desde la estación de San Miguel o cercanías, tomar líneas de colectivo local (consultar recorridos de líneas como 57, 176, 203, 315, 365, 440, entre otras, que pasen cerca de Av. Pte. Perón y Av. Balbín, o directamente por Av. Estelar si alguna llega).</li>
+                        </ul>
+                        <p class="text-xs text-gray-400 mb-3">Es recomendable utilizar aplicaciones como Google Maps, Moovit o "Cuándo SUBO" para planificar la ruta en tiempo real con los horarios y paradas actualizadas.</p>
+                        <p class="text-xs text-gray-500 mt-3">Desde la parada de colectivo más cercana al observatorio, puede ser necesaria una caminata de 10-20 minutos.</p>
+                    </div>
+
+                    <div class="location-card p-6 rounded-xl">
+                        <h4 class="text-xl font-bold text-white mb-3"><i class="fas fa-parking mr-2 text-location-green"></i>Estacionamiento y Accesibilidad</h4>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3">
+                            <strong>Estacionamiento:</strong> Contamos con un playón de estacionamiento gratuito dentro del predio del observatorio para aproximadamente 50 vehículos. En eventos de alta concurrencia, se habilita un área adicional en un terreno aledaño. No se permite estacionar sobre las banquinas de la Avenida Estelar.
+                        </p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3">
+                            <strong>Accesibilidad:</strong> Nos esforzamos por hacer nuestras instalaciones accesibles para todos.
+                        </p>
+                        <ul class="list-disc list-inside text-gray-400 text-xs space-y-1 pl-4">
+                            <li>Rampas de acceso al edificio principal, auditorio y algunas plataformas de observación.</li>
+                            <li>Baños adaptados en planta baja.</li>
+                            <li>Senderos internos compactados aptos para sillas de ruedas (algunas áreas pueden tener terreno natural).</li>
+                            <li>Personal disponible para asistir si se requiere. Recomendamos contactarnos con antelación si tienes necesidades específicas para coordinar tu visita.</li>
+                        </ul>
+                        <p class="text-xs text-gray-500 mt-3">Estamos trabajando continuamente para mejorar la accesibilidad de todas nuestras cúpulas e instalaciones históricas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="my-20">
+                 <h3 class="text-3xl font-semibold text-center text-location-green mb-12">Un Recorrido por Nuestras Instalaciones</h3>
+                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="location-card p-6 rounded-xl">
+                        <img src="https://via.placeholder.com/400x250.png?text=Cúpula+Principal+OSM" alt="Cúpula Principal" class="w-full h-48 object-cover rounded-lg mb-4 shadow-lg">
+                        <h4 class="text-xl font-bold text-white mb-2">Cúpula Principal "Carl Sagan"</h4>
+                        <p class="text-gray-300 text-sm leading-relaxed">Alberga nuestro telescopio reflector principal de 20 pulgadas (0.5m), el "Centinela Austral", utilizado para investigación y noches de observación Premium. Totalmente robotizado y con espectrógrafo.</p>
+                    </div>
+                    <div class="location-card p-6 rounded-xl">
+                        <img src="https://via.placeholder.com/400x250.png?text=Cúpula+Histórica+OSM" alt="Cúpula Histórica" class="w-full h-48 object-cover rounded-lg mb-4 shadow-lg">
+                        <h4 class="text-xl font-bold text-white mb-2">Cúpula Histórica "Aurora Vega"</h4>
+                        <p class="text-gray-300 text-sm leading-relaxed">Hogar del telescopio refractor de 12 pulgadas "Explorador Austral", un instrumento con décadas de servicio, ideal para observación planetaria y lunar detallada. Usado en visitas guiadas.</p>
+                    </div>
+                    <div class="location-card p-6 rounded-xl">
+                        <img src="https://via.placeholder.com/400x250.png?text=Auditorio+OSM" alt="Auditorio OSM" class="w-full h-48 object-cover rounded-lg mb-4 shadow-lg">
+                        <h4 class="text-xl font-bold text-white mb-2">Auditorio "Copérnico" y Sala de Exposiciones</h4>
+                        <p class="text-gray-300 text-sm leading-relaxed">Espacio para charlas, cursos y talleres, con capacidad para 80 personas. La sala adyacente cuenta con exposiciones interactivas sobre astronomía y la historia del observatorio.</p>
+                    </div>
+                     <div class="location-card p-6 rounded-xl">
+                        <img src="https://via.placeholder.com/400x250.png?text=Biblioteca+OSM" alt="Biblioteca OSM" class="w-full h-48 object-cover rounded-lg mb-4 shadow-lg">
+                        <h4 class="text-xl font-bold text-white mb-2">Biblioteca "Hypatia"</h4>
+                        <p class="text-gray-300 text-sm leading-relaxed">Una colección especializada de más de 3000 volúmenes, incluyendo libros de texto, atlas estelares, revistas científicas y obras históricas de astronomía. Disponible para consulta de miembros e investigadores.</p>
+                    </div>
+                     <div class="location-card p-6 rounded-xl">
+                        <img src="https://via.placeholder.com/400x250.png?text=Laboratorio+IA.STRO" alt="Laboratorio IA.STRO" class="w-full h-48 object-cover rounded-lg mb-4 shadow-lg">
+                        <h4 class="text-xl font-bold text-white mb-2">Taller "Hephaestus" y Laboratorio IA.STRO</h4>
+                        <p class="text-gray-300 text-sm leading-relaxed">El taller se encarga del mantenimiento y desarrollo de instrumentación. El laboratorio es el cerebro de nuestra plataforma IA.STRO, donde se procesan datos y se desarrollan nuevos algoritmos.</p>
+                    </div>
+                     <div class="location-card p-6 rounded-xl">
+                        <img src="https://via.placeholder.com/400x250.png?text=Tienda+OSM" alt="Tienda OSM" class="w-full h-48 object-cover rounded-lg mb-4 shadow-lg">
+                        <h4 class="text-xl font-bold text-white mb-2">Recepción, Tienda de Souvenirs y Café "Cosmos"</h4>
+                        <p class="text-gray-300 text-sm leading-relaxed">Punto de bienvenida para visitantes, donde pueden adquirir recuerdos, libros de divulgación, pequeños telescopios y disfrutar de un refrigerio en nuestro café temático.</p>
+                    </div>
+                 </div>
+            </div>
+            
+            <div class="my-20">
+                <h3 class="text-3xl font-semibold text-center text-location-green mb-12">Prepara tu Lente: Qué Esperar de tu Visita</h3>
+                <div class="ia-card p-8 rounded-xl"> <h4 class="text-xl font-bold text-white mb-4">Durante una Visita Guiada Típica (Diurna):</h4>
+                    <ul class="list-disc list-inside text-gray-300 text-sm space-y-2 pl-4 mb-6">
+                        <li>Recepción y breve introducción a la astronomía y al observatorio.</li>
+                        <li>Recorrido por la sala de exposiciones interactivas.</li>
+                        <li>Visita a la Cúpula Histórica "Aurora Vega" con explicación del telescopio refractor y cómo se utiliza (no se observa el Sol directamente sin filtros especiales).</li>
+                        <li>Demostración del funcionamiento de un telescopio solar (si las condiciones lo permiten y está programado).</li>
+                        <li>Charla breve en el Auditorio "Copérnico" sobre un tema astronómico de actualidad o sobre la historia del observatorio.</li>
+                        <li>Oportunidad para preguntas y respuestas con nuestros guías y divulgadores.</li>
+                        <li>Duración aproximada: 1.5 a 2 horas.</li>
+                    </ul>
+
+                    <h4 class="text-xl font-bold text-white mb-4 mt-8">Durante una Noche de Observación Pública (Nocturna):</h4>
+                     <ul class="list-disc list-inside text-gray-300 text-sm space-y-2 pl-4 mb-6">
+                        <li>Charla introductoria sobre el cielo de la noche: constelaciones visibles, planetas, objetos destacados.</li>
+                        <li>Instrucciones sobre cómo utilizar los telescopios disponibles para el público (generalmente reflectores Dobson de 8 a 10 pulgadas y el refractor histórico).</li>
+                        <li>Observación guiada de la Luna (si es visible), planetas, cúmulos estelares, nebulosas y galaxias, según la época del año y las condiciones.</li>
+                        <li>Nuestros astrónomos y voluntarios estarán disponibles para apuntar los telescopios y responder preguntas.</li>
+                        <li>Posibilidad de observar a través del telescopio principal "Centinela Austral" si hay un evento especial programado (generalmente para miembros Premium o con costo adicional).</li>
+                        <li>Duración aproximada: 2 a 3 horas.</li>
+                    </ul>
+                    
+                    <h4 class="text-xl font-bold text-white mb-4 mt-8">Recomendaciones para tu Visita:</h4>
+                    <div class="grid md:grid-cols-2 gap-x-8 gap-y-4 text-sm">
+                        <p class="text-gray-300"><i class="fas fa-calendar-alt text-location-green mr-2"></i><strong>Reservas:</strong> ¡Imprescindible! Especialmente para noches de observación, los cupos son limitados. Reserva a través de nuestro sitio web o contactándonos.</p>
+                        <p class="text-gray-300"><i class="fas fa-cloud-moon text-location-green mr-2"></i><strong>Clima:</strong> Las actividades de observación dependen del clima. En caso de cielo nublado o lluvia, las noches de observación se suspenden o se reemplazan por una actividad alternativa en el auditorio. Consulta nuestras redes sociales o sitio web antes de venir.</p>
+                        <p class="text-gray-300"><i class="fas fa-tshirt text-location-green mr-2"></i><strong>Vestimenta:</strong> Noches frescas son comunes, incluso en verano. Trae abrigo. Calzado cómodo es esencial para moverte por el predio.</p>
+                        <p class="text-gray-300"><i class="fas fa-lightbulb text-location-green mr-2"></i><strong>Linternas:</strong> Si traes linterna para la noche, que sea de luz roja para no afectar la adaptación a la oscuridad (tuya y de los demás). Evita luces blancas brillantes.</p>
+                        <p class="text-gray-300"><i class="fas fa-camera text-location-green mr-2"></i><strong>Fotografía:</strong> Permitida para uso personal. El uso de flash está restringido durante las observaciones nocturnas.</p>
+                        <p class="text-gray-300"><i class="fas fa-child text-location-green mr-2"></i><strong>Niños:</strong> ¡Son bienvenidos! Fomentamos la curiosidad astronómica desde temprana edad. Menores deben estar acompañados por un adulto.</p>
+                        <p class="text-gray-300"><i class="fas fa-cookie-bite text-location-green mr-2"></i><strong>Alimentos y Bebidas:</strong> Contamos con el Café "Cosmos" para refrigerios. No se permite el ingreso de alimentos o bebidas a las cúpulas o al auditorio durante las charlas.</p>
+                        <p class="text-gray-300"><i class="fas fa-ban text-location-green mr-2"></i><strong>Mascotas:</strong> No se permite el ingreso de mascotas, a excepción de perros de asistencia debidamente identificados.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="my-20">
+                <h3 class="text-3xl font-semibold text-center text-location-green mb-12">Un Vistazo a Nuestro Hogar Cósmico: Galería</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div class="gallery-image-container shadow-lg"> <img src="https://via.placeholder.com/400x300.png?text=Instalación+OSM+1" alt="Instalación del Observatorio 1" class="w-full h-auto object-cover"> </div>
+                    <div class="gallery-image-container shadow-lg"> <img src="https://via.placeholder.com/400x300.png?text=Telescopio+Principal+OSM" alt="Telescopio Principal" class="w-full h-auto object-cover"> </div>
+                    <div class="gallery-image-container shadow-lg"> <img src="https://via.placeholder.com/400x300.png?text=Visitantes+Observando" alt="Visitantes en el Observatorio" class="w-full h-auto object-cover"> </div>
+                    <div class="gallery-image-container shadow-lg"> <img src="https://via.placeholder.com/400x300.png?text=Noche+Estrellada+OSM" alt="Noche Estrellada en San Miguel" class="w-full h-auto object-cover"> </div>
+                    <div class="gallery-image-container shadow-lg"> <img src="https://via.placeholder.com/400x300.png?text=Charla+en+Auditorio" alt="Charla en Auditorio" class="w-full h-auto object-cover"> </div>
+                    <div class="gallery-image-container shadow-lg"> <img src="https://via.placeholder.com/400x300.png?text=Cúpula+Histórica+Interior" alt="Interior Cúpula Histórica" class="w-full h-auto object-cover"> </div>
+                    <div class="gallery-image-container shadow-lg"> <img src="https://via.placeholder.com/400x300.png?text=Exposición+Interactiva" alt="Exposición Interactiva" class="w-full h-auto object-cover"> </div>
+                    <div class="gallery-image-container shadow-lg"> <img src="https://via.placeholder.com/400x300.png?text=Atardecer+en+OSM" alt="Atardecer en el Observatorio" class="w-full h-auto object-cover"> </div>
+                    <div class="gallery-image-container shadow-lg"> <img src="https://via.placeholder.com/400x300.png?text=Niños+en+Taller" alt="Niños en Taller de Astronomía" class="w-full h-auto object-cover"> </div>
+                     <div class="gallery-image-container shadow-lg"> <img src="https://via.placeholder.com/400x300.png?text=Vista+Panorámica+Predio" alt="Vista Panorámica del Predio" class="w-full h-auto object-cover"> </div>
+                     <div class="gallery-image-container shadow-lg"> <img src="https://via.placeholder.com/400x300.png?text=Detalle+Instrumentación" alt="Detalle de Instrumentación Científica" class="w-full h-auto object-cover"> </div>
+                     <div class="gallery-image-container shadow-lg"> <img src="https://via.placeholder.com/400x300.png?text=Voluntarios+OSM" alt="Equipo de Voluntarios del OSM" class="w-full h-auto object-cover"> </div>
+                </div>
+            </div>
+            
+            <div class="my-20">
+                <h3 class="text-3xl font-semibold text-center text-location-green mb-12">Lo que Nuestros Visitantes Dicen</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="testimonial-card p-6 rounded-lg shadow-lg">
+                        <p class="text-gray-200 italic text-lg mb-4">"Una experiencia increíble la noche de observación. Ver Saturno por primera vez a través de un telescopio tan grande fue emocionante. ¡El personal es súper amable y sabe muchísimo!"</p>
+                        <p class="text-location-green font-semibold text-right">- Laura G., Visitante de Febrero 2025</p>
+                    </div>
+                    <div class="testimonial-card p-6 rounded-lg shadow-lg">
+                        <p class="text-gray-200 italic text-lg mb-4">"Llevé a mis hijos a la visita diurna y quedaron fascinados con las explicaciones y los modelos interactivos. Aprendimos un montón de forma divertida. ¡Volveremos seguro!"</p>
+                        <p class="text-location-green font-semibold text-right">- Martin R. y Familia, Visitantes de Marzo 2025</p>
+                    </div>
+                    <div class="testimonial-card p-6 rounded-lg shadow-lg">
+                        <p class="text-gray-200 italic text-lg mb-4">"El taller de astrofotografía superó mis expectativas. Los instructores son muy claros y pacientes. Pude sacar mis primeras fotos decentes de la Luna. ¡Muy recomendable!"</p>
+                        <p class="text-location-green font-semibold text-right">- Sofia C., Participante del Taller de Abril 2025</p>
+                    </div>
+                     <div class="testimonial-card p-6 rounded-lg shadow-lg">
+                        <p class="text-gray-200 italic text-lg mb-4">"Como docente, valoro enormemente la dedicación del observatorio a la divulgación científica. La visita con mi curso fue muy enriquecedora y despertó mucho interés en los alumnos."</p>
+                        <p class="text-location-green font-semibold text-right">- Prof. Esteban Q., Colegio San Patricio, Mayo 2025</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-16">
+                <a href="index.html#contacto" class="btn-location px-10 py-4 rounded-full font-bold text-lg">
+                    <i class="fas fa-phone-alt mr-2"></i>¿Tienes Dudas? Contáctanos para Planificar tu Visita
+                </a>
+            </div>
+
+        </div> </section>
+    <footer class="py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <p class="text-sm">© <span id="currentYearUbicacion"></span> Observatorio de Física Cósmica de San Miguel. Todos los derechos reservados.</p>
+             <p class="text-xs mt-2">Diseñado con <i class="fas fa-heart text-red-500"></i> por la IA y los Amantes del Cosmos.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Menú móvil
+        const mobileMenuButtonUbicacion = document.getElementById('mobile-menu-button');
+        const mobileMenuUbicacion = document.getElementById('mobile-menu');
+        if (mobileMenuButtonUbicacion && mobileMenuUbicacion) {
+          mobileMenuButtonUbicacion.addEventListener('click', () => {
+            mobileMenuUbicacion.classList.toggle('hidden');
+          });
+        }
+
+        // Año actual en footer
+        const currentYearElemUbicacion = document.getElementById('currentYearUbicacion');
+        if (currentYearElemUbicacion) {
+          currentYearElemUbicacion.textContent = new Date().getFullYear();
+        }
+        
+        // Smooth scroll (si se usa en esta página)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                 if (this.getAttribute('href').length > 1) {
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault(); 
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
