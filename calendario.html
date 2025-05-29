@@ -3,589 +3,648 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendario Astronómico Detallado - Agosto 2025 - Observatorio San Miguel</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Calendario Astronómico - Observatorio de Física Cósmica de San Miguel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Estilos Generales del Cuerpo */
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            margin: 0; 
-            background-color: #0a0e1a; /* Azul oscuro profundo para el fondo */
-            color: #e0e0e0; /* Color de texto principal claro */
-            line-height: 1.6;
+        :root {
+            --space-blue: #0b0d17;
+            --cosmic-purple: #1e1a3e;
+            --starlight-yellow: #f6ad55;
+            --nebula-pink: #d53f8c;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--space-blue);
+            color: #e2e8f0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(214, 188, 250, 0.05) 0%, rgba(214, 188, 250, 0) 40%),
+                radial-gradient(circle at 90% 80%, rgba(246, 173, 85, 0.05) 0%, rgba(246, 173, 85, 0) 40%),
+                radial-gradient(circle at 50% 50%, rgba(100, 100, 220, 0.03) 0%, rgba(100, 100, 220, 0) 30%);
+        }
+        
+        .navbar-glass {
+            background-color: rgba(11, 13, 23, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(246, 173, 85, 0.2);
+        }
+        
+        .hero-section-calendar {
+            background: linear-gradient(to bottom, rgba(11, 13, 23, 0.85), rgba(30, 26, 62, 0.95)), url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            min-height: 50vh; /* Reduced height for non-main page hero */
         }
 
-        html {
-            scroll-behavior: smooth; /* Desplazamiento suave para anclas */
+        .card {
+            background-color: rgba(30, 26, 62, 0.7);
+            border: 1px solid rgba(109, 40, 217, 0.3);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
-
-        /* Contenedor Principal */
-        .container { 
-            max-width: 1320px; /* Ancho máximo del contenido */
-            margin-left: auto;
-            margin-right: auto;
-            padding-left: 1rem;
-            padding-right: 1rem;
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(214, 188, 250, 0.1);
         }
-
-        /* Encabezado y Navegación */
-        header { 
-            background-color: #111827; /* Fondo del encabezado */
-            padding: 1rem 1.5rem; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            border-bottom: 1px solid #374151; /* Borde inferior sutil */
-            position: sticky; /* Menú fijo al hacer scroll */
-            top: 0;
-            z-index: 1000; /* Asegurar que esté por encima de otro contenido */
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--starlight-yellow), var(--nebula-pink));
+            color: #1a202c;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
         }
-
-        .logo-container { 
-            display: flex; 
-            align-items: center; 
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(246, 173, 85, 0.4);
         }
-
-        .observatorio-title-icon {
-            font-family: "Font Awesome 5 Free"; 
-            font-weight: 900;
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20px;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(25deg);
+            transition: all 0.5s;
+        }
+        
+        .btn-primary:hover::after {
+            left: 120%;
+        }
+        
+        .section-title {
+            color: var(--starlight-yellow);
+            position: relative;
             display: inline-block;
-            font-style: normal;
-            font-variant: normal;
-            text-rendering: auto;
-            -webkit-font-smoothing: antialiased;
-            content: "\f005"; /* Icono de estrella de FontAwesome */
-            color: #facc15; /* Color amarillo para el icono */
-            font-size: 1.8rem; /* Tamaño del icono */
-            margin-right: 10px; /* Espacio a la derecha del icono */
-        }
-
-        .observatorio-title { 
-            font-size: 1.75rem; /* Tamaño del título del observatorio */
-            font-weight: bold; 
-        }
-        .observatorio-name {
-            color: #ffffff; /* Color blanco para el nombre */
-        }
-
-        nav ul { 
-            list-style: none; 
-            padding: 0; 
-            margin: 0; 
-            display: flex; 
-            align-items: center; 
-        }
-
-        nav ul li { 
-            margin-left: 1.2rem; /* Espacio entre elementos del menú */
-        }
-
-        nav ul li a { 
-            text-decoration: none; 
-            color: #d1d5db; /* Color de los enlaces */
-            font-weight: 500; 
-            transition: color 0.3s ease-in-out, transform 0.2s ease; /* Transiciones suaves */
-            padding: 0.3rem 0.5rem;
-            border-radius: 0.3rem;
-        }
-
-        nav ul li a:hover,
-        nav ul li a:focus { 
-            color: #facc15; /* Color amarillo al pasar el mouse o enfocar */
-            background-color: rgba(250, 204, 21, 0.1); /* Fondo sutil al hover */
-            transform: translateY(-2px); /* Ligero efecto de elevación */
-        }
-
-        .premium-button { 
-            background: linear-gradient(135deg, #f97316, #ec4899); /* Gradiente para el botón premium */
-            color: white !important; /* Asegurar color de texto blanco */
-            padding: 0.6rem 1.2rem; 
-            border-radius: 0.5rem; 
-            text-decoration: none; 
-            font-weight: bold; 
-            transition: opacity 0.3s ease, transform 0.2s ease; 
-        }
-
-        .premium-button:hover,
-        .premium-button:focus { 
-            opacity: 0.9; 
-            transform: translateY(-2px) scale(1.05); /* Efecto de zoom y elevación */
-            color: white !important; /* Mantener color de texto blanco */
-            background: linear-gradient(135deg, #e86a0e, #d9408b); /* Gradiente ligeramente más oscuro al hover */
+            padding-bottom: 10px;
         }
         
-        /* Estilos del Calendario (heredados y mejorados) */
-        .bg-gray-900 { background-color: #0a0e1a; } /* Ajustado al fondo general */
-        .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
-        .text-3xl { font-size: 2rem; line-height: 2.5rem; } /* Ajuste de tamaño para títulos principales */
-        .font-bold { font-weight: 700; }
-        .text-center { text-align: center; }
-        .mb-16 { margin-bottom: 4rem; }
-        .section-title { color: #e5e7eb; } /* Color claro para el título de la sección */
-        .max-w-6xl { max-width: 72rem; } /* Ancho máximo para el contenido del calendario */
-        .flex { display: flex; }
-        .justify-between { justify-content: space-between; }
-        .items-center { align-items: center; }
-        .mb-8 { margin-bottom: 2rem; }
-        .text-2xl { font-size: 1.6rem; line-height: 2.1rem;} /* Ajuste para subtítulos */
-        .text-white { color: #ffffff; }
-        .space-x-2 > :not([hidden]) ~ :not([hidden]) { margin-left: 0.5rem; }
-        .bg-gray-800 { background-color: #1f2937; } /* Color para botones de navegación del mes */
-        .text-gray-300 { color: #d1d5db; }
-        .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
-        .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
-        .rounded-lg { border-radius: 0.5rem; }
-        .hover\:bg-gray-700:hover { background-color: #374151; }
-        .transition { transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
-        .text-xs { font-size: 0.8rem; line-height: 1.1rem;} /* Ajuste para texto pequeño */
-        .grid { display: grid; }
-        .grid-cols-7 { grid-template-columns: repeat(7, minmax(0, 1fr)); }
-        .gap-1 { gap: 0.25rem; }
-        .mb-4 { margin-bottom: 1rem; }
-        .text-gray-400 { color: #9ca3af; }
-        .font-semibold { font-weight: 600; }
-        .p-2 { padding: 0.5rem; }
-        .gap-2 { gap: 0.5rem; }
-        .sm\:gap-4 { gap: 1rem; } /* Espacio mayor para días en pantallas más grandes */
-
-        .calendar-day { 
-            border: 1px solid #2d3748; /* Borde de los días */
-            background-color: #111827cc; /* Fondo de los días con ligera transparencia */
-            backdrop-filter: blur(5px); /* Efecto de desenfoque para el fondo */
-            border-radius: 0.375rem; /* Bordes redondeados para los días */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sombra sutil para los días */
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--starlight-yellow), var(--nebula-pink));
+            border-radius: 3px;
         }
-        .p-3 { padding: 1rem; } /* Relleno interno de los días */
-        .text-left { text-align: left; }
-        .relative { position: relative; }
-        .card { /* Ya definido, se mantiene */ }
-        .space-y-2 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.5rem; }
-        .overflow-y-auto { overflow-y: auto; }
-        .min-height-day { min-height: 480px; } /* Altura mínima aumentada para más contenido */
         
-        .calendar-day h4 { /* Estilo para los títulos dentro de cada día */
-            border-bottom: 1px solid #4b5563;
-            padding-bottom: 0.35rem;
-            margin-top: 1rem !important;
-            margin-bottom: 0.75rem !important; 
-            font-size: 1rem; /* Tamaño de fuente para H4 */
-            letter-spacing: 0.025em; /* Ligero espaciado entre letras */
+        .star-decoration {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+            z-index: 0; 
         }
-        .calendar-day ul { padding-left: 1.2rem; } /* Indentación para listas */
-        .calendar-day ul li { margin-bottom: 0.3rem; /* Espacio entre elementos de lista */ }
-        .calendar-day p, .calendar-day ul li {
-            line-height: 1.65; /* Altura de línea mejorada */
-            font-size: 0.85rem; /* Tamaño de fuente para párrafos y listas */
+        
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0.2; transform: scale(0.8); }
         }
 
-        .text-xl { font-size: 1.35rem; } /* Para los números de los días */
-        .text-yellow-400 { color: #facc15; }
-        .text-blue-300 { color: #93c5fd; }
-        .text-sm { font-size: 0.9rem; line-height: 1.3rem;}
-        .text-nebula-pink { color: #ec4899; } /* Rosa para ciertos títulos */
-        .text-starlight-yellow { color: #fde047; } /* Amarillo claro para otros títulos */
-        .text-sky-400 { color: #38bdf8; } /* Azul cielo para otros */
-        
-        .opacity-50 { opacity: 0.5; } /* Para días de meses adyacentes */
-        .text-gray-500 { color: #6b7280; }
-        .text-lg { font-size: 1.125rem; }
-        .block { display: block; }
-        .text-gray-600 { color: #4b5563; }
-        .text-orange-400 { color: #fb923c; }
-        
-        .border-2 { border-width: 2px; }
-        .border-starlight-yellow { border-color: #fde047 !important; } /* Borde destacado para eventos */
-        .bg-event-highlight { background-color: rgba(253, 224, 71, 0.08) !important; } /* Fondo destacado para eventos */
-        
-        .text-red-500 { color: #ef4444; }
-        .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
-        .border-1 { border-width: 1px; }
-        .text-red-400 { color: #f87171; }
-        .fa-moon.text-yellow-200 { color: #fef08a; }
-        .text-purple-400 { color: #c084fc; }
-        .text-green-300 { color: #86efac; }
-        .text-purple-300 { color: #d8b4fe; }
-        .text-orange-300 { color: #fdba74; }
-        .text-teal-300 { color: #5eead4; }
-        .text-blue-400 { color: #60a5fa; }
-        .text-yellow-300 { color: #fde047; }
-
-        .mt-12 { margin-top: 3rem; }
-        .mt-6 { margin-top: 1.5rem; }
-        .inline-block { display: inline-block; }
-        .hover\:text-yellow-300:hover { color: #fde047; }
-        .ml-2 { margin-left: 0.5rem; }
-
-        /* Estilos para iconos en los días */
-        .calendar-day .fas, .calendar-day .far, .calendar-day .fab {
-            font-size: 1.1rem; /* Tamaño de los iconos de eventos */
-            transition: transform 0.3s ease;
+        /* Calendar specific styles */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            gap: 4px; /* Tailwind's gap-1 */
         }
-        .calendar-day .fas:hover, .calendar-day .far:hover, .calendar-day .fab:hover {
-            transform: scale(1.2); /* Efecto de zoom en iconos */
+        .calendar-day-header {
+            text-align: center;
+            color: var(--starlight-yellow);
+            font-weight: 600;
+            padding: 0.5rem; /* Tailwind's p-2 */
+            font-size: 0.875rem; /* Tailwind's text-sm */
         }
-        
-        /* Secciones placeholder para anclas */
-        .placeholder-section {
-            min-height: 200px; /* Altura mínima para que se vean */
-            padding: 40px 20px;
-            border-bottom: 1px dashed #374151;
-            display: flex;
+        .calendar-day-cell {
+            background-color: rgba(30, 26, 62, 0.4); /* --cosmic-purple with opacity */
+            border: 1px solid rgba(109, 40, 217, 0.2); /* Subtle border */
+            border-radius: 8px; /* Tailwind's rounded-lg */
+            min-height: 120px; /* Minimum height for day cells */
+            padding: 0.5rem; /* Tailwind's p-2 */
+            transition: all 0.3s ease;
+            font-size: 0.875rem; /* text-sm */
+            overflow-y: auto; /* Scroll for many events */
+            position: relative;
+        }
+        .calendar-day-cell:hover {
+            background-color: rgba(109, 40, 217, 0.2); /* Lighter on hover */
+            transform: scale(1.02);
+        }
+        .calendar-day-number {
+            font-weight: 600;
+            margin-bottom: 0.25rem; /* Tailwind's mb-1 */
+        }
+        .day-other-month .calendar-day-number {
+            color: #6b7280; /* Tailwind's gray-500 */
+            opacity: 0.6;
+        }
+        .day-today .calendar-day-number {
+            background-color: var(--starlight-yellow);
+            color: var(--space-blue);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
+            padding: 2px;
         }
-        .placeholder-section h2, .placeholder-section h4 {
-            color: #6b7280;
-            font-style: italic;
+        .calendar-event {
+            background-color: rgba(246, 173, 85, 0.1); /* --starlight-yellow with opacity */
+            color: var(--starlight-yellow);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem; /* text-xs */
+            margin-bottom: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .calendar-event:hover {
+            background-color: rgba(246, 173, 85, 0.3);
+        }
+        .event-type-observacion { border-left: 3px solid #34d399; } /* green-400 */
+        .event-type-charla { border-left: 3px solid #60a5fa; } /* blue-400 */
+        .event-type-taller { border-left: 3px solid #fbbf24; } /* amber-400 */
+        .event-type-curso { border-left: 3px solid #c084fc; } /* purple-400 */
+        .event-type-especial { border-left: 3px solid #f472b6; } /* pink-400 */
+        .event-type-premium { border-left: 3px solid var(--nebula-pink); }
+        .event-type-global { border-left: 3px solid #a3a3a3; } /* neutral-400 */
+        
+        .month-navigation button {
+            background-color: rgba(30, 26, 62, 0.8);
+            border: 1px solid rgba(109, 40, 217, 0.3);
+        }
+        .month-navigation button:hover {
+            background-color: var(--starlight-yellow);
+            color: var(--space-blue);
+        }
+        #event-tooltip {
+            position: absolute;
+            background-color: var(--cosmic-purple);
+            border: 1px solid var(--starlight-yellow);
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            z-index: 100;
+            width: 300px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            font-size: 0.875rem;
+            pointer-events: none; /* Important for mouseout to work correctly on the day cell */
+        }
+        #event-tooltip h4 {
+            color: var(--starlight-yellow);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        #event-tooltip p {
+            margin-bottom: 0.25rem;
+            line-height: 1.4;
         }
 
-        /* Footer */
-        footer {
-            background-color: #111827; /* Mismo color que el header */
-            border-top: 1px solid #374151; /* Borde superior sutil */
-            padding: 2.5rem 0;
-            margin-top: 3rem; /* Espacio antes del footer */
+        /* Ensure consistent modal styles if any are added to this page */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(11, 13, 23, 0.9); display: flex;
+            align-items: center; justify-content: center; z-index: 1000;
+            backdrop-filter: blur(5px); padding: 1rem;
         }
-        footer p {
-            margin-bottom: 0.8rem; /* Espacio entre párrafos del footer */
-            font-size: 0.9rem;
+        .modal-content {
+            background-color: var(--cosmic-purple); animation: fadeInModal 0.3s ease-out;
+            max-height: 90vh; overflow-y: auto;
         }
-        footer a {
-            color: #facc15; /* Enlaces del footer en amarillo */
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        footer a:hover {
-            color: #fde047; /* Amarillo más claro al hover */
-            text-decoration: underline;
-        }
-
-        /* Responsive typography adjustments if needed */
-        @media (max-width: 768px) {
-            nav ul { flex-direction: column; align-items: flex-start; }
-            nav ul li { margin-left: 0; margin-bottom: 0.5rem; }
-            .grid-cols-7 { grid-template-columns: repeat(1, minmax(0, 1fr)); } /* Calendario en una columna en móviles */
-            .min-height-day { min-height: auto; } /* Altura automática en móviles */
-            .text-3xl { font-size: 1.75rem; }
-            .text-2xl { font-size: 1.4rem; }
-            header { flex-direction: column; }
-            .logo-container { margin-bottom: 1rem; }
-        }
-        @media (min-width: 769px) and (max-width: 1024px) {
-             .grid-cols-7 { grid-template-columns: repeat(3, minmax(0, 1fr)); } /* 3 columnas en tablets */
+        @keyframes fadeInModal {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <span class="observatorio-title-icon" aria-hidden="true"></span>
-            <span class="observatorio-title observatorio-name">Observatorio San Miguel</span>
+    <div class="star-decoration" style="top: 5%; left: 5%; width: 1px; height: 1px; animation-delay: 0.5s;"></div>
+    <div class="star-decoration" style="top: 15%; left: 10%; width: 2px; height: 2px;"></div>
+    <div class="star-decoration" style="top: 10%; left: 30%; width: 1px; height: 1px; animation-delay: 1.5s;"></div>
+    <div class="star-decoration" style="top: 25%; left: 85%; width: 3px; height: 3px; animation-delay: 1s;"></div>
+    <div class="star-decoration" style="top: 30%; left: 60%; width: 2px; height: 2px; animation-delay: 2.5s;"></div>
+    <div class="star-decoration" style="top: 40%; left: 45%; width: 2px; height: 2px; animation-delay: 2s;"></div>
+    <div class="star-decoration" style="top: 50%; left: 90%; width: 1px; height: 1px; animation-delay: 3.5s;"></div>
+    <div class="star-decoration" style="top: 60%; left: 15%; width: 2px; height: 2px; animation-delay: 0.2s;"></div>
+    <div class="star-decoration" style="top: 70%; left: 25%; width: 3px; height: 3px; animation-delay: 3s;"></div>
+    <div class="star-decoration" style="top: 75%; left: 75%; width: 1px; height: 1px; animation-delay: 4.5s;"></div>
+    <div class="star-decoration" style="top: 85%; left: 65%; width: 2px; height: 2px; animation-delay: 4s;"></div>
+    <div class="star-decoration" style="top: 90%; left: 5%; width: 3px; height: 3px; animation-delay: 0.8s;"></div>
+    <div class="star-decoration" style="top: 95%; left: 50%; width: 1px; height: 1px; animation-delay: 2.2s;"></div>
+    <div class="star-decoration" style="top: 5%; left: 70%; width: 2px; height: 2px; animation-delay: 1.8s;"></div>
+    <div class="star-decoration" style="top: 65%; left: 95%; width: 2px; height: 2px; animation-delay: 3.2s;"></div>
+
+    <nav class="navbar-glass sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-white">
+                <i class="fas fa-satellite mr-2 text-yellow-400"></i>Observatorio San Miguel
+            </a>
+            <div class="hidden md:flex space-x-4 items-center">
+                <a href="index.html#eventos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Eventos</a>
+                <a href="index.html#ubicacion" class="text-gray-300 hover:text-yellow-400 transition duration-300">Ubicación</a>
+                <a href="index.html#cursos" class="text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
+                <a href="#" class="text-yellow-400 font-semibold transition duration-300">Calendario</a> <a href="index.html#comunidad" class="text-gray-300 hover:text-yellow-400 transition duration-300">Foro</a>
+                <a href="index.html#ia-stro" class="text-gray-300 hover:text-yellow-400 transition duration-300">IA.STRO</a>
+                <a href="index.html#descargas" class="text-gray-300 hover:text-yellow-400 transition duration-300">Descargas</a>
+                <a href="index.html#contacto" class="text-gray-300 hover:text-yellow-400 transition duration-300">Contacto</a>
+                <a href="index.html#premium" class="btn-primary px-4 py-2 rounded-full font-semibold">
+                    <i class="fas fa-star mr-1"></i>Premium
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-300 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
         </div>
-        <nav>
-            <ul>
-                <li><a href="#eventos-destacados">Eventos</a></li>
-                <li><a href="#ubicacion-observatorio">Ubicación</a></li>
-                <li><a href="#cursos-talleres">Cursos</a></li>
-                <li><a href="#calendario">Calendario</a></li>
-                <li><a href="#foro-comunidad">Foro</a></li>
-                <li><a href="#iastro-herramientas">IA.STRO</a></li>
-                <li><a href="#descargas-recursos">Descargas</a></li>
-                <li><a href="#contacto-info">Contacto</a></li>
-                <li><a href="#premium-acceso" class="premium-button">Premium</a></li>
-            </ul>
-        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="index.html#eventos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Eventos</a>
+            <a href="index.html#ubicacion" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Ubicación</a>
+            <a href="index.html#cursos" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Cursos</a>
+            <a href="#" class="block text-yellow-400 font-semibold transition duration-300">Calendario</a>
+            <a href="index.html#comunidad" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Foro</a>
+            <a href="index.html#ia-stro" class="block text-gray-300 hover:text-yellow-400 transition duration-300">IA.STRO</a>
+            <a href="index.html#descargas" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Descargas</a>
+            <a href="index.html#contacto" class="block text-gray-300 hover:text-yellow-400 transition duration-300">Contacto</a>
+            <a href="index.html#premium" class="block btn-primary px-4 py-2 rounded-full font-semibold text-center mt-2">
+                <i class="fas fa-star mr-1"></i>Premium
+            </a>
+        </div>
+    </nav>
+
+    <header class="hero-section-calendar flex items-center justify-center text-center">
+        <div class="container mx-auto px-6 relative z-10">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+                Calendario Astronómico <span class="text-yellow-400">2025</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
+                Explora todos nuestros eventos, fenómenos celestes y actividades programadas. No te pierdas ningún espectáculo cósmico.
+            </p>
+        </div>
     </header>
 
-    <section id="eventos-destacados" class="placeholder-section container"><h2>Sección Eventos Destacados</h2><p>Aquí se mostrarían los próximos eventos importantes del observatorio.</p></section>
-    <section id="ubicacion-observatorio" class="placeholder-section container"><h2>Sección Ubicación</h2><p>Información sobre cómo llegar al Observatorio San Miguel.</p></section>
-    <section id="cursos-talleres" class="placeholder-section container"><h2>Sección Cursos y Talleres</h2><p>Detalles de los cursos de astronomía, astrofotografía, etc.</p></section>
-    
-    <section id="calendario" class="py-16 bg-gray-900">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-16 section-title">Calendario Astronómico Detallado: Agosto 2025</h2>
-            
-            <div class="max-w-6xl mx-auto"> 
-                <div class="flex justify-between items-center mb-8">
-                    <h3 class="text-2xl md:text-3xl font-bold text-white">Agosto 2025: Un Viaje por el Cosmos y el Tiempo</h3>
-                    <div class="flex space-x-2">
-                        <button class="bg-gray-800 text-gray-300 px-3 py-2 sm:px-4 rounded-lg hover:bg-gray-700 transition text-xs sm:text-base" aria-label="Mes anterior">
-                            <i class="fas fa-chevron-left"></i> <span class="hidden sm:inline">Julio</span>
-                        </button>
-                        <button class="bg-gray-800 text-gray-300 px-3 py-2 sm:px-4 rounded-lg hover:bg-gray-700 transition text-xs sm:text-base" aria-label="Mes siguiente">
-                            <span class="hidden sm:inline">Sept.</span> <i class="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
+    <main class="container mx-auto px-2 sm:px-6 py-12">
+        <section id="calendar-controls" class="mb-10 p-6 card">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div class="month-navigation flex items-center space-x-2">
+                    <button id="prev-year-btn" class="px-3 py-2 rounded-lg text-sm" title="Año Anterior"><i class="fas fa-angle-double-left"></i></button>
+                    <button id="prev-month-btn" class="px-3 py-2 rounded-lg text-sm" title="Mes Anterior"><i class="fas fa-angle-left"></i></button>
+                    <h2 id="current-month-year" class="text-2xl font-bold text-white w-48 text-center">Enero 2025</h2>
+                    <button id="next-month-btn" class="px-3 py-2 rounded-lg text-sm" title="Mes Siguiente"><i class="fas fa-angle-right"></i></button>
+                    <button id="next-year-btn" class="px-3 py-2 rounded-lg text-sm" title="Año Siguiente"><i class="fas fa-angle-double-right"></i></button>
                 </div>
-                
-                <div class="grid grid-cols-7 gap-1 sm:gap-2 mb-4 text-xs sm:text-base">
-                    <div class="text-center text-gray-400 font-semibold p-2">Dom</div>
-                    <div class="text-center text-gray-400 font-semibold p-2">Lun</div>
-                    <div class="text-center text-gray-400 font-semibold p-2">Mar</div>
-                    <div class="text-center text-gray-400 font-semibold p-2">Mié</div>
-                    <div class="text-center text-gray-400 font-semibold p-2">Jue</div>
-                    <div class="text-center text-gray-400 font-semibold p-2">Vie</div>
-                    <div class="text-center text-gray-400 font-semibold p-2">Sáb</div>
+                <div class="flex items-center space-x-2">
+                    <label for="event-filter" class="text-sm text-gray-300">Filtrar por tipo:</label>
+                    <select id="event-filter" class="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 p-2">
+                        <option value="all">Todos</option>
+                        <option value="observacion">Observación</option>
+                        <option value="charla">Charla</option>
+                        <option value="taller">Taller</option>
+                        <option value="curso">Curso</option>
+                        <option value="especial">Especial</option>
+                        <option value="premium">Premium</option>
+                        <option value="global">Global</option>
+                    </select>
                 </div>
-                
-                <div class="grid grid-cols-7 gap-2 sm:gap-4 text-xs sm:text-base">
-                    <div class="calendar-day p-2 sm:p-3 text-center relative opacity-50 min-height-day"><div class="text-gray-500 text-lg">27</div><span class="text-xs block text-gray-600">JUL</span><p class="text-xs text-gray-600 mt-2">Fin de mes anterior.</p></div>
-                    <div class="calendar-day p-2 sm:p-3 text-center relative opacity-50 min-height-day"><div class="text-gray-500 text-lg">28</div><span class="text-xs block text-gray-600">JUL</span><p class="text-xs text-gray-600 mt-2">Día de transición.</p></div>
-                    <div class="calendar-day p-2 sm:p-3 text-center relative opacity-50 min-height-day"><div class="text-gray-500 text-lg">29</div><span class="text-xs block text-gray-600">JUL</span><p class="text-xs text-gray-600 mt-2">Preparativos para Agosto.</p></div>
-                    <div class="calendar-day p-2 sm:p-3 text-center relative opacity-50 min-height-day"><div class="text-gray-500 text-lg">30</div><span class="text-xs block text-gray-600">JUL</span><p class="text-xs text-gray-600 mt-2">Últimos días de Julio.</p></div>
-                    <div class="calendar-day p-2 sm:p-3 text-center relative opacity-50 min-height-day"><div class="text-gray-500 text-lg">31</div><span class="text-xs block text-gray-600">JUL</span><p class="text-xs text-gray-600 mt-2">Adiós Julio.</p></div>
+            </div>
+        </section>
+        
+        <section id="calendar-view" class="mb-12">
+            <div class="calendar-grid">
+                <div class="calendar-day-header">Dom</div>
+                <div class="calendar-day-header">Lun</div>
+                <div class="calendar-day-header">Mar</div>
+                <div class="calendar-day-header">Mié</div>
+                <div class="calendar-day-header">Jue</div>
+                <div class="calendar-day-header">Vie</div>
+                <div class="calendar-day-header">Sáb</div>
+            </div>
+            <div id="calendar-days-container" class="calendar-grid mt-1">
+                </div>
+        </section>
 
-                    <div class="calendar-day p-3 text-left relative card space-y-2 overflow-y-auto min-height-day">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold text-yellow-400">1</span> <i class="fas fa-moon text-blue-300" title="Luna Creciente (34%)"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-nebula-pink mt-1 mb-0.5">Efemérides Destacadas:</h4>
-                            <ul class="list-disc list-inside text-xs text-gray-300 space-y-0.5">
-                                <li>Luna en fase creciente (34% iluminación), visible claramente al atardecer en la constelación de Virgo. Una excelente oportunidad para observar sus cráteres cercanos al terminador.</li>
-                                <li>Mercurio en conjunción superior con el Sol. Esto significa que se encuentra en el lado opuesto del Sol desde nuestra perspectiva, por lo que no será visible durante varios días.</li>
-                                <li>Paso cercano de la Estación Espacial Internacional (ISS) visible a las 20:15 hs UTC (magnitud -2.5). Se recomienda consultar fuentes actualizadas para la trayectoria exacta y horarios locales específicos.</li>
-                                <li>Final de la lluvia de meteoros Piscis Austrínidas, aunque con muy baja actividad.</li>
-                                <li>Comienzo del mes con el Sol transitando la constelación de Cáncer (astronómicamente).</li>
-                            </ul>
-                            </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-starlight-yellow mt-1 mb-0.5">Hitos de la Historia Astronómica:</h4>
-                            <p class="text-xs text-gray-300">En 1847, Maria Mitchell, astrónoma pionera estadounidense, descubrió el cometa C/1847 T1 (conocido como "Cometa Miss Mitchell"). Este descubrimiento le valió reconocimiento mundial, incluyendo una medalla de oro del Rey de Dinamarca, y la convirtió en la primera mujer astrónoma profesional en EE. UU.</p>
-                            <p class="text-xs text-gray-300 mt-1">El 1 de agosto de 1967, se lanzó la sonda Lunar Orbiter 5 de la NASA. Su misión fue fotografiar extensamente la superficie lunar, completando el mapeo necesario para seleccionar sitios de aterrizaje seguros para las futuras misiones Apolo.</p>
-                            <p class="text-xs text-gray-300 mt-1">En 1774, el científico Joseph Priestley (y de forma independiente Carl Wilhelm Scheele) identificó el oxígeno, un descubrimiento fundamental para la química y nuestra comprensión de las atmósferas planetarias y la vida.</p>
-                            </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-sky-400 mt-1 mb-0.5">Astronomía Cultural: Lughnasadh / Lammas</h4>
-                            <p class="text-xs text-gray-300">En el hemisferio norte, el 1 de agosto se asocia tradicionalmente con Lughnasadh (en la tradición gaélica) o Lammas (en la tradición anglosajona), un festival que marca el inicio de la temporada de cosecha. Aunque de origen principalmente agrario, muchos de estos festivales antiguos estaban íntimamente ligados a ciclos celestes.</p>
-                            <p class="text-xs text-gray-300 mt-1">La posición de ciertas estrellas al amanecer o atardecer, o las fases de la Luna, eran cruciales para determinar el momento de estas celebraciones. Lughnasadh honraba al dios Lugh, asociado con la luz, las habilidades y la cosecha. Era un tiempo de agradecimiento y celebración comunitaria.</p>
-                            <p class="text-xs text-gray-300 mt-1">En el hemisferio sur, esta fecha cae en pleno invierno, donde otras constelaciones y fenómenos celestes guían las tradiciones locales, a menudo relacionadas con la preparación para la primavera.</p>
-                        </div>
-                        </div>
-                    <div class="calendar-day p-3 text-left relative card space-y-2 overflow-y-auto min-height-day">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold text-yellow-400">2</span> <i class="fas fa-meteor text-orange-400" title="Posible actividad de meteoros Alfa Capricórnidas"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-nebula-pink mt-1 mb-0.5">Efemérides Destacadas:</h4>
-                            <ul class="list-disc list-inside text-xs text-gray-300 space-y-0.5">
-                                <li>Luna creciente en la constelación de Libra (45% iluminación), visible al atardecer y primeras horas de la noche.</li>
-                                <li>Saturno, el gigante anillado, es visible durante la mayor parte de la noche en la constelación de Acuario (magnitud +0.6). Es un excelente objeto para telescopios pequeños.</li>
-                                <li>Posible leve aumento de actividad de la lluvia de meteoros Alfa Capricórnidas. Aunque es una lluvia menor, es conocida por producir bólidos ocasionales (meteoros muy brillantes). El radiante se encuentra en Capricornio.</li>
-                                <li>La galaxia del Triángulo (M33) comienza a ser más favorable para la observación en cielos oscuros, aunque requiere paciencia y buenas condiciones.</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-starlight-yellow mt-1 mb-0.5">Hitos de la Historia Astronómica:</h4>
-                            <p class="text-xs text-gray-300">En 1971, la misión Apolo 15, la cuarta en alunizar, concluyó su exitosa exploración lunar. Los astronautas David Scott y James Irwin fueron los primeros en utilizar el Vehículo Lunar Roving (LRV), lo que les permitió cubrir una distancia mucho mayor y recolectar una variedad más amplia de muestras geológicas.</p>
-                            <p class="text-xs text-gray-300 mt-1">En esta fecha, en 1788, nació Friedrich Bessel, astrónomo y matemático alemán. Es célebre por ser el primero en medir con éxito la paralaje de una estrella (61 Cygni en 1838), proporcionando así la primera determinación directa y fiable de la distancia a una estrella más allá de nuestro Sol.</p>
-                            <p class="text-xs text-gray-300 mt-1">Lanzamiento del primer satélite de comunicaciones Syncom 2 en 1963, el primer satélite de comunicaciones geosíncrono.</p>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-sky-400 mt-1 mb-0.5">Astronomía Cultural: El Escorpión Celeste</h4>
-                            <p class="text-xs text-gray-300">La constelación de Escorpio, prominente en las noches de invierno del hemisferio sur (y verano en el norte), ha sido una figura celestial temida y reverenciada en múltiples culturas. Su forma distintiva con una cola curvada y la brillante estrella roja Antares (su corazón) la hacen inconfundible.</p>
-                            <p class="text-xs text-gray-300 mt-1">Para los antiguos egipcios, representaba a la diosa Serket, protectora contra las picaduras venenosas. En la mitología griega, es el escorpión enviado por Gea (o Artemisa, según la versión) para matar al gigante cazador Orión. Por ello, se dice que cuando Escorpio asciende en el cielo, Orión se oculta.</p>
-                            </div>
-                    </div>
-                    <div class="calendar-day p-3 text-left relative card space-y-2 overflow-y-auto min-height-day">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold text-yellow-400">3</span> <i class="fas fa-adjust text-gray-400" title="Cuarto Creciente"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-nebula-pink mt-1 mb-0.5">Efemérides Destacadas:</h4>
-                            <ul class="list-disc list-inside text-xs text-gray-300 space-y-0.5">
-                                <li>Luna en fase de Cuarto Creciente a las 14:22 UTC. Será visible en la constelación de Escorpio al anochecer, ofreciendo una excelente vista de la línea del terminador.</li>
-                                <li>Júpiter, el planeta más grande de nuestro sistema solar, brilla intensamente en Tauro (magnitud -2.4). Es visible desde aproximadamente la medianoche local hasta el amanecer.</li>
-                                <li>La galaxia de Andrómeda (M31) se encuentra en una buena posición para la observación con binoculares o telescopios en cielos oscuros, elevándose en el noreste después de la medianoche.</li>
-                                <li>Ocasión para observar el "Mango de la Tetera" en Sagitario si las condiciones son óptimas.</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-starlight-yellow mt-1 mb-0.5">Hitos de la Historia Astronómica:</h4>
-                            <p class="text-xs text-gray-300">El 3 de agosto de 2004, la NASA lanzó la sonda MESSENGER (MErcury Surface, Space ENvironment, GEochemistry, and Ranging) hacia Mercurio. Fue la primera misión en orbitar el planeta más interno de nuestro sistema solar, proporcionando datos cruciales sobre su geología, campo magnético y exosfera.</p>
-                            <p class="text-xs text-gray-300 mt-1">Aunque no es una fecha exacta, fue en este período en 1676 que el astrónomo danés Ole Rømer, mediante la observación de los eclipses de las lunas de Júpiter (especialmente Ío), realizó la primera estimación cuantitativa de la velocidad de la luz. Aunque su valor fue una subestimación, fue un hito conceptual fundamental.</p>
-                            <p class="text-xs text-gray-300 mt-1">En 1958, el submarino nuclear USS Nautilus completó el primer viaje sumergido bajo el Polo Norte, un hito en la exploración terrestre.</p>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-sky-400 mt-1 mb-0.5">Astronomía Cultural: Los Nueve Señores de la Noche (Maya)</h4>
-                            <p class="text-xs text-gray-300">Para la civilización Maya, los "Nueve Señores de la Noche" (conocidos como Bolon Ti Ku) eran un grupo de deidades que regían sucesivamente sobre cada noche en un ciclo de nueve días. Este ciclo influía en los augurios y se entrelazaba con sus complejos calendarios, como el Tzolkin (260 días) y el Haab (365 días).</p>
-                            <p class="text-xs text-gray-300 mt-1">Cada Señor de la Noche tenía atributos y asociaciones específicas, y su influencia se consideraba importante para rituales y decisiones cotidianas. El conocimiento de estos ciclos era vital para los sacerdotes y gobernantes mayas.</p>
-                        </div>
-                    </div>
-                    <div class="calendar-day p-3 text-left relative card space-y-2 overflow-y-auto min-height-day">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold text-yellow-400">4</span> <i class="fas fa-globe-americas text-green-400" title="Observación de cúmulos"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-nebula-pink mt-1 mb-0.5">Efemérides Destacadas:</h4>
-                            <ul class="list-disc list-inside text-xs text-gray-300 space-y-0.5">
-                                <li>Luna gibosa creciente en la constelación de Ofiuco (65% iluminación). Ofiuco es una constelación grande que el Sol atraviesa.</li>
-                                <li>Marte, el planeta rojo, es visible en Géminis antes del amanecer (magnitud +1.7). Su brillo rojizo lo hace distintivo.</li>
-                                <li>El cúmulo globular M13 en Hércules (el Gran Cúmulo de Hércules) está bien posicionado para la observación telescópica en las primeras horas de la noche. Contiene cientos de miles de estrellas.</li>
-                                <li>La estrella Vega, en la constelación de Lyra, una de las más brillantes del cielo nocturno, está alta en el cielo durante la noche.</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-starlight-yellow mt-1 mb-0.5">Hitos de la Historia Astronómica:</h4>
-                            <p class="text-xs text-gray-300">El 4 de agosto de 2007, la NASA lanzó la sonda Phoenix Mars Lander hacia Marte. Aterrizó cerca del polo norte marciano en mayo de 2008 y confirmó la presencia de hielo de agua justo debajo de la superficie, además de analizar el suelo marciano.</p>
-                            <p class="text-xs text-gray-300 mt-1">Aunque el descubrimiento de Urano por William Herschel fue en marzo de 1781, fue durante este período que comenzó a sospechar seriamente que no era una simple estrella o cometa, sino un nuevo planeta, lo que se confirmaría poco después mediante más observaciones y cálculos orbitales.</p>
-                            <p class="text-xs text-gray-300 mt-1">Nacimiento de Percy Bysshe Shelley en 1792, poeta romántico inglés, autor de "Ozymandias" y obras que a menudo tocaban temas de naturaleza y trascendencia.</p>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-sky-400 mt-1 mb-0.5">Astronomía Cultural: Dragones y Eclipses (China Antigua)</h4>
-                            <p class="text-xs text-gray-300">En la antigua China, existía la creencia popular de que los eclipses solares ocurrían cuando un dragón celestial intentaba devorar el Sol. Para ahuyentar a este temible dragón y restaurar la luz solar, la gente hacía ruidos fuertes golpeando tambores, gongs y otros instrumentos.</p>
-                            <p class="text-xs text-gray-300 mt-1">Aunque los astrónomos de la corte china podían predecir los eclipses con notable precisión para su época, estas tradiciones populares persistieron durante siglos, reflejando la profunda conexión entre los fenómenos celestes y la vida cotidiana y espiritual.</p>
-                        </div>
-                    </div>
-                    <div class="calendar-day p-3 text-left relative card space-y-2 overflow-y-auto min-height-day bg-event-highlight border-2 border-starlight-yellow">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold text-yellow-400">5</span> <i class="fas fa-star text-yellow-300" title="Evento destacado del Observatorio: Taller de Astrofotografía para Niños"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-nebula-pink mt-1 mb-0.5">Efemérides y Evento Especial:</h4>
-                            <ul class="list-disc list-inside text-xs text-gray-300 space-y-0.5">
-                                <li>Luna gibosa creciente en Sagitario (74% iluminación). Su trayectoria la acerca visualmente a la Nebulosa de la Laguna (M8), un hermoso objeto de cielo profundo.</li>
-                                <li>Venus (magnitud -4.0) resplandece en el cielo occidental poco después del atardecer, en la constelación de Leo. Es el "lucero vespertino".</li>
-                                <li><strong><i class="fas fa-child mr-1"></i> Evento del Observatorio: Taller de Astrofotografía para Niños (16:00 - 18:00 hs UTC).</strong> Una introducción lúdica y práctica al mundo de la captura de imágenes celestes para los más jóvenes. ¡Plazas limitadas!</li>
-                                <li>El centro galáctico, en Sagitario, es un objetivo ideal para observación en noches oscuras y sin Luna.</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-starlight-yellow mt-1 mb-0.5">Hitos de la Historia Astronómica:</h4>
-                            <p class="text-xs text-gray-300">Neil Armstrong, el primer ser humano en caminar sobre la Luna durante la misión Apolo 11 en 1969, nació en esta fecha en 1930. Su frase "Es un pequeño paso para un hombre, pero un gran salto para la humanidad" quedó grabada en la historia.</p>
-                            <p class="text-xs text-gray-300 mt-1">Caroline Herschel, hermana de William Herschel y una astrónoma notable por derecho propio, descubrió su primer cometa (C/1786 P1 Herschel) el 1 de agosto de 1786 (la referencia del día 5 es al nacimiento de Armstrong, la fecha del cometa de Caroline es el 1ro, ajustando por claridad).</p>
-                            <p class="text-xs text-gray-300 mt-1">En 1858, se completó el primer cable telegráfico transatlántico, conectando Valentia (Irlanda) con Terranova.</p>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-sky-400 mt-1 mb-0.5">Astronomía Cultural: Sagitario, el Arquero Centauro</h4>
-                            <p class="text-xs text-gray-300">La constelación de Sagitario es comúnmente representada como un centauro (mitad hombre, mitad caballo) tensando un arco. Para los babilonios, esta región del cielo estaba asociada con el dios Pabilsag, una deidad tutelar con atributos similares.</p>
-                            <p class="text-xs text-gray-300 mt-1">La flecha del arquero celestial a menudo se interpreta como apuntando directamente al corazón de la constelación vecina, Escorpio, que es la estrella roja Antares. Sagitario también marca la dirección del centro de nuestra galaxia, la Vía Láctea.</p>
-                        </div>
-                    </div>
-                    <div class="calendar-day p-3 text-left relative card space-y-2 overflow-y-auto min-height-day bg-event-highlight border-2 border-starlight-yellow" style="border: 2px solid var(--starlight-yellow); background: rgba(246, 173, 85, 0.05);">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold text-yellow-400">12</span> <i class="fas fa-fire text-red-500 animate-pulse" title="¡Pico de las Perseidas!"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-nebula-pink mt-1 mb-0.5">Efemérides: ¡Pico de las Perseidas!</h4>
-                            <ul class="list-disc list-inside text-xs text-gray-300 space-y-0.5">
-                                <li>Luna gibosa menguante en Tauro (91% iluminación). Desafortunadamente, su brillo puede interferir significativamente con la observación de los meteoros más débiles de las Perseidas.</li>
-                                <li><strong><i class="fas fa-meteor mr-1"></i> PICO de la lluvia de meteoros Perseidas.</strong> Se esperan hasta <strong>60-100 meteoros por hora</strong> (Tasa Horaria Zenital) desde un sitio oscuro después de medianoche, aunque la Luna dificultará la visión de los más tenues. El radiante se encuentra en la constelación de Perseo. Busque meteoros brillantes y bólidos.</li>
-                                <li><strong><i class="fas fa-binoculars mr-1"></i> Evento del Observatorio: Observación guiada Lluvia de Perseidas (23:00 - 02:00 hs UTC del 13 de Agosto).</strong> Únase a nosotros para aprender sobre esta famosa lluvia de meteoros y, con suerte, ver algunas "Lágrimas de San Lorenzo".</li>
-                                <li>El cometa C/2023 P1 (Nishimura) podría ser visible con ayuda óptica, consultar efemérides actualizadas. (Ejemplo hipotético)</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-starlight-yellow mt-1 mb-0.5">Hitos de la Historia Astronómica:</h4>
-                            <p class="text-xs text-gray-300">En 1960, la NASA lanzó Echo 1, el primer satélite de comunicaciones pasivo. Era una gran esfera metalizada de 30 metros de diámetro que reflejaba señales de radio y microondas, demostrando la viabilidad de las comunicaciones por satélite.</p>
-                            <p class="text-xs text-gray-300 mt-1">El cometa Swift-Tuttle (109P/Swift-Tuttle), el cuerpo progenitor de la lluvia de meteoros Perseidas, fue codescubierto independientemente por Lewis Swift el 16 de julio de 1862 y por Horace Tuttle el 19 de julio de 1862. Giovanni Schiaparelli estableció la conexión entre este cometa y la lluvia de meteoros en 1866.</p>
-                            <p class="text-xs text-gray-300 mt-1">En 1977, se lanzó el Transbordador Espacial Enterprise para sus primeras pruebas de vuelo atmosférico (ALT).</p>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-sky-400 mt-1 mb-0.5">Astronomía Cultural: Lágrimas de San Lorenzo</h4>
-                            <p class="text-xs text-gray-300">En la tradición católica europea, la lluvia de meteoros Perseidas es popularmente conocida como las "Lágrimas de San Lorenzo". Esto se debe a que el pico de la lluvia suele coincidir con la festividad de San Lorenzo, un diácono romano martirizado el 10 de agosto del año 258.</p>
-                            <p class="text-xs text-gray-300 mt-1">Se creía que las estrellas fugaces eran las chispas del fuego en el que San Lorenzo fue asado en una parrilla, o sus lágrimas cayendo desde el cielo. Esta asociación ha mantenido viva la observación de las Perseidas durante siglos en muchas comunidades.</p>
-                        </div>
-                    </div>
-                    <div class="calendar-day p-3 text-left relative card space-y-2 overflow-y-auto min-height-day bg-event-highlight border-2 border-starlight-yellow" style="border: 2px solid var(--starlight-yellow); background: rgba(246, 173, 85, 0.05);">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold text-yellow-400">15</span> <i class="fas fa-moon text-yellow-200" title="Noche de Observación Lunar - Cuarto Menguante"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-nebula-pink mt-1 mb-0.5">Efemérides y Evento Especial:</h4>
-                            <ul class="list-disc list-inside text-xs text-gray-300 space-y-0.5">
-                                <li>Luna en fase de Cuarto Menguante a las 18:49 UTC. Será visible principalmente en la segunda mitad de la noche y temprano en la mañana, en la constelación de Cáncer. El terminador lunar ofrece vistas espectaculares de cráteres y montañas.</li>
-                                <li><strong><i class="fas fa-search-plus mr-1"></i> Evento del Observatorio: Noche de Observación Lunar (20:00 - 23:00 hs UTC).</strong> Ideal para principiantes y familias. Exploraremos los mares, cráteres y otras características lunares con nuestros telescopios.</li>
-                                <li>Urano en Tauro (magnitud +5.8), visible con binoculares o telescopio antes del amanecer, una vez que la Luna se haya puesto o esté baja en el horizonte.</li>
-                                <li>El cúmulo abierto M35 en Géminis es un buen objeto para observar en las horas previas al amanecer.</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-starlight-yellow mt-1 mb-0.5">Hitos de la Historia Astronómica:</h4>
-                            <p class="text-xs text-gray-300">En 1914, nació Paul Tibbets, el piloto del bombardero Enola Gay, que lanzó la primera bomba atómica sobre Hiroshima el 6 de agosto de 1945. Este evento marcó el inicio de la era nuclear, con profundas implicaciones para la ciencia, la política global y la humanidad.</p>
-                            <p class="text-xs text-gray-300 mt-1">El astrónomo y matemático francés Pierre Méchain nació el 16 de agosto de 1744 (no el 15). Colaboró extensamente con Charles Messier y codescubrió varios cometas y objetos de cielo profundo que forman parte del famoso catálogo Messier.</p>
-                            <p class="text-xs text-gray-300 mt-1">En 1877, Asaph Hall descubrió Fobos, una de las lunas de Marte (el 17 de agosto, Deimos el 11 de agosto).</p>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-sky-400 mt-1 mb-0.5">Astronomía Cultural: La Luna Menguante y sus Significados</h4>
-                            <p class="text-xs text-gray-300">La fase de cuarto menguante, cuando la mitad izquierda de la Luna está iluminada (vista desde el Hemisferio Norte), a menudo se asocia simbólicamente con la liberación, la reflexión, la revisión y la preparación para un nuevo ciclo que comenzará con la Luna Nueva.</p>
-                            <p class="text-xs text-gray-300 mt-1">En algunas tradiciones agrícolas antiguas, era un tiempo considerado propicio para cosechar ciertos cultivos (especialmente los que crecen bajo tierra) o para realizar podas, creyendo que la energía de la planta se concentraba en las raíces durante esta fase.</p>
-                        </div>
-                    </div>
-                    <div class="calendar-day p-3 text-left relative card space-y-2 overflow-y-auto min-height-day">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold text-yellow-400">31</span> <i class="fas fa-bullseye text-gray-200" title="Fin de mes, preparación para Septiembre"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-nebula-pink mt-1 mb-0.5">Efemérides Destacadas:</h4>
-                            <ul class="list-disc list-inside text-xs text-gray-300 space-y-0.5">
-                                <li>Luna gibosa creciente en Tauro (89% iluminación), acercándose a la Luna Llena de septiembre. Visible durante gran parte de la noche.</li>
-                                <li>Este mes no presenta una "Luna Azul" calendárica (segunda luna llena en un mismo mes calendario) para agosto de 2025. La próxima Luna Llena será el 7 de septiembre.</li>
-                                <li>El cúmulo estelar de las Pléyades (M45), también en Tauro, es un objeto espectacular visible prominentemente en el cielo matutino y bien entrada la noche. Es fácilmente visible a simple vista.</li>
-                                <li>Última oportunidad del mes para observar algunos objetos de cielo profundo de verano antes de que comiencen a bajar en el horizonte occidental más temprano.</li>
-                            </ul>
-                            </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-starlight-yellow mt-1 mb-0.5">Hitos de la Historia Astronómica:</h4>
-                            <p class="text-xs text-gray-300">Hermann von Helmholtz, médico y físico alemán de gran influencia, nació el 31 de agosto de 1821. Realizó contribuciones fundamentales a la fisiología (óptica, acústica), la psicología, la termodinámica (formuló el principio de conservación de la energía) y la meteorología.</p>
-                            <p class="text-xs text-gray-300 mt-1">En 1979, la sonda Pioneer 11 de la NASA se convirtió en la primera nave espacial en realizar un sobrevuelo cercano de Saturno, proporcionando las primeras imágenes detalladas de sus anillos, su atmósfera y algunas de sus lunas.</p>
-                            <p class="text-xs text-gray-300 mt-1">En 1997, falleció Diana, Princesa de Gales, un evento que conmocionó al mundo.</p>
-                            </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-sky-400 mt-1 mb-0.5">Astronomía Cultural: Las Pléyades y los Calendarios Globales</h4>
-                            <p class="text-xs text-gray-300">Las Pléyades, conocidas también como las "Siete Hermanas" (aunque la mayoría de la gente ve seis estrellas a simple vista), son un cúmulo estelar crucial en las tradiciones de innumerables culturas alrededor del mundo. Su aparición helíaca (primera visibilidad antes del amanecer después de un período de invisibilidad) o su culminación a medianoche marcaban fechas importantes.</p>
-                            <p class="text-xs text-gray-300 mt-1">Estos eventos celestes se usaban para la siembra, la cosecha, la navegación, y el inicio de nuevos años o estaciones. Por ejemplo, para los Maoríes de Nueva Zelanda, se llaman Matariki, y su aparición helíaca señala el Año Nuevo Maorí. En Japón, son Subaru, y han inspirado desde arte hasta el nombre de una marca de automóviles.</p>
-                            </div>
-                    </div>
-                    <div class="calendar-day p-2 sm:p-3 text-center relative opacity-50 min-height-day"><div class="text-gray-500 text-lg">1</div><span class="text-xs block text-gray-600">SEP</span><p class="text-xs text-gray-600 mt-2">Inicio de Septiembre.</p></div>
-                    <div class="calendar-day p-2 sm:p-3 text-center relative opacity-50 min-height-day"><div class="text-gray-500 text-lg">2</div><span class="text-xs block text-gray-600">SEP</span><p class="text-xs text-gray-600 mt-2">Expectativas para el nuevo mes.</p></div>
-                    <div class="calendar-day p-2 sm:p-3 text-center relative opacity-50 min-height-day"><div class="text-gray-500 text-lg">3</div><span class="text-xs block text-gray-600">SEP</span></div>
-                    <div class="calendar-day p-2 sm:p-3 text-center relative opacity-50 min-height-day"><div class="text-gray-500 text-lg">4</div><span class="text-xs block text-gray-600">SEP</span></div>
-                    <div class="calendar-day p-2 sm:p-3 text-center relative opacity-50 min-height-day"><div class="text-gray-500 text-lg">5</div><span class="text-xs block text-gray-600">SEP</span></div>
-                    <div class="calendar-day p-2 sm:p-3 text-center relative opacity-50 min-height-day"><div class="text-gray-500 text-lg">6</div><span class="text-xs block text-gray-600">SEP</span></div>
-                    </div>
-                
-                <div class="mt-12 text-center">
-                    <p class="text-gray-400 text-sm">
-                        Nota: Las horas de los eventos son UTC a menos que se indique lo contrario (ej. "hs" podría referirse a hora local, pero se usa UTC como estándar). Los eventos visibles localmente pueden variar. <br>
-                        La información cultural y histórica es una breve introducción y se recomienda una investigación más profunda para un entendimiento completo.<br>
-                        Consulte fuentes especializadas para predicciones exactas de visibilidad de ISS, ocultaciones y magnitud de meteoros.
-                    </p>
-                    <a href="#eventos-destacados" class="mt-6 inline-block text-yellow-400 hover:text-yellow-300 font-semibold">
-                        Volver a Resumen de Eventos <i class="fas fa-arrow-up ml-2"></i>
-                    </a>
-                </div>
-            </div> </div> </section>
-    <section id="foro-comunidad" class="placeholder-section container"><h2>Sección Foro de la Comunidad</h2><p>Espacio para discutir sobre astronomía, compartir experiencias y fotos.</p></section>
-    <section id="iastro-herramientas" class="placeholder-section container"><h2>Sección IA.STRO Herramientas</h2><p>Herramientas basadas en IA para astrónomos aficionados.</p></section>
-    <section id="descargas-recursos" class="placeholder-section container"><h2>Sección Descargas y Recursos</h2><p>Guías, software, fondos de pantalla y más material útil.</p></section>
-    <section id="contacto-info" class="placeholder-section container"><h2>Sección Contacto</h2><p>Cómo contactar con el Observatorio San Miguel.</p></section>
-    <section id="premium-acceso" class="placeholder-section container"><h2>Sección Acceso Premium</h2><p>Información sobre los beneficios de ser miembro premium.</p></section>
+        <section id="event-list-summary" class="mt-12">
+            <h2 class="text-2xl font-bold text-center mb-8 section-title">Resumen de Eventos del Mes</h2>
+            <div id="monthly-event-summary" class="space-y-4 max-w-3xl mx-auto">
+                <p class="text-center text-gray-400">Selecciona un mes para ver el resumen de eventos.</p>
+            </div>
+        </section>
+    </main>
 
-    <footer>
-        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
-            <p>&copy; 2025 Observatorio San Miguel. Todos los derechos reservados.</p>
-            <p>Un viaje por el cosmos y el tiempo, acercando las estrellas a todos.</p>
-            <p>Síguenos en nuestras redes sociales para no perderte ninguna novedad:
-                <a href="#" class="text-yellow-400 hover:text-yellow-300 mx-1"><i class="fab fa-facebook-f"></i> Facebook</a> |
-                <a href="#" class="text-yellow-400 hover:text-yellow-300 mx-1"><i class="fab fa-twitter"></i> Twitter</a> |
-                <a href="#" class="text-yellow-400 hover:text-yellow-300 mx-1"><i class="fab fa-instagram"></i> Instagram</a> |
-                <a href="#" class="text-yellow-400 hover:text-yellow-300 mx-1"><i class="fab fa-youtube"></i> YouTube</a>
-            </p>
-            <p class="mt-4">
-                <a href="#privacidad" class="text-sm text-gray-500 hover:text-gray-300">Política de Privacidad</a> |
-                <a href="#terminos" class="text-sm text-gray-500 hover:text-gray-300">Términos de Servicio</a> |
-                <a href="#mapa-sitio" class="text-sm text-gray-500 hover:text-gray-300">Mapa del Sitio</a>
-            </p>
-            <p class="text-xs mt-3">Diseñado con pasión por la astronomía.</p>
+    <div id="event-tooltip" class="hidden">
+        </div>
+
+    <footer class="py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <div class="mb-6">
+                 <a href="index.html" class="text-xl font-bold text-white hover:text-yellow-400 transition">
+                    <i class="fas fa-satellite mr-2 text-yellow-400"></i>Observatorio de Física Cósmica de San Miguel
+                </a>
+            </div>
+            <div class="mb-6 space-x-6">
+                <a href="index.html#eventos" class="hover:text-yellow-400">Eventos</a>
+                <a href="index.html#cursos" class="hover:text-yellow-400">Cursos</a>
+                <a href="index.html#comunidad" class="hover:text-yellow-400">Comunidad</a>
+                <a href="index.html#premium" class="hover:text-yellow-400">Premium</a>
+                <a href="index.html#contacto" class="hover:text-yellow-400">Contacto</a>
+                <a href="#" class="hover:text-yellow-400">Política de Privacidad</a>
+            </div>
+            <div class="mb-6 flex justify-center space-x-6">
+                <a href="#" aria-label="Facebook" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" aria-label="Twitter" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="#" aria-label="YouTube" class="text-gray-400 hover:text-yellow-400 transition duration-300"><i class="fab fa-youtube fa-lg"></i></a>
+            </div>
+            <p class="text-sm">© <span id="currentYear"></span> Observatorio de Física Cósmica de San Miguel. Todos los derechos reservados.</p>
+            <p class="text-xs mt-2">Diseñado con <i class="fas fa-heart text-red-500"></i> por la IA y los Amantes del Cosmos.</p>
         </div>
     </footer>
-    <section id="privacidad" class="placeholder-section container" style="min-height:100px;"><h4>Política de Privacidad (Detalles...)</h4></section>
-    <section id="terminos" class="placeholder-section container" style="min-height:100px;"><h4>Términos de Servicio (Condiciones...)</h4></section>
-    <section id="mapa-sitio" class="placeholder-section container" style="min-height:100px;"><h4>Mapa del Sitio (Enlaces...)</h4></section>
 
-    </body>
+    <script>
+        // Menú móvil
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Año actual en footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // --- Lógica del Calendario ---
+        const currentMonthYearElem = document.getElementById('current-month-year');
+        const calendarDaysContainer = document.getElementById('calendar-days-container');
+        const prevMonthBtn = document.getElementById('prev-month-btn');
+        const nextMonthBtn = document.getElementById('next-month-btn');
+        const prevYearBtn = document.getElementById('prev-year-btn');
+        const nextYearBtn = document.getElementById('next-year-btn');
+        const eventFilter = document.getElementById('event-filter');
+        const monthlyEventSummaryElem = document.getElementById('monthly-event-summary');
+        const eventTooltip = document.getElementById('event-tooltip');
+
+        let currentDate = new Date(2025, 0, 1); // Iniciar en Enero 2025
+
+        // Datos de eventos (ficticios y algunos reales para 2025)
+        // Formato: 'YYYY-MM-DD': [{ title: 'Evento', time: 'HH:MM', type: '...', description: '...', location: '...' }]
+        const eventsData = {
+            '2025-01-01': [{ title: 'Año Nuevo Cósmico', time: 'Todo el día', type: 'especial', description: 'Celebración especial en el observatorio (actividad diurna).', location: 'Observatorio' }],
+            '2025-01-03': [{ title: 'Lluvia de Cuadrántidas (Pico)', time: '02:00', type: 'global', description: 'Pico de la lluvia de meteoros Cuadrántidas. Visible en el hemisferio norte principalmente.', location: 'Cielo Nocturno' }],
+            '2025-01-06': [{ title: 'Luna Nueva', time: 'N/A', type: 'global', description: 'Ideal para observación de cielo profundo.', location: 'Cielo Nocturno' }],
+            '2025-01-10': [{ title: 'Charla: El Futuro de la Exploración Espacial', time: '19:00', type: 'charla', description: 'Conferencia por Dra. Aurora boreal sobre misiones futuras.', location: 'Auditorio Principal' }],
+            '2025-01-15': [{ title: 'Taller: Introducción al Manejo de Telescopios', time: '18:00', type: 'taller', description: 'Aprende los conceptos básicos para usar un telescopio. Dirigido por Nicolás Balbi.', location: 'Aula Cosmos' }],
+            '2025-01-21': [{ title: 'Luna Llena', time: 'N/A', type: 'global', description: 'Luna del Lobo. Observación lunar especial.', location: 'Terraza Observatorio' }],
+            '2025-01-25': [{ title: 'Observación de Júpiter y sus Lunas', time: '20:30', type: 'observacion', description: 'Observación guiada de Júpiter y las lunas galileanas.', location: 'Plataforma Principal' }],
+            '2025-01-28': [{ title: 'Inicio Curso: Introducción a la Astrofísica (Módulo 1)', time: '18:30', type: 'curso', description: 'Primer módulo del curso impartido por Bella Vista al Cosmos.', location: 'Online / Aula Magna' }],
+            
+            '2025-02-04': [{ title: 'Luna Nueva', time: 'N/A', type: 'global', description: 'Noche oscura para observar galaxias.', location: 'Cielo Nocturno' }],
+            '2025-02-08': [{ title: 'Taller de Astrofotografía para Principiantes', time: '17:00', type: 'taller', description: 'Con Mayra Schwarzschild. Cupos limitados.', location: 'Aula Cosmos Kids' }],
+            '2025-02-12': [{ title: 'Charla: Supernovas y la Creación de Elementos', time: '19:30', type: 'charla', description: 'Descubre el ciclo de vida estelar y las explosiones cósmicas.', location: 'Auditorio Principal' }],
+            '2025-02-19': [{ title: 'Luna Llena', time: 'N/A', type: 'global', description: 'Luna de Nieve. Observación guiada.', location: 'Terraza Observatorio' }],
+            '2025-02-22': [{ title: 'Observación de la Nebulosa de Orión', time: '21:00', type: 'observacion', description: 'Una de las nebulosas más brillantes y fáciles de observar.', location: 'Plataforma Principal' }],
+            '2025-02-26': [{ title: 'Evento Premium: Noche Exclusiva con el Gran Telescopio', time: '20:00', type: 'premium', description: 'Solo para miembros Cosmos Dorado. Acceso al telescopio principal.', location: 'Cúpula Principal' }],
+
+            '2025-03-06': [{ title: 'Luna Nueva', time: 'N/A', type: 'global', description: 'Oportunidad para astrofotografía de cielo profundo.', location: 'Cielo Nocturno' }],
+            '2025-03-10': [{ title: 'Charla: ¿Estamos solos? La Búsqueda de Exoplanetas', time: '19:00', type: 'charla', description: 'Impartida por la Dra. Estrella Polar.', location: 'Auditorio Principal (y online)' }],
+            '2025-03-14': [{ title: 'Eclipse Lunar Parcial', time: 'Aprox. 06:00 UTC', type: 'global', description: 'Eclipse lunar parcial visible en gran parte de América.', location: 'Cielo Nocturno' }, { title: 'Observación del Eclipse Lunar Parcial', time: '02:30 ARG', type: 'observacion', description: 'Evento especial para observar el eclipse. Chequear horarios locales.', location: 'Terraza Observatorio' }],
+            '2025-03-20': [{ title: 'Equinoccio de Otoño (HS)', time: 'N/A', type: 'global', description: 'Inicio del otoño en el hemisferio sur.', location: 'N/A' }],
+            '2025-03-21': [{ title: 'Luna Llena', time: 'N/A', type: 'global', description: 'Luna de Gusano.', location: 'Terraza Observatorio' }],
+            '2025-03-25': [{ title: 'Taller: Procesado de Imágenes Astronómicas', time: '18:00', type: 'taller', description: 'Nivel intermedio. Con Mayra Schwarzschild.', location: 'Aula Digital' }],
+            '2025-03-29': [{ title: 'Eclipse Solar Anular (Parcial en Argentina)', time: 'Variable', type: 'global', description: 'Visible como anular en algunas regiones, parcial en Argentina. Consultar horarios y precauciones.', location: 'Cielo Diurno (con protección)' }, { title: 'Observación Segura del Eclipse Solar Parcial', time: 'Mediodía ARG', type: 'observacion', description: 'Observación con filtros solares certificados. AFORO LIMITADO.', location: 'Observatorio (exterior)' }],
+
+            '2025-04-04': [{ title: 'Luna Nueva', time: 'N/A', type: 'global', description: 'Cielos oscuros ideales.', location: 'Cielo Nocturno' }],
+            '2025-04-08': [{ title: 'Observación de Mercurio al Atardecer', time: '18:30', type: 'observacion', description: 'Mejor oportunidad del mes para ver Mercurio.', location: 'Horizonte Oeste' }],
+            '2025-04-12': [{ title: 'Charla: La Vía Láctea, Nuestra Galaxia', time: '19:30', type: 'charla', description: 'Un recorrido por la estructura y componentes de nuestra galaxia hogar.', location: 'Auditorio Principal' }],
+            '2025-04-19': [{ title: 'Luna Llena', time: 'N/A', type: 'global', description: 'Luna Rosa.', location: 'Terraza Observatorio' }],
+            '2025-04-22': [{ title: 'Lluvia de Líridas (Pico)', time: '01:00', type: 'global', description: 'Pico de la lluvia de meteoros Líridas. Mejor después de medianoche.', location: 'Cielo Nocturno' }, { title: 'Noche de Líridas', time: '23:00', type: 'observacion', description: 'Observación guiada de la lluvia de meteoros.', location: 'Campo Abierto Norte' }],
+            '2025-04-27': [{ title: 'Inicio Curso: Telescopios Partes y Usos (Módulo 1)', time: '18:00', type: 'curso', description: 'Comienza el popular curso de telescopios.', location: 'Aula Cosmos' }],
+
+            '2025-05-03': [{ title: 'Luna Nueva', time: 'N/A', type: 'global', description: 'Ideal para fotografía de la Vía Láctea.', location: 'Cielo Nocturno' }],
+            '2025-05-06': [{ title: 'Lluvia de Eta Acuáridas (Pico)', time: '03:00', type: 'global', description: 'Restos del Cometa Halley. Mejor visibilidad antes del amanecer.', location: 'Cielo Nocturno' }],
+            '2025-05-10': [{ title: 'Día de la Astronomía - Jornada Especial', time: '15:00-23:00', type: 'especial', description: 'Charlas, talleres, observaciones, actividades para niños. ¡Gran evento!', location: 'Todo el Observatorio' }],
+            '2025-05-15': [{ title: 'Charla: Agujeros Negros Supermasivos', time: '19:00', type: 'charla', description: 'Con el Dr. Nicolás Balbi. Transmisión online para Premium.', location: 'Auditorio Principal' }],
+            '2025-05-18': [{ title: 'Luna Llena', time: 'N/A', type: 'global', description: 'Luna de Flores. Observación especial con música.', location: 'Terraza Observatorio' }],
+            '2025-05-24': [{ title: 'Observación de Saturno y sus Anillos', time: '21:00', type: 'observacion', description: 'Excelente oportunidad para ver Saturno en oposición (cercano).', location: 'Plataforma Principal' }],
+            '2025-05-29': [{ title: 'Taller Infantil: Cohetes de Agua', time: '16:00', type: 'taller', description: 'Construye y lanza tu propio cohete. Para niños de 6 a 10 años.', location: 'Jardines del Observatorio' }],
+            
+            '2025-06-02': [{ title: 'Luna Nueva', time: 'N/A', type: 'global', description: 'Máxima oscuridad.', location: 'Cielo Nocturno' }],
+            '2025-06-07': [{ title: 'Charla: Cosmología Moderna - Del Big Bang a la Energía Oscura', time: '19:30', type: 'charla', description: 'A cargo de Bella Vista al Cosmos.', location: 'Auditorio Principal' }],
+            '2025-06-14': [{ title: 'Noche de Observación de Cúmulos Globulares', time: '20:30', type: 'observacion', description: 'Explorando Omega Centauri y 47 Tucanae.', location: 'Plataforma Principal' }],
+            '2025-06-17': [{ title: 'Luna Llena', time: 'N/A', type: 'global', description: 'Luna de Fresa.', location: 'Terraza Observatorio' }],
+            '2025-06-21': [{ title: 'Solsticio de Invierno (HS)', time: 'N/A', type: 'global', description: 'La noche más larga del año. Charla especial sobre el Sol.', location: 'Auditorio / Online' }],
+            '2025-06-25': [{ title: 'Webinar Premium: Últimos Descubrimientos del JWST', time: '19:00', type: 'premium', description: 'Análisis de las imágenes y datos más recientes del Telescopio Espacial James Webb.', location: 'Online (Exclusivo Premium)' }],
+            '2025-06-29': [{ title: 'Inicio Curso: Astrofotografía Inicial (Módulo 1)', time: '17:00', type: 'curso', description: 'Aprende a capturar el cosmos con Mayra Schwarzschild.', location: 'Aula Cosmos / Online' }],
+
+            '2025-07-01': [{ title: 'Luna Nueva', time: 'N/A', type: 'global', description: 'Observación de la Vía Láctea en su esplendor.', location: 'Cielo Nocturno' }],
+            '2025-07-05': [{ title: 'Aniversario del Observatorio de San Miguel', time: 'Todo el día', type: 'especial', description: 'Actividades especiales, torta y sorpresas.', location: 'Todo el Observatorio' }],
+            '2025-07-12': [{ title: 'Charla: Vida en Marte - Mitos y Realidades', time: '19:00', type: 'charla', description: 'Explorando la posibilidad de vida pasada o presente en el planeta rojo.', location: 'Auditorio Principal' }],
+            '2025-07-16': [{ title: 'Luna Llena', time: 'N/A', type: 'global', description: 'Luna del Ciervo.', location: 'Terraza Observatorio' }],
+            '2025-07-20': [{ title: 'Noche de Observación Familiar: Planetas Gigantes', time: '20:00', type: 'observacion', description: 'Observa Júpiter y Saturno con toda la familia.', location: 'Plataforma Principal' }],
+            '2025-07-28': [{ title: 'Lluvia de Delta Acuáridas (Pico)', time: '02:00', type: 'global', description: 'Lluvia de meteoros visible en el hemisferio sur.', location: 'Cielo Nocturno' }],
+            '2025-07-31': [{ title: 'Luna Nueva (Azul)', time: 'N/A', type: 'global', description: 'Segunda luna nueva en un mes, cielos oscuros.', location: 'Cielo Nocturno' }],
+
+            '2025-08-05': [{ title: 'Taller de Astrofotografía para Niños (Edición Invierno)', time: '16:00', type: 'taller', description: 'Un taller divertido y educativo para que los más pequeños aprendan a capturar la belleza del cielo.', location: 'Aula Cosmos Kids' }],
+            '2025-08-12': [{ title: 'Lluvia de Perseidas (Pico Principal)', time: '23:00-03:00', type: 'global', description: 'La lluvia de meteoros más popular del año. Hasta 100 meteoros/hora.', location: 'Cielo Nocturno' }, { title: 'Gran Noche de Perseidas OSM', time: '22:00', type: 'observacion', description: 'Evento especial para observar las Perseidas. Trae tu reposera.', location: 'Campo Abierto Norte' }],
+            '2025-08-13': [{ title: 'Lluvia de Perseidas (Actividad Continua)', time: 'Todo el día', type: 'global', description: 'Continúa la actividad de las Perseidas.', location: 'Cielo Nocturno' }],
+            '2025-08-15': [{ title: 'Noche de Observación Lunar (Cuarto Creciente)', time: '20:00', type: 'observacion', description: 'Observa la Luna en su fase creciente con nuestros telescopios profesionales. Ideal para principiantes y familias.', location: 'Terraza Observatorio' }],
+            '2025-08-20': [{ title: 'Luna Nueva', time: 'N/A', type: 'global', description: 'Noche oscura ideal para objetos débiles.', location: 'Cielo Nocturno' }, { title: 'Webinar: Exoplanetas y Vida Alienígena (Repetición)', time: '19:00', type: 'charla', description: 'Únete a nuestra experta Dra. Estrella Polar en un viaje virtual explorando exoplanetas. (Online)', location: 'Online' }],
+            '2025-08-22': [{ title: 'Charla: Agujeros Negros y Ondas Gravitacionales', time: '18:30', type: 'charla', description: 'Conferencia magistral sobre los misterios de los agujeros negros con el Dr. Nicolás Balbi.', location: 'Auditorio Principal' }],
+            '2025-08-28': [{ title: 'Observación de Saturno y sus Anillos', time: '21:00', type: 'observacion', description: 'Saturno estará en una posición ideal para la observación. Admira sus majestuosos anillos.', location: 'Plataforma Principal' }],
+            '2025-08-30': [{ title: 'Luna Llena', time: 'N/A', type: 'global', description: 'Luna Azul (segunda luna llena del mes).', location: 'Terraza Observatorio' }],
+
+            '2025-09-05': [{ title: 'Taller de Introducción a la Radioastronomía (Premium)', time: '18:00', type: 'premium', description: 'Descubre cómo se escucha el universo. Cupos limitados.', location: 'Laboratorio de Radioastronomía' }],
+            '2025-09-07': [{ title: 'Eclipse Lunar Total', time: 'Aprox. 18:00-21:00 UTC', type: 'global', description: 'Eclipse lunar total visible en América, Europa y África.', location: 'Cielo Nocturno' }, { title: 'Noche de Eclipse Total de Luna', time: '16:00 ARG', type: 'observacion', description: 'Observación del eclipse desde sus fases iniciales. Evento principal.', location: 'Observatorio y Online' }],
+            '2025-09-12': [{ title: 'Lluvia de Perseidas (Pico secundario)', time: '23:00', type: 'observacion', description: 'Observación guiada de la famosa lluvia de meteoros Perseidas. Trae tu saco de dormir y curiosidad!', location: 'Campo Abierto Norte' }],
+            '2025-09-18': [{ title: 'Luna Nueva', time: 'N/A', type: 'global', description: 'Cielos oscuros para observar.', location: 'Cielo Nocturno' }],
+            '2025-09-20': [{ title: 'Webinar: Exoplanetas y la Búsqueda de Vida', time: '19:00', type: 'charla', description: 'Con la Dra. Estrella Polar. Exploración de mundos lejanos. (Online)', location: 'Online' }],
+            '2025-09-22': [{ title: 'Equinoccio de Primavera (HS)', time: 'N/A', type: 'global', description: 'Inicio de la primavera en el hemisferio sur.', location: 'N/A' }],
+            '2025-09-28': [{ title: 'Luna Llena', time: 'N/A', type: 'global', description: 'Luna de Cosecha. Observación especial con telescopios.', location: 'Terraza Observatorio' }, { title: 'Star Party Anual del Observatorio (Día 1)', time: '16:00-24:00', type: 'especial', description: 'Charlas, talleres, música y observación masiva. ¡No te lo pierdas!', location: 'Todo el Observatorio' }],
+            '2025-09-29': [{ title: 'Star Party Anual del Observatorio (Día 2)', time: '10:00-18:00', type: 'especial', description: 'Actividades diurnas, observación solar, cierre del evento.', location: 'Todo el Observatorio' }],
+
+            '2025-10-03': [{ title: 'Charla: El lado oscuro del Universo - Materia y Energía Oscura', time: '19:30', type: 'charla', description: 'A cargo de Bella Vista al Cosmos.', location: 'Auditorio Principal' }],
+            '2025-10-08': [{ title: 'Lluvia de Dracónidas (Pico)', time: 'Variable', type: 'global', description: 'Puede producir breves ráfagas de meteoros. Mejor al anochecer.', location: 'Cielo Nocturno' }],
+            '2025-10-17': [{ title: 'Luna Nueva', time: 'N/A', type: 'global', description: 'Cielos oscuros.', location: 'Cielo Nocturno' }],
+            '2025-10-21': [{ title: 'Lluvia de Oriónidas (Pico)', time: '02:00', type: 'global', description: 'Restos del Cometa Halley. Hasta 20 meteoros/hora.', location: 'Cielo Nocturno' }, { title: 'Noche de Oriónidas', time: '23:00', type: 'observacion', description: 'Observación de la lluvia de meteoros y la constelación de Orión.', location: 'Campo Abierto Norte' }],
+            '2025-10-25': [{ title: 'Taller de Cohetería para Aficionados (Nivel 1)', time: '10:00', type: 'taller', description: 'Construye y lanza cohetes de combustible sólido (modelismo).', location: 'Campo de Lanzamiento OSM' }],
+            '2025-10-28': [{ title: 'Luna Llena', time: 'N/A', type: 'global', description: 'Luna del Cazador.', location: 'Terraza Observatorio' }],
+            
+            '2025-11-05': [{ title: 'Lluvia de Táuridas del Sur (Pico)', time: '00:00', type: 'global', description: 'Conocida por sus bólidos brillantes.', location: 'Cielo Nocturno' }],
+            '2025-11-08': [{ title: 'Observación de Urano y Neptuno', time: '20:30', type: 'observacion', description: 'Aprovechando su buena posición, intentaremos observar los gigantes helados.', location: 'Plataforma Principal (requiere cielo muy oscuro)' }],
+            '2025-11-12': [{ title: 'Lluvia de Táuridas del Norte (Pico)', time: '00:00', type: 'global', description: 'Complementa a las Táuridas del Sur.', location: 'Cielo Nocturno' }],
+            '2025-11-15': [{ title: 'Luna Nueva', time: 'N/A', type: 'global', description: 'Ideal para objetos de cielo profundo.', location: 'Cielo Nocturno' }],
+            '2025-11-17': [{ title: 'Lluvia de Leónidas (Pico)', time: '04:00', type: 'global', description: 'Puede tener tormentas cada ~33 años. Este año actividad normal.', location: 'Cielo Nocturno' }, { title: 'Madrugada de Leónidas', time: '02:00', type: 'observacion', description: 'Observación especial para madrugadores.', location: 'Campo Abierto Norte' }],
+            '2025-11-22': [{ title: 'Charla: La Historia de la Astronomía Argentina', time: '18:30', type: 'charla', description: 'Un recorrido por los hitos y personajes de la astronomía en nuestro país.', location: 'Auditorio Principal' }],
+            '2025-11-27': [{ title: 'Luna Llena', time: 'N/A', type: 'global', description: 'Luna del Castor.', location: 'Terraza Observatorio' }],
+
+            '2025-12-01': [{ title: 'Inicio Curso Avanzado de Cosmología (Premium)', time: '19:00', type: 'premium', description: 'Profundiza en los modelos cosmológicos actuales. Online.', location: 'Online (Exclusivo Premium)' }],
+            '2025-12-08': [{ title: 'Marte en Oposición', time: 'N/A', type: 'global', description: 'Marte estará en su punto más cercano y brillante a la Tierra. Excelente para observación.', location: 'Cielo Nocturno' }, { title: 'Noche Especial: Marte en Primer Plano', time: '21:00', type: 'observacion', description: 'Observación detallada de Marte durante su oposición.', location: 'Plataforma Principal' }],
+            '2025-12-13': [{ title: 'Lluvia de Gemínidas (Pico)', time: '02:00', type: 'global', description: 'Una de las lluvias más activas y coloridas. Hasta 120 meteoros/hora.', location: 'Cielo Nocturno' }],
+            '2025-12-14': [{ title: 'Gran Noche de Gemínidas OSM', time: '22:00', type: 'observacion', description: 'Evento principal para la lluvia de Gemínidas. Chocolate caliente disponible.', location: 'Campo Abierto Norte' }, { title: 'Luna Nueva', time: 'N/A', type: 'global', description: 'Condiciones perfectas para las Gemínidas.', location: 'Cielo Nocturno' }],
+            '2025-12-21': [{ title: 'Solsticio de Verano (HS)', time: 'N/A', type: 'global', description: 'El día más largo del año. Observación solar especial (con filtros).', location: 'Observatorio (diurno)' }],
+            '2025-12-25': [{ title: 'Navidad Cósmica: Cuentos bajo las Estrellas', time: '20:00', type: 'especial', description: 'Evento familiar con narración de cuentos y observación si el cielo lo permite.', location: 'Jardines del Observatorio' }],
+            '2025-12-27': [{ title: 'Luna Llena', time: 'N/A', type: 'global', description: 'Última luna llena del año, Luna Fría.', location: 'Terraza Observatorio' }],
+            '2025-12-31': [{ title: 'Despedida del Año Estelar', time: '21:00', type: 'especial', description: 'Última observación del año y brindis. (Requiere reserva)', location: 'Terraza Observatorio' }],
+        };
+
+
+        function renderCalendar(date, filter = 'all') {
+            currentMonthYearElem.textContent = date.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
+            calendarDaysContainer.innerHTML = ''; // Limpiar calendario anterior
+            monthlyEventSummaryElem.innerHTML = ''; // Limpiar resumen anterior
+
+            const year = date.getFullYear();
+            const month = date.getMonth();
+
+            const firstDayOfMonth = new Date(year, month, 1);
+            const lastDayOfMonth = new Date(year, month + 1, 0);
+            const daysInMonth = lastDayOfMonth.getDate();
+            const startDayOfWeek = firstDayOfMonth.getDay(); // 0 (Dom) - 6 (Sáb)
+            
+            const today = new Date();
+            let monthlyEventsList = [];
+
+            // Celdas vacías para los días antes del inicio del mes
+            for (let i = 0; i < startDayOfWeek; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.classList.add('calendar-day-cell', 'day-other-month', 'opacity-50');
+                calendarDaysContainer.appendChild(emptyCell);
+            }
+
+            // Celdas para cada día del mes
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayCell = document.createElement('div');
+                dayCell.classList.add('calendar-day-cell');
+                
+                const dayNumber = document.createElement('div');
+                dayNumber.classList.add('calendar-day-number');
+                dayNumber.textContent = day;
+                dayCell.appendChild(dayNumber);
+
+                if (year === today.getFullYear() && month === today.getMonth() && day === today.getDate()) {
+                    dayCell.classList.add('day-today');
+                }
+
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                if (eventsData[dateStr]) {
+                    eventsData[dateStr].forEach(event => {
+                        if (filter === 'all' || event.type === filter) {
+                            const eventElem = document.createElement('div');
+                            eventElem.classList.add('calendar-event', `event-type-${event.type}`);
+                            eventElem.textContent = event.title;
+                            eventElem.dataset.description = event.description;
+                            eventElem.dataset.time = event.time;
+                            eventElem.dataset.location = event.location;
+                            eventElem.dataset.title = event.title;
+                            dayCell.appendChild(eventElem);
+                            monthlyEventsList.push({ day, ...event });
+                        }
+                    });
+                }
+                calendarDaysContainer.appendChild(dayCell);
+            }
+            
+            // Celdas vacías para los días después del fin del mes (para completar la cuadrícula)
+            const totalCells = startDayOfWeek + daysInMonth;
+            const remainingCells = (7 - (totalCells % 7)) % 7;
+            for (let i = 0; i < remainingCells; i++) {
+                 const emptyCell = document.createElement('div');
+                emptyCell.classList.add('calendar-day-cell', 'day-other-month', 'opacity-50');
+                calendarDaysContainer.appendChild(emptyCell);
+            }
+            
+            // Renderizar resumen del mes
+            if(monthlyEventsList.length > 0) {
+                monthlyEventsList.sort((a,b) => a.day - b.day); // Ordenar por día
+                monthlyEventsList.forEach(event => {
+                    const summaryItem = document.createElement('div');
+                    summaryItem.classList.add('p-4', 'rounded-lg', 'shadow', 'bg-opacity-20', `event-type-${event.type}`);
+                    summaryItem.style.backgroundColor = 'rgba(30, 26, 62, 0.6)'; // Default background
+                    summaryItem.innerHTML = `
+                        <h4 class="font-semibold text-lg text-yellow-400">${String(event.day).padStart(2, '0')}/${String(month + 1).padStart(2, '0')} - ${event.title}</h4>
+                        <p class="text-sm text-gray-300"><i class="fas fa-clock mr-2"></i>${event.time}</p>
+                        <p class="text-sm text-gray-400"><i class="fas fa-info-circle mr-2"></i>${event.description}</p>
+                        ${event.location ? `<p class="text-sm text-gray-400"><i class="fas fa-map-marker-alt mr-2"></i>${event.location}</p>` : ''}
+                    `;
+                    monthlyEventSummaryElem.appendChild(summaryItem);
+                });
+            } else {
+                monthlyEventSummaryElem.innerHTML = '<p class="text-center text-gray-400">No hay eventos programados para este mes con el filtro actual.</p>';
+            }
+
+            // Event listeners para tooltips en eventos del calendario
+            document.querySelectorAll('.calendar-event').forEach(elem => {
+                elem.addEventListener('mouseenter', (e) => {
+                    eventTooltip.innerHTML = `
+                        <h4>${e.target.dataset.title}</h4>
+                        <p><strong>Hora:</strong> ${e.target.dataset.time}</p>
+                        <p><strong>Lugar:</strong> ${e.target.dataset.location || 'N/D'}</p>
+                        <p>${e.target.dataset.description}</p>
+                    `;
+                    eventTooltip.classList.remove('hidden');
+                    
+                    // Posicionar tooltip
+                    const rect = e.target.getBoundingClientRect();
+                    let top = rect.bottom + window.scrollY + 5;
+                    let left = rect.left + window.scrollX;
+
+                    if (left + eventTooltip.offsetWidth > window.innerWidth - 20) { // 20px padding from edge
+                        left = window.innerWidth - eventTooltip.offsetWidth - 20;
+                    }
+                    if (top + eventTooltip.offsetHeight > window.innerHeight + window.scrollY - 20) {
+                        top = rect.top + window.scrollY - eventTooltip.offsetHeight - 5;
+                    }
+                    eventTooltip.style.top = `${top}px`;
+                    eventTooltip.style.left = `${left}px`;
+                });
+                elem.addEventListener('mouseleave', () => {
+                    eventTooltip.classList.add('hidden');
+                });
+            });
+        }
+
+        prevMonthBtn.addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar(currentDate, eventFilter.value);
+        });
+
+        nextMonthBtn.addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar(currentDate, eventFilter.value);
+        });
+
+        prevYearBtn.addEventListener('click', () => {
+            currentDate.setFullYear(currentDate.getFullYear() - 1);
+            renderCalendar(currentDate, eventFilter.value);
+        });
+
+        nextYearBtn.addEventListener('click', () => {
+            currentDate.setFullYear(currentDate.getFullYear() + 1);
+            renderCalendar(currentDate, eventFilter.value);
+        });
+        
+        eventFilter.addEventListener('change', () => {
+            renderCalendar(currentDate, eventFilter.value);
+        });
+
+        // Renderizar calendario inicial
+        renderCalendar(currentDate);
+
+    </script>
+</body>
 </html>
