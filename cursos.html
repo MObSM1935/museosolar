@@ -491,6 +491,56 @@
             color: #a0aec0;
             font-size: 0.9rem;
         }
+        
+        /* Testimonials */
+        .testimonial-card {
+            background: rgba(30, 26, 62, 0.7);
+            border: 1px solid rgba(109, 40, 217, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(214, 188, 250, 0.1);
+        }
+        
+        .testimonial-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 2px solid var(--starlight-yellow);
+            margin: 0 auto 1rem;
+            overflow: hidden;
+        }
+        
+        .testimonial-stars {
+            color: var(--starlight-yellow);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Course Benefits */
+        .benefit-card {
+            background: rgba(30, 26, 62, 0.6);
+            border: 1px solid rgba(109, 40, 217, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(214, 188, 250, 0.1);
+            border-color: rgba(246, 173, 85, 0.4);
+        }
+        
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--starlight-yellow);
+            margin-bottom: 1rem;
+        }
 
     </style>
 </head>
@@ -774,6 +824,114 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- Card 7: Cosmología -->
+                <div class="card overflow-hidden flex flex-col">
+                    <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
+                        <span class="absolute top-2 left-2 bg-starlight-yellow text-space-blue px-3 py-1 rounded-full text-xs font-bold shadow-md">Nivel: Avanzado</span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-semibold text-white">Cosmología: Del Big Bang al Destino del Universo</h3>
+                            <span class="bg-nebula-pink text-white px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap">9 Módulos</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-1"><i class="fas fa-chalkboard-teacher mr-2 text-starlight-yellow"></i>Instructor: Dr. Cosmo Horizonte</p>
+                        <p class="text-gray-400 text-sm mb-4 leading-relaxed flex-grow">
+                            Explora las teorías más avanzadas sobre el origen y evolución del universo. Este curso cubre desde la física del Big Bang hasta los modelos actuales de energía oscura y expansión acelerada.
+                        </p>
+                         <ul class="text-xs text-gray-400 list-disc list-inside mb-4 space-y-1">
+                            <li>Teoría del Big Bang y evidencia observacional</li>
+                            <li>Radiación cósmica de fondo</li>
+                            <li>Formación de estructuras cósmicas</li>
+                            <li>Materia oscura y energía oscura</li>
+                            <li>Modelos cosmológicos y destino del universo</li>
+                            <li>Inflación cósmica y multiversos</li>
+                        </ul>
+                        <div class="mt-auto">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-yellow-400 font-bold text-lg">ARS 240.000</span>
+                                    <p class="text-gray-500 text-xs">Gratis con Membresía Premium</p>
+                                </div>
+                                <button onclick="showCourseDetails('cosmologia')" class="btn-primary px-5 py-2.5 rounded-full text-sm font-semibold">
+                                    <i class="fas fa-info-circle mr-1"></i>Ver Detalles
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 8: Observación Planetaria -->
+                <div class="card overflow-hidden flex flex-col">
+                    <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
+                        <span class="absolute top-2 left-2 bg-starlight-yellow text-space-blue px-3 py-1 rounded-full text-xs font-bold shadow-md">Nivel: Intermedio</span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-semibold text-white">Observación Planetaria: Técnicas y Equipos</h3>
+                            <span class="bg-nebula-pink text-white px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap">7 Módulos</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-1"><i class="fas fa-chalkboard-teacher mr-2 text-starlight-yellow"></i>Instructor: Dr. Planetario</p>
+                        <p class="text-gray-400 text-sm mb-4 leading-relaxed flex-grow">
+                            Domina las técnicas para observar y fotografiar planetas. Aprende sobre equipamiento especializado, filtros y procesamiento de imágenes para obtener resultados profesionales.
+                        </p>
+                         <ul class="text-xs text-gray-400 list-disc list-inside mb-4 space-y-1">
+                            <li>Características de los planetas observables</li>
+                            <li>Equipamiento óptimo para observación planetaria</li>
+                            <li>Técnicas de observación visual avanzada</li>
+                            <li>Filtros para mejorar detalles planetarios</li>
+                            <li>Procesamiento de imágenes planetarias</li>
+                            <li>Fenómenos atmosféricos planetarios</li>
+                        </ul>
+                        <div class="mt-auto">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-yellow-400 font-bold text-lg">ARS 175.000</span>
+                                    <p class="text-gray-500 text-xs">Gratis con Membresía Premium</p>
+                                </div>
+                                <button onclick="showCourseDetails('planetaria')" class="btn-primary px-5 py-2.5 rounded-full text-sm font-semibold">
+                                    <i class="fas fa-info-circle mr-1"></i>Ver Detalles
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 9: Astronomía para Niños -->
+                <div class="card overflow-hidden flex flex-col">
+                    <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1596524430615-b46475bffbcc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
+                        <span class="absolute top-2 left-2 bg-starlight-yellow text-space-blue px-3 py-1 rounded-full text-xs font-bold shadow-md">Nivel: Infantil</span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-semibold text-white">Astronomía para Niños: Descubriendo el Cielo</h3>
+                            <span class="bg-nebula-pink text-white px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap">5 Módulos</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-1"><i class="fas fa-chalkboard-teacher mr-2 text-starlight-yellow"></i>Instructora: Prof. Estrellita</p>
+                        <p class="text-gray-400 text-sm mb-4 leading-relaxed flex-grow">
+                            Curso diseñado especialmente para niños de 8 a 12 años. Introducción lúdica y educativa a la astronomía con actividades prácticas, experimentos y observaciones seguras.
+                        </p>
+                         <ul class="text-xs text-gray-400 list-disc list-inside mb-4 space-y-1">
+                            <li>El Sistema Solar con maquetas y juegos</li>
+                            <li>Constelaciones y mitología para niños</li>
+                            <li>Observación segura del Sol y la Luna</li>
+                            <li>Construcción de telescopios simples</li>
+                            <li>Experimentos sobre gravedad y luz</li>
+                            <li>Astronomía en la cultura popular infantil</li>
+                        </ul>
+                        <div class="mt-auto">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-yellow-400 font-bold text-lg">ARS 95.000</span>
+                                    <p class="text-gray-500 text-xs">Gratis con Membresía Premium</p>
+                                </div>
+                                <button onclick="showCourseDetails('infantil')" class="btn-primary px-5 py-2.5 rounded-full text-sm font-semibold">
+                                    <i class="fas fa-info-circle mr-1"></i>Ver Detalles
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div class="text-center mt-16">
@@ -784,191 +942,104 @@
         </div>
     </section>
 
-    <!-- Modal de detalles para curso de Telescopios -->
-    <div id="course-modal-telescopios" class="modal-overlay hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-[1000]">
-        <div class="modal-content card max-w-3xl w-full mx-auto p-6 sm:p-8 rounded-lg shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <button onclick="closeModal('telescopios')" class="absolute top-4 right-4 text-gray-400 hover:text-yellow-400 text-2xl z-20">
-                <i class="fas fa-times"></i>
-            </button>
-            <h2 class="text-2xl sm:text-3xl font-bold text-yellow-400 mb-3">Telescopios: Partes, Usos y Secretos Revelados</h2>
-            <p class="text-gray-300 mb-1 text-sm sm:text-base">Instructor: <span class="font-semibold">Dr. Nicolás Balbi</span></p>
-            <span class="bg-nebula-pink text-white px-3 py-1 rounded-full text-xs sm:text-sm font-bold mb-5 inline-block">6 Módulos</span>
-
-            <div class="mb-5 border-b border-gray-700">
-                <nav class="flex flex-wrap space-x-2 sm:space-x-4 -mb-px" aria-label="Tabs">
-                    <button data-tab="desc-telescopios" class="modal-tab active-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Descripción</button>
-                    <button data-tab="mod-telescopios" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Módulos</button>
-                    <button data-tab="inst-telescopios" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">Instructor</button>
-                    <button data-tab="faq-telescopios" class="modal-tab px-2 py-2 sm:px-3 font-medium text-xs sm:text-sm rounded-t-lg">FAQ</button>
-                </nav>
-            </div>
-
-            <div data-tab-content="desc-telescopios" class="modal-tab-content text-sm sm:text-base">
-                <h4 class="text-lg sm:text-xl font-semibold text-white mb-2">Descripción Detallada del Curso</h4>
-                <p class="text-gray-300 leading-relaxed">
-                    Este curso integral está diseñado para entusiastas de la astronomía de todos los niveles, desde el principiante absoluto hasta el aficionado con algo de experiencia que desea consolidar sus conocimientos técnicos. El Dr. Nicolás Balbi te guiará a través de seis módulos llenos de información práctica, teórica y consejos de experto. Aprenderás no solo a identificar los diferentes tipos de telescopios (refractores, reflectores Newtonianos, Schmidt-Cassegrain, Maksutov-Cassegrain), sino a entender sus ventajas, desventajas y aplicaciones ideales. Se profundizará en los componentes clave: objetivos (lentes y espejos), sus calidades y defectos comunes (aberraciones); oculares (Plössl, Kellner, ortoscópicos, gran angular), cómo calcular aumentos, campo visual real y pupila de salida; y la importancia crucial de las monturas (altazimutales manuales y GoTo, ecuatoriales alemanas, de horquilla, y su puesta en estación). El curso cubre extensamente cómo elegir el equipo adecuado para tus necesidades específicas y presupuesto, evitando errores comunes de compra. Además, se abordarán en detalle técnicas de mantenimiento preventivo y correctivo, colimación precisa de reflectores y catadióptricos (con herramientas caseras y profesionales), y el uso inteligente de accesorios como buscadores (ópticos, Telrad, punto rojo), filtros (lunares, planetarios, de contaminación lumínica, solares de apertura completa y H-alpha), barlows, reductores de focal, y adaptadores para astrofotografía básica. Al finalizar, serás capaz de seleccionar, montar, alinear, operar y mantener tu propio telescopio con total confianza y destreza, listo para explorar las maravillas del cosmos. Se incluyen videos demostrativos y ejercicios prácticos.
-                </p>
-            </div>
-            <div data-tab-content="mod-telescopios" class="modal-tab-content hidden text-sm sm:text-base">
-                <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Contenido Detallado del Curso (6 Módulos)</h4>
-                <ul class="space-y-3 text-gray-300">
-                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 1: Fundamentos de Óptica Astronómica.</strong> Principios de luz y formación de imágenes. Tipos de telescopios: historia, diseño, pros y contras. Aberraciones ópticas comunes y cómo identificarlas. Calidad óptica: ¿qué buscar?</li>
-                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 2: El Corazón del Telescopio: Objetivos y Oculares.</strong> Lentes vs. Espejos. Diseños de oculares (Huygens, Ramsden, Kellner, Plössl, Erfle, Nagler, etc.). Cálculo de aumentos, campo aparente y real, pupila de salida. Selección de oculares según el objeto a observar. Barlows y reductores de focal.</li>
-                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 3: Monturas: El Soporte del Universo.</strong> Tipos de monturas: altazimutales (manuales, GoTo) y ecuatoriales (alemanas, de horquilla, CGEM, etc.). Ventajas para observación visual y astrofotografía. Puesta en estación precisa de monturas ecuatoriales (método polar, deriva). Sistemas GoTo: configuración y uso eficiente. Trípodes y columnas.</li>
-                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 4: Eligiendo tu Primer (o Próximo) Telescopio.</strong> Definiendo tus objetivos: ¿visual, planetaria, cielo profundo, astrofotografía? Impacto del presupuesto. Telescopios para ciudad vs. cielos oscuros. Portabilidad. Marcas y modelos recomendados. Dónde comprar: ventajas y desventajas. Mercado de segunda mano.</li>
-                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 5: Operación Práctica y Técnicas de Observación.</strong> Ensamblaje seguro. Buscadores: alineación y uso. Enfoque preciso. Star hopping vs. GoTo. Adaptación a la oscuridad. Observación segura del Sol (filtros adecuados). Dibujo astronómico. Estimación de magnitudes.</li>
-                    <li class="p-3 bg-gray-800 rounded-md"><strong>Módulo 6: Mantenimiento, Colimación y Accesorios Avanzados.</strong> Limpieza de ópticas (lentes y espejos). Colimación de Newtonianos (Cheshire, colimador láser). Colimación de Schmidt-Cassegrain. Resolución de problemas comunes (vibraciones, empañamiento). Filtros avanzados (banda estrecha OIII, H-alpha, UHC, etc.). Introducción a cámaras astronómicas dedicadas. Software de planificación.</li>
-                </ul>
-            </div>
-            <div data-tab-content="inst-telescopios" class="modal-tab-content hidden text-sm sm:text-base">
-                <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Sobre el Instructor: Dr. Nicolás Balbi</h4>
-                 <img src="https://via.placeholder.com/100x100.png?text=N.+Balbi" alt="Nicolás Balbi" class="rounded-full float-left mr-4 mb-2 w-20 h-20 sm:w-24 sm:h-24">
-                 <p class="text-gray-300 leading-relaxed">El Dr. Nicolás Balbi es el Director del Observatorio de Física Cósmica de San Miguel y un reconocido astrónomo y divulgador científico con más de 25 años de experiencia en observación astronómica, instrumentación y astrofísica. Graduado con honores de la Universidad Nacional de La Plata, ha participado en numerosos proyectos de investigación internacionales y es un apasionado por la enseñanza de la astronomía a públicos de todas las edades y niveles. Su especialidad radica en la óptica astronómica, el diseño de instrumentación y las técnicas de observación de alta resolución. Es autor de varios artículos científicos y guías prácticas sobre el uso y mantenimiento de telescopios, y ha dictado cursos y talleres en toda Latinoamérica. Actualmente, además de sus tareas directivas y de investigación, se desempeña como coordinador de actividades de divulgación y formación en el Observatorio de San Miguel. Su estilo didáctico, claro y accesible, combinado con su profundo conocimiento práctico, hace que los conceptos más complejos sean fáciles de entender y aplicar. Es un firme creyente de que "el mejor telescopio es el que más se usa", y su objetivo con este curso es que cada participante termine no solo entendiendo su equipo, sino amándolo y usándolo al máximo de su potencial.</p>
-            </div>
-            <div data-tab-content="faq-telescopios" class="modal-tab-content hidden text-sm sm:text-base">
-                <h4 class="text-lg sm:text-xl font-semibold text-white mb-3">Preguntas Frecuentes sobre el Curso de Telescopios</h4>
-                <div class="space-y-4">
-                    <div>
-                        <p class="font-semibold text-yellow-300">P: ¿Necesito tener un telescopio para tomar el curso?</p>
-                        <p class="text-gray-300">R: No es estrictamente necesario al inicio, especialmente para los módulos teóricos. Sin embargo, para los módulos de operación, mantenimiento y colimación, tener acceso a un telescopio (propio o prestado) será muy útil para aplicar los conocimientos prácticos. El curso también te guiará sobre cómo seleccionar uno si aún no lo tienes.</p>
-                    </div>
-                    <div>
-                        <p class="font-semibold text-yellow-300">P: ¿Este curso es adecuado para alguien que nunca ha tocado un telescopio?</p>
-                        <p class="text-gray-300">R: ¡Absolutamente! Está diseñado para ser accesible para principiantes, comenzando desde los conceptos más básicos. Pero también ofrece información valiosa, detalles técnicos y técnicas avanzadas que serán de utilidad para aquellos con algo de experiencia previa que busquen profundizar.</p>
-                    </div>
-                    <div>
-                        <p class="font-semibold text-yellow-300">P: ¿Cuánto tiempo tendré acceso al material del curso una vez inscrito?</p>
-                        <p class="text-gray-300">R: Una vez inscrito (y con membresía Premium activa para acceso continuo o según términos de compra individual), tendrás acceso de por vida al material del curso, incluyendo videos, lecturas, y a futuras actualizaciones o módulos complementarios que se puedan añadir.</p>
-                    </div>
-                    <div>
-                        <p class="font-semibold text-yellow-300">P: ¿Se enseñará a colimar diferentes tipos de telescopios?</p>
-                        <p class="text-gray-300">R: Sí, el curso cubre en detalle la colimación de telescopios reflectores Newtonianos (los más comunes para aficionados) y también de los Schmidt-Cassegrain (SCT). Se mostrarán diferentes herramientas y técnicas.</p>
-                    </div>
-                     <div>
-                        <p class="font-semibold text-yellow-300">P: ¿El curso cubre astrofotografía con telescopio?</p>
-                        <p class="text-gray-300">R: Este curso se centra principalmente en el conocimiento, selección, uso visual y mantenimiento de telescopios. Se mencionan los adaptadores y consideraciones básicas para astrofotografía, pero para un aprendizaje profundo en esa área, recomendamos nuestro curso específico de "Astrofotografía: Captura la Belleza del Cosmos".</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-6 sm:mt-8 text-right">
-                <button onclick="openRegistrationModal('Telescopios: Partes, Usos y Secretos Revelados', 150000)" class="btn-primary px-5 py-2.5 sm:px-6 rounded-full font-semibold text-sm sm:text-base">Inscribirme (ARS 150.000)</button>
-                <p class="text-gray-500 text-xs sm:text-sm mt-2">o certificación y acceso gratis con <a href="index.html#premium" class="text-yellow-400 hover:underline">Membresía Premium</a></p>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Modal de inscripción -->
-    <div id="registration-modal" class="modal-overlay hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-[1100]">
-        <div class="modal-content card max-w-xl w-full mx-auto p-6 sm:p-8 rounded-lg shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <button onclick="closeRegistrationModal()" class="absolute top-4 right-4 text-gray-400 hover:text-yellow-400 text-2xl z-20">
-                <i class="fas fa-times"></i>
-            </button>
+    <!-- Sección de beneficios -->
+    <section id="beneficios" class="py-16 bg-gradient-to-b from-cosmic-purple to-space-blue">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 section-title">Beneficios Exclusivos de Nuestros Cursos</h2>
             
-            <div id="registration-form-container">
-                <h2 class="text-2xl sm:text-3xl font-bold text-yellow-400 mb-3">Inscripción al Curso</h2>
-                <p id="course-title" class="text-gray-300 text-xl mb-6">Telescopios: Partes, Usos y Secretos Revelados</p>
-                
-                <div class="progress-bar mb-6">
-                    <div id="registration-progress" class="progress-fill" style="width: 33%"></div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="benefit-card text-center">
+                    <div class="benefit-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Certificación Oficial</h3>
+                    <p class="text-gray-300">Recibe un certificado digital verificable al completar cada curso exitosamente.</p>
                 </div>
                 
-                <form id="registration-form" class="registration-form">
-                    <div class="step" id="step1">
-                        <h3 class="text-xl font-semibold text-white mb-4">Información Personal</h3>
-                        <input type="text" id="name" placeholder="Nombre completo" required>
-                        <input type="email" id="email" placeholder="Correo electrónico" required>
-                        <input type="tel" id="phone" placeholder="Teléfono">
-                        <textarea id="experience" placeholder="Experiencia previa en astronomía (opcional)" rows="3"></textarea>
-                        <div class="text-right">
-                            <button type="button" onclick="nextStep(2)" class="btn-primary px-5 py-2.5 rounded-full font-semibold">Siguiente</button>
-                        </div>
+                <div class="benefit-card text-center">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
                     </div>
-                    
-                    <div class="step hidden" id="step2">
-                        <h3 class="text-xl font-semibold text-white mb-4">Forma de Pago</h3>
-                        <div class="payment-option" onclick="selectPayment(this, 'premium')">
-                            <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400 text-2xl mr-3"></i>
-                                <div>
-                                    <h4 class="text-white font-semibold">Membresía Premium</h4>
-                                    <p class="text-gray-400 text-sm">Acceso a todos los cursos sin costo adicional</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="payment-option" onclick="selectPayment(this, 'transferencia')">
-                            <div class="flex items-center">
-                                <i class="fas fa-university text-blue-400 text-2xl mr-3"></i>
-                                <div>
-                                    <h4 class="text-white font-semibold">Transferencia Bancaria</h4>
-                                    <p class="text-gray-400 text-sm">Descuento del 5% por pago anticipado</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="payment-option" onclick="selectPayment(this, 'tarjeta')">
-                            <div class="flex items-center">
-                                <i class="fas fa-credit-card text-purple-400 text-2xl mr-3"></i>
-                                <div>
-                                    <h4 class="text-white font-semibold">Tarjeta de Crédito</h4>
-                                    <p class="text-gray-400 text-sm">Pagos en 3, 6 o 12 cuotas sin interés</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="payment-option" onclick="selectPayment(this, 'mercadoPago')">
-                            <div class="flex items-center">
-                                <i class="fas fa-wallet text-green-400 text-2xl mr-3"></i>
-                                <div>
-                                    <h4 class="text-white font-semibold">Mercado Pago</h4>
-                                    <p class="text-gray-400 text-sm">Pago rápido y seguro</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <input type="hidden" id="payment-method" value="">
-                        
-                        <div class="flex justify-between mt-6">
-                            <button type="button" onclick="prevStep(1)" class="bg-gray-700 text-white px-5 py-2.5 rounded-full font-semibold hover:bg-gray-600">Atrás</button>
-                            <button type="button" onclick="nextStep(3)" class="btn-primary px-5 py-2.5 rounded-full font-semibold">Siguiente</button>
-                        </div>
-                    </div>
-                    
-                    <div class="step hidden" id="step3">
-                        <h3 class="text-xl font-semibold text-white mb-4">Confirmación</h3>
-                        <div class="bg-gray-800 rounded-lg p-4 mb-4">
-                            <p class="text-gray-300"><strong>Curso:</strong> <span id="confirm-course">Telescopios: Partes, Usos y Secretos Revelados</span></p>
-                            <p class="text-gray-300"><strong>Método de pago:</strong> <span id="confirm-payment">Membresía Premium</span></p>
-                            <p class="text-gray-300"><strong>Nombre:</strong> <span id="confirm-name">Juan Pérez</span></p>
-                            <p class="text-gray-300"><strong>Email:</strong> <span id="confirm-email">juan@example.com</span></p>
-                        </div>
-                        
-                        <div class="mb-4">
-                            <input type="checkbox" id="terms" required>
-                            <label for="terms" class="text-gray-300 ml-2">Acepto los <a href="#" class="text-yellow-400 hover:underline">términos y condiciones</a> y la <a href="#" class="text-yellow-400 hover:underline">política de privacidad</a></label>
-                        </div>
-                        
-                        <div class="flex justify-between">
-                            <button type="button" onclick="prevStep(2)" class="bg-gray-700 text-white px-5 py-2.5 rounded-full font-semibold hover:bg-gray-600">Atrás</button>
-                            <button type="submit" class="btn-primary px-5 py-2.5 rounded-full font-semibold">Confirmar Inscripción</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            
-            <div id="registration-success" class="enrollment-success hidden">
-                <div class="icon">
-                    <i class="fas fa-check-circle"></i>
+                    <h3 class="text-xl font-semibold text-white mb-3">Comunidad Exclusiva</h3>
+                    <p class="text-gray-300">Acceso a nuestro foro privado para estudiantes con astrónomos profesionales.</p>
                 </div>
-                <h3>¡Inscripción Exitosa!</h3>
-                <p>Te has inscrito correctamente al curso <strong id="success-course">Telescopios: Partes, Usos y Secretos Revelados</strong>.</p>
-                <p>Hemos enviado un correo de confirmación a <strong id="success-email">juan@example.com</strong> con los detalles de acceso al curso.</p>
-                <button onclick="closeRegistrationModal()" class="btn-primary px-8 py-3 rounded-full font-semibold mt-4">Continuar Explorando</button>
+                
+                <div class="benefit-card text-center">
+                    <div class="benefit-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Material Didáctico</h3>
+                    <p class="text-gray-300">Recursos descargables, guías prácticas y bibliografía especializada.</p>
+                </div>
+                
+                <div class="benefit-card text-center">
+                    <div class="benefit-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Acceso Permanente</h3>
+                    <p class="text-gray-300">Actualizaciones gratuitas y acceso de por vida a todos los materiales del curso.</p>
+                </div>
             </div>
         </div>
-    </div>
-    
+    </section>
+
+    <!-- Sección de testimonios -->
+    <section id="testimonios" class="py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 section-title">Lo Que Dicen Nuestros Estudiantes</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="María López">
+                    </div>
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 italic mb-4">"El curso de Astrofotografía superó todas mis expectativas. Las técnicas aprendidas me permitieron capturar imágenes increíbles de la Vía Láctea en mi primer intento."</p>
+                    <p class="text-white font-semibold">María López</p>
+                    <p class="text-gray-400 text-sm">Estudiante de Astrofotografía</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos Rodríguez">
+                    </div>
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 italic mb-4">"Gracias al curso de Telescopios finalmente entendí cómo usar mi equipo correctamente. Las explicaciones del Dr. Balbi son claras y prácticas. ¡Recomiendo totalmente!"</p>
+                    <p class="text-white font-semibold">Carlos Rodríguez</p>
+                    <p class="text-gray-400 text-sm">Estudiante de Telescopios</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ana Martínez">
+                    </div>
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="text-gray-300 italic mb-4">"La membresía Premium fue la mejor inversión. Acceso a todos los cursos, certificaciones gratuitas y una comunidad increíble de astrónomos aficionados."</p>
+                    <p class="text-white font-semibold">Ana Martínez</p>
+                    <p class="text-gray-400 text-sm">Miembro Premium</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Sección de enlaces importantes -->
     <section id="important-links" class="py-16 bg-gradient-to-b from-space-blue to-cosmic-purple">
         <div class="container mx-auto px-6">
@@ -1041,6 +1112,50 @@
                         <p>Acceso a datos de misiones astronómicas</p>
                     </div>
                 </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección de FAQ -->
+    <section id="faq" class="py-16 bg-gradient-to-b from-cosmic-purple to-space-blue">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 section-title">Preguntas Frecuentes</h2>
+            
+            <div class="space-y-4">
+                <details class="faq-item">
+                    <summary class="text-lg font-semibold text-white">¿Necesito conocimientos previos para tomar los cursos?</summary>
+                    <div>
+                        <p class="text-gray-300">La mayoría de nuestros cursos están diseñados para todos los niveles. Los cursos avanzados especifican requisitos previos en su descripción. Ofrecemos cursos desde nivel principiante hasta avanzado.</p>
+                    </div>
+                </details>
+                
+                <details class="faq-item">
+                    <summary class="text-lg font-semibold text-white">¿Cómo funciona la certificación?</summary>
+                    <div>
+                        <p class="text-gray-300">Al completar satisfactoriamente un curso (incluyendo todas las evaluaciones), recibirás un certificado digital firmado por el Observatorio de Física Cósmica de San Miguel. Este certificado incluye un código QR para verificación.</p>
+                    </div>
+                </details>
+                
+                <details class="faq-item">
+                    <summary class="text-lg font-semibold text-white">¿Puedo acceder al material después de completar el curso?</summary>
+                    <div>
+                        <p class="text-gray-300">Sí, tendrás acceso permanente a los materiales del curso, incluso después de completarlo. También recibirás actualizaciones gratuitas cuando el curso se renueve.</p>
+                    </div>
+                </details>
+                
+                <details class="faq-item">
+                    <summary class="text-lg font-semibold text-white">¿Qué beneficios ofrece la membresía Premium?</summary>
+                    <div>
+                        <p class="text-gray-300">La membresía Premium incluye acceso ilimitado a todos los cursos, certificaciones gratuitas, descuentos en eventos especiales, acceso prioritario a nuevas ofertas y participación en sesiones exclusivas con astrónomos profesionales.</p>
+                    </div>
+                </details>
+                
+                <details class="faq-item">
+                    <summary class="text-lg font-semibold text-white">¿Ofrecen cursos presenciales?</summary>
+                    <div>
+                        <p class="text-gray-300">Actualmente todos nuestros cursos son en línea, pero organizamos eventos presenciales periódicos, talleres y observaciones nocturnas para nuestros estudiantes y miembros Premium.</p>
+                    </div>
+                </details>
             </div>
         </div>
     </section>
